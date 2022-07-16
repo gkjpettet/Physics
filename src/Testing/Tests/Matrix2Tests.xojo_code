@@ -1,28 +1,27 @@
 #tag Class
-Protected Class DesktopTestController
-Inherits TestController
-	#tag Event
-		Sub InitializeTestGroups()
-		  // Instantiate TestGroup subclasses here so that they can be run
+Protected Class Matrix2Tests
+Inherits TestGroup
+	#tag Method, Flags = &h0
+		Sub TransformedTest()
+		  Var rot As VMaths.Matrix2 = VMaths.Matrix2.Rotation(Maths.PI / 4)
+		  Var input As New VMaths.Vector2(0.234245234259, 0.890723489233)
 		  
-		  Var group As TestGroup
+		  Var expected As New VMaths.Vector2(rot.Entry(0, 0) * input.X + rot.Entry(0, 1) * input.Y, _
+		  rot.Entry(1, 0) * input.X + rot.Entry(1, 1) * input.Y)
 		  
-		  group = New Vector2Tests(Self, "Vector2")
-		  group = New Matrix2Tests(Self, "Matrix2")
+		  Var transExpected As New VMaths.Vector2(rot.Entry(0, 0) * input.X + rot.Entry(1, 0) * input.Y, _
+		  rot.Entry(0, 1) * input.X + rot.Entry(1, 1) * input.Y)
 		  
+		  Var result1 As VMaths.Vector2 = rot.Transformed(input)
+		  Var result2 As VMaths.Vector2 = rot.Transposed.Transformed(input)
+		  
+		  Assert.AreEqual(result1, expected)
+		  Assert.AreEqual(result2, transExpected)
 		End Sub
-	#tag EndEvent
+	#tag EndMethod
 
 
 	#tag ViewBehavior
-		#tag ViewProperty
-			Name="AllTestCount"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Duration"
 			Visible=false
@@ -32,7 +31,7 @@ Inherits TestController
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="FailedCount"
+			Name="FailedTestCount"
 			Visible=false
 			Group="Behavior"
 			InitialValue=""
@@ -40,11 +39,11 @@ Inherits TestController
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="GroupCount"
+			Name="IncludeGroup"
 			Visible=false
 			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
+			InitialValue="True"
+			Type="Boolean"
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
@@ -64,15 +63,7 @@ Inherits TestController
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="PassedCount"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="RunGroupCount"
+			Name="PassedTestCount"
 			Visible=false
 			Group="Behavior"
 			InitialValue=""
@@ -88,7 +79,23 @@ Inherits TestController
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="SkippedCount"
+			Name="SkippedTestCount"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="StopTestOnFail"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="TestCount"
 			Visible=false
 			Group="Behavior"
 			InitialValue=""

@@ -411,7 +411,9 @@ Protected Class Vector2
 		  /// the same for the two vectors to be considered equivalent.
 		  /// To compare to vectors with tolerance use the `Compare()` method.
 		  
-		  If Self Is other Then
+		  If other Is Nil Then
+		    Return -1
+		  ElseIf Self Is other Then
 		    Return 0
 		  ElseIf X = other.X And Y = other.Y Then
 		    Return 0
@@ -488,7 +490,12 @@ Protected Class Vector2
 		  /// If `m` is a rotation matrix, this is a computational shortcut for applying the inverse of the 
 		  /// transformation.
 		  
-		  #Pragma Warning "TODO: Matrix2 needs to have been implemented"
+		  Var v0 As Double = X
+		  Var v1 As Double = Y
+		  
+		  X = v0 * m.Storage(0) + v1 * m.Storage(1)
+		  Y = v0 * m.Storage(2) + v1 * m.Storage(3)
+		  
 		End Sub
 	#tag EndMethod
 

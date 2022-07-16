@@ -12,6 +12,7 @@ BuildSteps=Build Automation;Build Automation.xojo_code;&h00000000288E97FF;&h0000
 Class=DesktopTestController;Testing/DesktopTestController.xojo_code;&h000000003FC78D4E;&h000000002516B04D;false
 Folder=Tests;Testing/Tests;&h0000000044C729E7;&h000000002516B04D;false
 Class=Vector2Tests;Testing/Tests/Vector2Tests.xojo_code;&h000000003EDE4FFF;&h0000000044C729E7;false
+Class=Matrix2Tests;Testing/Tests/Matrix2Tests.xojo_code;&h000000003EE66FFF;&h0000000044C729E7;false
 Folder=TestFramework;Testing/TestFramework;&h000000003E1A9B41;&h000000002516B04D;false
 Class=TestGroup;Testing/TestFramework/TestGroup.xojo_code;&h000000006F90619D;&h000000003E1A9B41;false
 Class=TestController;Testing/TestFramework/TestController.xojo_code;&h000000006FF90549;&h000000003E1A9B41;false
