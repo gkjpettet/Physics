@@ -33,6 +33,9 @@ Protected Module Maths
 	#tag EndMethod
 
 
+	#tag Constant, Name = HALF_PI, Type = Double, Dynamic = False, Default = \"1.570796326795", Scope = Protected, Description = 416E20617070726F78696D6174696F6E206F662068616C662050692E
+	#tag EndConstant
+
 	#tag Constant, Name = PI, Type = Double, Dynamic = False, Default = \"3.14159265359", Scope = Protected, Description = 5468652076616C7565206F6620506920746F20313120646563696D616C20706C616365732E
 	#tag EndConstant
 

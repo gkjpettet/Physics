@@ -1,23 +1,40 @@
-import 'package:forge2d_dart_app/forge2d_dart_app.dart' as forge2d_dart_app;
-import 'package:vector_math/vector_math_64.dart';
-import 'dart:math' as math;
+import 'package:forge2d/forge2d.dart';
+
+const int pyramidSize = 40;
+
+final World world = World(Vector2(0.0, -10.0));
 
 void main(List<String> arguments) {
-  final rot = Matrix2.rotation(math.pi / 4);
-  final input = Vector2(0.234245234259, 0.890723489233);
+  print("Hi");
+}
 
-  final expected = Vector2(
-      rot.entry(0, 0) * input.x + rot.entry(0, 1) * input.y, rot.entry(1, 0) * input.x + rot.entry(1, 1) * input.y);
+void initialise() {
+  final bd = BodyDef();
+  final ground = world.createBody(bd);
 
-  final transExpected = Vector2(
-      rot.entry(0, 0) * input.x + rot.entry(1, 0) * input.y, rot.entry(0, 1) * input.x + rot.entry(1, 1) * input.y);
+  final groundShape = EdgeShape()..set(Vector2(-40.0, -30.0), Vector2(40.0, -30.0));
+  ground.createFixtureFromShape(groundShape);
 
-  var result1 = rot.transformed(input);
-  var result2 = rot.transposed().transformed(input);
+  // add boxes
+  const boxSize = .5;
+  final shape = PolygonShape()..setAsBoxXY(boxSize, boxSize);
 
-  print(result1);
-  print(expected);
+  final x = Vector2(-7.0, 0.75);
+  final y = Vector2.zero();
+  final deltaX = Vector2(0.5625, 1.0);
+  final deltaY = Vector2(1.125, 0.0);
 
-  print(result2);
-  print(transExpected);
+  for (var i = 0; i < pyramidSize; ++i) {
+    y.setFrom(x);
+
+    for (var j = i; j < pyramidSize; ++j) {
+      final bd = BodyDef()
+        ..type = BodyType.dynamic
+        ..position.setFrom(y);
+      world.createBody(bd).createFixtureFromShape(shape, 5.0);
+      y.add(deltaY);
+    }
+
+    x.add(deltaX);
+  }
 }
