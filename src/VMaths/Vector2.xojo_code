@@ -621,6 +621,16 @@ Protected Class Vector2
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Sub SetValues(x As Double, y As Double)
+		  /// Set the values of this vector.
+		  
+		  Self.X = x
+		  Self.Y = y
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 5A65726F207468697320766563746F722E
 		Sub SetZero()
 		  /// Zero this vector.
