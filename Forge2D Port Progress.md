@@ -110,7 +110,7 @@
 [-] filter
 [x] fixture
 [x] fixture_def
-[-] fixture_proxy
+[x] fixture_proxy
 [] island
 [] profile
 [] solver_data
