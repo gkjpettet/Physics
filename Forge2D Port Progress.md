@@ -54,9 +54,9 @@
 [x] color3i
 [x] raycast_result
 [x] rot
-[] sweep
+[x] sweep
 [] timer
-[] transform
+[-] transform
 [] viewport_transform
 
 ## dynamics

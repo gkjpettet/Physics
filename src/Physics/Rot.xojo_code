@@ -8,7 +8,7 @@ Protected Class Rot
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub Constructor(sin As Double, cos As Double)
+		Sub Constructor(sin As Double = 0.0, cos As Double = 1.0)
 		  Self.Sin = sin
 		  Self.Cos = cos
 		  
@@ -39,7 +39,9 @@ Protected Class Rot
 	#tag Method, Flags = &h0
 		Function GetXAxis(xAxis As VMaths.Vector2) As VMaths.Vector2
 		  #Pragma Unused xAxis
-		  #Pragma Warning "Can this argument be removed?"
+		  
+		  #Pragma Warning "BUG? I think there is a bug in Forge2D"
+		  // https://github.com/flame-engine/forge2d/issues/60#issuecomment-1186529420
 		  
 		  Return New VMaths.Vector2(Self.Cos, Self.Sin)
 		  
@@ -49,7 +51,9 @@ Protected Class Rot
 	#tag Method, Flags = &h0
 		Function GetYAxis(yAxis As VMaths.Vector2) As VMaths.Vector2
 		  #Pragma Unused yAxis
-		  #Pragma Warning "Can this argument be removed?"
+		  
+		  #Pragma Warning "BUG? I think there is a bug in Forge2D"
+		  // https://github.com/flame-engine/forge2d/issues/60#issuecomment-1186529420
 		  
 		  Return New VMaths.Vector2(-Self.Sin, Self.Cos)
 		  
