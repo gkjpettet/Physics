@@ -109,7 +109,7 @@
 [] contact_manager
 [-] filter
 [x] fixture
-[-] fixture_def
+[x] fixture_def
 [-] fixture_proxy
 [] island
 [] profile
