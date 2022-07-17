@@ -6,35 +6,17 @@ final World world = World(Vector2(0.0, -10.0));
 
 void main(List<String> arguments) {
   print("Hi");
+
+  var c1 = MyClass(10, 20, 30);
+  var c2 = MyClass(50, 60, 70, a: 80);
+  var b = 10;
 }
 
-void initialise() {
-  final bd = BodyDef();
-  final ground = world.createBody(bd);
+class MyClass {
+  int r = 1;
+  int g = 2;
+  int b = 3;
+  double a = 1.0;
 
-  final groundShape = EdgeShape()..set(Vector2(-40.0, -30.0), Vector2(40.0, -30.0));
-  ground.createFixtureFromShape(groundShape);
-
-  // add boxes
-  const boxSize = .5;
-  final shape = PolygonShape()..setAsBoxXY(boxSize, boxSize);
-
-  final x = Vector2(-7.0, 0.75);
-  final y = Vector2.zero();
-  final deltaX = Vector2(0.5625, 1.0);
-  final deltaY = Vector2(1.125, 0.0);
-
-  for (var i = 0; i < pyramidSize; ++i) {
-    y.setFrom(x);
-
-    for (var j = i; j < pyramidSize; ++j) {
-      final bd = BodyDef()
-        ..type = BodyType.dynamic
-        ..position.setFrom(y);
-      world.createBody(bd).createFixtureFromShape(shape, 5.0);
-      y.add(deltaY);
-    }
-
-    x.add(deltaX);
-  }
+  MyClass(this.r, this.g, this.b, {this.a = 2.0});
 }

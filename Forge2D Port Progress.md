@@ -1,0 +1,130 @@
+# Forge2D Port Progress
+
+[x] common
+[x] settings
+[x] vector_math
+
+## callbacks
+[] canvas_draw
+[] contact_filter
+[] contact_impulse
+[] contact_listener
+[] debug_draw
+[] destroy_listener
+[] pair_callback
+[] particle_destroy_listener
+[] particle_query_callback
+[] particle_raycast_callback
+[] query_callback
+[] raycast_callback
+[] tree_callback
+[] tree_raycast_callback
+
+## collision
+[] broadphase
+	[] broadphase
+	[] broadphase_strategy
+	[] default_broadphase_buffer
+	[] dynamic_tree
+	[] dynamic_tree_node
+	[] pair
+[] shapes
+	[] chain_shape
+	[] circle_shape
+	[] edge_shape
+	[] mass_data
+	[] polygon_shape
+	[] shape
+	[] shape_type
+[] aabb
+[] collision
+[] contact_id
+[] distance
+[] distance_input
+[] distance_output
+[] manifold
+[] manifold_point
+[] raycast_input
+[] raycast_output
+[] time_of_impact
+[] world_manifold
+
+## common
+[] canvas_viewport_transform
+[x] color3i
+[] raycast_result
+[] rot
+[] sweep
+[] timer
+[] transform
+[] viewport_transform
+
+## dynamics
+[] contacts
+	[] chain_and_circle_contact
+	[] chain_and_polygon_contact
+	[] circle_contact
+	[] contact
+	[] contact_position_and_constraint
+	[] contact_solver
+	[] contact_velocity_constraint
+	[] edge_and_circle_contact
+	[] edge_and_polygon_contact
+	[] polygon_and_circle_contact
+	[] polygon_contact
+	[] position
+	[] velocity
+[] joints
+	[] constant_volume_joint
+	[] constant_volume_joint_def
+	[] distance_joint
+	[] distance_joint_def
+	[] friction_joint
+	[] friction_joint_def
+	[] gear_joint
+	[] gear_joint_def
+	[] jacobian
+	[] joint
+	[] joint_def
+	[] limit_state
+	[] motor_joint
+	[] motor_joint_def
+	[] mouse_joint
+	[] mouse_joint_def
+	[] prismtatic_joint
+	[] prismatic_joint_def
+	[] pulley_joint
+	[] pulley_joint_def
+	[] revolute_joint
+	[] revolute_joint_def
+	[] rope_joint
+	[] rope_joint_def
+	[] weld_joint
+	[] weld_joint_def
+	[] wheel_joint
+	[] wheel_joint_def
+[] body
+[] body_def
+[] body_type
+[] contact_manager
+[] filter
+[] fixture
+[] fixture_def
+[] fixture_proxy
+[] island
+[] profile
+[] solver_data
+[] time_step
+[] world
+
+## particle
+[] particle
+[] particle_body_contact
+[] particle_callbacks
+[] particle_contact
+[] particle_group
+[] particle_group_def
+[] particle_group_type
+[] particle_system
+[] particle_type
+[] voronoi_diagram
