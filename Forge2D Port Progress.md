@@ -53,7 +53,7 @@
 [] canvas_viewport_transform
 [x] color3i
 [x] raycast_result
-[] rot
+[x] rot
 [] sweep
 [] timer
 [] transform
