@@ -29,6 +29,7 @@ Class=Vector2;VMaths/Vector2.xojo_code;&h000000000435C7FF;&h000000006B3D17FF;fal
 Class=Matrix2;VMaths/Matrix2.xojo_code;&h0000000056F6CFFF;&h000000006B3D17FF;false
 Class=Settings;Physics/Settings.xojo_code;&h000000002986D7FF;&h0000000058463FFF;false
 Class=Color3i;Physics/Color3i.xojo_code;&h00000000654B2FFF;&h0000000058463FFF;false
+Class=RaycastResult;Physics/RaycastResult.xojo_code;&h00000000473ED7FF;&h0000000058463FFF;false
 DefaultWindow=WinUnitTests
 AppMenuBar=MainMenuBar
 MajorVersion=1

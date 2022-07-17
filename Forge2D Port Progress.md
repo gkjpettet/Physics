@@ -52,7 +52,7 @@
 ## common
 [] canvas_viewport_transform
 [x] color3i
-[] raycast_result
+[x] raycast_result
 [] rot
 [] sweep
 [] timer

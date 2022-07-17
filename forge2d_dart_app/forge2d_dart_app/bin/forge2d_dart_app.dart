@@ -5,18 +5,35 @@ const int pyramidSize = 40;
 final World world = World(Vector2(0.0, -10.0));
 
 void main(List<String> arguments) {
-  print("Hi");
+  print('create c1');
+  var c1 = MyClass();
+  print("create c2");
+  var c2 = MyClass();
 
-  var c1 = MyClass(10, 20, 30);
-  var c2 = MyClass(50, 60, 70, a: 80);
-  var b = 10;
+  var n1 = c1.normal;
+  n1.x = 10;
+  print('n1: $n1');
+  print('c1.normal ${c1.normal}');
 }
 
 class MyClass {
-  int r = 1;
-  int g = 2;
-  int b = 3;
-  double a = 1.0;
+  final GVec normal = GVec.zero();
+}
 
-  MyClass(this.r, this.g, this.b, {this.a = 2.0});
+class GVec {
+  double x = 1.0;
+  double y = 2.0;
+
+  GVec(this.x, this.y);
+
+  GVec.zero() {
+    print('.zero called');
+    x = 0;
+    y = 0;
+  }
+
+  @override
+  String toString() {
+    return '$x,$y';
+  }
 }
