@@ -40,11 +40,18 @@ Protected Class Rot
 		Function GetXAxis(xAxis As VMaths.Vector2) As VMaths.Vector2
 		  #Pragma Unused xAxis
 		  
-		  #Pragma Warning "BUG? I think there is a bug in Forge2D"
+		  // Changed from original code due to bug in Forge2D:
 		  // https://github.com/flame-engine/forge2d/issues/60#issuecomment-1186529420
 		  
-		  Return New VMaths.Vector2(Self.Cos, Self.Sin)
+		  'Return New VMaths.Vector2(Self.Cos, Self.Sin)
 		  
+		  If xAxis = Nil Then
+		    Return New VMaths.Vector2(Self.Cos, Self.Sin)
+		  Else
+		    xAxis.X = Self.Cos
+		    xAxis.Y = Self.Sin
+		    Return xAxis
+		  End If
 		End Function
 	#tag EndMethod
 
@@ -52,10 +59,18 @@ Protected Class Rot
 		Function GetYAxis(yAxis As VMaths.Vector2) As VMaths.Vector2
 		  #Pragma Unused yAxis
 		  
-		  #Pragma Warning "BUG? I think there is a bug in Forge2D"
+		  // Changed from original code due to bug in Forge2D:
 		  // https://github.com/flame-engine/forge2d/issues/60#issuecomment-1186529420
 		  
-		  Return New VMaths.Vector2(-Self.Sin, Self.Cos)
+		  'Return New VMaths.Vector2(-Self.Sin, Self.Cos)
+		  
+		  If yAxis = Nil Then
+		    Return New VMaths.Vector2(-Self.Sin, Self.Cos)
+		  Else
+		    yAxis.X = -Self.Sin
+		    yAxis.Y = Self.Cos
+		    Return yAxis
+		  End If
 		  
 		End Function
 	#tag EndMethod

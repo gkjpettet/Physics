@@ -90,22 +90,22 @@ Protected Class Sweep
 		Alpha0 As Double = 0.0
 	#tag EndProperty
 
-	#tag ComputedProperty, Flags = &h21, Description = 4F6E65206F662074776F2063656E74726520776F726C6420706F736974696F6E732E
+	#tag ComputedProperty, Flags = &h0, Description = 4F6E65206F662074776F2063656E74726520776F726C6420706F736974696F6E732E
 		#tag Getter
 			Get
 			  Return mC
 			End Get
 		#tag EndGetter
-		Private C As VMaths.Vector2
+		C As VMaths.Vector2
 	#tag EndComputedProperty
 
-	#tag ComputedProperty, Flags = &h21, Description = 4F6E65206F662074776F2063656E74726520776F726C6420706F736974696F6E732E
+	#tag ComputedProperty, Flags = &h0, Description = 4F6E65206F662074776F2063656E74726520776F726C6420706F736974696F6E732E
 		#tag Getter
 			Get
 			  Return mC0
 			End Get
 		#tag EndGetter
-		Private C0 As VMaths.Vector2
+		C0 As VMaths.Vector2
 	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0, Description = 4C6F63616C2063656E747265206F66206D61737320706F736974696F6E2E

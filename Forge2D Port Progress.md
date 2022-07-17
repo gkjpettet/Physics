@@ -22,7 +22,7 @@
 
 ## collision
 [] broadphase
-	[] broadphase
+	[-] broadphase
 	[] broadphase_strategy
 	[] default_broadphase_buffer
 	[] dynamic_tree
@@ -32,11 +32,11 @@
 	[] chain_shape
 	[] circle_shape
 	[] edge_shape
-	[] mass_data
+	[-] mass_data
 	[] polygon_shape
-	[] shape
-	[] shape_type
-[] aabb
+	[-] shape
+	[x] shape_type
+[x] aabb
 [] collision
 [] contact_id
 [] distance
@@ -44,8 +44,8 @@
 [] distance_output
 [] manifold
 [] manifold_point
-[] raycast_input
-[] raycast_output
+[-] raycast_input
+[-] raycast_output
 [] time_of_impact
 [] world_manifold
 
@@ -64,7 +64,7 @@
 	[] chain_and_circle_contact
 	[] chain_and_polygon_contact
 	[] circle_contact
-	[] contact
+	[-] contact
 	[] contact_position_and_constraint
 	[] contact_solver
 	[] contact_velocity_constraint
@@ -84,7 +84,7 @@
 	[] gear_joint
 	[] gear_joint_def
 	[] jacobian
-	[] joint
+	[-] joint
 	[] joint_def
 	[] limit_state
 	[] motor_joint
@@ -103,19 +103,19 @@
 	[] weld_joint_def
 	[] wheel_joint
 	[] wheel_joint_def
-[] body
-[] body_def
-[] body_type
+[-] body
+[x] body_def
+[x] body_type
 [] contact_manager
-[] filter
-[] fixture
-[] fixture_def
-[] fixture_proxy
+[-] filter
+[x] fixture
+[-] fixture_def
+[-] fixture_proxy
 [] island
 [] profile
 [] solver_data
 [] time_step
-[] world
+[-] world
 
 ## particle
 [] particle
