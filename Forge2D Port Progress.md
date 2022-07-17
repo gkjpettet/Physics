@@ -56,7 +56,7 @@
 [x] rot
 [x] sweep
 [] timer
-[-] transform
+[x] transform
 [] viewport_transform
 
 ## dynamics
