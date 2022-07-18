@@ -7,10 +7,10 @@ Protected Module Physics
 	#tag EndEnum
 
 	#tag Enum, Name = ShapeType, Type = Integer, Flags = &h1, Description = 5479706573206F66207368617065732E
-		Circle
-		  Edge
-		  Polygon
-		Chain
+		Circle = 0
+		  Edge = 1
+		  Polygon = 2
+		Chain = 3
 	#tag EndEnum
 
 

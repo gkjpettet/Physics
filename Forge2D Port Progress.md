@@ -64,7 +64,7 @@
 	[] chain_and_circle_contact
 	[] chain_and_polygon_contact
 	[] circle_contact
-	[-] contact
+	[x] contact
 	[] contact_position_and_constraint
 	[] contact_solver
 	[] contact_velocity_constraint
