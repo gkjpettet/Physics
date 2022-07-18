@@ -45,7 +45,7 @@
 [] manifold
 [] manifold_point
 [x] raycast_input
-[-] raycast_output
+[x] raycast_output
 [] time_of_impact
 [] world_manifold
 
