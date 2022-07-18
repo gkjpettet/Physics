@@ -84,7 +84,7 @@
 	[] gear_joint
 	[] gear_joint_def
 	[] jacobian
-	[-] joint
+	[x] joint
 	[] joint_def
 	[] limit_state
 	[] motor_joint
