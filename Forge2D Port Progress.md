@@ -32,7 +32,7 @@
 	[] chain_shape
 	[] circle_shape
 	[] edge_shape
-	[-] mass_data
+	[x] mass_data
 	[] polygon_shape
 	[x] shape
 	[x] shape_type
