@@ -34,7 +34,7 @@
 	[] edge_shape
 	[-] mass_data
 	[] polygon_shape
-	[-] shape
+	[x] shape
 	[x] shape_type
 [x] aabb
 [] collision
