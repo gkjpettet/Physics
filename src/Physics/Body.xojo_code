@@ -13,7 +13,15 @@ Protected Class Body
 
 	#tag Method, Flags = &h0
 		Sub Constructor(bd As Physics.BodyDef, world As Physics.World)
+		  #If DebugBuild
+		    Assert(Not bd.Position.IsInfinite And Not bd.Position.IsNotANumber)
+		    Assert(Not bd.LinearVelocity.IsInfinite And Not bd.LinearVelocity.IsNotANumber)
+		    Assert(bd.AngularDamping >= 0.0)
+		    Assert(bd.LinearDamping >= 0.0)
+		  #EndIf
+		  
 		  Constructor
+		  
 		  Self.World = world
 		  
 		  flags = 0

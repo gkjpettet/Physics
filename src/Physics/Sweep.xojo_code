@@ -4,6 +4,10 @@ Protected Class Sweep
 		Sub Advance(alpha As Double)
 		  /// Advance the sweep forward, yielding a new initial state.
 		  
+		  #If DebugBuild
+		    Assert(Alpha0 < 1.0)
+		  #EndIf
+		  
 		  Var beta As Double = (alpha - Alpha0) / (1.0 - Alpha0)
 		  C0.X = C0.X + (beta * (C.X - C0.X))
 		  C0.Y = C0.Y + (beta * (C.Y - C0.Y))

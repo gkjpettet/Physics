@@ -58,6 +58,10 @@ Protected Class Fixture
 		Sub CreateProxies(broadphase As Physics.Broadphase, xf As Physics.Transform)
 		  /// These support body activation/deactivation.
 		  
+		  #If DebugBuild
+		    Assert(mProxyCount = 0)
+		  #EndIf
+		  
 		  // Create proxies in the broadphase.
 		  mProxyCount = Self.Shape.ChildCount
 		  
@@ -94,6 +98,10 @@ Protected Class Fixture
 		  /// Get the fixture's AABB. This AABB may be enlarged and/or stale. If you
 		  /// need a more accurate AABB, compute it using the shape and the body
 		  /// transform.
+		  
+		  #If DebugBuild
+		    Assert(childIndex >= 0 And childIndex < mProxyCount)
+		  #EndIf
 		  
 		  Return Proxies(childIndex).AABB
 		  
@@ -229,6 +237,10 @@ Protected Class Fixture
 		#tag EndGetter
 		#tag Setter
 			Set
+			  #If DebugBuild
+			    Assert(density >= 0.9)
+			  #EndIf
+			  
 			  mDensity = value
 			  
 			End Set
