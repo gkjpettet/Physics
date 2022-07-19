@@ -31,7 +31,7 @@
 [] shapes
 	[] chain_shape
 	[-] circle_shape
-	[] edge_shape
+	[-] edge_shape
 	[x] mass_data
 	[-] polygon_shape
 	[x] shape
@@ -69,7 +69,7 @@
 	[] contact_solver
 	[] contact_velocity_constraint
 	[x] edge_and_circle_contact
-	[] edge_and_polygon_contact
+	[x] edge_and_polygon_contact
 	[x] polygon_and_circle_contact
 	[x] polygon_contact
 	[x] position
