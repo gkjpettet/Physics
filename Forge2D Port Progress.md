@@ -107,12 +107,12 @@
 [x] body_def
 [x] body_type
 [x] contact_manager
-[-] filter
+[x] filter
 [x] fixture
 [x] fixture_def
 [x] fixture_proxy
 [] island
-[] profile
+[x] profile
 [] solver_data
 [] time_step
 [-] world
