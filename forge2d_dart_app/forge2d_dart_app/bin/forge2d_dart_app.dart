@@ -6,14 +6,10 @@ final World world = World(Vector2(0.0, -10.0));
 
 void main(List<String> arguments) {
   var list = ['a', 'b', 'c', 'd'];
-  var val = list.first;
-  list.clear();
-  var i = 10;
+
+  list.forEach(show);
 }
 
-class MyClass {
-  final String name;
-  int proxyId = 0;
-
-  MyClass(this.name);
+void show(String s) {
+  print(s);
 }

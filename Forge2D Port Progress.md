@@ -106,7 +106,7 @@
 [x] body
 [x] body_def
 [x] body_type
-[-] contact_manager
+[x] contact_manager
 [-] filter
 [x] fixture
 [x] fixture_def
