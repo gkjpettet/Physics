@@ -38,7 +38,7 @@
 	[x] shape_type
 [x] aabb
 [] collision
-[] contact_id
+[x] contact_id
 [] distance
 [] distance_input
 [] distance_output

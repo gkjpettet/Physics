@@ -70,6 +70,7 @@ Class=Velocity;Physics/Velocity.xojo_code;&h00000000295BAFFF;&h0000000058463FFF;
 Class=ContactPositionConstraint;Physics/ContactPositionConstraint.xojo_code;&h0000000045F717FF;&h0000000058463FFF;false
 Class=Manifold;Physics/Manifold.xojo_code;&h000000007D075FFF;&h0000000058463FFF;false
 Class=ManifoldPoint;Physics/ManifoldPoint.xojo_code;&h000000005F624FFF;&h0000000058463FFF;false
+Class=ContactID;Physics/ContactID.xojo_code;&h000000002855BFFF;&h0000000058463FFF;false
 DefaultWindow=WinUnitTests
 AppMenuBar=MainMenuBar
 MajorVersion=1

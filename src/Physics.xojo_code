@@ -41,6 +41,11 @@ Protected Module Physics
 		Dynamic
 	#tag EndEnum
 
+	#tag Enum, Name = ContactIDType, Type = Integer, Flags = &h1
+		Vertex
+		Face
+	#tag EndEnum
+
 	#tag Enum, Name = ManifoldType, Type = Integer, Flags = &h1
 		Circles
 		  FaceA
