@@ -30,14 +30,14 @@
 	[] pair
 [] shapes
 	[] chain_shape
-	[] circle_shape
+	[-] circle_shape
 	[] edge_shape
 	[x] mass_data
-	[] polygon_shape
+	[-] polygon_shape
 	[x] shape
 	[x] shape_type
 [x] aabb
-[] collision
+[-] collision
 [x] contact_id
 [] distance
 [] distance_input
@@ -71,7 +71,7 @@
 	[] edge_and_circle_contact
 	[] edge_and_polygon_contact
 	[] polygon_and_circle_contact
-	[] polygon_contact
+	[x] polygon_contact
 	[x] position
 	[x] velocity
 [] joints
