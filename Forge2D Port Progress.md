@@ -73,7 +73,7 @@
 	[] polygon_and_circle_contact
 	[] polygon_contact
 	[x] position
-	[] velocity
+	[x] velocity
 [] joints
 	[] constant_volume_joint
 	[] constant_volume_joint_def
