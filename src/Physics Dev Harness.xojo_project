@@ -77,6 +77,7 @@ Class=CircleShape;Physics/CircleShape.xojo_code;&h000000006125C7FF;&h00000000584
 Class=PolygonShape;Physics/PolygonShape.xojo_code;&h000000004FA7B7FF;&h0000000058463FFF;false
 Class=PolygonContact;Physics/PolygonContact.xojo_code;&h0000000023457FFF;&h0000000058463FFF;false
 Class=PolygonAndCircleContact;Physics/PolygonAndCircleContact.xojo_code;&h0000000055EB87FF;&h0000000058463FFF;false
+Class=EdgeAndCircleContact;Physics/EdgeAndCircleContact.xojo_code;&h00000000415A87FF;&h0000000058463FFF;false
 DefaultWindow=WinUnitTests
 AppMenuBar=MainMenuBar
 MajorVersion=1

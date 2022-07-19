@@ -2,22 +2,18 @@ import 'package:forge2d/forge2d.dart';
 import 'dart:typed_data';
 
 void main(List<String> arguments) {
-  print(-3 << 1);
-  print(9 << 2);
-  print(10 << 3);
+  var c1 = Class1('Garry');
+  var c2 = Class2('Fi');
+
+  var i = 10;
 }
 
-class MyClass {
-  final Int8List _data = Int8List(4);
+class Class1 {
+  final String name;
 
-  set indexA(int v) {
-    _data[0] = v;
-  }
+  Class1(this.name) {}
+}
 
-  set indexB(int v) {
-    _data[1] = v;
-  }
-
-  int get indexA => _data[0];
-  int get indexB => _data[1];
+class Class2 extends Class1 {
+  Class2(super.name) {}
 }
