@@ -113,7 +113,7 @@
 [x] fixture_proxy
 [] island
 [x] profile
-[] solver_data
+[x] solver_data
 [] time_step
 [-] world
 
