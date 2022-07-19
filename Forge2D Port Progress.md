@@ -70,7 +70,7 @@
 	[] contact_velocity_constraint
 	[] edge_and_circle_contact
 	[] edge_and_polygon_contact
-	[] polygon_and_circle_contact
+	[x] polygon_and_circle_contact
 	[x] polygon_contact
 	[x] position
 	[x] velocity
