@@ -85,7 +85,7 @@
 	[] gear_joint_def
 	[] jacobian
 	[x] joint
-	[] joint_def
+	[x] joint_def
 	[] limit_state
 	[] motor_joint
 	[] motor_joint_def
@@ -118,11 +118,11 @@
 [-] world
 
 ## particle
-[] particle
+[-] particle
 [] particle_body_contact
 [] particle_callbacks
 [] particle_contact
-[] particle_group
+[-] particle_group
 [] particle_group_def
 [] particle_group_type
 [] particle_system
