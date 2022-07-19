@@ -12,7 +12,7 @@
 [] debug_draw
 [x] destroy_listener
 [x] pair_callback
-[] particle_destroy_listener
+[x] particle_destroy_listener
 [] particle_query_callback
 [] particle_raycast_callback
 [] query_callback
