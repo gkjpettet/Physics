@@ -68,6 +68,7 @@ Class=SolverData;Physics/SolverData.xojo_code;&h000000002084C7FF;&h0000000058463
 Class=Position;Physics/Position.xojo_code;&h0000000019D86FFF;&h0000000058463FFF;false
 Class=Velocity;Physics/Velocity.xojo_code;&h00000000295BAFFF;&h0000000058463FFF;false
 Class=ContactPositionConstraint;Physics/ContactPositionConstraint.xojo_code;&h0000000045F717FF;&h0000000058463FFF;false
+Class=Manifold;Physics/Manifold.xojo_code;&h000000007D075FFF;&h0000000058463FFF;false
 DefaultWindow=WinUnitTests
 AppMenuBar=MainMenuBar
 MajorVersion=1

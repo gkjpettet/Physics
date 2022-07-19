@@ -41,6 +41,12 @@ Protected Module Physics
 		Dynamic
 	#tag EndEnum
 
+	#tag Enum, Name = ManifoldType, Type = Integer, Flags = &h1
+		Circles
+		  FaceA
+		FaceB
+	#tag EndEnum
+
 	#tag Enum, Name = ShapeType, Type = Integer, Flags = &h1, Description = 5479706573206F66207368617065732E
 		Circle = 0
 		  Edge = 1

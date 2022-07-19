@@ -42,7 +42,7 @@
 [] distance
 [] distance_input
 [] distance_output
-[] manifold
+[x] manifold
 [] manifold_point
 [x] raycast_input
 [x] raycast_output
@@ -65,7 +65,7 @@
 	[] chain_and_polygon_contact
 	[] circle_contact
 	[x] contact
-	[] contact_position_and_constraint
+	[x] contact_position_and_constraint
 	[] contact_solver
 	[] contact_velocity_constraint
 	[] edge_and_circle_contact
