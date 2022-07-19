@@ -43,7 +43,7 @@
 [] distance_input
 [] distance_output
 [x] manifold
-[] manifold_point
+[x] manifold_point
 [x] raycast_input
 [x] raycast_output
 [] time_of_impact
