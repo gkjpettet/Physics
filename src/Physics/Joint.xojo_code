@@ -108,7 +108,7 @@
 			Get
 			  // Get the anchor point on `BodyB` in world coordinates.
 			  
-			  BodyB.WorldPoint(LocalAnchorB)
+			  Return BodyB.WorldPoint(LocalAnchorB)
 			  
 			End Get
 		#tag EndGetter

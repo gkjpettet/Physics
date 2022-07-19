@@ -19,15 +19,19 @@ Protected Class Manifold
 		Shared Function Copy(other As Physics.Manifold) As Physics.Manifold
 		  /// Creates this manifold as a copy of `other`.
 		  
-		  LocalNormal.SetFrom(other.LocalNormal)
-		  LocalPoint.SetFrom(other.LocalPoint)
-		  Type = other.Type
-		  PointCount = other.PointCount
+		  Var result As New Physics.Manifold
+		  
+		  result.LocalNormal.SetFrom(other.LocalNormal)
+		  result.LocalPoint.SetFrom(other.LocalPoint)
+		  result.Type = other.Type
+		  result.PointCount = other.PointCount
 		  
 		  Var iLimit As Integer = Physics.Settings.MaxManifoldPoints - 1
 		  For i As Integer = 0 To iLimit
-		    Points(i) = Physics.ManifoldPoint.Copy(other.Points(i))
+		    result.Points(i) = Physics.ManifoldPoint.Copy(other.Points(i))
 		  Next i
+		  
+		  Return result
 		  
 		End Function
 	#tag EndMethod

@@ -42,7 +42,7 @@
 
 	#tag Method, Flags = &h0
 		Sub Evaluate(manifold As Physics.Manifold, xfA As Physics.Transform, xfB As Physics.Transform)
-		  
+		  Raise New UnsupportedOperationException("Subclasses should override this method.")
 		End Sub
 	#tag EndMethod
 
@@ -88,7 +88,6 @@
 		  // order the arguments should come in the different contact classes.
 		  // { CIRCLE, EDGE, POLYGON, CHAIN }
 		  
-		  #Pragma Warning "TODO: Tidy this mess up."
 		  // This is horrid and needs tidying up but for now we will just port Forge2D verbatim.
 		  
 		  Var typeA As Physics.ShapeType = _
