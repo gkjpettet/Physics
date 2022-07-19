@@ -11,7 +11,7 @@
 [] contact_listener
 [] debug_draw
 [] destroy_listener
-[] pair_callback
+[x] pair_callback
 [] particle_destroy_listener
 [] particle_query_callback
 [] particle_raycast_callback
@@ -106,7 +106,7 @@
 [x] body
 [x] body_def
 [x] body_type
-[] contact_manager
+[-] contact_manager
 [-] filter
 [x] fixture
 [x] fixture_def
