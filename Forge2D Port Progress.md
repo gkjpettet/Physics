@@ -103,7 +103,7 @@
 	[] weld_joint_def
 	[] wheel_joint
 	[] wheel_joint_def
-[-] body
+[x] body
 [x] body_def
 [x] body_type
 [] contact_manager

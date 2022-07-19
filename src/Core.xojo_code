@@ -1,7 +1,7 @@
 #tag Module
 Protected Module Core
 	#tag Method, Flags = &h0
-		Sub Assert(condition As Boolean, message As String)
+		Sub Assert(condition As Boolean, message As String = "")
 		  /// If `condition` is False then an `UnsupportedOperation` is raised. 
 		  /// Only executes in debug mode.
 		  

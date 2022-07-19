@@ -600,10 +600,22 @@ Protected Class Vector2
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 526F7461746573207468697320766563746F72206279203930206465677265657320616E64207468656E207363616C657320697420627920607363616C65602E2053746F7265732074686520726573756C7420696E20606F7574602E204F766572726964652072657475726E7320606F7574602E
+		Sub ScaleOrthogonalInto(scale As Double, ByRef out As VMaths.Vector2)
+		  /// Rotates this vector by 90 degrees and then scales it by `scale`. 
+		  /// Stores the result in `out`. Override returns `out`.
+		  
+		  out.X = -scale * Y
+		  out.Y = scale * X
+		  
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 526F7461746573207468697320766563746F72206279203930206465677265657320616E64207468656E207363616C657320697420627920607363616C65602E2053746F7265732074686520726573756C7420696E20606F75746020616E642072657475726E7320606F7574602E
 		Function ScaleOrthogonalInto(scale As Double, ByRef out As VMaths.Vector2) As VMaths.Vector2
-		  /// Rotates this vector by 90 degrees and then scales it by `scale`. Stores the result in `out` and 
-		  /// returns `out`.
+		  /// Rotates this vector by 90 degrees and then scales it by `scale`. 
+		  /// Stores the result in `out` and returns `out`.
 		  
 		  out.X = -scale * Y
 		  out.Y = scale * X

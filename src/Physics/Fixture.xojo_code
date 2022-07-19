@@ -164,8 +164,8 @@ Protected Class Fixture
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h21
-		Private Sub Synchronize(broadphase As Physics.Broadphase, transform1 As Physics.Transform, transform2 As Physics.Transform)
+	#tag Method, Flags = &h0
+		Sub Synchronize(broadphase As Physics.Broadphase, transform1 As Physics.Transform, transform2 As Physics.Transform)
 		  If mProxyCount = 0 Then Return
 		  
 		  Var iLimit As Integer = mProxyCount - 1
