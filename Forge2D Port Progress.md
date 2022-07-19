@@ -10,7 +10,7 @@
 [] contact_impulse
 [] contact_listener
 [] debug_draw
-[] destroy_listener
+[x] destroy_listener
 [x] pair_callback
 [] particle_destroy_listener
 [] particle_query_callback

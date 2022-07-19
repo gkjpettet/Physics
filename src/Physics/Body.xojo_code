@@ -388,12 +388,12 @@ Protected Class Body
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 4765742074686520776F726C642076656C6F63697479206F662061206C6F63616C20706F696E742E
-		Sub LinearVelocityFromLocalPoint()
+		Function LinearVelocityFromLocalPoint(localPoint As VMaths.Vector2) As VMaths.Vector2
 		  /// Get the world velocity of a local point.
 		  
-		  Return LinearVelocityFromWorldPoint(WorldPoint(LocalPoint))
+		  Return LinearVelocityFromWorldPoint(WorldPoint(localPoint))
 		  
-		End Sub
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 4765742074686520776F726C64206C696E6561722076656C6F63697479206F66206120776F726C6420706F696E7420617474616368656420746F207468697320626F64792E
@@ -543,7 +543,7 @@ Protected Class Body
 		    
 		    // Contacts are created the next time step.
 		  Else
-		    Flags & Flags And OnesComplement(ActiveFlag)
+		    Flags = Flags And OnesComplement(ActiveFlag)
 		    
 		    // Destroy all proxies.
 		    Var broadPhase As Physics.Broadphase = World.ContactManager.BroadPhase
@@ -553,7 +553,7 @@ Protected Class Body
 		    
 		    // Destroy the attached contacts.
 		    While Contacts.Count > 0
-		      world.contactManager.destroy(contacts.first);
+		      World.ContactManager.Destroy(Contacts(0))
 		    Wend
 		    Contacts.ResizeTo(-1)
 		  End If
@@ -765,7 +765,7 @@ Protected Class Body
 		  End If
 		  
 		  // Does a joint prevent collision?
-		  For joint As Physics.Joint In Joints
+		  For Each joint As Physics.Joint In Joints
 		    If joint.ContainsBody(other) And Not joint.CollideConnected Then
 		      Return False
 		    End If

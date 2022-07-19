@@ -15,7 +15,7 @@
 		  Constructor
 		  
 		  Self.FixtureA = fixtureA
-		  Self.IndexA - indexA
+		  Self.IndexA = indexA
 		  Self.FixtureB = fixtureB
 		  Self.IndexB = indexB
 		  
@@ -219,8 +219,8 @@
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h21
-		Private Sub Update(listener As Physics.ContactListener)
+	#tag Method, Flags = &h0
+		Sub Update(listener As Physics.ContactListener)
 		  mOldManifold.Set(Manifold)
 		  
 		  // Re-enable this contact.
