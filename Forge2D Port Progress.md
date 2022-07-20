@@ -62,7 +62,7 @@
 ## dynamics
 [] contacts
 	[x] chain_and_circle_contact
-	[] chain_and_polygon_contact
+	[x] chain_and_polygon_contact
 	[x] circle_contact
 	[x] contact
 	[x] contact_position_and_constraint

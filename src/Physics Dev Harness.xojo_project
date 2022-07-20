@@ -82,6 +82,7 @@ Class=EdgeShape;Physics/EdgeShape.xojo_code;&h00000000523F3FFF;&h0000000058463FF
 Class=EdgeAndPolygonContact;Physics/EdgeAndPolygonContact.xojo_code;&h0000000024A227FF;&h0000000058463FFF;false
 Class=ChainAndCircleContact;Physics/ChainAndCircleContact.xojo_code;&h00000000581E17FF;&h0000000058463FFF;false
 Class=ChainShape;Physics/ChainShape.xojo_code;&h0000000015CA2FFF;&h0000000058463FFF;false
+Class=ChainAndPolygonContact;Physics/ChainAndPolygonContact.xojo_code;&h000000003A1C77FF;&h0000000058463FFF;false
 DefaultWindow=WinUnitTests
 AppMenuBar=MainMenuBar
 MajorVersion=1
