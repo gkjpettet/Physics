@@ -93,6 +93,7 @@ Interface=ParticleQueryCallback;Physics/ParticleQueryCallback.xojo_code;&h000000
 Interface=ParticleRaycastCallback;Physics/ParticleRaycastCallback.xojo_code;&h00000000675827FF;&h0000000058463FFF;false
 Interface=QueryCallback;Physics/QueryCallback.xojo_code;&h000000003112D7FF;&h0000000058463FFF;false
 Interface=RaycastCallback;Physics/RaycastCallback.xojo_code;&h000000002C7EC7FF;&h0000000058463FFF;false
+Interface=TreeRayCastCallback;Physics/TreeRayCastCallback.xojo_code;&h000000005BD367FF;&h0000000058463FFF;false
 DefaultWindow=WinUnitTests
 AppMenuBar=MainMenuBar
 MajorVersion=1

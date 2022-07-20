@@ -18,7 +18,7 @@
 [x] query_callback
 [x] raycast_callback
 [x] tree_callback
-[] tree_raycast_callback
+[x] tree_raycast_callback
 
 ## collision
 [] broadphase
