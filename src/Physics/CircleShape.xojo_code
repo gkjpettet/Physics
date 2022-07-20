@@ -233,7 +233,13 @@ Inherits Physics.Shape
 			Group="Behavior"
 			InitialValue=""
 			Type="Physics.ShapeType"
-			EditorType=""
+			EditorType="Enum"
+			#tag EnumValues
+				"0 - Circle"
+				"1 - Edge"
+				"2 - Polygon"
+				"3 - Chain"
+			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

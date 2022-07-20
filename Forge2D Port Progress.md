@@ -114,7 +114,7 @@
 [] island
 [x] profile
 [x] solver_data
-[] time_step
+[x] time_step
 [-] world
 
 ## particle

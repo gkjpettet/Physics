@@ -260,7 +260,7 @@ Protected Class Fixture
 		#tag Setter
 			Set
 			  /// Set the contact filtering data. This is an expensive operation and should
-			  /// not be called frequently. 
+			  /// not be called frequently.
 			  ///
 			  /// This will not update contacts until the next
 			  /// time step when either parent body is awake.
@@ -431,6 +431,14 @@ Protected Class Fixture
 			Group="Behavior"
 			InitialValue=""
 			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Type"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Physics.ShapeType"
 			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior

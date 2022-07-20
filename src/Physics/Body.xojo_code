@@ -1280,6 +1280,35 @@ Protected Class Body
 			Group="Behavior"
 			InitialValue=""
 			Type="Physics.BodyType"
+			EditorType="Enum"
+			#tag EnumValues
+				"0 - Static_"
+				"1 - Kinematic"
+				"2 - Dynamic"
+			#tag EndEnumValues
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="IsActive"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="IsAwake"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Mass"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Double"
 			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior

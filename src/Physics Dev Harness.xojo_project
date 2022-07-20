@@ -87,6 +87,7 @@ Class=WorldManifold;Physics/WorldManifold.xojo_code;&h000000006CED6FFF;&h0000000
 Interface=ContactListener;Physics/ContactListener.xojo_code;&h00000000724167FF;&h0000000058463FFF;false
 Class=ContactImpulse;Physics/ContactImpulse.xojo_code;&h000000004941BFFF;&h0000000058463FFF;false
 Class=ContactFilter;Physics/ContactFilter.xojo_code;&h0000000045ACA7FF;&h0000000058463FFF;false
+Class=TimeStep;Physics/TimeStep.xojo_code;&h000000003A4817FF;&h0000000058463FFF;false
 DefaultWindow=WinUnitTests
 AppMenuBar=MainMenuBar
 MajorVersion=1
