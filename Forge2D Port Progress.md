@@ -29,7 +29,7 @@
 	[] dynamic_tree_node
 	[] pair
 [] shapes
-	[] chain_shape
+	[-] chain_shape
 	[-] circle_shape
 	[-] edge_shape
 	[x] mass_data
@@ -61,7 +61,7 @@
 
 ## dynamics
 [] contacts
-	[] chain_and_circle_contact
+	[x] chain_and_circle_contact
 	[] chain_and_polygon_contact
 	[x] circle_contact
 	[x] contact
