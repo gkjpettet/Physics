@@ -13,7 +13,7 @@
 [x] destroy_listener
 [x] pair_callback
 [x] particle_destroy_listener
-[] particle_query_callback
+[x] particle_query_callback
 [] particle_raycast_callback
 [] query_callback
 [] raycast_callback
