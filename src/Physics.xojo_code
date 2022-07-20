@@ -1,5 +1,16 @@
 #tag Module
 Protected Module Physics
+	#tag Method, Flags = &h0, Description = 496620606E6565646C65602069732077697468696E2060686179737461636B602069742069732072656D6F7665642E
+		Sub Remove(Extends haystack() As Physics.Contact, needle As Physics.Contact)
+		  /// If `needle` is within `haystack` it is removed.
+		  
+		  Var index As Integer = haystack.IndexOf(needle)
+		  
+		  If index <> -1 Then haystack.RemoveAt(index)
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 496620606E6565646C65602069732077697468696E2060686179737461636B602069742069732072656D6F76656420616E6420547275652069732072657475726E65642E204F74686572776973652046616C73652069732072657475726E65642E
 		Function Remove(Extends haystack() As Physics.Contact, needle As Physics.Contact) As Boolean
 		  /// If `needle` is within `haystack` it is removed and True is returned. Otherwise

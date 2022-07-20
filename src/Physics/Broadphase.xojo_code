@@ -1,7 +1,7 @@
 #tag Interface
 Protected Interface Broadphase
 	#tag Method, Flags = &h0, Description = 43726561746520612070726F7879207769746820616E20696E697469616C20414142422E20506169727320617265206E6F74207265706F7274656420756E74696C206055706461746550616972732829602069732063616C6C65642E
-		Function CreateProxy(aabb As Physics.AABB, , userData As Variant) As Integer
+		Function CreateProxy(aabb As Physics.AABB, userData As Variant) As Integer
 		  
 		End Function
 	#tag EndMethod

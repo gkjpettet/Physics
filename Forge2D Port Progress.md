@@ -17,7 +17,7 @@
 [] particle_raycast_callback
 [] query_callback
 [] raycast_callback
-[] tree_callback
+[x] tree_callback
 [] tree_raycast_callback
 
 ## collision
