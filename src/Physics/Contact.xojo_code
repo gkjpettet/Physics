@@ -234,13 +234,13 @@
 		  
 		  Var bodA As Physics.Body = FixtureA.Body
 		  Var bodB As Physics.Body = FixtureB.Body
-		  Var xfA As Physics.Tranform = bodA.Transform
+		  Var xfA As Physics.Transform = bodA.Transform
 		  Var xfB As Physics.Transform = bodB.Transform
 		  
 		  If sensor Then
 		    Var shapeA As Physics.Shape = FixtureA.Shape
 		    Var shapeB As Physics.Shape = FixtureB.Shape
-		    touching = World.collision.testOverlap( shapeA, indexA, shapeB, indexB, xfA, xfB)
+		    touching = World.collision.testOverlap(shapeA, indexA, shapeB, indexB, xfA, xfB)
 		    
 		    // Sensors don't generate manifolds.
 		    Manifold.PointCount = 0
@@ -471,7 +471,63 @@
 			Name="Flags"
 			Visible=false
 			Group="Behavior"
+			InitialValue="0"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Friction"
+			Visible=false
+			Group="Behavior"
 			InitialValue=""
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="IndexA"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="IndexB"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Restitution"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="TangentSpeed"
+			Visible=false
+			Group="Behavior"
+			InitialValue="0"
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="TOI"
+			Visible=false
+			Group="Behavior"
+			InitialValue="0"
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="TOICount"
+			Visible=false
+			Group="Behavior"
+			InitialValue="0"
 			Type="Integer"
 			EditorType=""
 		#tag EndViewProperty
