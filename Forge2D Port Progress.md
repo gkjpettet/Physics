@@ -47,7 +47,7 @@
 [x] raycast_input
 [x] raycast_output
 [] time_of_impact
-[] world_manifold
+[x] world_manifold
 
 ## common
 [] canvas_viewport_transform
