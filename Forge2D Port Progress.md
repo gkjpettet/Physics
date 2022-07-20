@@ -14,7 +14,7 @@
 [x] pair_callback
 [x] particle_destroy_listener
 [x] particle_query_callback
-[] particle_raycast_callback
+[x] particle_raycast_callback
 [] query_callback
 [] raycast_callback
 [x] tree_callback
