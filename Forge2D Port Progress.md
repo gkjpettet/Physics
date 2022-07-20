@@ -6,7 +6,7 @@
 
 ## callbacks
 [] canvas_draw
-[] contact_filter
+[x] contact_filter
 [x] contact_impulse
 [x] contact_listener
 [] debug_draw
