@@ -30,7 +30,7 @@
 	[] pair
 [] shapes
 	[-] chain_shape
-	[-] circle_shape
+	[x] circle_shape
 	[-] edge_shape
 	[x] mass_data
 	[-] polygon_shape
