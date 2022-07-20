@@ -1,46 +1,59 @@
 #tag Class
-Protected Class Collision
+Private Class mReferenceFace
 	#tag Method, Flags = &h0
 		Sub Constructor()
-		  mInput = New Physics.DistanceInput
-		  mCache = New Physics.SimplexCache
-		  mOutput = New Physics.DistanceOutput
-		  
+		  V1 = VMaths.Vector2.Zero
+		  V2 = VMaths.Vector2.Zero
+		  Normal = VMaths.Vector2.Zero
+		  SideNormal1 = VMaths.Vector2.Zero
+		  SideNormal2 = VMaths.Vector2.Zero
 		End Sub
 	#tag EndMethod
 
 
 	#tag Note, Name = About
-		Functions used for computing contact points, distance queries, and TOI
-		queries. 
+		Reference face used for clipping.
 		
-		Collision methods are non-static for pooling speed, retrieve a
-		collision object from the SingletonPool.
-		
+		Used internally within `Physics.Collision`.
 		
 	#tag EndNote
 
-	#tag Note, Name = Progress
-		
-		Up to (not including) TestOverlap().
-	#tag EndNote
-
 
 	#tag Property, Flags = &h0
-		mCache As Physics.SimplexCache
+		i1 As Integer = 0
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		mInput As Physics.DistanceInput
+		i2 As Integer = 0
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		mOutput As Physics.DistanceOutput
+		Normal As VMaths.Vector2
 	#tag EndProperty
 
+	#tag Property, Flags = &h0
+		SideNormal1 As VMaths.Vector2
+	#tag EndProperty
 
-	#tag Constant, Name = NullFeature, Type = Double, Dynamic = False, Default = \"&h3FFFFFFF", Scope = Public
-	#tag EndConstant
+	#tag Property, Flags = &h0
+		SideNormal2 As VMaths.Vector2
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		SideOffset1 As Double = 0.0
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		SideOffset2 As Double = 0.0
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		V1 As VMaths.Vector2
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		V2 As VMaths.Vector2
+	#tag EndProperty
 
 
 	#tag ViewBehavior
@@ -85,7 +98,7 @@ Protected Class Collision
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="mInput"
+			Name="i1"
 			Visible=false
 			Group="Behavior"
 			InitialValue=""

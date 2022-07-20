@@ -1,46 +1,42 @@
 #tag Class
-Protected Class Collision
+Protected Class DistanceInput
 	#tag Method, Flags = &h0
 		Sub Constructor()
-		  mInput = New Physics.DistanceInput
-		  mCache = New Physics.SimplexCache
-		  mOutput = New Physics.DistanceOutput
+		  ProxyA = New Physics.DistanceProxy
+		  ProxyB = New Physics.DistanceProxy
+		  TransformA = Physics.Transform.Zero
+		  TransformB = Physics.Transform.Zero
 		  
 		End Sub
 	#tag EndMethod
 
 
 	#tag Note, Name = About
-		Functions used for computing contact points, distance queries, and TOI
-		queries. 
-		
-		Collision methods are non-static for pooling speed, retrieve a
-		collision object from the SingletonPool.
-		
+		Input for Distance.
+		You have to option to use the shape radii in the computation.
 		
 	#tag EndNote
 
-	#tag Note, Name = Progress
-		
-		Up to (not including) TestOverlap().
-	#tag EndNote
-
 
 	#tag Property, Flags = &h0
-		mCache As Physics.SimplexCache
+		ProxyA As Physics.DistanceProxy
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		mInput As Physics.DistanceInput
+		ProxyB As Physics.DistanceProxy
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		mOutput As Physics.DistanceOutput
+		TransformA As Physics.Transform
 	#tag EndProperty
 
+	#tag Property, Flags = &h0
+		TransformB As Physics.Transform
+	#tag EndProperty
 
-	#tag Constant, Name = NullFeature, Type = Double, Dynamic = False, Default = \"&h3FFFFFFF", Scope = Public
-	#tag EndConstant
+	#tag Property, Flags = &h0
+		UseRadii As Boolean = False
+	#tag EndProperty
 
 
 	#tag ViewBehavior
@@ -85,7 +81,7 @@ Protected Class Collision
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="mInput"
+			Name="ProxyA"
 			Visible=false
 			Group="Behavior"
 			InitialValue=""

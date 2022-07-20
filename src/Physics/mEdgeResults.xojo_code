@@ -1,46 +1,18 @@
 #tag Class
-Protected Class Collision
-	#tag Method, Flags = &h0
-		Sub Constructor()
-		  mInput = New Physics.DistanceInput
-		  mCache = New Physics.SimplexCache
-		  mOutput = New Physics.DistanceOutput
-		  
-		End Sub
-	#tag EndMethod
-
-
+Private Class mEdgeResults
 	#tag Note, Name = About
-		Functions used for computing contact points, distance queries, and TOI
-		queries. 
-		
-		Collision methods are non-static for pooling speed, retrieve a
-		collision object from the SingletonPool.
-		
+		Private class for returning edge results. Used within `Physics.Collision`.
 		
 	#tag EndNote
 
-	#tag Note, Name = Progress
-		
-		Up to (not including) TestOverlap().
-	#tag EndNote
-
 
 	#tag Property, Flags = &h0
-		mCache As Physics.SimplexCache
+		EdgeIndex As Integer = 0
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		mInput As Physics.DistanceInput
+		Separation As Double = 0.0
 	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		mOutput As Physics.DistanceOutput
-	#tag EndProperty
-
-
-	#tag Constant, Name = NullFeature, Type = Double, Dynamic = False, Default = \"&h3FFFFFFF", Scope = Public
-	#tag EndConstant
 
 
 	#tag ViewBehavior
@@ -85,7 +57,7 @@ Protected Class Collision
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="mInput"
+			Name="Separation"
 			Visible=false
 			Group="Behavior"
 			InitialValue=""

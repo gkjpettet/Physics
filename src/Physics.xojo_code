@@ -61,10 +61,23 @@ Protected Module Physics
 		Face
 	#tag EndEnum
 
+	#tag Enum, Name = EPAxisType, Type = Integer, Flags = &h0
+		Unknown
+		  EdgeA
+		EdgeB
+	#tag EndEnum
+
 	#tag Enum, Name = ManifoldType, Type = Integer, Flags = &h1
 		Circles
 		  FaceA
 		FaceB
+	#tag EndEnum
+
+	#tag Enum, Name = PointState, Type = Integer, Flags = &h1, Description = 5573656420696E7465726E616C6C7920666F722064657465726D696E696E6720746865207374617465206F6620636F6E7461637420706F696E74732E
+		NullState
+		  AddState
+		  PersistState
+		RemoveState
 	#tag EndEnum
 
 	#tag Enum, Name = ShapeType, Type = Integer, Flags = &h1, Description = 5479706573206F66207368617065732E

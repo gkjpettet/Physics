@@ -1,46 +1,35 @@
 #tag Class
-Protected Class Collision
+Protected Class ClipVertex
 	#tag Method, Flags = &h0
 		Sub Constructor()
-		  mInput = New Physics.DistanceInput
-		  mCache = New Physics.SimplexCache
-		  mOutput = New Physics.DistanceOutput
+		  V = VMaths.Vector2.Zero
+		  ID = New Physics.ContactID
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub Set(cv As Physics.ClipVertex)
+		  Var v1 As VMaths.Vector2 = cv.V
+		  v.X = v1.X
+		  v.Y = v1.Y
+		  Var c As Physics.ContactID = cv.ID
+		  id.IndexA = c.IndexA
+		  id.IndexB = c.IndexB
+		  id.TypeA = c.TypeA
+		  id.TypeB = c.TypeB
 		  
 		End Sub
 	#tag EndMethod
 
 
-	#tag Note, Name = About
-		Functions used for computing contact points, distance queries, and TOI
-		queries. 
-		
-		Collision methods are non-static for pooling speed, retrieve a
-		collision object from the SingletonPool.
-		
-		
-	#tag EndNote
-
-	#tag Note, Name = Progress
-		
-		Up to (not including) TestOverlap().
-	#tag EndNote
-
-
 	#tag Property, Flags = &h0
-		mCache As Physics.SimplexCache
+		ID As Physics.ContactID
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		mInput As Physics.DistanceInput
+		V As VMaths.Vector2
 	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		mOutput As Physics.DistanceOutput
-	#tag EndProperty
-
-
-	#tag Constant, Name = NullFeature, Type = Double, Dynamic = False, Default = \"&h3FFFFFFF", Scope = Public
-	#tag EndConstant
 
 
 	#tag ViewBehavior
@@ -85,7 +74,7 @@ Protected Class Collision
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="mInput"
+			Name="V"
 			Visible=false
 			Group="Behavior"
 			InitialValue=""

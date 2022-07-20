@@ -1,46 +1,39 @@
 #tag Class
-Protected Class Collision
+Protected Class TempPolygon
 	#tag Method, Flags = &h0
 		Sub Constructor()
-		  mInput = New Physics.DistanceInput
-		  mCache = New Physics.SimplexCache
-		  mOutput = New Physics.DistanceOutput
+		  Vertices.ResizeTo(Physics.Settings.MaxPolygonVertices - 1)
+		  For i As Integer = 0 To Vertices.LastIndex
+		    Vertices(i) = VMaths.Vector2.Zero
+		  Next i
+		  
+		  Normals.ResizeTo(Physics.Settings.MaxPolygonVertices - 1)
+		  For i As Integer = 0 To Vertices.LastIndex
+		    Normals(i) = VMaths.Vector2.Zero
+		  Next i
 		  
 		End Sub
 	#tag EndMethod
 
 
 	#tag Note, Name = About
-		Functions used for computing contact points, distance queries, and TOI
-		queries. 
-		
-		Collision methods are non-static for pooling speed, retrieve a
-		collision object from the SingletonPool.
-		
+		This holds polygon B expressed in frame A. 
+		Used internally within `Physics.Collision`.
 		
 	#tag EndNote
 
-	#tag Note, Name = Progress
-		
-		Up to (not including) TestOverlap().
-	#tag EndNote
-
 
 	#tag Property, Flags = &h0
-		mCache As Physics.SimplexCache
+		Count As Integer = 0
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		mInput As Physics.DistanceInput
+		Normals() As VMaths.Vector2
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		mOutput As Physics.DistanceOutput
+		Vertices() As VMaths.Vector2
 	#tag EndProperty
-
-
-	#tag Constant, Name = NullFeature, Type = Double, Dynamic = False, Default = \"&h3FFFFFFF", Scope = Public
-	#tag EndConstant
 
 
 	#tag ViewBehavior
@@ -85,7 +78,7 @@ Protected Class Collision
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="mInput"
+			Name="Vertices()"
 			Visible=false
 			Group="Behavior"
 			InitialValue=""
