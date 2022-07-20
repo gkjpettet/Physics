@@ -22,7 +22,7 @@
 
 ## collision
 [] broadphase
-	[-] broadphase
+	[x] broadphase
 	[] broadphase_strategy
 	[] default_broadphase_buffer
 	[] dynamic_tree

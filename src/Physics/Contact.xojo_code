@@ -240,7 +240,7 @@
 		  If sensor Then
 		    Var shapeA As Physics.Shape = FixtureA.Shape
 		    Var shapeB As Physics.Shape = FixtureB.Shape
-		    touching = World.collision.testOverlap(shapeA, indexA, shapeB, indexB, xfA, xfB)
+		    touching = World.Collision.TestOverlap(shapeA, indexA, shapeB, indexB, xfA, xfB)
 		    
 		    // Sensors don't generate manifolds.
 		    Manifold.PointCount = 0

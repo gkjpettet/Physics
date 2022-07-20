@@ -18,7 +18,7 @@ Protected Class ContactImpulse
 
 
 	#tag Property, Flags = &h0
-		Count As 0
+		Count As Integer = 0
 	#tag EndProperty
 
 	#tag Property, Flags = &h0

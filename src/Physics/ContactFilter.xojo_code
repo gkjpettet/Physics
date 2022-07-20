@@ -16,7 +16,7 @@ Protected Class ContactFilter
 		  End If
 		  
 		  Return ((filterA.MaskBits And filterB.CategoryBits) <> 0) And _
-		  ((filterA.CategoryBits & filterB.MaskBits) <> 0)
+		  ((filterA.CategoryBits And filterB.MaskBits) <> 0)
 		  
 		End Function
 	#tag EndMethod

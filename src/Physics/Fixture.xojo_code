@@ -43,7 +43,7 @@ Protected Class Fixture
 		    Var xLimit As Integer = newCount - 1
 		    For x As Integer = 0 To xLimit
 		      Var fp As New Physics.FixtureProxy(Self)
-		      fp.ProxyId = Physics.Broadphase.NullProxy
+		      fp.ProxyId = Physics.BroadphaseNullProxy
 		      Proxies.Add(fp)
 		    Next x
 		  End If
@@ -85,7 +85,7 @@ Protected Class Fixture
 		  For i As Integer = 0 To iLimit
 		    Var proxy As Physics.FixtureProxy = Proxies(i)
 		    broadPhase.DestroyProxy(proxy.ProxyId)
-		    proxy.ProxyId = Physics.BroadPhase.NullProxy
+		    proxy.ProxyId = Physics.BroadPhaseNullProxy
 		  Next i
 		  
 		  mProxyCount = 0

@@ -35,6 +35,10 @@ Protected Module Physics
 	#tag EndMethod
 
 
+	#tag Constant, Name = BroadphaseNullProxy, Type = Double, Dynamic = False, Default = \"-1", Scope = Protected, Description = 506F727465642066726F6D206042726F616470686173652E4E756C6C50726F7879602E
+	#tag EndConstant
+
+
 	#tag Enum, Name = BodyType, Type = Integer, Flags = &h1, Description = 446566696E6573207468652074797065206F66206120626F64792E
 		Static_
 		  Kinematic
