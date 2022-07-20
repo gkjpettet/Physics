@@ -16,7 +16,7 @@
 [x] particle_query_callback
 [x] particle_raycast_callback
 [x] query_callback
-[] raycast_callback
+[x] raycast_callback
 [x] tree_callback
 [] tree_raycast_callback
 
