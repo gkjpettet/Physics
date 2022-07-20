@@ -41,7 +41,7 @@
 [x] contact_id
 [-] distance
 [x] distance_input
-[] distance_output
+[x] distance_output
 [x] manifold
 [x] manifold_point
 [x] raycast_input
