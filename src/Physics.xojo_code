@@ -45,6 +45,38 @@ Protected Module Physics
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Sub SetRange(Extends destination() As Integer, start As Integer, finish As Integer, source() As Integer, skipCount As Integer = 0)
+		  /// Copies elements of `source` into `destination` skipping `skipCount` elements first 
+		  /// from `start` (inclusive) to `finish` (exclusive).
+		  
+		  // Empty range?
+		  If start = finish Then Return
+		  
+		  Var sourceFinish As Integer = skipCount + finish - start - 1
+		  
+		  If source = destination Then
+		    Var tmp() As Integer
+		    For i As Integer = skipCount To sourceFinish
+		      tmp.Add(source(i))
+		    Next i
+		    Var j As Integer = start
+		    For i As Integer = skipCount To sourceFinish
+		      destination(j) = tmp(i)
+		      j = j + 1
+		    Next i
+		    
+		  Else
+		    Var j As Integer = start
+		    For i As Integer = skipCount To sourceFinish
+		      destination(j) = source(i)
+		      j = j + 1
+		    Next i
+		  End If
+		  
+		End Sub
+	#tag EndMethod
+
 
 	#tag Constant, Name = BroadphaseNullProxy, Type = Double, Dynamic = False, Default = \"-1", Scope = Protected, Description = 506F727465642066726F6D206042726F616470686173652E4E756C6C50726F7879602E
 	#tag EndConstant

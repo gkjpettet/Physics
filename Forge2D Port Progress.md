@@ -39,7 +39,7 @@
 [x] aabb
 [-] collision
 [x] contact_id
-[-] distance
+[x] distance
 [x] distance_input
 [x] distance_output
 [x] manifold
