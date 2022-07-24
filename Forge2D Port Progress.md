@@ -29,7 +29,7 @@
 	[] dynamic_tree_node
 	[] pair
 [] shapes
-	[-] chain_shape
+	[x] chain_shape
 	[x] circle_shape
 	[x] edge_shape
 	[x] mass_data
