@@ -226,7 +226,7 @@ Protected Class Collision
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub CollideEdgeAndPolygon(manifold As Physics.Manifold, edgaA As Physics.EdgeShape, xfA As Physics.Transform, polygonB As Physics.PolygonShape, xfB As Physics.Transform)
+		Sub CollideEdgeAndPolygon(manifold As Physics.Manifold, edgeA As Physics.EdgeShape, xfA As Physics.Transform, polygonB As Physics.PolygonShape, xfB As Physics.Transform)
 		  mCollider.Collide(manifold, edgeA, xfA, polygonB, xfB)
 		  
 		End Sub
@@ -647,7 +647,7 @@ Protected Class Collision
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 46696E6420746865206D61782073657061726174696F6E206265747765656E20706F6C793120616E6420706F6C7932207573696E672065646765206E6F726D616C732066726F6D2060706F6C7931602E
-		Sub FindMaxSeparation(results As Physics.mEdgeResults, poly1 As Physics.PolygonShape, xf1 As Physics.Transform, poly As Physics.PolygonShape, xf2 As Physics.Transform)
+		Sub FindMaxSeparation(results As Physics.mEdgeResults, poly1 As Physics.PolygonShape, xf1 As Physics.Transform, poly2 As Physics.PolygonShape, xf2 As Physics.Transform)
 		  /// Find the max separation between poly1 and poly2 using edge normals from `poly1`.
 		  
 		  Var count1 As Double = poly1.Vertices.Count
@@ -718,12 +718,6 @@ Protected Class Collision
 		collision object from the SingletonPool.
 		
 		
-	#tag EndNote
-
-	#tag Note, Name = Progress
-		Ported upto but not including `()`
-		
-		findIncidentEdge
 	#tag EndNote
 
 

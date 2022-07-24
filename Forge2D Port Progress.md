@@ -31,13 +31,13 @@
 [] shapes
 	[-] chain_shape
 	[x] circle_shape
-	[-] edge_shape
+	[x] edge_shape
 	[x] mass_data
-	[-] polygon_shape
+	[x] polygon_shape
 	[x] shape
 	[x] shape_type
 [x] aabb
-[-] collision
+[x] collision
 [x] contact_id
 [x] distance
 [x] distance_input
