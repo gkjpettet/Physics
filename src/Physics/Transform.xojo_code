@@ -69,9 +69,20 @@ Protected Class Transform
 		End Function
 	#tag EndMethod
 
-	#tag Method, Flags = &h0, Description = 536574207468697320746F20657175616C20616E6F74686572207472616E73666F726D2E
+	#tag Method, Flags = &h0, Description = 536574207468697320746F20657175616C20616E6F74686572207472616E73666F726D2E204F766572726964652072657475726E7320697473656C662E
+		Sub Set(xf As Physics.Transform)
+		  /// Set this to equal another transform. Override returns itself.
+		  
+		  mP.SetFrom(xf.P)
+		  mQ.SetFrom(xf.Q)
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 536574207468697320746F20657175616C20616E6F74686572207472616E73666F726D2E2052657475726E7320697473656C662E
 		Function Set(xf As Physics.Transform) As Physics.Transform
-		  /// Set this to equal another transform.
+		  /// Set this to equal another transform. Returns itself.
 		  
 		  mP.SetFrom(xf.P)
 		  mQ.SetFrom(xf.Q)
@@ -196,14 +207,6 @@ Protected Class Transform
 			Visible=true
 			Group="Position"
 			InitialValue="0"
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="mP"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
 			Type="Integer"
 			EditorType=""
 		#tag EndViewProperty

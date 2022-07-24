@@ -601,7 +601,7 @@ Protected Class Vector2
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 526F7461746573207468697320766563746F72206279203930206465677265657320616E64207468656E207363616C657320697420627920607363616C65602E2053746F7265732074686520726573756C7420696E20606F7574602E204F766572726964652072657475726E7320606F7574602E
-		Sub ScaleOrthogonalInto(scale As Double, ByRef out As VMaths.Vector2)
+		Sub ScaleOrthogonalInto(scale As Double, out As VMaths.Vector2)
 		  /// Rotates this vector by 90 degrees and then scales it by `scale`. 
 		  /// Stores the result in `out`. Override returns `out`.
 		  
@@ -613,7 +613,7 @@ Protected Class Vector2
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 526F7461746573207468697320766563746F72206279203930206465677265657320616E64207468656E207363616C657320697420627920607363616C65602E2053746F7265732074686520726573756C7420696E20606F75746020616E642072657475726E7320606F7574602E
-		Function ScaleOrthogonalInto(scale As Double, ByRef out As VMaths.Vector2) As VMaths.Vector2
+		Function ScaleOrthogonalInto(scale As Double, out As VMaths.Vector2) As VMaths.Vector2
 		  /// Rotates this vector by 90 degrees and then scales it by `scale`. 
 		  /// Stores the result in `out` and returns `out`.
 		  
@@ -733,7 +733,7 @@ Protected Class Vector2
 		#tag EndGetter
 		#tag Setter
 			Set
-			  /// Sets the length of the vector. A negative value will change the vector's orientation and a value of 
+			  /// Sets the length of the vector. A negative value will change the vector's orientation and a value of
 			  /// zero will set the vector to zero.
 			  
 			  If value = 0.0 Then
@@ -808,6 +808,54 @@ Protected Class Vector2
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="IsInfinite"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="IsNotANumber"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Length"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Length2"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="X"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Y"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Double"
 			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior

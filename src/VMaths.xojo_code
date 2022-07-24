@@ -1,5 +1,28 @@
 #tag Module
 Protected Module VMaths
+	#tag Method, Flags = &h0, Description = 417070656E647320616C6C20766563746F72206F626A6563747320696E2060736F757263656020746F2074686520656E64206F66206064657374696E6174696F6E602E
+		Sub AddAll(Extends destination() As VMaths.Vector2, source() As VMaths.Vector2)
+		  /// Appends all vector objects in `source` to the end of `destination`.
+		  
+		  For Each v As VMaths.Vector2 In source
+		    destination.Add(v)
+		  Next v
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 52657475726E73205472756520696620606E6565646C652060697320666F756E642077697468696E2060686179737461636B602E
+		Function Contains(Extends haystack() As VMaths.Vector2, needle As VMaths.Vector2) As Boolean
+		  /// Returns True if `needle `is found within `haystack`.
+		  
+		  If haystack.IndexOf(needle) = -1 Then
+		    Return False
+		  Else
+		    Return True
+		  End If
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h1, Description = 52657475726E732060646567726565736020696E2072616469616E732E
 		Protected Function Radians(degrees As Double) As Double
 		  /// Returns `degrees` in radians.
