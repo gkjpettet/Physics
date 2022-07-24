@@ -93,7 +93,7 @@ Protected Module Physics
 		Face
 	#tag EndEnum
 
-	#tag Enum, Name = EPAxisType, Type = Integer, Flags = &h0
+	#tag Enum, Name = EPAxisType, Type = Integer, Flags = &h1
 		Unknown
 		  EdgeA
 		EdgeB
@@ -117,6 +117,12 @@ Protected Module Physics
 		  Edge = 1
 		  Polygon = 2
 		Chain = 3
+	#tag EndEnum
+
+	#tag Enum, Name = VertexType, Type = Integer, Flags = &h1
+		Isolated
+		  Concave
+		Convex
 	#tag EndEnum
 
 

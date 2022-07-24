@@ -105,6 +105,7 @@ Class=mSimplexVertex;Physics/mSimplexVertex.xojo_code;&h0000000068726FFF;&h00000
 Class=SimplexCache;Physics/SimplexCache.xojo_code;&h00000000293227FF;&h0000000058463FFF;false
 Class=mSimplex;Physics/mSimplex.xojo_code;&h00000000167D17FF;&h0000000058463FFF;false
 Class=DistanceProxy;Physics/DistanceProxy.xojo_code;&h00000000113D87FF;&h0000000058463FFF;false
+Class=EdgePolygonCollider;Physics/EdgePolygonCollider.xojo_code;&h0000000062244FFF;&h0000000058463FFF;false
 DefaultWindow=WinUnitTests
 AppMenuBar=MainMenuBar
 MajorVersion=1
