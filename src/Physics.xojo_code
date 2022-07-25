@@ -112,11 +112,25 @@ Protected Module Physics
 		RemoveState
 	#tag EndEnum
 
+	#tag Enum, Name = SeparationFunctionType, Type = Integer, Flags = &h1
+		Points
+		  FaceA
+		FaceB
+	#tag EndEnum
+
 	#tag Enum, Name = ShapeType, Type = Integer, Flags = &h1, Description = 5479706573206F66207368617065732E
 		Circle = 0
 		  Edge = 1
 		  Polygon = 2
 		Chain = 3
+	#tag EndEnum
+
+	#tag Enum, Name = TOIOutputState, Type = Integer, Flags = &h1
+		Unknown
+		  Failed
+		  Overlapped
+		  Touching
+		Separated
 	#tag EndEnum
 
 	#tag Enum, Name = VertexType, Type = Integer, Flags = &h1
