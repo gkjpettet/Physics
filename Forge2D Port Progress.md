@@ -125,6 +125,6 @@
 [-] particle_group
 [] particle_group_def
 [] particle_group_type
-[] particle_system
+[-] particle_system
 [] particle_type
 [] voronoi_diagram

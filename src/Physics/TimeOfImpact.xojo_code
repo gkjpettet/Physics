@@ -14,8 +14,8 @@ Protected Class TimeOfImpact
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h21
-		Private Sub TimeOfImpact(output As Physics.TOIOutput, input As Physics.TOIInput)
+	#tag Method, Flags = &h0
+		Sub TimeOfImpact_(output As Physics.TOIOutput, input As Physics.TOIInput)
 		  /// Compute the upper bound on time before two shapes penetrate. Time is
 		  /// represented as a fraction between [0,TMax]. 
 		  ///
