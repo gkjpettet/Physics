@@ -118,7 +118,7 @@
 [-] world
 
 ## particle
-[-] particle
+[x] particle
 [] particle_body_contact
 [] particle_callbacks
 [] particle_contact
