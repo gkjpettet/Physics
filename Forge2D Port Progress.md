@@ -67,7 +67,7 @@
 	[x] contact
 	[x] contact_position_and_constraint
 	[] contact_solver
-	[-] contact_velocity_constraint
+	[x] contact_velocity_constraint
 	[x] edge_and_circle_contact
 	[x] edge_and_polygon_contact
 	[x] polygon_and_circle_contact

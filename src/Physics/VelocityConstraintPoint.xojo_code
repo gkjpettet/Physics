@@ -1,78 +1,40 @@
 #tag Class
-Protected Class ContactVelocityConstraint
+Protected Class VelocityConstraintPoint
 	#tag Method, Flags = &h0
 		Sub Constructor()
-		  Points.ResizeTo(Physics.Settings.MaxManifoldPoints - 1)
-		  For i As Integer = 0 To Points.LastIndex
-		    Points(i) = New Physics.VelocityConstraintPoint
-		  Next i
-		  
-		  Normal = VMaths.Vector2.Zero
-		  NormalMass = VMaths.Matrix2.Zero
-		  K = VMaths.Matrix2.Zero
+		  RA = VMaths.Vector2.Zero
+		  RB = VMaths.Vector2.Zero
 		  
 		End Sub
 	#tag EndMethod
 
 
 	#tag Property, Flags = &h0
-		ContactIndex As Integer = 0
+		NormalImpulse As Double = 0
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		Friction As Double = 0
+		NormalMass As Double = 0
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		IndexA As Integer = 0
+		RA As VMaths.Vector2
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		IndexB As Integer = 0
+		RB As VMaths.Vector2
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		InvIA As Double = 0
+		TangentImpulse As Double = 0
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		InvIB As Double = 0
+		TangentMass As Double = 0
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		InvMassA As Double = 0
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		InvMassB As Double = 0
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		K As VMaths.Matrix2
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		Normal As VMaths.Vector2
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		NormalMass As VMaths.Matrix2
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		PointCount As Integer = 0
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		Points() As Physics.VelocityConstraintPoint
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		Restitution As Double = 0
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		TangentSpeed As Double = 0
+		VelocityBias As Double = 0
 	#tag EndProperty
 
 
@@ -118,7 +80,7 @@ Protected Class ContactVelocityConstraint
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="Points()"
+			Name="RA"
 			Visible=false
 			Group="Behavior"
 			InitialValue=""

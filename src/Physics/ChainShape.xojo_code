@@ -375,14 +375,6 @@ Inherits Physics.Shape
 				"3 - Chain"
 			#tag EndEnumValues
 		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Vertices()"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class
 #tag EndClass

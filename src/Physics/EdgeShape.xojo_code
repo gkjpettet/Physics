@@ -273,11 +273,19 @@ Inherits Shape
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="Vertex1"
+			Name="HasVertex0"
 			Visible=false
 			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
+			InitialValue="False"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="HasVertex3"
+			Visible=false
+			Group="Behavior"
+			InitialValue="False"
+			Type="Boolean"
 			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
