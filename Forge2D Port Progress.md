@@ -126,5 +126,5 @@
 [] particle_group_def
 [] particle_group_type
 [-] particle_system (up to not including ParticleSystem class)
-[] particle_type
+[x] particle_type
 [] voronoi_diagram

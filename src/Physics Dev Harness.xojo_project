@@ -113,6 +113,7 @@ Class=SeparationFunction;Physics/SeparationFunction.xojo_code;&h0000000071D667FF
 Class=PsPair;Physics/PsPair.xojo_code;&h000000004157E7FF;&h0000000058463FFF;false
 Class=PsProxy;Physics/PsProxy.xojo_code;&h000000005628EFFF;&h0000000058463FFF;false
 Class=NewIndices;Physics/NewIndices.xojo_code;&h000000003CB41FFF;&h0000000058463FFF;false
+Class=ParticleType;Physics/ParticleType.xojo_code;&h0000000032195FFF;&h0000000058463FFF;false
 DefaultWindow=WinUnitTests
 AppMenuBar=MainMenuBar
 MajorVersion=1
