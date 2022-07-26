@@ -2,6 +2,7 @@ import 'package:forge2d/forge2d.dart';
 import 'dart:math';
 
 void main(List<String> arguments) {
+  int i0 = 1 << 0;
   int i1 = 1 << 1;
   int i2 = 1 << 2;
   int i3 = 1 << 3;
