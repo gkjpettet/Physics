@@ -123,7 +123,7 @@
 [] particle_callbacks
 [x] particle_contact
 [x] particle_group
-[] particle_group_def
+[x] particle_group_def
 [x] particle_group_type
 [-] particle_system (up to not including ParticleSystem class)
 [x] particle_type
