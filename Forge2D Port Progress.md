@@ -119,7 +119,7 @@
 
 ## particle
 [x] particle
-[] particle_body_contact
+[x] particle_body_contact
 [] particle_callbacks
 [x] particle_contact
 [x] particle_group
