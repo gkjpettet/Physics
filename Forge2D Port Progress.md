@@ -121,7 +121,7 @@
 [x] particle
 [] particle_body_contact
 [] particle_callbacks
-[] particle_contact
+[x] particle_contact
 [x] particle_group
 [] particle_group_def
 [x] particle_group_type
