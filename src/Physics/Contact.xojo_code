@@ -3,7 +3,7 @@
 	#tag Method, Flags = &h21
 		Private Sub Constructor()
 		  PositionConstraint = New Physics.ContactPositionConstraint
-		  VelocityConstraint = New Physics.ContactPositionConstraint
+		  VelocityConstraint = New Physics.ContactVelocityConstraint
 		  Manifold = New Physics.Manifold
 		  mOldManifold = New Physics.Manifold
 		  
@@ -403,7 +403,7 @@
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		VelocityConstraint As Physics.ContactPositionConstraint
+		VelocityConstraint As Physics.ContactVelocityConstraint
 	#tag EndProperty
 
 

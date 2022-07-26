@@ -38,8 +38,8 @@
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h1
-		Protected Sub InitVelocityConstraints(data As Physics.SolverData)
+	#tag Method, Flags = &h0
+		Sub InitVelocityConstraints(data As Physics.SolverData)
 		  
 		End Sub
 	#tag EndMethod
@@ -79,8 +79,8 @@
 		End Function
 	#tag EndMethod
 
-	#tag Method, Flags = &h1
-		Protected Sub SolveVelocityConstraints(data As Physics.SolverData)
+	#tag Method, Flags = &h0
+		Sub SolveVelocityConstraints(data As Physics.SolverData)
 		  
 		End Sub
 	#tag EndMethod

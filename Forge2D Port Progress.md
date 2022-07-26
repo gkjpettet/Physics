@@ -67,7 +67,7 @@
 	[x] contact
 	[x] contact_position_and_constraint
 	[] contact_solver
-	[] contact_velocity_constraint
+	[-] contact_velocity_constraint
 	[x] edge_and_circle_contact
 	[x] edge_and_polygon_contact
 	[x] polygon_and_circle_contact
@@ -111,7 +111,7 @@
 [x] fixture
 [x] fixture_def
 [x] fixture_proxy
-[] island
+[x] island
 [x] profile
 [x] solver_data
 [x] time_step
