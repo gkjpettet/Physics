@@ -122,9 +122,9 @@
 [] particle_body_contact
 [] particle_callbacks
 [] particle_contact
-[-] particle_group
+[x] particle_group
 [] particle_group_def
 [] particle_group_type
-[-] particle_system
+[-] particle_system (up to not including ParticleSystem class)
 [] particle_type
 [] voronoi_diagram
