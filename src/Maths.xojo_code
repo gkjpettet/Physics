@@ -1,5 +1,16 @@
 #tag Module
 Protected Module Maths
+	#tag Method, Flags = &h1
+		Protected Function Clamp(value As Double, minimum As Double, maximum As Double) As Double
+		  /// Clamps `value` between `minimum` and `maximum`.
+		  
+		  If value > maximum Then Return maximum
+		  If value < minimum Then Return minimum
+		  Return value
+		  
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 436C616D707320606460206265747765656E20606D696E696D756D6020616E6420606D6178696D756D602E
 		Function Clamp(Extends value As Double, minimum As Double, maximum As Double) As Double
 		  /// Clamps `value` between `minimum` and `maximum`.
