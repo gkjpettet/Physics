@@ -311,7 +311,6 @@ Protected Class Island
 		  Next i
 		  
 		  // Leap of faith to new safe state.
-		  #Pragma Warning "CHECK: Is this right?"
 		  Var tmpPositions() As Physics.Position = mPositions
 		  Bodies(toiIndexA).Body.Sweep.C0.X = tmpPositions(toiIndexA).C.X
 		  Bodies(toiIndexA).Body.Sweep.C0.Y = tmpPositions(toiIndexA).C.Y
