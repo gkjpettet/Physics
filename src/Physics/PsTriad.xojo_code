@@ -60,6 +60,10 @@ Protected Class PsTriad
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		S As Double = 0
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		Strength As Double = 0
 	#tag EndProperty
 
@@ -103,6 +107,46 @@ Protected Class PsTriad
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Flags"
+			Visible=false
+			Group="Behavior"
+			InitialValue="0"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Ka"
+			Visible=false
+			Group="Behavior"
+			InitialValue="0"
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Kb"
+			Visible=false
+			Group="Behavior"
+			InitialValue="0"
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Kc"
+			Visible=false
+			Group="Behavior"
+			InitialValue="0"
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Strength"
+			Visible=false
+			Group="Behavior"
+			InitialValue="0"
+			Type="Double"
 			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior

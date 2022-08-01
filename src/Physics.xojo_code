@@ -1,5 +1,16 @@
 #tag Module
 Protected Module Physics
+	#tag Method, Flags = &h0
+		Function Contains(Extends haystack() As Physics.Particle, needle As Physics.Particle) As Boolean
+		  If haystack.IndexOf(needle) = -1 Then
+		    Return False
+		  Else
+		    Return True
+		  End If
+		  
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 496620606E6565646C65602069732077697468696E2060686179737461636B602069742069732072656D6F7665642E
 		Sub Remove(Extends haystack() As Physics.Contact, needle As Physics.Contact)
 		  /// If `needle` is within `haystack` it is removed.

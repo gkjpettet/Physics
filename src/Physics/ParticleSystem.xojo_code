@@ -32,7 +32,10 @@ Protected Class ParticleSystem
 		  Self.ColorMixingStrength = colorMixingStrength
 		  
 		  mTemp = New Physics.AABB
-		  
+		  mTemp2 = New Physics.AABB
+		  mTempVec = VMaths.Vector2.Zero
+		  mTempTransform = Physics.Transform.Zero
+		  mTempTransform2 = Physics.Transform.Zero
 		End Sub
 	#tag EndMethod
 
@@ -42,6 +45,95 @@ Protected Class ParticleSystem
 		  GroupBuffer.Add(particle.Group)
 		  ProxyBuffer.Add(New Physics.PsProxy(particle))
 		  mParticles.Add(particle)
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub CreateParticleGroup(groupDef As Physics.ParticleGroupDef)
+		  Var stride As Double = ParticleStride
+		  mTempTransform.SetIdentity
+		  Var identity As Physics.Transform = mTempTransform
+		  mTempTransform2.SetIdentity
+		  Var transform As Physics.Transform = mTempTransform2
+		  
+		  Var group As New Physics.ParticleGroup(Self)
+		  group.GroupFlags = groupDef.GroupFlags
+		  group.Strength = groupDef.Strength
+		  group.UserData = groupDef.UserData
+		  group.Transform.Set(transform)
+		  group.DestroyAutomatically = groupDef.DestroyAutomatically
+		  
+		  If groupDef.Shape <> Nil Then
+		    Var seedParticle As New Physics.Particle(Self, group)
+		    seedParticle.Flags = groupDef.Flags
+		    seedParticle.Colour = groupDef.Colour
+		    seedParticle.UserData = groupDef.UserData
+		    Var shape As Physics.Shape = groupDef.Shape
+		    transform.SetVec2Angle(groupDef.Position, groupDef.Angle)
+		    Var aabb As Physics.AABB = mTemp
+		    Var childCount As Integer = shape.ChildCount
+		    Var childIndexLimit As Integer = childCount - 1
+		    For childIndex As Integer = 0 To childIndexLimit
+		      If childIndex = 0 Then
+		        shape.ComputeAABB(aabb, identity, childIndex)
+		      Else
+		        Var childAABB As Physics.AABB = mTemp2
+		        shape.ComputeAABB(childAABB, identity, childIndex)
+		        aabb.Combine(childAABB)
+		      End If
+		    Next childIndex
+		    Var upperBoundY As Double = aabb.UpperBound.Y
+		    Var upperBoundX As Double = aabb.UpperBound.X
+		    Var yLimit As Integer = upperBoundY - 1
+		    For y As Integer = Floor(aabb.LowerBound.Y / stride) * stride To yLimit Step stride
+		      Var xLimit As Integer = upperBoundX - 1
+		      For x As Integer = Floor(aabb.lowerBound.x / stride) * stride To xLimit Step stride
+		        mTempVec.SetValues(x, y)
+		        Var p As VMaths.Vector2 = mTempVec
+		        If shape.TestPoint(identity, p) Then
+		          p.SetFrom(Physics.Transform.MulVec2(transform, p))
+		          Var particle As Physics.Particle = seedParticle.Clone
+		          p.Subtract(groupDef.Position)
+		          particle.Position.SetFrom(p)
+		          p.ScaleOrthogonalInto(groupDef.AngularVelocity, particle.Velocity)
+		          particle.Velocity.Add(groupDef.LinearVelocity)
+		          CreateParticle(particle)
+		        End If
+		      Next x
+		    Next y
+		    groupBuffer.Add(group)
+		  End If
+		  
+		  UpdateContacts(True)
+		  If (groupDef.Flags And pairFlags) <> 0 Then
+		    For Each contact As Physics.ParticleContact In ContactBuffer
+		      Var particleA As Physics.Particle = contact.ParticleA
+		      Var particleB As Physics.Particle = contact.ParticleB
+		      If group.Particles.Contains(particleA) And _
+		        group.Particles.Contains(particleB) Then
+		        Var pair_ As New Physics.PsPair(particleA, particleB)
+		        pair_.Flags = contact.Flags
+		        pair_.Strength = groupDef.Strength
+		        pair_.Distance = particleA.Position.DistanceTo(particleB.Position)
+		        pairBuffer.Add(pair_)
+		      End If
+		    Next contact
+		  End If
+		  If (groupDef.Flags And triadFlags) <> 0 Then
+		    Var diagram As New Physics.VoronoiDiagram
+		    For Each particle As Physics.Particle In group.Particles
+		      diagram.AddGenerator(particle.Position, particle)
+		    Next particle
+		    diagram.Generate(stride / 2)
+		    Var cpgCallback As New Physics.CreateParticleGroupCallback(Self, groupDef)
+		    diagram.Nodes(cpgCallback)
+		  End If
+		  If (groupDef.GroupFlags And Physics.ParticleGroupType.SolidParticleGroup) <> 0 Then
+		    ComputeDepthForGroup(group)
+		  End If
+		  
+		  Return group
 		  
 		End Sub
 	#tag EndMethod
@@ -59,15 +151,35 @@ Protected Class ParticleSystem
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h21, Description = 44657374726F79207061727469636C657320696E7369646520612073686170652E
-		Private Sub DestroyParticlesInShape(shape As Physics.Shape, xf As Physics.Transform, callDestructionListener As Boolean = False)
+	#tag Method, Flags = &h0
+		Sub DestroyParticlesInGroup(group As Physics.ParticleGroup, callDestructionListener As Boolean = False)
+		  For Each p As Physics.Particle In group.Particles
+		    DestroyParticle(p, callDestructionListener)
+		  Next p
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 44657374726F79207061727469636C657320696E7369646520612073686170652E
+		Sub DestroyParticlesInShape(shape As Physics.Shape, xf As Physics.Transform, callDestructionListener As Boolean = False)
 		  /// Destroy particles inside a shape. 
 		  ///
 		  /// In addition, this function immediately
 		  /// destroys particles in the shape in contrast to `DestroyParticle()` which
 		  /// defers the destruction until the next simulation step.
 		  
+		  Var callback As New Physics.DestroyParticlesInShapeCallback( _
+		  Self, shape, xf, callDestructionListener)
+		  shape.ComputeAABB(mTemp, xf, 0)
+		  Self.World.QueryAABBParticle(callback, mTemp)
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub JoinParticleGroups(groupA As Physics.ParticleGroup, groupB As Physics.ParticleGroup)
 		  #Pragma Error "TODO"
+		  
 		End Sub
 	#tag EndMethod
 
@@ -130,6 +242,22 @@ Protected Class ParticleSystem
 
 	#tag Property, Flags = &h21
 		Private mTemp As Physics.AABB
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mTemp2 As Physics.AABB
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mTempTransform As Physics.Transform
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mTempTransform2 As Physics.Transform
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mTempVec As VMaths.Vector2
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
