@@ -26,7 +26,7 @@
 	[] broadphase_strategy
 	[] default_broadphase_buffer
 	[] dynamic_tree
-	[] dynamic_tree_node
+	[x] dynamic_tree_node
 	[x] pair
 [] shapes
 	[x] chain_shape

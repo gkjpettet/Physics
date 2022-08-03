@@ -138,6 +138,7 @@ Class=CreateParticleGroupCallback;Physics/CreateParticleGroupCallback.xojo_code;
 Class=JoinParticleGroupsCallback;Physics/JoinParticleGroupsCallback.xojo_code;&h00000000731EE7FF;&h0000000058463FFF;false
 Class=SolveCollisionCallback;Physics/SolveCollisionCallback.xojo_code;&h00000000024EFFFF;&h0000000058463FFF;false
 Class=Pair2D;Physics/Pair2D.xojo_code;&h0000000023F82FFF;&h0000000058463FFF;false
+Class=DynamicTreeNode;Physics/DynamicTreeNode.xojo_code;&h0000000015B257FF;&h0000000058463FFF;false
 DefaultWindow=WinUnitTests
 AppMenuBar=MainMenuBar
 MajorVersion=1
