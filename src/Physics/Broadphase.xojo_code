@@ -18,12 +18,6 @@ Protected Interface Broadphase
 		End Function
 	#tag EndMethod
 
-	#tag Method, Flags = &h0, Description = 4765747320746865206E756D626572206F662070726F786965732E
-		Function GetProxyCount() As Integer
-		  
-		End Function
-	#tag EndMethod
-
 	#tag Method, Flags = &h0
 		Function GetTreeBalance() As Integer
 		  
@@ -52,6 +46,12 @@ Protected Interface Broadphase
 		Sub MoveProxy(proxyID As Integer, AABB As Physics.AABB, displacement As VMaths.Vector2)
 		  
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 4765747320746865206E756D626572206F662070726F786965732E
+		Function ProxyCount() As Integer
+		  
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 517565727920616E204141424220666F72206F7665726C617070696E672070726F786965732E205468652063616C6C6261636B20636C6173732069732063616C6C656420666F7220656163682070726F78792074686174206F7665726C6170732074686520737570706C69656420414142422E
