@@ -27,7 +27,7 @@
 	[] default_broadphase_buffer
 	[] dynamic_tree
 	[] dynamic_tree_node
-	[] pair
+	[x] pair
 [] shapes
 	[x] chain_shape
 	[x] circle_shape
