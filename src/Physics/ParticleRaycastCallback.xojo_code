@@ -1,25 +1,7 @@
 #tag Interface
 Protected Interface ParticleRaycastCallback
 	#tag Method, Flags = &h0
-		Function Fraction() As Double
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function Index() As Integer
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function Normal() As VMaths.Vector2
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function Point() As VMaths.Vector2
+		Function ReportParticle(index As Integer, point As VMaths.Vector2, normal As VMaths.Vector2, fraction As Double) As Double
 		  
 		End Function
 	#tag EndMethod

@@ -16,17 +16,9 @@ const int xMask = (1 << xTruncBits) - 1;
 const int yMask = (1 << yTruncBits) - 1;
 
 void main(List<String> arguments) {
-  var a = computeRelativeTag(1, 2, 3);
-  var b = computeRelativeTag(55, 98, 3);
+  var a = ['a', 'b', 'c'];
+  var b = ['d', 'e', 'f'];
 
-  print(a);
-  print(b);
-}
-
-int computeTag(double x, double y) {
-  return ((y + yOffset).toInt() << yShift) + ((xScale * x).toInt() + xOffset);
-}
-
-int computeRelativeTag(int tag, int x, int y) {
-  return tag + (y << yShift) + (x << xShift);
+  var c = a + b;
+  print(c);
 }

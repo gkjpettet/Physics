@@ -268,7 +268,7 @@ Protected Class Vector2
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 536574207468652076616C756573206F662060726573756C746020746F20746865206D6178696D756D206F662060616020616E642060626020666F722065616368206C696E652E
-		Shared Sub Maximum(a As VMaths.Vector2, b As VMaths.Vector2, ByRef result As VMaths.Vector2)
+		Shared Sub Maximum(a As VMaths.Vector2, b As VMaths.Vector2, result As VMaths.Vector2)
 		  /// Set the values of `result` to the maximum of `a` and `b` for each line.
 		  
 		  result.X = Max(a.X, b.X)
@@ -278,7 +278,7 @@ Protected Class Vector2
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 536574207468652076616C756573206F662060726573756C746020746F20746865206D696E696D756D206F662060616020616E642060626020666F722065616368206C696E652E
-		Shared Sub Minimum(a As VMaths.Vector2, b As VMaths.Vector2, ByRef result As VMaths.Vector2)
+		Shared Sub Minimum(a As VMaths.Vector2, b As VMaths.Vector2, result As VMaths.Vector2)
 		  /// Set the values of `result` to the minimum of `a` and `b` for each line.
 		  
 		  result.X = Min(a.X, b.X)

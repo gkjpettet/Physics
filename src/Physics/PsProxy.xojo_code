@@ -21,6 +21,14 @@ Protected Class PsProxy
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 44656C656761746520666F7220736F7274696E6720507350726F7879206F626A6563747320696E20616E2061727261792E
+		Shared Function SortDelegate(value1 As Physics.PsProxy, value2 As Physics.PsProxy) As Integer
+		  /// Delegate for sorting PsProxy objects in an array.
+		  
+		  Return value1.CompareTo(value2)
+		End Function
+	#tag EndMethod
+
 
 	#tag Note, Name = About
 		Used for detecting particle contacts.
