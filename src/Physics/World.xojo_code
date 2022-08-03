@@ -1,5 +1,44 @@
 #tag Class
 Protected Class World
+	#tag Method, Flags = &h0
+		Sub Constructor(gravity As VMaths.Vector2 = Nil, broadphase As Physics.Broadphase = Nil)
+		  If gravity = Nil Then
+		    mGravity = VMaths.Vector2.Zero
+		  Else
+		    mGravity = gravity
+		  End If
+		  
+		  If broadphase = Nil Then
+		    broadphase = Physics.DefaultBroadphaseBuffer(New Physics.DynamicTree)
+		  End If
+		  
+		  mWarmStarting = True
+		  mContinuousPhysics = True
+		  mSubStepping = False
+		  mStepComplete = True
+		  
+		  mAllowSleep = True
+		  
+		  flags = ClearForcesBit
+		  
+		  mInvDt0 = 0.0
+		  
+		  ContactManager = New Physics.ContactManager(broadPhase)
+		  mProfile = New Physics.Profile
+		  
+		  ParticleSystem = New Physics.ParticleSystem(Self)
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub SetAllowSleep(flag As Boolean)
+		  #Pragma Error "TODO"
+		  
+		End Sub
+	#tag EndMethod
+
+
 	#tag Property, Flags = &h0
 		Bodies() As Physics.Body
 	#tag EndProperty
@@ -60,8 +99,8 @@ Protected Class World
 		Joints() As Physics.Joint
 	#tag EndProperty
 
-	#tag Property, Flags = &h0
-		mAllowSleep As Boolean = False
+	#tag Property, Flags = &h21
+		Private mAllowSleep As Boolean = False
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
@@ -168,6 +207,22 @@ Protected Class World
 			Visible=false
 			Group="Behavior"
 			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Flags"
+			Visible=false
+			Group="Behavior"
+			InitialValue="0"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="mAllowSleep"
+			Visible=false
+			Group="Behavior"
+			InitialValue="False"
 			Type="Boolean"
 			EditorType=""
 		#tag EndViewProperty

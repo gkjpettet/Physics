@@ -137,6 +137,7 @@ Class=VoronoiDiagramTaskListQueue;Physics/VoronoiDiagramTaskListQueue.xojo_code;
 Class=CreateParticleGroupCallback;Physics/CreateParticleGroupCallback.xojo_code;&h00000000108447FF;&h0000000058463FFF;false
 Class=JoinParticleGroupsCallback;Physics/JoinParticleGroupsCallback.xojo_code;&h00000000731EE7FF;&h0000000058463FFF;false
 Class=SolveCollisionCallback;Physics/SolveCollisionCallback.xojo_code;&h00000000024EFFFF;&h0000000058463FFF;false
+Class=Pair2D;Physics/Pair2D.xojo_code;&h0000000023F82FFF;&h0000000058463FFF;false
 DefaultWindow=WinUnitTests
 AppMenuBar=MainMenuBar
 MajorVersion=1

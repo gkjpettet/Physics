@@ -144,7 +144,7 @@ Protected Class ParticleSystem
 	#tag Method, Flags = &h0
 		Sub CreateParticle(particle As Physics.Particle)
 		  particle.Group.Add(particle)
-		  GroupBuffer.Add(particle.Group)
+		  Call GroupBuffer.Add(particle.Group)
 		  ProxyBuffer.Add(New Physics.PsProxy(particle))
 		  mParticles.Add(particle)
 		  
@@ -204,7 +204,7 @@ Protected Class ParticleSystem
 		        End If
 		      Next x
 		    Next y
-		    groupBuffer.Add(group)
+		    Call GroupBuffer.Add(group)
 		  End If
 		  
 		  UpdateContacts(True)
@@ -364,7 +364,7 @@ Protected Class ParticleSystem
 		  If Self.World.ParticleDestroyListener <> Nil Then
 		    Self.World.ParticleDestroyListener.OnDestroyParticleGroup(groupB)
 		  End If
-		  groupBuffer.Remove(groupB)
+		  Call GroupBuffer.Remove(groupB)
 		  
 		  If (groupFlags And Physics.ParticleGroupType.SolidParticleGroup) <> 0 Then
 		    ComputeDepthForGroup(groupA)
@@ -512,9 +512,11 @@ Protected Class ParticleSystem
 		  If mParticles.Count = 0 Then Return
 		  
 		  AllGroupFlags = 0
-		  For Each group As Physics.ParticleGroupSet In GroupBuffer
+		  
+		  For i As Integer = 0 To GroupBuffer.LastIndex
+		    Var group As Physics.ParticleGroup = GroupBuffer.ElementAt(i)
 		    AllGroupFlags = AllGroupFlags Or group.GroupFlags
-		  Next group
+		  Next i
 		  
 		  Var gravityX As Double = step_.Dt * gravityScale * world.Gravity.X
 		  Var gravityY As Double = step_.Dt * gravityScale * world.Gravity.Y
@@ -871,7 +873,9 @@ Protected Class ParticleSystem
 
 	#tag Method, Flags = &h0
 		Sub SolveRigid(step_ As Physics.TimeStep)
-		  For Each group As Physics.ParticleGroup In GroupBuffer
+		  Var iLimit As Integer = GroupBuffer.LastIndex
+		  For i As Integer = 0 To iLimit
+		    Var group As Physics.ParticleGroup = GroupBuffer.ElementAt(i)
 		    If (group.GroupFlags And Physics.ParticleGroupType.RigidParticleGroup) <> 0 Then
 		      group.UpdateStatistics
 		      Var temp As VMaths.Vector2 = mTempVec
@@ -895,7 +899,7 @@ Protected Class ParticleSystem
 		        Physics.Transform.MulVec2(velocityTransform, particle.Position))
 		      Next particle
 		    End If
-		  Next group
+		  Next i
 		  
 		End Sub
 	#tag EndMethod
@@ -1070,7 +1074,7 @@ Protected Class ParticleSystem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 52656D6F766573207061727469636C65732077697468207A6F6D62696520666C61672E
-		Sub SolveZombie(particle As Physics.Particle)
+		Sub SolveZombie()
 		  /// Removes particles with zombie flag.
 		  
 		  For i As Integer = mParticles.LastIndex DownTo 0
@@ -1356,7 +1360,7 @@ Protected Class ParticleSystem
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
-			  Return Particles.Count
+			  Return mParticles.Count
 			End Get
 		#tag EndGetter
 		ParticleCount As Integer
