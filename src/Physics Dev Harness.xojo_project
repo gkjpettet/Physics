@@ -142,6 +142,7 @@ Class=DynamicTreeNode;Physics/DynamicTreeNode.xojo_code;&h0000000015B257FF;&h000
 Interface=BroadphaseStrategy;Physics/BroadphaseStrategy.xojo_code;&h00000000221B9FFF;&h0000000058463FFF;false
 Class=DefaultBroadphaseBuffer;Physics/DefaultBroadphaseBuffer.xojo_code;&h000000000EB2EFFF;&h0000000058463FFF;false
 Class=Pair2DSet;Physics/Pair2DSet.xojo_code;&h0000000059C5A7FF;&h0000000058463FFF;false
+Class=DynamicTree;Physics/DynamicTree.xojo_code;&h000000006BE3CFFF;&h0000000058463FFF;false
 DefaultWindow=WinUnitTests
 AppMenuBar=MainMenuBar
 MajorVersion=1

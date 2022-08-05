@@ -34,7 +34,7 @@ Protected Class DynamicTreeNode
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		UserDate As Variant
+		UserData As Variant
 	#tag EndProperty
 
 

@@ -225,7 +225,7 @@ Protected Class AABB
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function TestOverlap(a As Physics.AABB, b As Physics.AABB) As Boolean
+		Shared Function TestOverlap(a As Physics.AABB, b As Physics.AABB) As Boolean
 		  If b.LowerBound.X - a.UpperBound.X > 0.0 Or _
 		    b.LowerBound.Y - a.UpperBound.Y > 0.0 Then
 		    Return False
@@ -351,6 +351,14 @@ Protected Class AABB
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Perimeter"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Double"
 			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
