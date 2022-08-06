@@ -24,7 +24,7 @@ Protected Class World
 		  End If
 		  
 		  If broadphase = Nil Then
-		    broadphase = Physics.DefaultBroadphaseBuffer(New Physics.DynamicTree)
+		    broadphase = New Physics.DefaultBroadphaseBuffer(New Physics.DynamicTree)
 		  End If
 		  
 		  mWarmStarting = True

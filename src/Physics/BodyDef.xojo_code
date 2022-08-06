@@ -1,7 +1,7 @@
 #tag Class
 Protected Class BodyDef
 	#tag Method, Flags = &h0
-		Sub Constructor(type As Physics.BodyType = Physics.BodyType.Static_, userData As Variant = Nil, position As VMaths.Vector2 = Nil, angle As Double = 0, linearVelocity As VMaths.Vector2 = Nil, angularVelocity As Double = 0, linearDamping As Double = 0, angularDamping As Double = 0, allowSleep As Boolean = True, isAwake As Boolean = True, fixedRotation As Boolean = False, bullet As Boolean = False, active As Boolean = True, gravityOverride As VMaths.Vector2, gravityScale As VMaths.Vector2)
+		Sub Constructor(type As Physics.BodyType = Physics.BodyType.Static_, userData As Variant = Nil, position As VMaths.Vector2 = Nil, angle As Double = 0, linearVelocity As VMaths.Vector2 = Nil, angularVelocity As Double = 0, linearDamping As Double = 0, angularDamping As Double = 0, allowSleep As Boolean = True, isAwake As Boolean = True, fixedRotation As Boolean = False, bullet As Boolean = False, active As Boolean = True, gravityOverride As VMaths.Vector2 = Nil, gravityScale As VMaths.Vector2 = Nil)
 		  Self.Type = type
 		  Self.UserData = userData
 		  Self.Angle = angle
@@ -54,7 +54,7 @@ Protected Class BodyDef
 
 	#tag Property, Flags = &h0, Description = 4973207468697320612066617374206D6F76696E6720626F647920746861742073686F756C642062652070726576656E7465642066726F6D2074756E6E656C696E67207468726F756768206F74686572206D6F76696E6720626F646965733F205761726E696E673A20596F752073686F756C6420757365207468697320666C61672073706172696E676C792073696E636520697420696E637265617365732070726F63657373696E672074696D652E
 		#tag Note
-			Is this a fast moving body that should be prevented from tunneling through 
+			Is this a fast moving body that should be prevented from tunneling through
 			other moving bodies?
 			
 			Note: All bodies are prevented from tunneling through `BodyType.kinematic`
@@ -62,7 +62,6 @@ Protected Class BodyDef
 			`BodyType.dynamic` bodies.
 			
 			Warning: You should use this flag sparingly since it increases processing time.
-			
 		#tag EndNote
 		Bullet As Boolean = False
 	#tag EndProperty
@@ -82,7 +81,6 @@ Protected Class BodyDef
 			If you wish to modify the gravity relative to the world, use
 			`World.Gravity` as part of the calculation. However, if you only wish to
 			scale it, use `GravityScale` instead.
-			
 		#tag EndNote
 		GravityOverride As VMaths.Vector2
 	#tag EndProperty
@@ -155,6 +153,86 @@ Protected Class BodyDef
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Active"
+			Visible=false
+			Group="Behavior"
+			InitialValue="True"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="AllowSleep"
+			Visible=false
+			Group="Behavior"
+			InitialValue="True"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Angle"
+			Visible=false
+			Group="Behavior"
+			InitialValue="0"
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="AngularDamping"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="AngularVelocity"
+			Visible=false
+			Group="Behavior"
+			InitialValue="0"
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Bullet"
+			Visible=false
+			Group="Behavior"
+			InitialValue="False"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="FixedRotation"
+			Visible=false
+			Group="Behavior"
+			InitialValue="False"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="IsAwake"
+			Visible=false
+			Group="Behavior"
+			InitialValue="True"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="LinearDamping"
+			Visible=false
+			Group="Behavior"
+			InitialValue="0"
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Type"
+			Visible=false
+			Group="Behavior"
+			InitialValue="Physics.BodyType.Static_"
+			Type="Physics.BodyType"
 			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior

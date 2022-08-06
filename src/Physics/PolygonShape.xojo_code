@@ -52,7 +52,7 @@ Inherits Physics.Shape
 		  upper.X = lower.X
 		  upper.Y = lower.Y
 		  
-		  Var iLimit As Integer = Vertices.Count
+		  Var iLimit As Integer = Vertices.Count - 1
 		  For i As Integer = 1 To iLimit
 		    Var v2 As VMaths.Vector2 = vertices(i)
 		    Var vx As Double = (xfqc * v2.X - xfqs * v2.Y) + xfpx
