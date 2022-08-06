@@ -15,8 +15,8 @@ Protected Class SeparationFunction
 		  mLocalPointB1 = VMaths.Vector2.Zero
 		  mLocalPointB2 = VMaths.Vector2.Zero
 		  mTemp = VMaths.Vector2.Zero
-		  mxfa = New Physics.Transform
-		  mxfb = New Physics.Transform
+		  mxfa = Physics.Transform.Zero
+		  mxfb = Physics.Transform.Zero
 		  mAxisA = VMaths.Vector2.Zero
 		  mAxisB = VMaths.Vector2.Zero
 		  
@@ -351,6 +351,14 @@ Protected Class SeparationFunction
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Type"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Physics.SeparationFunctionType"
 			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior

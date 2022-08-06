@@ -557,6 +557,7 @@ Protected Class Collision
 		  mV1 = VMaths.Vector2.Zero
 		  mResults1 = New Physics.mEdgeResults
 		  Results2 = New Physics.mEdgeResults
+		  mLocalNormal = VMaths.Vector2.Zero
 		  mLocalTangent = VMaths.Vector2.Zero
 		  mPlanePoint = VMaths.Vector2.Zero
 		  mTangent = VMaths.Vector2.Zero
@@ -864,14 +865,6 @@ Protected Class Collision
 			Visible=true
 			Group="Position"
 			InitialValue="0"
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="mInput"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
 			Type="Integer"
 			EditorType=""
 		#tag EndViewProperty
