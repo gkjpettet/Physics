@@ -145,6 +145,7 @@ Class=Pair2DSet;Physics/Pair2DSet.xojo_code;&h0000000059C5A7FF;&h0000000058463FF
 Class=DynamicTree;Physics/DynamicTree.xojo_code;&h000000006BE3CFFF;&h0000000058463FFF;false
 Class=WorldQueryWrapper;Physics/WorldQueryWrapper.xojo_code;&h0000000076980FFF;&h0000000058463FFF;false
 Class=WorldRayCastWrapper;Physics/WorldRayCastWrapper.xojo_code;&h0000000069F74FFF;&h0000000058463FFF;false
+Class=DebugDraw;Physics/DebugDraw.xojo_code;&h000000002D8E57FF;&h0000000058463FFF;false
 DefaultWindow=Window1
 AppMenuBar=MainMenuBar
 MajorVersion=1

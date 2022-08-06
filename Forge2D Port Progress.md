@@ -9,7 +9,7 @@
 [x] contact_filter
 [x] contact_impulse
 [x] contact_listener
-[] debug_draw
+[x] debug_draw
 [x] destroy_listener
 [x] pair_callback
 [x] particle_destroy_listener
