@@ -19,6 +19,10 @@
 		  /// Given a transform, compute the associated axis aligned bounding box for a
 		  /// child shape.
 		  
+		  #Pragma Unused aabb
+		  #Pragma Unused xf
+		  #Pragma Unused childIndex
+		  
 		  Raise New UnsupportedOperationException("This method should be overriden by subclasses.")
 		End Sub
 	#tag EndMethod
@@ -34,6 +38,11 @@
 		  /// `p` is a point in world coordinates.
 		  /// `normalOut` returns the direction in which the distance increases.
 		  
+		  #Pragma Unused xf
+		  #Pragma Unused p
+		  #Pragma Unused childIndex
+		  #Pragma Unused normalOut
+		  
 		  Raise New UnsupportedOperationException("This method should be overriden by subclasses.")
 		  
 		End Function
@@ -45,6 +54,9 @@
 		  /// density. The inertia tensor is computed about the local origin.
 		  ///
 		  /// `density` should be in kilograms per metre squared.
+		  
+		  #Pragma Unused massData
+		  #Pragma Unused density
 		  
 		  Raise New UnsupportedOperationException("This method should be overriden by subclasses.")
 		End Sub
@@ -73,6 +85,11 @@
 		  /// `transform` to be applied to the shape.
 		  /// `childIndex` the child shape index
 		  
+		  #Pragma Unused output
+		  #Pragma Unused input
+		  #Pragma Unused transform
+		  #Pragma Unused childIndex
+		  
 		  Raise New UnsupportedOperationException("This method should be overriden by subclasses.")
 		  
 		End Function
@@ -84,6 +101,9 @@
 		  ///
 		  /// `xf` should be the shape world transform.
 		  /// `point` should be in world coordinates.
+		  
+		  #Pragma Unused xf
+		  #Pragma Unused point
 		  
 		  Raise New UnsupportedOperationException("This method should be overriden by subclasses.")
 		End Function

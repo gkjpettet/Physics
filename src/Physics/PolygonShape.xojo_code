@@ -38,6 +38,8 @@ Inherits Physics.Shape
 
 	#tag Method, Flags = &h0
 		Sub ComputeAABB(aabb As Physics.AABB, xf As Physics.Transform, childIndex As Integer)
+		  #Pragma Unused childIndex
+		  
 		  Var lower As VMaths.Vector2 = aabb.LowerBound
 		  Var upper As VMaths.Vector2 = aabb.UpperBound
 		  Var v1 As VMaths.Vector2 = Vertices(0)
@@ -125,6 +127,8 @@ Inherits Physics.Shape
 
 	#tag Method, Flags = &h0
 		Function ComputeDistanceToOut(xf As Physics.Transform, p As VMaths.Vector2, childIndex As Integer, ByRef normalOut As VMaths.Vector2) As Double
+		  #Pragma Unused childIndex
+		  
 		  Var xfqc As Double = xf.Q.cos
 		  Var xfqs As Double = xf.Q.Sin
 		  Var tx As Double = p.X - xf.P.X
@@ -294,6 +298,8 @@ Inherits Physics.Shape
 
 	#tag Method, Flags = &h0
 		Function Raycast(output As Physics.RaycastOutput, input As Physics.RaycastInput, xf As Physics.Transform, childIndex As Integer) As Boolean
+		  #Pragma Unused childIndex
+		  
 		  Var xfqc As Double = xf.Q.Cos
 		  Var xfqs  As Double = xf.Q.Sin
 		  Var xfp As VMaths.Vector2 = xf.P

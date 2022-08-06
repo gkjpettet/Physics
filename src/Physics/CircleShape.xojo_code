@@ -21,6 +21,8 @@ Inherits Physics.Shape
 
 	#tag Method, Flags = &h0
 		Sub ComputeAABB(aabb As Physics.AABB, transform As Physics.Transform, childIndex As Integer)
+		  #Pragma Unused childIndex
+		  
 		  Var tq As Physics.Rot = transform.Q
 		  Var tp As VMaths.Vector2 = transform.P
 		  Var px As Double = tq.Cos * Position.X - tq.Sin * Position.Y + tp.X
@@ -36,6 +38,8 @@ Inherits Physics.Shape
 
 	#tag Method, Flags = &h0
 		Function ComputeDistanceToOut(xf As Physics.Transform, p As VMaths.Vector2, childIndex As Integer, ByRef normalOut As VMaths.Vector2) As Double
+		  #Pragma Unused childIndex
+		  
 		  Var xfq As Physics.Rot = xf.Q
 		  Var centerX As Double = xfq.Cos * p.X - xfq.Sin * p.Y + xf.P.X
 		  Var centerY As Double = xfq.Sin * p.X + xfq.Cos * p.Y + xf.P.Y
@@ -77,6 +81,8 @@ Inherits Physics.Shape
 		Function GetSupport(d As VMaths.Vector2) As Integer
 		  /// Get the supporting vertex index in the given direction.
 		  
+		  #Pragma Unused d
+		  
 		  Return 0
 		  
 		End Function
@@ -85,6 +91,8 @@ Inherits Physics.Shape
 	#tag Method, Flags = &h0, Description = 4765742074686520737570706F7274696E672076657274657820696E2074686520676976656E20646972656374696F6E2E
 		Function GetSupportVertex(d As VMaths.Vector2) As VMaths.Vector2
 		  /// Get the supporting vertex in the given direction.
+		  
+		  #Pragma Unused d
 		  
 		  Return Position
 		  
@@ -119,6 +127,8 @@ Inherits Physics.Shape
 		  // From Section 3.1.2
 		  // x = s + a * r
 		  // norm(x) = radius
+		  
+		  #Pragma Unused childIndex
 		  
 		  Var inputP1 As VMaths.Vector2 = input.P1
 		  Var inputP2 As VMaths.Vector2 = input.P2

@@ -29,6 +29,8 @@
 	#tag Method, Flags = &h0, Description = 537562636C61737365732073686F756C64206F76657272696465207468697320746F2068616E646C6520746865206465737472756374696F6E206F6620746865206A6F696E742E
 		Sub Destroy()
 		  /// Subclasses should override this to handle the destruction of the joint.
+		  
+		  Raise New UnsupportedOperationException("Subclasses should override this.")
 		End Sub
 	#tag EndMethod
 
@@ -40,7 +42,9 @@
 
 	#tag Method, Flags = &h0
 		Sub InitVelocityConstraints(data As Physics.SolverData)
+		  #Pragma Unused data
 		  
+		  Raise New UnsupportedOperationException("Subclasses should override this.")
 		End Sub
 	#tag EndMethod
 
@@ -61,6 +65,8 @@
 		Function ReactionForce(invDt As Double) As VMaths.Vector2
 		  /// Get the reaction force on body2 at the joint anchor in Newtons.
 		  
+		  #Pragma Unused invDt
+		  
 		  Raise New UnsupportedOperationException("This method should be overridden by subclasses.")
 		End Function
 	#tag EndMethod
@@ -69,19 +75,25 @@
 		Function ReactionTorque(invDt As Double) As Double
 		  /// Get the reaction torque on body2 in N*m.
 		  
+		  #Pragma Unused invDt
+		  
 		  Raise New UnsupportedOperationException("This method should be overridden by subclasses.")
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 52657475726E7320547275652069662074686520706F736974696F6E206572726F7273206172652077697468696E20746F6C6572616E63652E20496E7465726E616C2E
 		Function SolvePositionConstraints(data As Physics.SolverData) As Boolean
+		  #Pragma Unused data
 		  
+		  Raise New UnsupportedOperationException("Subclasses should override this.")
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub SolveVelocityConstraints(data As Physics.SolverData)
+		  #Pragma Unused data
 		  
+		  Raise New UnsupportedOperationException("Subclasses should override this.")
 		End Sub
 	#tag EndMethod
 

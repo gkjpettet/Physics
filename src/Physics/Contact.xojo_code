@@ -42,6 +42,10 @@
 
 	#tag Method, Flags = &h0
 		Sub Evaluate(manifold As Physics.Manifold, xfA As Physics.Transform, xfB As Physics.Transform)
+		  #Pragma Unused manifold
+		  #Pragma Unused xfA
+		  #Pragma Unused xfB
+		  
 		  Raise New UnsupportedOperationException("Subclasses should override this method.")
 		End Sub
 	#tag EndMethod

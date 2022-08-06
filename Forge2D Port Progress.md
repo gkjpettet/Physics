@@ -21,14 +21,14 @@
 [x] tree_raycast_callback
 
 ## collision
-[] broadphase
+[x] broadphase
 	[x] broadphase
 	[x] broadphase_strategy
 	[x] default_broadphase_buffer
 	[x] dynamic_tree
 	[x] dynamic_tree_node
 	[x] pair
-[] shapes
+[x] shapes
 	[x] chain_shape
 	[x] circle_shape
 	[x] edge_shape
@@ -60,7 +60,7 @@
 [x] viewport_transform
 
 ## dynamics
-[] contacts
+[x] contacts
 	[x] chain_and_circle_contact
 	[x] chain_and_polygon_contact
 	[x] circle_contact
@@ -115,7 +115,7 @@
 [x] profile
 [x] solver_data
 [x] time_step
-[-] world
+[x] world
 
 ## particle
 [x] particle
@@ -125,6 +125,6 @@
 [x] particle_group
 [x] particle_group_def
 [x] particle_group_type
-[x] particle_system (up to not including ParticleSystem class)
+[x] particle_system
 [x] particle_type
 [x] voronoi_diagram

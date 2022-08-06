@@ -26,6 +26,8 @@ Inherits Shape
 
 	#tag Method, Flags = &h0, Description = 476976656E2061207472616E73666F726D2C20636F6D7075746520746865206173736F636961746564206178697320616C69676E656420626F756E64696E6720626F7820666F722061206368696C642073686170652E
 		Sub ComputeAABB(aabb As Physics.AABB, xf As Physics.Transform, childIndex As Integer)
+		  #Pragma Unused childIndex
+		  
 		  Var lowerBound As VMaths.Vector2 = aabb.LowerBound
 		  Var upperBound As VMaths.Vector2 = aabb.UpperBound
 		  Var xfq As Physics.Rot = xf.Q
@@ -50,6 +52,8 @@ Inherits Shape
 
 	#tag Method, Flags = &h0, Description = 436F6D70757465207468652064697374616E63652066726F6D207468652063757272656E7420736861706520746F207468652073706563696669656420706F696E742E2052657475726E73207468652064697374616E63652066726F6D207468652063757272656E742073686170652E
 		Function ComputeDistanceToOut(xf As Physics.Transform, p As VMaths.Vector2, childIndex As Integer, ByRef normalOut As VMaths.Vector2) As Double
+		  #Pragma Unused childIndex
+		  
 		  Var xfqc As Double = xf.Q.Cos
 		  Var xfqs As Double = xf.Q.Sin
 		  Var xfpx As Double = xf.P.X
@@ -91,6 +95,8 @@ Inherits Shape
 
 	#tag Method, Flags = &h0, Description = 436F6D7075746520746865206D6173732070726F70657274696573206F662074686973207368617065207573696E67206974732064696D656E73696F6E7320616E642064656E736974792E2054686520696E65727469612074656E736F7220697320636F6D70757465642061626F757420746865206C6F63616C206F726967696E2E
 		Sub ComputeMass(massData As Physics.MassData, density As Double)
+		  #Pragma Unused density
+		  
 		  massData.Mass = 0.0
 		  massData.Center.SetFrom(Vertex1)
 		  massData.Center.Add(Vertex2)
@@ -116,6 +122,8 @@ Inherits Shape
 
 	#tag Method, Flags = &h0, Description = 4361737420612072617920616761696E73742061206368696C642073686170652E2052657475726E73205472756520696620746865206368696C64207368617065206973206869742E
 		Function Raycast(output As Physics.RaycastOutput, input As Physics.RaycastInput, xf As Physics.Transform, childIndex As Integer) As Boolean
+		  #Pragma Unused childIndex
+		  
 		  Var v1 As VMaths.Vector2 = Vertex1
 		  Var v2 As VMaths.Vector2 = Vertex2
 		  Var xfq As Physics.Rot = xf.Q
@@ -193,6 +201,9 @@ Inherits Shape
 
 	#tag Method, Flags = &h0, Description = 54657374206120706F696E7420666F7220636F6E7461696E6D656E7420696E20746869732073686170652E2054686973206F6E6C7920776F726B7320666F7220636F6E766578207368617065732E
 		Function TestPoint(xf As Physics.Transform, point As VMaths.Vector2) As Boolean
+		  #Pragma Unused xf
+		  #Pragma Unused point
+		  
 		  Return False
 		  
 		End Function

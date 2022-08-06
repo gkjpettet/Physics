@@ -8,7 +8,7 @@ Protected Class ProfileEntry
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub EnAccum()
+		Sub EndAccum()
 		  Record(mAccum)
 		End Sub
 	#tag EndMethod
@@ -112,6 +112,38 @@ Protected Class ProfileEntry
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="LongAvg"
+			Visible=false
+			Group="Behavior"
+			InitialValue="0"
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Maximum"
+			Visible=false
+			Group="Behavior"
+			InitialValue="-1.7976931348623157e+308"
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Minimum"
+			Visible=false
+			Group="Behavior"
+			InitialValue="1.7976931348623157e+308"
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="ShortAvg"
+			Visible=false
+			Group="Behavior"
+			InitialValue="0"
+			Type="Double"
 			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior

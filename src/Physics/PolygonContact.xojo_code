@@ -3,6 +3,8 @@ Protected Class PolygonContact
 Inherits Physics.Contact
 	#tag Method, Flags = &h0
 		Sub Constructor(fixtureA As Physics.Fixture, fixtureBV As Physics.Fixture)
+		  #Pragma Unused fixtureBV
+		  
 		  #If DebugBuild
 		    Assert(fixtureA.Type = Physics.ShapeType.Polygon)
 		    Assert(fixtureB.Type = Physics.ShapeType.Polygon)

@@ -115,6 +115,8 @@ Inherits Physics.Shape
 
 	#tag Method, Flags = &h0
 		Sub ComputeMass(massData As Physics.MassData, density As Double)
+		  #Pragma Unused density
+		  
 		  massData.Mass = 0.0
 		  massData.Center.SetZero
 		  massData.I = 0.0
@@ -226,6 +228,9 @@ Inherits Physics.Shape
 
 	#tag Method, Flags = &h0
 		Function TestPoint(xf As Physics.Transform, point As VMaths.Vector2) As Boolean
+		  #Pragma Unused xf
+		  #Pragma Unused point
+		  
 		  Return False
 		  
 		End Function

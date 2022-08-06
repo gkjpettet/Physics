@@ -115,7 +115,7 @@ Protected Class ParticleSystem
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub Constructor(world As Physics.World, pressureStrength As Double = 0.05, dampingStrength As Double = 1, elasticStrength As Double = 0.25, springStrength As Double = 0.25, viscousStrength As Double = 0.25, surfaceTensionStrengthAs As Double = 0.1, surfaceTensionStrengthB As Double = 0.2, powderStrength As Double = 0.5, ejectionStrength As Double = 0.5, colorMixingStrength As Double = 0.5)
+		Sub Constructor(world As Physics.World, pressureStrength As Double = 0.05, dampingStrength As Double = 1, elasticStrength As Double = 0.25, springStrength As Double = 0.25, viscousStrength As Double = 0.25, surfaceTensionStrengthA As Double = 0.1, surfaceTensionStrengthB As Double = 0.2, powderStrength As Double = 0.5, ejectionStrength As Double = 0.5, colorMixingStrength As Double = 0.5)
 		  Self.World = world
 		  Self.PressureStrength = pressureStrength
 		  Self.DampingStrength = dampingStrength
@@ -621,6 +621,8 @@ Protected Class ParticleSystem
 		Sub SolveColorMixing(step_ As Physics.TimeStep)
 		  // Mixes colour between contacting particles.
 		  
+		  #Pragma Unused step_
+		  
 		  Var colorMixing256 As Integer = 256 * ColorMixingStrength
 		  
 		  For Each contact As Physics.ParticleContact In ContactBuffer
@@ -650,6 +652,8 @@ Protected Class ParticleSystem
 
 	#tag Method, Flags = &h0
 		Sub SolveDamping(step_ As Physics.TimeStep)
+		  #Pragma Unused step_
+		  
 		  Var  damping As Double = DampingStrength
 		  
 		  For Each contact As Physics.ParticleBodyContact In BodyContactBuffer
@@ -1017,6 +1021,8 @@ Protected Class ParticleSystem
 
 	#tag Method, Flags = &h0
 		Sub SolveViscous(step_ As Physics.TimeStep)
+		  #Pragma Unused step_
+		  
 		  For Each contact As Physics.ParticleBodyContact In BodyContactBuffer
 		    Var particle As Physics.Particle = contact.Particle
 		    If (particle.Flags And Physics.ParticleType.ViscousParticle) <> 0 Then
@@ -1064,6 +1070,8 @@ Protected Class ParticleSystem
 
 	#tag Method, Flags = &h0
 		Sub SolveWall(step_ As Physics.TimeStep)
+		  #Pragma Unused step_
+		  
 		  For Each particle As Physics.Particle In mParticles
 		    If (particle.Flags And Physics.ParticleType.WallParticle) <> 0 Then
 		      particle.Velocity.SetZero

@@ -99,6 +99,8 @@ Protected Class Island
 
 	#tag Method, Flags = &h0
 		Sub Solve(profile As Physics.Profile, step_ As Physics.TimeStep, gravity As VMaths.Vector2, allowSleep As Boolean)
+		  #Pragma Unused profile
+		  
 		  Var dt As Double = step_.Dt
 		  
 		  // Integrate velocities and apply damping. Initialise the body state.
