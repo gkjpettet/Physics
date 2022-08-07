@@ -85,6 +85,15 @@ Protected Class Color3i
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 52657475726E73207468697320436F6C6F72336920696E7374616E6365206173206120586F6A6F20436F6C6F722E
+		Function ToColor() As Color
+		  /// Returns this Color3i instance as a Xojo Color.
+		  
+		  Return Color.RGB(R, G, B, A)
+		  
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Function ToString() As String
 		  Return "Color3i(" + R.ToString + ", " + G.ToString + ", " + _
@@ -170,7 +179,31 @@ Protected Class Color3i
 			Name="R"
 			Visible=false
 			Group="Behavior"
-			InitialValue=""
+			InitialValue="0"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="A"
+			Visible=false
+			Group="Behavior"
+			InitialValue="1.0"
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="B"
+			Visible=false
+			Group="Behavior"
+			InitialValue="0"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="G"
+			Visible=false
+			Group="Behavior"
+			InitialValue="0"
 			Type="Integer"
 			EditorType=""
 		#tag EndViewProperty

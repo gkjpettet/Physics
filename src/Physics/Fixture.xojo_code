@@ -51,6 +51,15 @@ Protected Class Fixture
 		  mProxyCount = 0
 		  mDensity = def.Density
 		  
+		  mLiquidOffset = VMaths.Vector2.Zero
+		  mCircleCenterMoved = VMaths.Vector2.Zero
+		  mLiquidColor = Physics.Color3i.FromRGBd(0.4, 0.4, 1.0)
+		  
+		  RenderCenter = VMaths.Vector2.Zero
+		  RenderAxis = VMaths.Vector2.Zero
+		  mV1 = VMaths.Vector2.Zero
+		  mV2 = VMaths.Vector2.Zero
+		  
 		End Sub
 	#tag EndMethod
 
@@ -148,6 +157,84 @@ Protected Class Fixture
 		  For i As Integer = 0 To iLimit
 		    broadPhase.TouchProxy(Proxies(i).ProxyId)
 		  Next i
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub Render(debugDraw As Physics.DebugDraw, xf As Physics.Transform, colour As Physics.Color3i, wireframe As Boolean)
+		  Select Case Self.Type
+		  Case Physics.ShapeType.Circle
+		    Var circle As Physics.CircleShape = Physics.CircleShape(shape)
+		    
+		    RenderCenter.SetFrom(Physics.Transform.MulVec2(xf, circle.Position))
+		    Var radius As Double = circle.Radius
+		    Call xf.Q.GetXAxis(RenderAxis)
+		    
+		    If UserData <> Nil And UserData = LiquidFlag Then
+		      mLiquidOffset.SetFrom(body.LinearVelocity)
+		      Var linVelLength As Double = body.LinearVelocity.Length
+		      If mAverageLinearVel = -1 Then
+		        mAverageLinearVel = linVelLength
+		      Else
+		        mAverageLinearVel = 0.98 * mAverageLinearVel + 0.02 * linVelLength
+		      End If
+		      
+		      mLiquidOffset.Scale(mLiquidLength / mAverageLinearVel / 2)
+		      mCircleCenterMoved.SetFrom(RenderCenter)
+		      mCircleCenterMoved.Add(mLiquidOffset)
+		      RenderCenter.Subtract(mLiquidOffset)
+		      DebugDraw.DrawSegment(RenderCenter, mCircleCenterMoved, mLiquidColor)
+		      Return
+		    End If
+		    
+		    If wireframe Then
+		      DebugDraw.DrawCircleAxis(RenderCenter, radius, RenderAxis, colour)
+		    Else
+		      DebugDraw.DrawSolidCircle(RenderCenter, radius, colour)
+		    End If
+		    
+		  Case Physics.ShapeType.Polygon
+		    Var poly As Physics.PolygonShape = Physics.PolygonShape(shape)
+		    
+		    #If DebugBuild
+		      Assert(poly.Vertices.Count <= Physics.Settings.MaxPolygonVertices)
+		    #EndIf
+		    
+		    Var vertices() As VMaths.Vector2 
+		    For Each vertex As VMaths.Vector2 In poly.Vertices
+		      vertices.Add(Physics.Transform.MulVec2(xf, vertex))
+		    Next vertex
+		    
+		    If wireframe Then
+		      DebugDraw.DrawPolygon(vertices, colour)
+		    Else
+		      DebugDraw.DrawSolidPolygon(vertices, colour)
+		    End If
+		    
+		  Case Physics.ShapeType.Edge
+		    Var edge As Physics.EdgeShape = Physics.EdgeShape(shape)
+		    mV1.SetFrom(Physics.Transform.MulVec2(xf, edge.Vertex1))
+		    mV2.SetFrom(Physics.Transform.MulVec2(xf, edge.Vertex2))
+		    DebugDraw.DrawSegment(mV1, mV2, colour)
+		    
+		  Case Physics.ShapeType.chain
+		    Var chain As Physics.ChainShape = Physics.ChainShape(shape)
+		    Var count As Integer = chain.VertexCount
+		    Var vertices() As VMaths.Vector2 = chain.Vertices
+		    
+		    mV1.SetFrom(Physics.Transform.MulVec2(xf, vertices(0)))
+		    Var iLimit As Integer = count - 1
+		    For i As Integer = 1 To iLimit
+		      mV2.SetFrom(Physics.Transform.MulVec2(xf, vertices(i)))
+		      DebugDraw.DrawSegment(mV1, mV2, colour)
+		      DebugDraw.DrawCircle(mV1, 0.05, colour)
+		      mV1.SetFrom(mV2)
+		    Next i
+		    
+		  Else
+		    Raise New UnsupportedOperationException("Unsupported fixture shape type.")
+		  End Select
 		  
 		End Sub
 	#tag EndMethod
@@ -289,6 +376,14 @@ Protected Class Fixture
 	#tag EndComputedProperty
 
 	#tag Property, Flags = &h21
+		Private mAverageLinearVel As Double = -1.0
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mCircleCenterMoved As VMaths.Vector2
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
 		Private mDensity As Double = 0
 	#tag EndProperty
 
@@ -305,6 +400,18 @@ Protected Class Fixture
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
+		Private mLiquidColor As Physics.Color3i
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mLiquidLength As Double = 0.12
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mLiquidOffset As VMaths.Vector2
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
 		Private mPool1 As Physics.AABB
 	#tag EndProperty
 
@@ -314,6 +421,14 @@ Protected Class Fixture
 
 	#tag Property, Flags = &h21
 		Private mProxyCount As Integer = 0
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mV1 As VMaths.Vector2
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mV2 As VMaths.Vector2
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -329,6 +444,14 @@ Protected Class Fixture
 		#tag EndGetter
 		ProxyCount As Integer
 	#tag EndComputedProperty
+
+	#tag Property, Flags = &h0
+		RenderAxis As VMaths.Vector2
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		RenderCenter As VMaths.Vector2
+	#tag EndProperty
 
 	#tag Property, Flags = &h0
 		Restitution As Double = 0
@@ -350,6 +473,10 @@ Protected Class Fixture
 	#tag Property, Flags = &h0, Description = 557365207468697320746F2073746F726520796F7572206170706C69636174696F6E20737065636966696320646174612E
 		UserData As Variant
 	#tag EndProperty
+
+
+	#tag Constant, Name = LiquidFlag, Type = Double, Dynamic = False, Default = \"1234598372", Scope = Public
+	#tag EndConstant
 
 
 	#tag ViewBehavior
@@ -439,7 +566,13 @@ Protected Class Fixture
 			Group="Behavior"
 			InitialValue=""
 			Type="Physics.ShapeType"
-			EditorType=""
+			EditorType="Enum"
+			#tag EnumValues
+				"0 - Circle"
+				"1 - Edge"
+				"2 - Polygon"
+				"3 - Chain"
+			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

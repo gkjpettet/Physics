@@ -205,11 +205,104 @@ Protected Class World
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
+	#tag Method, Flags = &h0, Description = 43616C6C207468697320746F20647261772073686170657320616E64206F74686572206465627567206472617720646174612E
 		Sub DrawDebugData()
-		  #Pragma Warning "TODO: Need to port the debug drawing routines in Forge2D"
+		  /// Call this to draw shapes and other debug draw data.
 		  
-		  Raise New UnsupportedOperationException("Not yet implemented")
+		  If debugDraw = Nil Then
+		    Return
+		  End If
+		  
+		  DebugDraw.BeginDrawing
+		  
+		  Var flags As Integer = DebugDraw.DrawFlags
+		  Var wireframe As Boolean = (flags And Physics.DebugDrawWireFrameDrawingBit) <> 0
+		  
+		  If (flags And Physics.DebugDrawShapeBit) <> 0 Then
+		    For Each body As Physics.Body In Bodies
+		      Xf.Set(body.Transform)
+		      For Each fixture As Physics.Fixture In body.Fixtures
+		        If Not body.IsActive Then
+		          Colour.SetFromRGBd(0.5, 0.5, 0.3)
+		          fixture.Render(DebugDraw, Xf, Colour, wireframe)
+		          
+		        ElseIf body.BodyType = Physics.BodyType.Static_ Then
+		          Colour.SetFromRGBd(0.5, 0.9, 0.3)
+		          fixture.Render(DebugDraw, Xf, Colour, wireframe)
+		          
+		        ElseIf body.BodyType = Physics.BodyType.Kinematic Then
+		          Colour.SetFromRGBd(0.5, 0.5, 0.9)
+		          fixture.Render(DebugDraw, Xf, Colour, wireframe)
+		          
+		        ElseIf Not body.IsAwake Then
+		          Colour.SetFromRGBd(0.5, 0.5, 0.5)
+		          fixture.Render(DebugDraw, Xf, Colour, wireframe)
+		          
+		        Else
+		          Colour.SetFromRGBd(0.9, 0.7, 0.7)
+		          fixture.Render(DebugDraw, Xf, Colour, wireframe)
+		        End If
+		      Next fixture
+		    Next body
+		    particleSystem.Render(DebugDraw)
+		  End If
+		  
+		  If (flags And Physics.DebugDrawJointBit) <> 0 Then
+		    For Each j As Physics.Joint In Joints
+		      j.Render(DebugDraw)
+		    Next j
+		  End If
+		  
+		  If (flags And Physics.DebugDrawPairBit) <> 0 Then
+		    Colour.SetFromRGBd(0.3, 0.9, 0.9)
+		    For Each c As Physics.Contact In ContactManager.Contacts
+		      Var fixtureA As Physics.Fixture = c.FixtureA
+		      Var fixtureB As Physics.Fixture = c.FixtureB
+		      CA.SetFrom(fixtureA.GetAABB(c.IndexA).Center)
+		      CB.SetFrom(fixtureB.GetAABB(c.IndexB).Center)
+		      DebugDraw.DrawSegment(CA, CB, Colour)
+		    Next c
+		  End If
+		  
+		  If (flags And Physics.DebugDrawAABBBit) <> 0 Then 
+		    Colour.SetFromRGBd(0.9, 0.3, 0.9)
+		    
+		    For Each b As Physics.Body In Bodies
+		      If b.IsActive = False Then
+		        Continue
+		      End If
+		      
+		      For Each f As Physics.Fixture In b.Fixtures
+		        Var iLimit As Integer = f.ProxyCount - 1
+		        For i As Integer = 0 To iLimit
+		          Var proxy As Physics.FixtureProxy = f.Proxies(i)
+		          Var aabb As Physics.AABB = ContactManager.Broadphase.FatAABB(proxy.ProxyId)
+		          Var vs() As VMaths.Vector2 = Array( _
+		          New VMaths.Vector2(aabb.LowerBound.X, aabb.LowerBound.Y), _
+		          New VMaths.Vector2(aabb.UpperBound.X, aabb.LowerBound.Y), _
+		          New VMaths.Vector2(aabb.UpperBound.X, aabb.UpperBound.Y), _
+		          New VMaths.Vector2(aabb.LowerBound.X, aabb.UpperBound.Y))
+		          DebugDraw.DrawPolygon(vs, Colour)
+		        Next i
+		      Next f
+		    Next b
+		  End If
+		  
+		  If (flags And Physics.DebugDrawCenterOfMassBit) <> 0 Then
+		    Var xfColor As New Physics.Color3i(255, 0, 0)
+		    For Each b As Physics.Body In Bodies
+		      Xf.Set(b.Transform)
+		      Xf.P.SetFrom(b.WorldCenter)
+		      DebugDraw.DrawTransform(Xf, xfColor)
+		    Next b
+		  End If
+		  
+		  If (flags And Physics.DebugDrawDynamicTreeBit) <> 0 Then
+		    ContactManager.Broadphase.DrawTree(DebugDraw)
+		  End If
+		  
+		  DebugDraw.EndDrawing
+		  
 		End Sub
 	#tag EndMethod
 
@@ -960,6 +1053,10 @@ Protected Class World
 
 	#tag Property, Flags = &h0
 		ContactManager As Physics.ContactManager
+	#tag EndProperty
+
+	#tag Property, Flags = &h0, Description = 4F7074696F6E616C20636C61737320746861742068616E646C65732064726177696E67207468697320776F726C64277320646562756720696E666F726D6174696F6E2028776972656672616D65732C20657463292E
+		DebugDraw As Physics.DebugDraw
 	#tag EndProperty
 
 	#tag Property, Flags = &h0

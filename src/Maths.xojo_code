@@ -53,6 +53,9 @@ Protected Module Maths
 	#tag Constant, Name = PI, Type = Double, Dynamic = False, Default = \"3.14159265359", Scope = Protected, Description = 5468652076616C7565206F6620506920746F20313120646563696D616C20706C616365732E
 	#tag EndConstant
 
+	#tag Constant, Name = TWO_PI, Type = Double, Dynamic = False, Default = \"6.28318530718", Scope = Protected, Description = 416E20617070726F78696D6174696F6E206F66205069202A20322E
+	#tag EndConstant
+
 
 	#tag ViewBehavior
 		#tag ViewProperty

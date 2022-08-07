@@ -60,8 +60,10 @@ Protected Class Transform
 		End Function
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
+	#tag Method, Flags = &h0, Description = 52657475726E732061206E657720566563746F723220696E7374616E63652E
 		Shared Function MulVec2(t As Physics.Transform, v As VMaths.Vector2) As VMaths.Vector2
+		  /// Returns a new Vector2 instance.
+		  
 		  Return New VMaths.Vector2( _
 		  (t.Q.Cos * v.X - t.Q.Sin * v.Y) + t.P.X, _
 		  (t.Q.Sin * v.X + t.Q.Cos * v.Y) + t.P.Y)

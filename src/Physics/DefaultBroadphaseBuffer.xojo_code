@@ -35,6 +35,12 @@ Implements Physics.Broadphase, Physics.TreeCallback
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub DrawTree(argDraw As Physics.DebugDraw)
+		  #Pragma Warning "TODO: Need to implement"
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function FatAABB(proxyID As Integer) As Physics.AABB
 		  // Part of the Physics.Broadphase interface.
 		  
