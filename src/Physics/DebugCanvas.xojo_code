@@ -86,20 +86,15 @@ Implements Physics.DebugDraw
 		Sub DrawCircle(center As VMaths.Vector2, radius As Double, colour As Physics.Color3i)
 		  // Part of the Physics.DebugDraw interface.
 		  
-		  'CheckBuffer
-		  
 		  Var screenRadius As Double = radius * Viewport.Scale
 		  Var screenCenter As VMaths.Vector2 = WorldToScreen(center)
+		  Var circumference As Double = radius * 2
 		  
 		  mBuffer.Graphics.DrawingColor = colour.ToColor
 		  
-		  ' Var path As New GraphicsPath
-		  ' path.AddArc(screenCenter.x, screenCenter.y, screenRadius, 0, Maths.TWO_PI, True)
-		  ' mBuffer.Graphics.DrawPath(path)
-		  Var circumf As Double = screenRadius * 2
 		  mBuffer.Graphics.DrawOval(screenCenter.X - screenRadius, _
 		  screenCenter.Y - screenRadius, _
-		  circumf, circumf)
+		  circumference, circumference)
 		  
 		End Sub
 	#tag EndMethod
@@ -159,33 +154,14 @@ Implements Physics.DebugDraw
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
+	#tag Method, Flags = &h0, Description = 447261772074686520776972656672616D65206F66206120636C6F73656420706F6C79676F6E2070726F766964656420696E20636F756E7465722D636C6F636B77697365206F726465722E
 		Sub DrawPolygon(vertices() As VMaths.Vector2, colour As Physics.Color3i)
-		  /// Draw a closed polygon provided in counter-clockwise order.
+		  /// Draw the wireframe of a closed polygon provided in counter-clockwise order.
 		  ///
-		  /// This implementation uses `DrawSegment()` to draw each side of the polygon.
 		  /// Part of the Physics.DebugDraw interface.
 		  
-		  #Pragma Unused vertices
-		  #Pragma Unused colour
-		  
-		  // This commented out stuff was from the original Forge2D `DebugDraw` implementation.
-		  ' Var vertexCount As Integer = vertices.Count
-		  ' 
-		  ' If vertexCount = 1 Then
-		  ' DrawSegment(vertices(0), vertices(0), colour)
-		  ' Return
-		  ' End If
-		  ' 
-		  ' Var iLimit As Integer = vertexCount - 2
-		  ' For i As Integer = 0 To iLimit
-		  ' DrawSegment(vertices(i), vertices(i + 1), colour)
-		  ' Next i
-		  ' 
-		  ' If vertexCount > 2 Then
-		  ' DrawSegment(vertices(vertexCount - 1), vertices(0), colour)
-		  ' End If
-		  
+		  mBuffer.Graphics.DrawingColor = colour.ToColor
+		  mBuffer.Graphics.DrawPath(PolygonPath(vertices))
 		  
 		End Sub
 	#tag EndMethod
@@ -208,25 +184,26 @@ Implements Physics.DebugDraw
 		Sub DrawSolidCircle(center as VMaths.Vector2, radius as Double, colour as Physics.Color3i)
 		  // Part of the Physics.DebugDraw interface.
 		  
-		  #Pragma Unused center
-		  #Pragma Unused radius
-		  #Pragma Unused colour
+		  Var screenRadius As Double = radius * Viewport.Scale
+		  Var screenCenter As VMaths.Vector2 = WorldToScreen(center)
+		  Var circumference As Double = radius * 2
 		  
-		  #Pragma Warning  "Don't forget to implement this method!"
+		  mBuffer.Graphics.DrawingColor = colour.ToColor
 		  
-		  
+		  mBuffer.Graphics.FillOval(screenCenter.X - screenRadius, _
+		  screenCenter.Y - screenRadius, _
+		  circumference, circumference)
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
+	#tag Method, Flags = &h0, Description = 4472617720612066696C6C656420636C6F73656420706F6C79676F6E2070726F766964656420696E20636F756E7465722D636C6F636B77697365206F726465722E
 		Sub DrawSolidPolygon(vertices() As VMaths.Vector2, colour As Physics.Color3i)
-		  // Part of the Physics.DebugDraw interface.
+		  /// Draw a filled closed polygon provided in counter-clockwise order.
+		  ///
+		  /// Part of the Physics.DebugDraw interface.
 		  
-		  #Pragma Unused vertices
-		  #Pragma Unused colour
-		  
-		  #Pragma Warning  "Don't forget to implement this method!"
-		  
+		  mBuffer.Graphics.DrawingColor = colour.ToColor
+		  mBuffer.Graphics.FillPath(PolygonPath(vertices))
 		  
 		End Sub
 	#tag EndMethod
@@ -276,6 +253,33 @@ Implements Physics.DebugDraw
 		  
 		  
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21, Description = 52657475726E73206120636C6F73656420706F6C79676F6E2070726F766964656420696E20636F756E7465722D636C6F636B77697365206F726465722E
+		Private Function PolygonPath(vertices() As VMaths.Vector2) As GraphicsPath
+		  /// Returns a closed polygon provided in counter-clockwise order.
+		  ///
+		  /// Part of the Physics.DebugDraw interface.
+		  
+		  Var screenVertices() As VMaths.Vector2
+		  For Each vertex As VMaths.Vector2 In vertices
+		    screenVertices.Add(WorldToScreen(vertex))
+		  Next vertex
+		  
+		  Var path As New GraphicsPath
+		  path.MoveToPoint(screenVertices(0).X, screenVertices(0).Y)
+		  
+		  // Draw lines to all of the remaining points.
+		  For Each vertex As VMaths.Vector2 In screenVertices
+		    path.AddLineToPoint(vertex.X, vertex.Y)
+		  Next vertex
+		  
+		  // Draw a line back to the starting point.
+		  path.AddLineToPoint(screenVertices(0).X, screenVertices(0).Y)
+		  
+		  Return path
+		  
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 54616B6573207468652073637265656E20636F6F7264696E6174657320616E642072657475726E732074686520776F726C6420636F6F7264696E617465732E

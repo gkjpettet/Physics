@@ -31,10 +31,10 @@ Begin DesktopWindow Window1
       AllowTabs       =   False
       Backdrop        =   0
       Enabled         =   True
-      Height          =   522
+      Height          =   788
       Index           =   -2147483648
       Left            =   0
-      LockBottom      =   False
+      LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   True
@@ -47,53 +47,6 @@ Begin DesktopWindow Window1
       Tooltip         =   ""
       Top             =   0
       Transparent     =   True
-      Visible         =   True
-      Width           =   1038
-   End
-   Begin DesktopTextArea Info
-      AllowAutoDeactivate=   True
-      AllowFocusRing  =   True
-      AllowSpellChecking=   True
-      AllowStyledText =   True
-      AllowTabs       =   False
-      BackgroundColor =   &cFFFFFF
-      Bold            =   False
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Format          =   ""
-      HasBorder       =   True
-      HasHorizontalScrollbar=   False
-      HasVerticalScrollbar=   True
-      Height          =   267
-      HideSelection   =   True
-      Index           =   -2147483648
-      Italic          =   False
-      Left            =   0
-      LineHeight      =   0.0
-      LineSpacing     =   1.0
-      LockBottom      =   True
-      LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   True
-      LockTop         =   False
-      MaximumCharactersAllowed=   0
-      Multiline       =   True
-      ReadOnly        =   False
-      Scope           =   2
-      TabIndex        =   1
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Text            =   ""
-      TextAlignment   =   0
-      TextColor       =   &c000000
-      Tooltip         =   ""
-      Top             =   521
-      Transparent     =   False
-      Underline       =   False
-      UnicodeMode     =   1
-      ValidationMask  =   ""
       Visible         =   True
       Width           =   1038
    End
@@ -129,9 +82,18 @@ End
 		  // Create and add the ground.
 		  CreateGround
 		  
-		  // Create two circles.
-		  CreateCircle(Body1, New VMaths.Vector2(0, 4), 10)
-		  CreateCircle(Body2, New VMaths.Vector2(8, 30), 12)
+		  // Create some circles.
+		  For i As Integer = 0 To 15
+		    CreateCircle(New VMaths.Vector2(System.Random.InRange(-200, 200), _
+		    System.Random.InRange(-100, 100)), System.Random.InRange(3, 10))
+		  Next i
+		  
+		  // Create some boxes
+		  For i As Integer = 0 To 15
+		    CreateBox(New VMaths.Vector2(System.Random.InRange(-200, 200), _
+		    System.Random.InRange(-100, 100)), _
+		    System.Random.InRange(7, 20), System.Random.InRange(7, 20))
+		  Next i
 		  
 		  WorldUpdateTimer.Enabled = True
 		  
@@ -140,20 +102,40 @@ End
 
 
 	#tag Method, Flags = &h21, Description = 4372656174657320616E642061646473206120636972636C6520626F647920746F2074686520776F726C642061742060706F736974696F6E602E
-		Private Sub CreateCircle(body As Physics.Body, position As VMaths.Vector2, radius As Double)
+		Private Sub CreateBox(position As VMaths.Vector2, width As Double, height As Double)
 		  /// Creates and adds a circle body to the world at `position`.
 		  
 		  // Create a dynamic body.
 		  Var bodyDef As New Physics.BodyDef(Physics.BodyType.Dynamic)
 		  bodyDef.Position.SetValues(position.X, position.Y)
-		  body = World.CreateBody(bodyDef)
+		  Var body As Physics.Body = World.CreateBody(bodyDef)
+		  
+		  // Create a box shape.
+		  Var box As New Physics.PolygonShape
+		  box.SetAsBoxXY(width / 2, height / 2)
+		  
+		  // Create and add a fixture with custom properties for the box.
+		  Var fixtureDef As New Physics.FixtureDef(box, Nil, 0.3, 0.5, 1)
+		  Call body.CreateFixture(fixtureDef)
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21, Description = 4372656174657320616E642061646473206120636972636C6520626F647920746F2074686520776F726C642061742060706F736974696F6E602E
+		Private Sub CreateCircle(position As VMaths.Vector2, radius As Double)
+		  /// Creates and adds a circle body to the world at `position`.
+		  
+		  // Create a dynamic body.
+		  Var bodyDef As New Physics.BodyDef(Physics.BodyType.Dynamic)
+		  bodyDef.Position.SetValues(position.X, position.Y)
+		  Var body As Physics.Body = World.CreateBody(bodyDef)
 		  
 		  // Create a circle shape.
 		  Var circle As New Physics.CircleShape
 		  circle.Radius = radius
 		  
 		  // Create and add a fixture with custom properties for the circle.
-		  Var fixtureDef As New Physics.FixtureDef(circle, Nil, 0.3, 0.8, 1)
+		  Var fixtureDef As New Physics.FixtureDef(circle, Nil, 0.3, 0.5, 1)
 		  Call body.CreateFixture(fixtureDef)
 		End Sub
 	#tag EndMethod
@@ -164,24 +146,17 @@ End
 		  
 		  // Create the ground body.
 		  Var groundBodyDef As New Physics.BodyDef
-		  groundBodyDef.Position.SetValues(0, -100)
+		  groundBodyDef.Position.SetValues(0, -250)
 		  Var groundBody As Physics.Body = World.CreateBody(groundBodyDef)
 		  
 		  // Set the ground's shape and attach it as a fixture.
 		  Var groundBox As New Physics.PolygonShape
-		  groundBox.SetAsBoxXY(50, 10)
+		  groundBox.SetAsBoxXY(Scene.Width / 2, 10)
 		  Call groundBody.CreateFixtureFromShape(groundBox, 0)
+		  
 		End Sub
 	#tag EndMethod
 
-
-	#tag Property, Flags = &h0
-		Body1 As Physics.Body
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		Body2 As Physics.Body
-	#tag EndProperty
 
 	#tag Property, Flags = &h0
 		World As Physics.World
@@ -201,11 +176,6 @@ End
 		  
 		  Scene.Refresh
 		  
-		  ' Var pos1 As VMaths.Vector2
-		  ' pos1 = body1.Position
-		  ' Info.Text = Info.Text + _
-		  ' "body1: " + pos1.X.ToString + " " + pos1.Y.ToString + " " + body1.Angle.ToString + _
-		  ' EndOfLine
 		  
 		End Sub
 	#tag EndEvent
