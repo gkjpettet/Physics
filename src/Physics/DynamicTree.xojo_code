@@ -96,6 +96,46 @@ Implements Physics.BroadphaseStrategy
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub DrawTree(argDraw As Physics.DebugDraw)
+		  // Part of the Physics.BroadphaseStrategy interface.
+		  
+		  If mRoot = Nil  Then
+		    Return
+		  End If
+		  
+		  Var height As Integer = ComputeHeight
+		  DrawTreeX(argDraw, mRoot, 0, height)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub DrawTreeX(argDraw As Physics.DebugDraw, node As Physics.DynamicTreeNode, spot As Integer, height As Integer)
+		  node.AABB.GetVertices(DrawVecs)
+		  
+		  mColor = _
+		  Color.RGB(255, 255 * ((height - spot) * 1.0 / height), 255 * ((height - spot) * 1.0 / height))
+		  
+		  argDraw.DrawPolygon(DrawVecs, mColor)
+		  
+		  Var textVec As VMaths.Vector2 = argDraw.Viewport.WorldToScreen(node.AABB.UpperBound)
+		  Var tmp As Integer = spot + 1
+		  argDraw.DrawStringXY( _
+		  textVec.X, textVec.Y, _
+		  node.ID.ToString + "-" + tmp.ToString + "/" + height.ToString, _
+		  mColor)
+		  
+		  If node.Child1 <> Nil Then
+		    DrawTreeX(argDraw, node.Child1, spot + 1, height)
+		  End If
+		  
+		  If node.Child2 <> Nil Then
+		    DrawTreeX(argDraw, node.Child2, spot + 1, height)
+		  End If
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function FatAABB(proxyId As Integer) As Physics.AABB
 		  // Part of the Physics.BroadphaseStrategy interface.
 		  
@@ -1090,10 +1130,10 @@ Implements Physics.BroadphaseStrategy
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="mRoot"
+			Name="NodeStackIndex"
 			Visible=false
 			Group="Behavior"
-			InitialValue=""
+			InitialValue="0"
 			Type="Integer"
 			EditorType=""
 		#tag EndViewProperty

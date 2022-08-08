@@ -108,6 +108,18 @@ Protected Interface DebugDraw
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Function Viewport() As Physics.ViewportTransform
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub Viewport(Assigns v As Physics.ViewportTransform)
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 54616B65732074686520776F726C6420636F6F7264696E6174657320616E642072657475726E73207468652073637265656E20636F6F7264696E617465732E
 		Function WorldToScreen(argWorld As VMaths.Vector2) As VMaths.Vector2
 		  

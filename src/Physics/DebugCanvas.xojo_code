@@ -53,7 +53,6 @@ Implements Physics.DebugDraw
 		    Return
 		  End If
 		  
-		  #Pragma Warning "CHECK: Is this correct or should it be multiplied by ScaleFactor?"
 		  If mBuffer.Width <> Self.Width * mCurrentScaleFactorX Or _
 		    mBuffer.Height <> Self.Height * mCurrentScaleFactorY Then
 		    CreateNewBuffer
@@ -133,11 +132,9 @@ Implements Physics.DebugDraw
 		Sub DrawParticles(particles() As Physics.Particle, radius As Double)
 		  // Part of the Physics.DebugDraw interface.
 		  
-		  #Pragma Unused particles
-		  #Pragma Unused radius
-		  
-		  #Pragma Warning  "Don't forget to implement this method!"
-		  
+		  For Each p As Physics.Particle In particles
+		    DrawSolidCircle(p.Position, radius, p.Colour)
+		  Next p
 		  
 		End Sub
 	#tag EndMethod
@@ -149,22 +146,22 @@ Implements Physics.DebugDraw
 		  #Pragma Unused particles
 		  #Pragma Unused radius
 		  
-		  #Pragma Warning  "Don't forget to implement this method!"
-		  
-		  
+		  Raise New UnsupportedOperationException("Not implemented.")
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub DrawPoint(argPoint As VMaths.Vector2, argRadiusOnScreen As Double, argColor As Color)
+		Sub DrawPoint(point As VMaths.Vector2, radiusOnScreen As Double, colour As Color)
 		  // Part of the Physics.DebugDraw interface.
 		  
-		  #Pragma Unused argPoint
-		  #Pragma Unused  argRadiusOnScreen
-		  #Pragma Unused argColor
+		  Var screenCenter As VMaths.Vector2 = WorldToScreen(point)
+		  Var circumference As Double = radiusOnScreen * 2
 		  
-		  #Pragma Warning  "Don't forget to implement this method!"
+		  mBuffer.Graphics.DrawingColor = colour
 		  
+		  mBuffer.Graphics.FillOval(screenCenter.X - radiusOnScreen, _
+		  screenCenter.Y - radiusOnScreen, _
+		  circumference, circumference)
 		End Sub
 	#tag EndMethod
 
@@ -180,16 +177,18 @@ Implements Physics.DebugDraw
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
+	#tag Method, Flags = &h0, Description = 447261772061206C696E65207365676D656E742E
 		Sub DrawSegment(p1 As VMaths.Vector2, p2 As VMaths.Vector2, colour As Color)
-		  // Part of the Physics.DebugDraw interface.
+		  /// Draw a line segment. 
+		  ///
+		  /// Part of the Physics.DebugDraw interface.
 		  
-		  #Pragma Unused p1
-		  #Pragma Unused p2
-		  #Pragma Unused colour
+		  mBuffer.Graphics.DrawingColor = colour
 		  
-		  #Pragma Warning  "Don't forget to implement this method!"
+		  Var screenP1 As VMaths.Vector2 = WorldToScreen(p1)
+		  Var screenP2 As VMaths.Vector2 = WorldToScreen(p2)
 		  
+		  mBuffer.Graphics.DrawLine(screenP1.X, screenP1.Y, screenP2.X, screenP2.Y)
 		  
 		End Sub
 	#tag EndMethod
@@ -247,11 +246,7 @@ Implements Physics.DebugDraw
 		Sub DrawTransform(xf As Physics.Transform, colour As Color)
 		  // Part of the Physics.DebugDraw interface.
 		  
-		  #Pragma Unused xf
-		  #Pragma Unused colour
-		  
-		  #Pragma Warning  "Don't forget to implement this method!"
-		  
+		  DrawCircle(xf.P, 0.1, colour)
 		  
 		End Sub
 	#tag EndMethod
@@ -304,6 +299,20 @@ Implements Physics.DebugDraw
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Function Viewport() As Physics.ViewportTransform
+		  Return mViewport
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub Viewport(Assigns v As Physics.ViewportTransform)
+		  mViewport = v
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 54616B65732074686520776F726C6420636F6F7264696E6174657320616E642072657475726E73207468652073637265656E20636F6F7264696E617465732E
 		Function WorldToScreen(argWorld As VMaths.Vector2) As VMaths.Vector2
 		  /// Takes the world coordinates and returns the screen coordinates.
@@ -343,12 +352,12 @@ Implements Physics.DebugDraw
 		Private mDrawFlags As Integer = Physics.DebugDrawShapeBit
 	#tag EndProperty
 
-	#tag Property, Flags = &h0, Description = 546865206261636B67726F756E6420636F6C6F7572206F6620746865207363656E652E
-		SceneBackgroundColor As Color = &cffffff
+	#tag Property, Flags = &h21
+		Private mViewport As Physics.ViewportTransform
 	#tag EndProperty
 
-	#tag Property, Flags = &h0
-		Viewport As Physics.ViewportTransform
+	#tag Property, Flags = &h0, Description = 546865206261636B67726F756E6420636F6C6F7572206F6620746865207363656E652E
+		SceneBackgroundColor As Color = &cffffff
 	#tag EndProperty
 
 

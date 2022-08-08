@@ -83,17 +83,17 @@ End
 		  CreateGround
 		  
 		  // Create some circles.
-		  For i As Integer = 0 To 100
+		  For i As Integer = 0 To 9
 		    CreateCircle(New VMaths.Vector2(System.Random.InRange(-300, 300), _
-		    System.Random.InRange(-200, 100)), System.Random.InRange(3, 10))
+		    System.Random.InRange(-300, 100)), System.Random.InRange(3, 10))
 		  Next i
 		  
-		  ' // Create some boxes.
-		  ' For i As Integer = 0 To 25
-		  ' CreateBox(New VMaths.Vector2(System.Random.InRange(-200, 200), _
-		  ' System.Random.InRange(-100, 100)), _
-		  ' System.Random.InRange(7, 20), System.Random.InRange(7, 20))
-		  ' Next i
+		  // Create some boxes.
+		  For i As Integer = 0 To 9
+		    CreateBox(New VMaths.Vector2(System.Random.InRange(-200, 200), _
+		    System.Random.InRange(-100, 100)), _
+		    System.Random.InRange(7, 20), System.Random.InRange(7, 20))
+		  Next i
 		  
 		  WorldUpdateTimer.Enabled = True
 		  
@@ -179,12 +179,14 @@ End
 		  World.DebugDraw.DrawStringXY(20, 20, _
 		  "Step Time: " + World.Profile.Step_.ToString, Color.Black)
 		  
-		  World.DebugDraw.DrawStringXY(20, 50, _
+		  World.DebugDraw.DrawStringXY(20, 40, _
 		  "Draw Time: " + _
 		  drawTimer.ElapsedMilliseconds.ToString(Locale.Current, "#.#") + " ms", Color.Black)
 		  
-		  Scene.Refresh
+		  World.DebugDraw.DrawStringXY(20, 60, _
+		  "Bodies: " + World.Bodies.Count.ToString, Color.Black)
 		  
+		  Scene.Refresh
 		  
 		End Sub
 	#tag EndEvent

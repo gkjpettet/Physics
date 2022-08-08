@@ -36,7 +36,8 @@ Implements Physics.Broadphase, Physics.TreeCallback
 
 	#tag Method, Flags = &h0
 		Sub DrawTree(argDraw As Physics.DebugDraw)
-		  #Pragma Warning "TODO: Need to implement"
+		  mTree.DrawTree(argDraw)
+		  
 		End Sub
 	#tag EndMethod
 

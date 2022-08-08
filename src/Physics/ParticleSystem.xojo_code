@@ -496,7 +496,17 @@ Protected Class ParticleSystem
 
 	#tag Method, Flags = &h0
 		Sub Render(debugDraw As Physics.DebugDraw)
-		  #Pragma Warning "TODO: Need to implement"
+		  Var wireframe As Boolean = _
+		  (debugDraw.DrawFlags And Physics.DebugDrawWireFrameDrawingBit) <> 0
+		  
+		  If Particles.count > 1 Then
+		    If wireframe Then
+		      debugDraw.DrawParticlesWireframe(Particles.ToArray, ParticleRadius)
+		    Else
+		      debugDraw.DrawParticles(Particles.ToArray, ParticleRadius)
+		    End If
+		  End If
+		  
 		End Sub
 	#tag EndMethod
 

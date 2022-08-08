@@ -36,8 +36,8 @@ Protected Class ProfileEntry
 		  /// in the format: "avg: #.# ms, min: #.# ms, max: #.# ms".
 		  
 		  Return "avg: " + LongAvg.ToString(Locale.Current, "#.0") + " ms, " + _
-		  "min: " + Minimum.ToString(Locale.Current, "#.0") + " ms " + _
-		  ", max: " + Maximum.ToString(Locale.Current, "#.0") + " ms"
+		  "min: " + Minimum.ToString(Locale.Current, "#.0") + " ms, " + _
+		  "max: " + Maximum.ToString(Locale.Current, "#.0") + " ms"
 		  
 		End Function
 	#tag EndMethod

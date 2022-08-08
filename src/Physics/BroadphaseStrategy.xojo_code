@@ -19,6 +19,12 @@ Protected Interface BroadphaseStrategy
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub DrawTree(draw As Physics.DebugDraw)
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function FatAABB(proxyId As Integer) As Physics.AABB
 		  
 		End Function

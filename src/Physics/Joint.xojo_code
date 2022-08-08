@@ -83,8 +83,9 @@
 
 	#tag Method, Flags = &h0
 		Sub Render(debugDraw As Physics.DebugDraw)
-		  #Pragma Warning "TODO: Need to implement"
+		  #Pragma Unused debugDraw
 		  
+		  Raise New UnsupportedOperationException("Subclasses should implement this method.")
 		End Sub
 	#tag EndMethod
 

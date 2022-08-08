@@ -7,6 +7,24 @@ Protected Class UnmodifiableParticleArrayView
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 52657475726E73207468652061637475616C206172726179206261636B696E67207468697320766965772E20596F752073686F756C64206E6F74206D6F6469667920746869732061727261792E
+		Function ToArray() As Physics.Particle()
+		  /// Returns the actual array backing this view. You should not modify this array.
+		  
+		  Return mParticles
+		End Function
+	#tag EndMethod
+
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  Return mParticles.Count
+			  
+			End Get
+		#tag EndGetter
+		Count As Integer
+	#tag EndComputedProperty
 
 	#tag Property, Flags = &h21
 		Private mParticles() As Physics.Particle
