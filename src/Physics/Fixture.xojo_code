@@ -53,7 +53,7 @@ Protected Class Fixture
 		  
 		  mLiquidOffset = VMaths.Vector2.Zero
 		  mCircleCenterMoved = VMaths.Vector2.Zero
-		  mLiquidColor = Physics.Color3i.FromRGBd(0.4, 0.4, 1.0)
+		  mLiquidColor = &c6666FF
 		  
 		  RenderCenter = VMaths.Vector2.Zero
 		  RenderAxis = VMaths.Vector2.Zero
@@ -162,7 +162,7 @@ Protected Class Fixture
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub Render(debugDraw As Physics.DebugDraw, xf As Physics.Transform, colour As Physics.Color3i, wireframe As Boolean)
+		Sub Render(debugDraw As Physics.DebugDraw, xf As Physics.Transform, colour As Color, wireframe As Boolean)
 		  Select Case Self.Type
 		  Case Physics.ShapeType.Circle
 		    Var circle As Physics.CircleShape = Physics.CircleShape(shape)
@@ -400,7 +400,7 @@ Protected Class Fixture
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private mLiquidColor As Physics.Color3i
+		Private mLiquidColor As Color
 	#tag EndProperty
 
 	#tag Property, Flags = &h21

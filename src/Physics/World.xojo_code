@@ -47,7 +47,6 @@ Protected Class World
 		  mStepTimer = New Physics.Timer
 		  mTempTimer = New Physics.Timer
 		  
-		  Colour = Physics.Color3i.Zero
 		  Xf = Physics.Transform.Zero
 		  CA = VMaths.Vector2.Zero
 		  CB = VMaths.Vector2.Zero
@@ -223,23 +222,23 @@ Protected Class World
 		      Xf.Set(body.Transform)
 		      For Each fixture As Physics.Fixture In body.Fixtures
 		        If Not body.IsActive Then
-		          Colour.SetFromRGBd(0.5, 0.5, 0.3)
+		          Colour = &c7A7A4C
 		          fixture.Render(DebugDraw, Xf, Colour, wireframe)
 		          
 		        ElseIf body.BodyType = Physics.BodyType.Static_ Then
-		          Colour.SetFromRGBd(0.5, 0.9, 0.3)
+		          Colour = &c7Ae54C
 		          fixture.Render(DebugDraw, Xf, Colour, wireframe)
 		          
 		        ElseIf body.BodyType = Physics.BodyType.Kinematic Then
-		          Colour.SetFromRGBd(0.5, 0.5, 0.9)
+		          Colour = &c7A7AE5
 		          fixture.Render(DebugDraw, Xf, Colour, wireframe)
 		          
 		        ElseIf Not body.IsAwake Then
-		          Colour.SetFromRGBd(0.5, 0.5, 0.5)
+		          Colour = &c7A7A7A
 		          fixture.Render(DebugDraw, Xf, Colour, wireframe)
 		          
 		        Else
-		          Colour.SetFromRGBd(0.9, 0.7, 0.7)
+		          Colour = &cE5B2B2
 		          fixture.Render(DebugDraw, Xf, Colour, wireframe)
 		        End If
 		      Next fixture
@@ -254,7 +253,7 @@ Protected Class World
 		  End If
 		  
 		  If (flags And Physics.DebugDrawPairBit) <> 0 Then
-		    Colour.SetFromRGBd(0.3, 0.9, 0.9)
+		    Colour = &c4CE5E5
 		    For Each c As Physics.Contact In ContactManager.Contacts
 		      Var fixtureA As Physics.Fixture = c.FixtureA
 		      Var fixtureB As Physics.Fixture = c.FixtureB
@@ -264,8 +263,8 @@ Protected Class World
 		    Next c
 		  End If
 		  
-		  If (flags And Physics.DebugDrawAABBBit) <> 0 Then 
-		    Colour.SetFromRGBd(0.9, 0.3, 0.9)
+		  If (flags And Physics.DebugDrawAABBBit) <> 0 Then
+		    Colour = &cE54CE5
 		    
 		    For Each b As Physics.Body In Bodies
 		      If b.IsActive = False Then
@@ -289,7 +288,7 @@ Protected Class World
 		  End If
 		  
 		  If (flags And Physics.DebugDrawCenterOfMassBit) <> 0 Then
-		    Var xfColor As New Physics.Color3i(255, 0, 0)
+		    Var xfColor As Color = &cFF0000
 		    For Each b As Physics.Body In Bodies
 		      Xf.Set(b.Transform)
 		      Xf.P.SetFrom(b.WorldCenter)
@@ -1048,7 +1047,7 @@ Protected Class World
 	#tag EndComputedProperty
 
 	#tag Property, Flags = &h0
-		Colour As Physics.Color3i
+		Colour As Color = Color.Black
 	#tag EndProperty
 
 	#tag Property, Flags = &h0

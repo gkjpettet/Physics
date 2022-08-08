@@ -19,13 +19,13 @@ Protected Interface DebugDraw
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 44726177206120636972636C652E
-		Sub DrawCircle(center As VMaths.Vector2, radius As Double, colour As Physics.Color3i)
+		Sub DrawCircle(center As VMaths.Vector2, radius As Double, colour As Color)
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub DrawCircleAxis(center As VMaths.Vector2, radius As Double, axis As VMaths.Vector2, colour As Physics.Color3i)
+		Sub DrawCircleAxis(center As VMaths.Vector2, radius As Double, axis As VMaths.Vector2, colour As Color)
 		  
 		End Sub
 	#tag EndMethod
@@ -49,49 +49,49 @@ Protected Interface DebugDraw
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 4472617773206120706F696E742E
-		Sub DrawPoint(argPoint As VMaths.Vector2, argRadiusOnScreen As Double, argColor As Physics.Color3i)
+		Sub DrawPoint(argPoint As VMaths.Vector2, argRadiusOnScreen As Double, argColor As Color)
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 44726177206120636C6F73656420706F6C79676F6E2070726F766964656420696E20636F756E7465722D636C6F636B77697365206F726465722E
-		Sub DrawPolygon(vertices() As VMaths.Vector2, colour As Physics.Color3i)
+		Sub DrawPolygon(vertices() As VMaths.Vector2, colour As Color)
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 447261772061206C696E65207365676D656E742E
-		Sub DrawSegment(p1 As VMaths.Vector2, p2 As VMaths.Vector2, colour As Physics.Color3i)
+		Sub DrawSegment(p1 As VMaths.Vector2, p2 As VMaths.Vector2, colour As Color)
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 44726177206120736F6C696420636972636C652E20
-		Sub DrawSolidCircle(center as VMaths.Vector2, radius as Double, colour as Physics.Color3i)
+		Sub DrawSolidCircle(center as VMaths.Vector2, radius as Double, colour as Color)
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 44726177206120736F6C696420636C6F73656420706F6C79676F6E2070726F766964656420696E20636F756E7465722D636C6F636B77697365206F726465722E
-		Sub DrawSolidPolygon(vertices() As VMaths.Vector2, colour As Physics.Color3i)
+		Sub DrawSolidPolygon(vertices() As VMaths.Vector2, colour As Color)
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 44726177206120737472696E672E
-		Sub DrawString(pos As VMaths.Vector2, s As String, colour As Physics.Color3i)
+		Sub DrawString(pos As VMaths.Vector2, s As String, colour As Color)
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 44726177206120737472696E672E
-		Sub DrawStringXY(x As Double, y As Double, s As String, colour As Physics.Color3i)
+		Sub DrawStringXY(x As Double, y As Double, s As String, colour As Color)
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 447261772061207472616E73666F726D2E
-		Sub DrawTransform(xf As Physics.Transform, colour As Physics.Color3i)
+		Sub DrawTransform(xf As Physics.Transform, colour As Color)
 		  
 		End Sub
 	#tag EndMethod

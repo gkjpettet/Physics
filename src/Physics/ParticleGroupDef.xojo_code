@@ -4,7 +4,7 @@ Protected Class ParticleGroupDef
 		Sub Constructor()
 		  Position = VMaths.Vector2.Zero
 		  LinearVelocity = VMaths.Vector2.Zero
-		  Colour = Physics.Color3i.Black
+		  Colour = &c000000
 		  
 		End Sub
 	#tag EndMethod
@@ -27,7 +27,7 @@ Protected Class ParticleGroupDef
 	#tag EndProperty
 
 	#tag Property, Flags = &h0, Description = 54686520636F6C6F7572206F6620616C6C207061727469636C657320696E207468652067726F75702E
-		Colour As Physics.Color3i
+		Colour As Color = Color.Black
 	#tag EndProperty
 
 	#tag Property, Flags = &h0, Description = 496620547275652C2064657374726F79207468652067726F7570206175746F6D61746963616C6C7920616674657220697473206C617374207061727469636C6520686173206265656E2064657374726F7965642E

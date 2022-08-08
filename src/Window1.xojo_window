@@ -88,7 +88,7 @@ End
 		    System.Random.InRange(-100, 100)), System.Random.InRange(3, 10))
 		  Next i
 		  
-		  // Create some boxes
+		  // Create some boxes.
 		  For i As Integer = 0 To 15
 		    CreateBox(New VMaths.Vector2(System.Random.InRange(-200, 200), _
 		    System.Random.InRange(-100, 100)), _
@@ -135,7 +135,7 @@ End
 		  circle.Radius = radius
 		  
 		  // Create and add a fixture with custom properties for the circle.
-		  Var fixtureDef As New Physics.FixtureDef(circle, Nil, 0.3, 0.5, 1)
+		  Var fixtureDef As New Physics.FixtureDef(circle, Nil, 0.3, 0.4, 1)
 		  Call body.CreateFixture(fixtureDef)
 		End Sub
 	#tag EndMethod

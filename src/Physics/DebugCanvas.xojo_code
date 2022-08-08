@@ -83,14 +83,14 @@ Implements Physics.DebugDraw
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub DrawCircle(center As VMaths.Vector2, radius As Double, colour As Physics.Color3i)
+		Sub DrawCircle(center As VMaths.Vector2, radius As Double, colour As Color)
 		  // Part of the Physics.DebugDraw interface.
 		  
 		  Var screenRadius As Double = radius * Viewport.Scale
 		  Var screenCenter As VMaths.Vector2 = WorldToScreen(center)
 		  Var circumference As Double = radius * 2
 		  
-		  mBuffer.Graphics.DrawingColor = colour.ToColor
+		  mBuffer.Graphics.DrawingColor = colour
 		  
 		  mBuffer.Graphics.DrawOval(screenCenter.X - screenRadius, _
 		  screenCenter.Y - screenRadius, _
@@ -100,7 +100,7 @@ Implements Physics.DebugDraw
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub DrawCircleAxis(center As VMaths.Vector2, radius As Double, axis As VMaths.Vector2, colour As Physics.Color3i)
+		Sub DrawCircleAxis(center As VMaths.Vector2, radius As Double, axis As VMaths.Vector2, colour As Color)
 		  // Part of the Physics.DebugDraw interface.
 		  
 		  #Pragma Unused axis
@@ -142,7 +142,7 @@ Implements Physics.DebugDraw
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub DrawPoint(argPoint As VMaths.Vector2, argRadiusOnScreen As Double, argColor As Physics.Color3i)
+		Sub DrawPoint(argPoint As VMaths.Vector2, argRadiusOnScreen As Double, argColor As Color)
 		  // Part of the Physics.DebugDraw interface.
 		  
 		  #Pragma Unused argPoint
@@ -155,19 +155,19 @@ Implements Physics.DebugDraw
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 447261772074686520776972656672616D65206F66206120636C6F73656420706F6C79676F6E2070726F766964656420696E20636F756E7465722D636C6F636B77697365206F726465722E
-		Sub DrawPolygon(vertices() As VMaths.Vector2, colour As Physics.Color3i)
+		Sub DrawPolygon(vertices() As VMaths.Vector2, colour As Color)
 		  /// Draw the wireframe of a closed polygon provided in counter-clockwise order.
 		  ///
 		  /// Part of the Physics.DebugDraw interface.
 		  
-		  mBuffer.Graphics.DrawingColor = colour.ToColor
+		  mBuffer.Graphics.DrawingColor = colour
 		  mBuffer.Graphics.DrawPath(PolygonPath(vertices))
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub DrawSegment(p1 As VMaths.Vector2, p2 As VMaths.Vector2, colour As Physics.Color3i)
+		Sub DrawSegment(p1 As VMaths.Vector2, p2 As VMaths.Vector2, colour As Color)
 		  // Part of the Physics.DebugDraw interface.
 		  
 		  #Pragma Unused p1
@@ -181,14 +181,14 @@ Implements Physics.DebugDraw
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub DrawSolidCircle(center as VMaths.Vector2, radius as Double, colour as Physics.Color3i)
+		Sub DrawSolidCircle(center as VMaths.Vector2, radius as Double, colour as Color)
 		  // Part of the Physics.DebugDraw interface.
 		  
 		  Var screenRadius As Double = radius * Viewport.Scale
 		  Var screenCenter As VMaths.Vector2 = WorldToScreen(center)
 		  Var circumference As Double = radius * 2
 		  
-		  mBuffer.Graphics.DrawingColor = colour.ToColor
+		  mBuffer.Graphics.DrawingColor = colour
 		  
 		  mBuffer.Graphics.FillOval(screenCenter.X - screenRadius, _
 		  screenCenter.Y - screenRadius, _
@@ -197,19 +197,19 @@ Implements Physics.DebugDraw
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 4472617720612066696C6C656420636C6F73656420706F6C79676F6E2070726F766964656420696E20636F756E7465722D636C6F636B77697365206F726465722E
-		Sub DrawSolidPolygon(vertices() As VMaths.Vector2, colour As Physics.Color3i)
+		Sub DrawSolidPolygon(vertices() As VMaths.Vector2, colour As Color)
 		  /// Draw a filled closed polygon provided in counter-clockwise order.
 		  ///
 		  /// Part of the Physics.DebugDraw interface.
 		  
-		  mBuffer.Graphics.DrawingColor = colour.ToColor
+		  mBuffer.Graphics.DrawingColor = colour
 		  mBuffer.Graphics.FillPath(PolygonPath(vertices))
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub DrawString(pos As VMaths.Vector2, s As String, colour As Physics.Color3i)
+		Sub DrawString(pos As VMaths.Vector2, s As String, colour As Color)
 		  // Part of the Physics.DebugDraw interface.
 		  
 		  DrawStringXY(pos.X, pos.Y, s, colour)
@@ -218,7 +218,7 @@ Implements Physics.DebugDraw
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub DrawStringXY(x As Double, y As Double, s As String, colour As Physics.Color3i)
+		Sub DrawStringXY(x As Double, y As Double, s As String, colour As Color)
 		  // Part of the Physics.DebugDraw interface.
 		  
 		  #Pragma Unused x
@@ -233,7 +233,7 @@ Implements Physics.DebugDraw
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub DrawTransform(xf As Physics.Transform, colour As Physics.Color3i)
+		Sub DrawTransform(xf As Physics.Transform, colour As Color)
 		  // Part of the Physics.DebugDraw interface.
 		  
 		  #Pragma Unused xf

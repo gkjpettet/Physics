@@ -7,7 +7,7 @@ Protected Class Particle
 		  p.Position.SetFrom(Position)
 		  p.Velocity.SetFrom(Velocity)
 		  p.Depth = Depth
-		  p.Colour = Colour.Clone
+		  p.Colour = Self.Colour
 		  p.UserData = UserData
 		  
 		  Return p
@@ -20,7 +20,6 @@ Protected Class Particle
 		  position = VMaths.Vector2.Zero
 		  Velocity = VMaths.Vector2.Zero
 		  AccumulationVector = VMaths.Vector2.Zero
-		  Colour = Physics.Color3i.Black
 		  
 		  Self.System = system
 		  Self.Group = If(group = Nil, New Physics.ParticleGroup(system), group)
@@ -47,7 +46,7 @@ Protected Class Particle
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		Colour As Physics.Color3i
+		Colour As Color = Color.Black
 	#tag EndProperty
 
 	#tag Property, Flags = &h0

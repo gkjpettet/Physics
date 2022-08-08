@@ -44,7 +44,7 @@ Implements Physics.BroadphaseStrategy
 		  Next i
 		  
 		  mCombinedAABB = New Physics.AABB
-		  mColor = Physics.Color3i.Zero
+		  
 		  
 		End Sub
 	#tag EndMethod
@@ -997,7 +997,7 @@ Implements Physics.BroadphaseStrategy
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private mColor As Physics.Color3i
+		Private mColor As Color = Color.Black
 	#tag EndProperty
 
 	#tag Property, Flags = &h21

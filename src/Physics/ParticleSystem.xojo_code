@@ -636,20 +636,16 @@ Protected Class ParticleSystem
 		    Var particleB As Physics.Particle = contact.particleA
 		    If (particleA.Flags And particleB.Flags And _
 		      Physics.ParticleType.ColorMixingParticle) <> 0 Then
-		      Var colorA As Physics.Color3i = particleA.Colour
-		      Var colorB As Physics.Color3i = particleB.Colour
-		      Var dr As Integer = Bitwise.ShiftRight(colorMixing256 * (colorB.r - colorA.r), 8)
-		      Var dg As Integer = Bitwise.ShiftRight(colorMixing256 * (colorB.g - colorA.g), 8)
-		      Var db As Integer = Bitwise.ShiftRight(colorMixing256 * (colorB.b - colorA.b), 8)
-		      Var da As Integer = Bitwise.ShiftRight((colorMixing256 * (colorB.a - colorA.a)), 8)
-		      colorA.R = colorA.R + dr
-		      colorA.G = colorA.G + dg
-		      colorA.B = colorA.B + db
-		      colorA.A = colorA.A + da
-		      colorB.R = colorB.R - dr
-		      colorB.G = colorB.G - dg
-		      colorB.B = colorB.B - db
-		      colorB.A = colorB.A - da
+		      Var colorA As Color = particleA.Colour
+		      Var colorB As Color = particleB.Colour
+		      Var dr As Integer = Bitwise.ShiftRight(colorMixing256 * (colorB.Red - colorA.Red), 8)
+		      Var dg As Integer = Bitwise.ShiftRight(colorMixing256 * (colorB.Green - colorA.Green), 8)
+		      Var db As Integer = Bitwise.ShiftRight(colorMixing256 * (colorB.Blue - colorA.Blue), 8)
+		      Var da As Integer = Bitwise.ShiftRight((colorMixing256 * (colorB.Alpha - colorA.Alpha)), 8)
+		      colorA = _
+		      Color.RGB(colorA.Red + dr, colorA.Green + dg, colorA.Blue + db, colorA.Alpha + da)
+		      colorB = _
+		      Color.RGB(colorB.Red - dr, colorB.Green - dg, colorB.Blue - db, colorB.Alpha - da)
 		    End If
 		  Next contact
 		  
