@@ -83,17 +83,17 @@ End
 		  CreateGround
 		  
 		  // Create some circles.
-		  For i As Integer = 0 To 15
-		    CreateCircle(New VMaths.Vector2(System.Random.InRange(-200, 200), _
-		    System.Random.InRange(-100, 100)), System.Random.InRange(3, 10))
+		  For i As Integer = 0 To 100
+		    CreateCircle(New VMaths.Vector2(System.Random.InRange(-300, 300), _
+		    System.Random.InRange(-200, 100)), System.Random.InRange(3, 10))
 		  Next i
 		  
-		  // Create some boxes.
-		  For i As Integer = 0 To 15
-		    CreateBox(New VMaths.Vector2(System.Random.InRange(-200, 200), _
-		    System.Random.InRange(-100, 100)), _
-		    System.Random.InRange(7, 20), System.Random.InRange(7, 20))
-		  Next i
+		  ' // Create some boxes.
+		  ' For i As Integer = 0 To 25
+		  ' CreateBox(New VMaths.Vector2(System.Random.InRange(-200, 200), _
+		  ' System.Random.InRange(-100, 100)), _
+		  ' System.Random.InRange(7, 20), System.Random.InRange(7, 20))
+		  ' Next i
 		  
 		  WorldUpdateTimer.Enabled = True
 		  
@@ -135,7 +135,7 @@ End
 		  circle.Radius = radius
 		  
 		  // Create and add a fixture with custom properties for the circle.
-		  Var fixtureDef As New Physics.FixtureDef(circle, Nil, 0.3, 0.4, 1)
+		  Var fixtureDef As New Physics.FixtureDef(circle, Nil, 0.3, 0.4, 2)
 		  Call body.CreateFixture(fixtureDef)
 		End Sub
 	#tag EndMethod
@@ -172,7 +172,16 @@ End
 		Sub Action()
 		  World.StepDt(1/30)
 		  
+		  Var drawTimer As New Physics.Timer
 		  World.DrawDebugData
+		  drawTimer.Stop
+		  
+		  World.DebugDraw.DrawStringXY(20, 20, _
+		  "Step Time: " + World.Profile.Step_.ToString, Color.Black)
+		  
+		  World.DebugDraw.DrawStringXY(20, 50, _
+		  "Draw Time: " + _
+		  drawTimer.ElapsedMilliseconds.ToString(Locale.Current, "#.#") + " ms", Color.Black)
 		  
 		  Scene.Refresh
 		  

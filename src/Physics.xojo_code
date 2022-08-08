@@ -1,5 +1,19 @@
 #tag Module
 Protected Module Physics
+	#tag Method, Flags = &h1
+		Protected Sub Assert(condition As Boolean, message As String = "")
+		  /// If `condition` is False then an `UnsupportedOperation` is raised. 
+		  /// Only executes in debug mode.
+		  
+		  #If DebugBuild
+		    If Not condition Then
+		      Raise New UnsupportedOperationException("Failed assertion: " + message)
+		    End If
+		  #EndIf
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Function Contains(Extends haystack() As Physics.Particle, needle As Physics.Particle) As Boolean
 		  If haystack.IndexOf(needle) = -1 Then

@@ -657,7 +657,7 @@ Protected Class World
 		  
 		  // Look for new contacts.
 		  ContactManager.FindNewContacts
-		  mProfile.Broadphase.Record(BroadphaseTimer.GetMilliseconds)
+		  mProfile.Broadphase.Record(BroadphaseTimer.ElapsedMilliseconds)
 		  
 		End Sub
 	#tag EndMethod
@@ -969,29 +969,29 @@ Protected Class World
 		  mStep.DtRatio = mInvDt0 * dt
 		  
 		  mStep.WarmStarting = mWarmStarting
-		  mProfile.StepInit.Record(mTempTimer.GetMilliseconds)
+		  mProfile.StepInit.Record(mTempTimer.ElapsedMilliseconds)
 		  
 		  // Update contacts. This is where some contacts are destroyed.
 		  mTempTimer.Reset
 		  ContactManager.Collide
-		  mProfile.Collide.Record(mTempTimer.GetMilliseconds)
+		  mProfile.Collide.Record(mTempTimer.ElapsedMilliseconds)
 		  
 		  // Integrate velocities, solve velocity constraints, and integrate
 		  // positions.
 		  If mStepComplete And mStep.Dt > 0.0 Then
 		    mTempTimer.Reset
 		    ParticleSystem.Solve(mStep) // Particle Simulation.
-		    mProfile.SolveParticleSystem.Record(mTempTimer.GetMilliseconds)
+		    mProfile.SolveParticleSystem.Record(mTempTimer.ElapsedMilliseconds)
 		    mTempTimer.Reset
 		    Solve(mStep)
-		    mProfile.Solve.Record(mTempTimer.GetMilliseconds)
+		    mProfile.Solve.Record(mTempTimer.ElapsedMilliseconds)
 		  End If
 		  
 		  // Handle TOI events.
 		  If mContinuousPhysics And mStep.Dt > 0.0 Then
 		    mTempTimer.Reset
 		    SolveTOI(mStep)
-		    mProfile.SolveTOI.Record(mTempTimer.GetMilliseconds)
+		    mProfile.SolveTOI.Record(mTempTimer.ElapsedMilliseconds)
 		  End If
 		  
 		  If mStep.Dt > 0.0 Then
@@ -1004,7 +1004,8 @@ Protected Class World
 		  
 		  Flags = Flags And Bitwise.OnesComplement(Locked)
 		  
-		  mProfile.Step_.Record(mStepTimer.GetMilliseconds)
+		  // Record how many milliseconds this step took.
+		  mProfile.Step_.Record(mStepTimer.ElapsedMilliseconds)
 		  
 		End Sub
 	#tag EndMethod
@@ -1191,6 +1192,15 @@ Protected Class World
 	#tag Property, Flags = &h0
 		ParticleSystem As Physics.ParticleSystem
 	#tag EndProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  Return mProfile
+			End Get
+		#tag EndGetter
+		Profile As Physics.Profile
+	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0, Description = 47657420746865206E756D626572206F662062726F61642D70686173652070726F786965732E
 		#tag Getter

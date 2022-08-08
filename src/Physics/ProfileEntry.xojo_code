@@ -30,10 +30,14 @@ Protected Class ProfileEntry
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
+	#tag Method, Flags = &h0, Description = 52657475726E732074686520617665726167652C206D696E20616E64206D6178207265636F726465642074696D6573206173206120737472696E6720696E2074686520666F726D61743A20226176673A20232E23206D732C206D696E3A20232E23206D732C206D61783A20232E23206D73222E
 		Function ToString() As String
-		  Return ShortAvg.ToString + " (" + LongAvg.ToString + ") " + _
-		  "[" + Minimum.ToString + "," + Maximum.ToString + "]"
+		  /// Returns the average, min and max recorded times as a string 
+		  /// in the format: "avg: #.# ms, min: #.# ms, max: #.# ms".
+		  
+		  Return "avg: " + LongAvg.ToString(Locale.Current, "#.0") + " ms, " + _
+		  "min: " + Minimum.ToString(Locale.Current, "#.0") + " ms " + _
+		  ", max: " + Maximum.ToString(Locale.Current, "#.0") + " ms"
 		  
 		End Function
 	#tag EndMethod

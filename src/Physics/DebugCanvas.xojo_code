@@ -79,6 +79,20 @@ Implements Physics.DebugDraw
 		  #Pragma Warning "CHECK: Is this width & height * ScaleFactor?"
 		  mBuffer = Self.Window.BitmapForCaching(Self.Width, Self.Height)
 		  
+		  // Use a monospace font.
+		  #If TargetMacOS
+		    mBuffer.Graphics.FontName = "Menlo"
+		    
+		  #ElseIf TargetWindows
+		    mBuffer.Graphics.FontName = "Consolas"
+		    
+		  #ElseIf TargetLinux
+		    mBuffer.Graphics.FontName = "DejaVu Sans Mono"
+		    
+		  #ElseIf TargetIOS
+		    mBuffer.Graphics.FontName = "Menlo"
+		  #EndIf
+		  
 		End Sub
 	#tag EndMethod
 
@@ -212,7 +226,9 @@ Implements Physics.DebugDraw
 		Sub DrawString(pos As VMaths.Vector2, s As String, colour As Color)
 		  // Part of the Physics.DebugDraw interface.
 		  
-		  DrawStringXY(pos.X, pos.Y, s, colour)
+		  mBuffer.Graphics.DrawingColor = colour
+		  
+		  mBuffer.Graphics.DrawText(s, pos.X, pos.Y)
 		  
 		End Sub
 	#tag EndMethod
@@ -221,14 +237,9 @@ Implements Physics.DebugDraw
 		Sub DrawStringXY(x As Double, y As Double, s As String, colour As Color)
 		  // Part of the Physics.DebugDraw interface.
 		  
-		  #Pragma Unused x
-		  #Pragma Unused y
-		  #Pragma Unused s
-		  #Pragma Unused colour
+		  mBuffer.Graphics.DrawingColor = colour
 		  
-		  #Pragma Warning  "Don't forget to implement this method!"
-		  
-		  
+		  mBuffer.Graphics.DrawText(s, x, y)
 		End Sub
 	#tag EndMethod
 
