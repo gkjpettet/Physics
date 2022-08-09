@@ -39,15 +39,14 @@ Protected Class ViewportTransform
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 54616B65732074686520776F726C6420636F6F7264696E6174657320616E642072657475726E2074686520636F72726573706F6E64696E672073637265656E20636F6F7264696E617465732E
-		Function WorldToScreen(argWorld As VMaths.Vector2) As VMaths.Vector2
-		  /// Takes the world coordinates and return the corresponding screen
-		  /// coordinates.
+		Function WorldToScreen(worldPos As VMaths.Vector2) As VMaths.Vector2
+		  /// Takes the world coordinates and return the corresponding screen coordinates.
 		  
 		  // Correct for the canvas considering the upper-left corner, rather than the
 		  // centre, to be the origin.
 		  Var gridCorrected As New VMaths.Vector2( _
-		  (argWorld.X * scale) + Extents.X, _
-		  Extents.Y - (argWorld.Y * scale))
+		  (worldPos.X * scale) + Extents.X, _
+		  Extents.Y - (worldPos.Y * scale))
 		  
 		  Var tmp As VMaths.Vector2 = Translation
 		  tmp.Y = tmp.Y * If(yFlip, 1, -1)
@@ -76,7 +75,6 @@ Protected Class ViewportTransform
 			/// actual centre of the canvas and the currently specified centre. For
 			/// example, if the actual canvas centre is (5, 5) but the current centre is
 			/// (6, 6), the translation is (1, 1).
-			
 		#tag EndNote
 		#tag Getter
 			Get
@@ -144,8 +142,16 @@ Protected Class ViewportTransform
 			Name="YFlip"
 			Visible=false
 			Group="Behavior"
+			InitialValue="False"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Scale"
+			Visible=false
+			Group="Behavior"
 			InitialValue=""
-			Type="Integer"
+			Type="Double"
 			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior

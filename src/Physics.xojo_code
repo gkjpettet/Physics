@@ -131,7 +131,7 @@ Protected Module Physics
 	#tag Constant, Name = DebugDrawAABBBit, Type = Double, Dynamic = False, Default = \"8", Scope = Protected, Description = 44726177206178697320616C69676E656420626F756E64696E6720626F7865732E20466F722064656275672064726177696E672E
 	#tag EndConstant
 
-	#tag Constant, Name = DebugDrawCenterOfMassBit, Type = Double, Dynamic = False, Default = \"32", Scope = Protected, Description = 447261772063656E747265206F66206D617373206672616D652E20466F722064656275672064726177696E672E
+	#tag Constant, Name = DebugDrawCenterOfMassBit, Type = Double, Dynamic = False, Default = \"32", Scope = Protected, Description = 44726177207468652063656E747265206F66206D617373206F6620626F646965732E20466F722064656275672064726177696E672E
 	#tag EndConstant
 
 	#tag Constant, Name = DebugDrawDynamicTreeBit, Type = Double, Dynamic = False, Default = \"64", Scope = Protected, Description = 447261772064796E616D696320747265652E20466F722064656275672064726177696E672E

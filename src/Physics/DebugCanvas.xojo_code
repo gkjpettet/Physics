@@ -6,11 +6,8 @@ Implements Physics.DebugDraw
 		Sub Paint(g As Graphics, areas() As Rect)
 		  #Pragma Unused areas
 		  
-		  mCurrentScaleFactorX = g.ScaleX
-		  mCurrentScaleFactorY = g.ScaleY
-		  
 		  // We need a valid viewport. Ideally this should be set in the constructor but as 
-		  // this is a canvas csubclass we don't have access to the constructor.
+		  // this is a canvas subclass we don't have access to the constructor.
 		  If Self.Viewport = Nil Then Return
 		  
 		  CheckBuffer
@@ -53,8 +50,8 @@ Implements Physics.DebugDraw
 		    Return
 		  End If
 		  
-		  If mBuffer.Width <> Self.Width * mCurrentScaleFactorX Or _
-		    mBuffer.Height <> Self.Height * mCurrentScaleFactorY Then
+		  If mBuffer.Width <> Self.Width * ScaleFactor Or _
+		    mBuffer.Height <> Self.Height * ScaleFactor Then
 		    CreateNewBuffer
 		    Return
 		  End If
@@ -75,7 +72,6 @@ Implements Physics.DebugDraw
 		Private Sub CreateNewBuffer()
 		  /// Creates a new backign buffer of the correct width and height.
 		  
-		  #Pragma Warning "CHECK: Is this width & height * ScaleFactor?"
 		  mBuffer = Self.Window.BitmapForCaching(Self.Width, Self.Height)
 		  
 		  // Use a monospace font.
@@ -101,7 +97,7 @@ Implements Physics.DebugDraw
 		  
 		  Var screenRadius As Double = radius * Viewport.Scale
 		  Var screenCenter As VMaths.Vector2 = WorldToScreen(center)
-		  Var circumference As Double = radius * 2
+		  Var circumference As Double = screenRadius * 2
 		  
 		  mBuffer.Graphics.DrawingColor = colour
 		  
@@ -299,6 +295,17 @@ Implements Physics.DebugDraw
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 54616B6573207468652073637265656E20582C205920636F6F7264696E6174657320616E642072657475726E732074686520776F726C6420636F6F7264696E617465732E
+		Function ScreenXYToWorld(screenX As Double, screenY As Double) As VMaths.Vector2
+		  /// Takes the screen X, Y coordinates and returns the world coordinates.
+		  ///
+		  /// Part of the Physics.DebugDraw interface.
+		  
+		  Return Viewport.ScreenToWorld(New VMaths.Vector2(screenX, screenY))
+		  
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Function Viewport() As Physics.ViewportTransform
 		  Return mViewport
@@ -338,14 +345,6 @@ Implements Physics.DebugDraw
 
 	#tag Property, Flags = &h21
 		Private mBuffer As Picture
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private mCurrentScaleFactorX As Double = 1
-	#tag EndProperty
-
-	#tag Property, Flags = &h21
-		Private mCurrentScaleFactorY As Double = 1
 	#tag EndProperty
 
 	#tag Property, Flags = &h21

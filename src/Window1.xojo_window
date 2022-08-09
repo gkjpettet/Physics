@@ -66,12 +66,13 @@ End
 	#tag Event
 		Sub Opening()
 		  // Setup the debug drawing canvas for the world.
-		  Const viewportScale = 1
+		  Const viewportScale = 10
 		  Var extents As New VMaths.Vector2(Scene.Width / 2, Scene.Height / 2)
 		  Scene.Viewport = New Physics.ViewportTransform(extents, extents, viewportScale)
-		  Scene.Viewport.Scale = viewportScale
 		  Scene.AppendFlags(Physics.DebugDrawShapeBit)
 		  Scene.AppendFlags(Physics.DebugDrawWireFrameDrawingBit)
+		  
+		  Scene.AppendFlags(Physics.DebugDrawCenterOfMassBit)
 		  
 		  // Create a world.
 		  Var gravity As New VMaths.Vector2(0, -10)
@@ -82,17 +83,27 @@ End
 		  // Create and add the ground.
 		  CreateGround
 		  
+		  ' CreateCircle(New VMaths.Vector2(0, 0), 0.5)
+		  ' CreateCircle(New VMaths.Vector2(2.5, 10), 0.5)
+		  ' CreateCircle(New VMaths.Vector2(10, 0), 1)
+		  
+		  Var xMin As Double = Scene.ScreenXYToWorld(0, 0).X
+		  Var xMax As Double = Scene.ScreenXYToWorld(Scene.Width, 0).X
+		  Var yMin As Double = Scene.ScreenXYToWorld(0, 0).Y
+		  Var yMax As Double = Scene.ScreenXYToWorld(0, Scene.Height).Y - 5 // Allow for ground height.
+		  
 		  // Create some circles.
-		  For i As Integer = 0 To 9
-		    CreateCircle(New VMaths.Vector2(System.Random.InRange(-300, 300), _
-		    System.Random.InRange(-300, 100)), System.Random.InRange(3, 10))
+		  For i As Integer = 0 To 24
+		    Var pos As New VMaths.Vector2(System.Random.InRange(xMin, xMax), _
+		    System.Random.InRange(yMin, yMax))
+		    CreateCircle(pos, System.Random.InRange(5, 30)/10) ' /10 as InRange takes an integer.
 		  Next i
 		  
 		  // Create some boxes.
-		  For i As Integer = 0 To 9
-		    CreateBox(New VMaths.Vector2(System.Random.InRange(-200, 200), _
-		    System.Random.InRange(-100, 100)), _
-		    System.Random.InRange(7, 20), System.Random.InRange(7, 20))
+		  For i As Integer = 0 To 24
+		    Var pos As New VMaths.Vector2(System.Random.InRange(xMin, xMax), _
+		    System.Random.InRange(yMin, yMax))
+		    CreateBox(pos, System.Random.InRange(5, 60)/10, System.Random.InRange(5, 60)/10)
 		  Next i
 		  
 		  WorldUpdateTimer.Enabled = True
@@ -115,7 +126,10 @@ End
 		  box.SetAsBoxXY(width / 2, height / 2)
 		  
 		  // Create and add a fixture with custom properties for the box.
-		  Var fixtureDef As New Physics.FixtureDef(box, Nil, 0.3, 0.5, 1)
+		  Var fixtureDef As New Physics.FixtureDef(box)
+		  fixtureDef.Density = 1
+		  fixtureDef.Friction = 0.7
+		  fixtureDef.Restitution = 0.3
 		  Call body.CreateFixture(fixtureDef)
 		  
 		End Sub
@@ -135,7 +149,10 @@ End
 		  circle.Radius = radius
 		  
 		  // Create and add a fixture with custom properties for the circle.
-		  Var fixtureDef As New Physics.FixtureDef(circle, Nil, 0.3, 0.4, 2)
+		  Var fixtureDef As New Physics.FixtureDef(circle)
+		  fixtureDef.Density = 1
+		  fixtureDef.Friction = 0.7
+		  fixtureDef.Restitution = 0.3
 		  Call body.CreateFixture(fixtureDef)
 		End Sub
 	#tag EndMethod
@@ -144,15 +161,21 @@ End
 		Private Sub CreateGround()
 		  /// Creates a ground body and adds it to `world`.
 		  
+		  Var groundHeight As Double = 1
+		  
+		  Var pos As VMaths.Vector2 = _
+		  Scene.ScreenXYToWorld(Scene.Width/2, Scene.Height - (groundHeight * Scene.Viewport.Scale))
+		  
 		  // Create the ground body.
 		  Var groundBodyDef As New Physics.BodyDef
-		  groundBodyDef.Position.SetValues(0, -250)
+		  groundBodyDef.Position.SetFrom(pos)
 		  Var groundBody As Physics.Body = World.CreateBody(groundBodyDef)
 		  
 		  // Set the ground's shape and attach it as a fixture.
 		  Var groundBox As New Physics.PolygonShape
-		  groundBox.SetAsBoxXY(Scene.Width / 2, 10)
+		  groundBox.SetAsBoxXY((Scene.Width / Scene.Viewport.Scale) / 2, groundHeight)
 		  Call groundBody.CreateFixtureFromShape(groundBox, 0)
+		  groundBody.Fixtures(0).Friction = 1
 		  
 		End Sub
 	#tag EndMethod
@@ -170,7 +193,8 @@ End
 #tag Events WorldUpdateTimer
 	#tag Event
 		Sub Action()
-		  World.StepDt(1/30)
+		  Var fps As Double = 1/30
+		  World.StepDt(fps)
 		  
 		  Var drawTimer As New Physics.Timer
 		  World.DrawDebugData

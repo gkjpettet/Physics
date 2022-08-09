@@ -210,10 +210,11 @@ Protected Class Body
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0, Description = 437265617465732061206669787475726520616E6420617474616368657320697420746F207468697320626F64792E20557365207468697320696620796F75206E65656420746F2073657420736F6D65206669787475726520706172616D65746572732E204F746865727769736520796F752063616E20637265617465207468652066697874757265206469726563746C792066726F6D20612073686170652E
+	#tag Method, Flags = &h0, Description = 43726561746573206120666978747572652066726F6D20606465666020616E6420617474616368657320697420746F207468697320626F64792E2052657475726E732074686520666978747572652E
 		Function CreateFixture(def As Physics.FixtureDef) As Physics.Fixture
-		  /// Creates a fixture and attaches it to this body. Use this if you
-		  /// need to set some fixture parameters. Otherwise you can
+		  /// Creates a fixture from `def` and attaches it to this body. Returns the fixture.
+		  ///
+		  /// Use this if you need to set some fixture parameters. Otherwise you can
 		  /// create the fixture directly from a shape. 
 		  ///
 		  /// If the density is non-zero, this function automatically updates the mass of the body. 
@@ -681,8 +682,7 @@ Protected Class Body
 		  /// Set the position of the body's origin and rotation. This breaks any contacts and 
 		  /// wakes the other bodies. 
 		  ///
-		  /// Manipulating a body's transform may cause non-physical
-		  /// behavior.
+		  /// Manipulating a body's transform may cause non-physical behavior.
 		  ///
 		  /// Note: contacts are updated on the next call to `World.Step()`.
 		  

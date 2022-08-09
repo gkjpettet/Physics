@@ -361,7 +361,7 @@ Protected Class Fixture
 		FilterData As Physics.Filter
 	#tag EndComputedProperty
 
-	#tag Property, Flags = &h0
+	#tag Property, Flags = &h0, Description = 30203D204E6F206672696374696F6E2E2031203D2048696768657374206672696374696F6E2E
 		Friction As Double = 0
 	#tag EndProperty
 
@@ -453,7 +453,7 @@ Protected Class Fixture
 		RenderCenter As VMaths.Vector2
 	#tag EndProperty
 
-	#tag Property, Flags = &h0
+	#tag Property, Flags = &h0, Description = 30203D204E6F20626F756E63696E672E2031203D20416C6C20656E6572677920636F6E7365727665642075706F6E20636F6C6C6973696F6E2E
 		Restitution As Double = 0
 	#tag EndProperty
 
