@@ -60,6 +60,15 @@ Implements Physics.DebugDraw
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub ClearFlag(flag As Integer)
+		  // Part of the Physics.DebugDraw interface.
+		  
+		  mDrawFlags = mDrawFlags And OnesComplement(flag)
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub ClearFlags(flags As Integer)
 		  // Part of the Physics.DebugDraw interface.
 		  
@@ -195,7 +204,7 @@ Implements Physics.DebugDraw
 		  
 		  Var screenRadius As Double = radius * Viewport.Scale
 		  Var screenCenter As VMaths.Vector2 = WorldToScreen(center)
-		  Var circumference As Double = radius * 2
+		  Var circumference As Double = screenRadius * 2
 		  
 		  mBuffer.Graphics.DrawingColor = colour
 		  
@@ -343,6 +352,132 @@ Implements Physics.DebugDraw
 	#tag EndMethod
 
 
+	#tag ComputedProperty, Flags = &h0, Description = 57686574686572206F72206E6F7420746F206472617720746865206178697320616C69676E656420626F756E64696E6720626F7865732061726F756E6420626F646965732E
+		#tag Getter
+			Get
+			  Return (mDrawFlags And DrawAABBBit) <> 0
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  If value Then
+			    AppendFlags(DrawAABBBit)
+			  Else
+			    ClearFlag(DrawAABBBit)
+			  End If
+			End Set
+		#tag EndSetter
+		DrawAABB As Boolean
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0, Description = 49662054727565207468656E207468652063656E747265206F66206D6173732077696C6C20626520647261776E20666F7220626F646965732E
+		#tag Getter
+			Get
+			  Return (mDrawFlags And DrawCenterOfMassBit) <> 0
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  If value Then
+			    AppendFlags(DrawCenterOfMassBit)
+			  Else
+			    ClearFlag(DrawCenterOfMassBit)
+			  End If
+			End Set
+		#tag EndSetter
+		DrawCenterOfMass As Boolean
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0, Description = 49662054727565207468656E207468652064796E616D696320747265652077696C6C20626520647261776E2E
+		#tag Getter
+			Get
+			  Return (mDrawFlags And DrawDynamicTreeBit) <> 0
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  If value Then
+			    AppendFlags(DrawDynamicTreeBit)
+			  Else
+			    ClearFlag(DrawDynamicTreeBit)
+			  End If
+			End Set
+		#tag EndSetter
+		DrawDynamicTree As Boolean
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0, Description = 49662054727565207468656E206A6F696E74732077696C6C20626520647261776E2E
+		#tag Getter
+			Get
+			  Return (mDrawFlags And DrawJointBit) <> 0
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  If value Then
+			    AppendFlags(DrawJointBit)
+			  Else
+			    ClearFlag(DrawJointBit)
+			  End If
+			End Set
+		#tag EndSetter
+		DrawJoints As Boolean
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0, Description = 49662054727565207468656E2070616972732077696C6C20626520647261776E2E
+		#tag Getter
+			Get
+			  Return (mDrawFlags And DrawPairBit) <> 0
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  If value Then
+			    AppendFlags(DrawPairBit)
+			  Else
+			    ClearFlag(DrawPairBit)
+			  End If
+			End Set
+		#tag EndSetter
+		DrawPairs As Boolean
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0, Description = 49662054727565207468656E207368617065732077696C6C20626520647261776E2E
+		#tag Getter
+			Get
+			  Return (mDrawFlags And DrawShapeBit) <> 0
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  If value Then
+			    AppendFlags(DrawShapeBit)
+			  Else
+			    ClearFlag(DrawShapeBit)
+			  End If
+			End Set
+		#tag EndSetter
+		DrawShapes As Boolean
+	#tag EndComputedProperty
+
+	#tag ComputedProperty, Flags = &h0, Description = 49662054727565207468656E20776972656672616D657320726174686572207468616E20736F6C6964207368617065732077696C6C20626520647261776E2E
+		#tag Getter
+			Get
+			  Return (mDrawFlags And DrawWireFrameDrawingBit) <> 0
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  If value Then
+			    AppendFlags(DrawWireFrameDrawingBit)
+			  Else
+			    ClearFlag(DrawWireFrameDrawingBit)
+			  End If
+			End Set
+		#tag EndSetter
+		DrawWireframes As Boolean
+	#tag EndComputedProperty
+
 	#tag Property, Flags = &h21
 		Private mBuffer As Picture
 	#tag EndProperty
@@ -358,6 +493,28 @@ Implements Physics.DebugDraw
 	#tag Property, Flags = &h0, Description = 546865206261636B67726F756E6420636F6C6F7572206F6620746865207363656E652E
 		SceneBackgroundColor As Color = &cffffff
 	#tag EndProperty
+
+
+	#tag Constant, Name = DrawAABBBit, Type = Double, Dynamic = False, Default = \"8", Scope = Protected, Description = 44726177206178697320616C69676E656420626F756E64696E6720626F7865732E20466F722064656275672064726177696E672E
+	#tag EndConstant
+
+	#tag Constant, Name = DrawCenterOfMassBit, Type = Double, Dynamic = False, Default = \"32", Scope = Protected, Description = 44726177207468652063656E747265206F66206D617373206F6620626F646965732E20466F722064656275672064726177696E672E
+	#tag EndConstant
+
+	#tag Constant, Name = DrawDynamicTreeBit, Type = Double, Dynamic = False, Default = \"64", Scope = Protected, Description = 447261772064796E616D696320747265652E20466F722064656275672064726177696E672E
+	#tag EndConstant
+
+	#tag Constant, Name = DrawJointBit, Type = Double, Dynamic = False, Default = \"4", Scope = Protected, Description = 44726177206A6F696E7420636F6E6E656374696F6E732E20466F722064656275672064726177696E672E
+	#tag EndConstant
+
+	#tag Constant, Name = DrawPairBit, Type = Double, Dynamic = False, Default = \"16", Scope = Protected, Description = 44726177207061697273206F6620636F6E6E6563746564206F626A656374732E20466F722064656275672064726177696E672E
+	#tag EndConstant
+
+	#tag Constant, Name = DrawShapeBit, Type = Double, Dynamic = False, Default = \"2", Scope = Protected, Description = 44726177207368617065732E20466F722064656275672064726177696E672E
+	#tag EndConstant
+
+	#tag Constant, Name = DrawWireFrameDrawingBit, Type = Double, Dynamic = False, Default = \"128", Scope = Protected, Description = 44726177206F6E6C792074686520776972656672616D6520666F722064726177696E6720706572666F726D616E63652E20466F722064656275672064726177696E672E
+	#tag EndConstant
 
 
 	#tag ViewBehavior
@@ -551,6 +708,62 @@ Implements Physics.DebugDraw
 			Group="Behavior"
 			InitialValue="&cffffff"
 			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="DrawCenterOfMass"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="DrawAABB"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="DrawDynamicTree"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="DrawJoints"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="DrawPairs"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="DrawShapes"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="DrawWireframes"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Boolean"
 			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior

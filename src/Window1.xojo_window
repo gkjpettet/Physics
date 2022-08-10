@@ -69,15 +69,15 @@ End
 		  Const viewportScale = 10
 		  Var extents As New VMaths.Vector2(Scene.Width / 2, Scene.Height / 2)
 		  Scene.Viewport = New Physics.ViewportTransform(extents, extents, viewportScale)
-		  Scene.AppendFlags(Physics.DebugDrawShapeBit)
-		  Scene.AppendFlags(Physics.DebugDrawWireFrameDrawingBit)
 		  
-		  Scene.AppendFlags(Physics.DebugDrawCenterOfMassBit)
+		  'Scene.DrawWireframes = True
+		  Scene.DrawCenterOfMass = True
 		  
 		  // Create a world.
 		  Var gravity As New VMaths.Vector2(0, -10)
 		  World = New Physics.World(gravity)
 		  
+		  // Assign the debug drawing canvas to the world.
 		  World.DebugDraw = Scene
 		  
 		  // Create and add the ground.
@@ -93,14 +93,14 @@ End
 		  Var yMax As Double = Scene.ScreenXYToWorld(0, Scene.Height).Y - 5 // Allow for ground height.
 		  
 		  // Create some circles.
-		  For i As Integer = 0 To 24
+		  For i As Integer = 0 To 9
 		    Var pos As New VMaths.Vector2(System.Random.InRange(xMin, xMax), _
 		    System.Random.InRange(yMin, yMax))
 		    CreateCircle(pos, System.Random.InRange(5, 30)/10) ' /10 as InRange takes an integer.
 		  Next i
 		  
 		  // Create some boxes.
-		  For i As Integer = 0 To 24
+		  For i As Integer = 0 To 9
 		    Var pos As New VMaths.Vector2(System.Random.InRange(xMin, xMax), _
 		    System.Random.InRange(yMin, yMax))
 		    CreateBox(pos, System.Random.InRange(5, 60)/10, System.Random.InRange(5, 60)/10)
@@ -193,23 +193,30 @@ End
 #tag Events WorldUpdateTimer
 	#tag Event
 		Sub Action()
-		  Var fps As Double = 1/30
-		  World.StepDt(fps)
+		  // fps = 1/dt
+		  Var dt As Double = Me.Period / 1000
 		  
+		  // Step the physics simulation.
+		  World.StepDt(dt)
+		  
+		  // Draw the world to its internal buffer and time how long it takes.
 		  Var drawTimer As New Physics.Timer
 		  World.DrawDebugData
 		  drawTimer.Stop
 		  
+		  // Draw the timing stats in the top left corner.
 		  World.DebugDraw.DrawStringXY(20, 20, _
 		  "Step Time: " + World.Profile.Step_.ToString, Color.Black)
 		  
 		  World.DebugDraw.DrawStringXY(20, 40, _
 		  "Draw Time: " + _
-		  drawTimer.ElapsedMilliseconds.ToString(Locale.Current, "#.#") + " ms", Color.Black)
+		  drawTimer.ElapsedMilliseconds.ToString(Locale.Current, "#.#") + " ms", _
+		  Color.Black)
 		  
 		  World.DebugDraw.DrawStringXY(20, 60, _
 		  "Bodies: " + World.Bodies.Count.ToString, Color.Black)
 		  
+		  // Tell the debug canvas to paint.
 		  Scene.Refresh
 		  
 		End Sub
