@@ -210,9 +210,47 @@ Protected Class Body
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0, Description = 43726561746573206120666978747572652066726F6D20606465666020616E6420617474616368657320697420746F207468697320626F64792E2052657475726E732074686520666978747572652E
+	#tag Method, Flags = &h0, Description = 43726561746573206120666978747572652066726F6D20606465666020616E6420617474616368657320697420746F207468697320626F64792E204F766572726964652072657475726E732074686520666978747572652E
+		Sub CreateFixture(def As Physics.FixtureDef)
+		  /// Creates a fixture from `def` and attaches it to this body. Override returns the fixture.
+		  ///
+		  /// Use this if you need to set some fixture parameters. Otherwise you can
+		  /// create the fixture directly from a shape. 
+		  ///
+		  /// If the density is non-zero, this function automatically updates the mass of the body. 
+		  /// Contacts are not created until the next time step.
+		  ///
+		  /// Warning: This function is locked during callbacks.
+		  
+		  #If DebugBuild
+		    Assert(Not world.IsLocked, "The world is locked.")
+		  #EndIf
+		  
+		  Var fixture As New Physics.Fixture(Self, def)
+		  
+		  If (Flags And ActiveFlag) = ActiveFlag Then
+		    Var broadPhase As Physics.Broadphase = World.ContactManager.BroadPhase
+		    fixture.CreateProxies(broadPhase, Transform)
+		  End If
+		  
+		  fixtures.Add(fixture)
+		  
+		  // Adjust mass properties if needed.
+		  If fixture.Density > 0.0 Then
+		    ResetMassData
+		  End If
+		  
+		  // Let the world know we have a new fixture. This will cause new contacts
+		  // to be created at the beginning of the next time step.
+		  world.Flags = world.Flags Or World.NewFixture
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 43726561746573206120666978747572652066726F6D20606465666020616E6420617474616368657320697420746F207468697320626F64792E204F766572726964652072657475726E732074686520666978747572652E
 		Function CreateFixture(def As Physics.FixtureDef) As Physics.Fixture
-		  /// Creates a fixture from `def` and attaches it to this body. Returns the fixture.
+		  /// Creates a fixture from `def` and attaches it to this body. Override returns the fixture.
 		  ///
 		  /// Use this if you need to set some fixture parameters. Otherwise you can
 		  /// create the fixture directly from a shape. 

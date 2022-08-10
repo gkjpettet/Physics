@@ -128,27 +128,6 @@ Protected Module Physics
 	#tag Constant, Name = BroadphaseNullProxy, Type = Double, Dynamic = False, Default = \"-1", Scope = Protected, Description = 506F727465642066726F6D206042726F616470686173652E4E756C6C50726F7879602E
 	#tag EndConstant
 
-	#tag Constant, Name = DebugDrawAABBBit, Type = Double, Dynamic = False, Default = \"8", Scope = Protected, Description = 44726177206178697320616C69676E656420626F756E64696E6720626F7865732E20466F722064656275672064726177696E672E
-	#tag EndConstant
-
-	#tag Constant, Name = DebugDrawCenterOfMassBit, Type = Double, Dynamic = False, Default = \"32", Scope = Protected, Description = 44726177207468652063656E747265206F66206D617373206F6620626F646965732E20466F722064656275672064726177696E672E
-	#tag EndConstant
-
-	#tag Constant, Name = DebugDrawDynamicTreeBit, Type = Double, Dynamic = False, Default = \"64", Scope = Protected, Description = 447261772064796E616D696320747265652E20466F722064656275672064726177696E672E
-	#tag EndConstant
-
-	#tag Constant, Name = DebugDrawJointBit, Type = Double, Dynamic = False, Default = \"4", Scope = Protected, Description = 44726177206A6F696E7420636F6E6E656374696F6E732E20466F722064656275672064726177696E672E
-	#tag EndConstant
-
-	#tag Constant, Name = DebugDrawPairBit, Type = Double, Dynamic = False, Default = \"16", Scope = Protected, Description = 44726177207061697273206F6620636F6E6E6563746564206F626A656374732E20466F722064656275672064726177696E672E
-	#tag EndConstant
-
-	#tag Constant, Name = DebugDrawShapeBit, Type = Double, Dynamic = False, Default = \"2", Scope = Protected, Description = 44726177207368617065732E20466F722064656275672064726177696E672E
-	#tag EndConstant
-
-	#tag Constant, Name = DebugDrawWireFrameDrawingBit, Type = Double, Dynamic = False, Default = \"128", Scope = Protected, Description = 44726177206F6E6C792074686520776972656672616D6520666F722064726177696E6720706572666F726D616E63652E20466F722064656275672064726177696E672E
-	#tag EndConstant
-
 
 	#tag Enum, Name = BodyType, Type = Integer, Flags = &h1, Description = 446566696E6573207468652074797065206F66206120626F64792E
 		Static_

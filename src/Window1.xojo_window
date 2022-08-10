@@ -8,9 +8,9 @@ Begin DesktopWindow Window1
    HasBackgroundColor=   False
    HasCloseButton  =   True
    HasFullScreenButton=   False
-   HasMaximizeButton=   True
+   HasMaximizeButton=   False
    HasMinimizeButton=   True
-   Height          =   788
+   Height          =   800
    ImplicitInstance=   True
    MacProcID       =   0
    MaximumHeight   =   32000
@@ -19,11 +19,11 @@ Begin DesktopWindow Window1
    MenuBarVisible  =   False
    MinimumHeight   =   64
    MinimumWidth    =   64
-   Resizeable      =   True
-   Title           =   "Untitled"
+   Resizeable      =   False
+   Title           =   "Physics Demo"
    Type            =   0
    Visible         =   True
-   Width           =   1038
+   Width           =   1400
    Begin Physics.DebugCanvas Scene
       AllowAutoDeactivate=   True
       AllowFocus      =   False
@@ -31,7 +31,7 @@ Begin DesktopWindow Window1
       AllowTabs       =   False
       Backdrop        =   0
       Enabled         =   True
-      Height          =   788
+      Height          =   800
       Index           =   -2147483648
       Left            =   0
       LockBottom      =   True
@@ -48,7 +48,7 @@ Begin DesktopWindow Window1
       Top             =   0
       Transparent     =   True
       Visible         =   True
-      Width           =   1038
+      Width           =   1400
    End
    Begin Timer WorldUpdateTimer
       Enabled         =   True
@@ -65,47 +65,53 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  // Setup the debug drawing canvas for the world.
-		  Const viewportScale = 10
+		  // Setup the viewport for the canvas.
+		  Const VIEWPORT_SCALE = 10
 		  Var extents As New VMaths.Vector2(Scene.Width / 2, Scene.Height / 2)
-		  Scene.Viewport = New Physics.ViewportTransform(extents, extents, viewportScale)
+		  Scene.Viewport = New Physics.ViewportTransform(extents, extents, VIEWPORT_SCALE)
 		  
-		  'Scene.DrawWireframes = True
+		  // Draw the centre of mass for debugging.
 		  Scene.DrawCenterOfMass = True
 		  
-		  // Create a world.
+		  // Create a world with normal gravity.
 		  Var gravity As New VMaths.Vector2(0, -10)
 		  World = New Physics.World(gravity)
 		  
 		  // Assign the debug drawing canvas to the world.
 		  World.DebugDraw = Scene
 		  
-		  // Create and add the ground.
-		  CreateGround
+		  // Create the ground and two walls.
+		  CreateGroundAndWalls
 		  
-		  ' CreateCircle(New VMaths.Vector2(0, 0), 0.5)
-		  ' CreateCircle(New VMaths.Vector2(2.5, 10), 0.5)
-		  ' CreateCircle(New VMaths.Vector2(10, 0), 1)
-		  
+		  // Figure out the limits of where we will randomise bodies to in world space.
 		  Var xMin As Double = Scene.ScreenXYToWorld(0, 0).X
 		  Var xMax As Double = Scene.ScreenXYToWorld(Scene.Width, 0).X
 		  Var yMin As Double = Scene.ScreenXYToWorld(0, 0).Y
 		  Var yMax As Double = Scene.ScreenXYToWorld(0, Scene.Height).Y - 5 // Allow for ground height.
 		  
-		  // Create some circles.
-		  For i As Integer = 0 To 9
+		  // Create some circles in random locations.
+		  For i As Integer = 0 To 19
 		    Var pos As New VMaths.Vector2(System.Random.InRange(xMin, xMax), _
 		    System.Random.InRange(yMin, yMax))
-		    CreateCircle(pos, System.Random.InRange(5, 30)/10) ' /10 as InRange takes an integer.
+		    CreateCircle(pos, System.Random.InRange(5, 30)/10)
+		    
+		    // Add a random impulse.
+		    World.Bodies(World.Bodies.LastIndex).ApplyLinearImpulse( _
+		    New VMaths.Vector2(System.Random.InRange(1, 10), System.Random.InRange(1, 10)))
 		  Next i
 		  
-		  // Create some boxes.
-		  For i As Integer = 0 To 9
+		  // Create some boxes in random locations.
+		  For i As Integer = 0 To 19
 		    Var pos As New VMaths.Vector2(System.Random.InRange(xMin, xMax), _
 		    System.Random.InRange(yMin, yMax))
 		    CreateBox(pos, System.Random.InRange(5, 60)/10, System.Random.InRange(5, 60)/10)
+		    
+		    // Add a random impulse.
+		    World.Bodies(World.Bodies.LastIndex).ApplyLinearImpulse( _
+		    New VMaths.Vector2(System.Random.InRange(1, 10), System.Random.InRange(1, 10)))
 		  Next i
 		  
+		  // Start updating.
 		  WorldUpdateTimer.Enabled = True
 		  
 		End Sub
@@ -128,9 +134,9 @@ End
 		  // Create and add a fixture with custom properties for the box.
 		  Var fixtureDef As New Physics.FixtureDef(box)
 		  fixtureDef.Density = 1
-		  fixtureDef.Friction = 0.7
+		  fixtureDef.Friction = 0.5
 		  fixtureDef.Restitution = 0.3
-		  Call body.CreateFixture(fixtureDef)
+		  body.CreateFixture(fixtureDef)
 		  
 		End Sub
 	#tag EndMethod
@@ -151,32 +157,66 @@ End
 		  // Create and add a fixture with custom properties for the circle.
 		  Var fixtureDef As New Physics.FixtureDef(circle)
 		  fixtureDef.Density = 1
-		  fixtureDef.Friction = 0.7
-		  fixtureDef.Restitution = 0.3
-		  Call body.CreateFixture(fixtureDef)
+		  fixtureDef.Friction = 0.5
+		  fixtureDef.Restitution = 0.4
+		  body.CreateFixture(fixtureDef)
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h21, Description = 4372656174657320612067726F756E6420626F647920616E64206164647320697420746F2060776F726C64602E
-		Private Sub CreateGround()
-		  /// Creates a ground body and adds it to `world`.
+	#tag Method, Flags = &h21, Description = 437265617465732067726F756E6420616E642077616C6C20626F6469657320616E642061646473207468656D20746F2074686520776F726C642E
+		Private Sub CreateGroundAndWalls()
+		  /// Creates ground and wall bodies and adds them to the world.
 		  
-		  Var groundHeight As Double = 1
+		  Const GROUND_HEIGHT = 1
+		  Const WALL_WIDTH = 1
 		  
+		  // =======================
+		  // GROUND
+		  // =======================
+		  // Compute the position of the ground (accounting for pixels -> world space coordinates).
 		  Var pos As VMaths.Vector2 = _
-		  Scene.ScreenXYToWorld(Scene.Width/2, Scene.Height - (groundHeight * Scene.Viewport.Scale))
+		  Scene.ScreenXYToWorld(Scene.Width/2, Scene.Height - (GROUND_HEIGHT * Scene.Viewport.Scale))
 		  
 		  // Create the ground body.
 		  Var groundBodyDef As New Physics.BodyDef
 		  groundBodyDef.Position.SetFrom(pos)
 		  Var groundBody As Physics.Body = World.CreateBody(groundBodyDef)
 		  
-		  // Set the ground's shape and attach it as a fixture.
-		  Var groundBox As New Physics.PolygonShape
-		  groundBox.SetAsBoxXY((Scene.Width / Scene.Viewport.Scale) / 2, groundHeight)
-		  Call groundBody.CreateFixtureFromShape(groundBox, 0)
-		  groundBody.Fixtures(0).Friction = 1
+		  // Make the ground a rectangle.
+		  Var groundShape As New Physics.PolygonShape
+		  groundShape.SetAsBoxXY((Scene.Width / Scene.Viewport.Scale) / 2, GROUND_HEIGHT)
 		  
+		  // Create the fixture from the shape and a modest amount of friction.
+		  Var groundFixtureDef As New Physics.FixtureDef(groundShape)
+		  groundFixtureDef.Friction = 0.5
+		  groundBody.CreateFixture(groundFixtureDef)
+		  
+		  // =======================
+		  // WALLS
+		  // =======================
+		  // Compute the position of the walls. (accounting for pixels -> world space coordinates).
+		  Var lPos As VMaths.Vector2 = _
+		  Scene.ScreenXYToWorld(0 + (WALL_WIDTH * Scene.Viewport.Scale)/2, Scene.Height / 2)
+		  Var rPos As VMaths.Vector2 = _
+		  Scene.ScreenXYToWorld(Scene.Width - (WALL_WIDTH * Scene.Viewport.Scale)/2, Scene.Height / 2)
+		  
+		  // Create the wall bodyies.
+		  Var wallBodyDef As New Physics.BodyDef
+		  wallBodyDef.Position.SetFrom(lPos)
+		  Var leftWallBody As Physics.Body = World.CreateBody(wallBodyDef)
+		  
+		  wallBodyDef.Position.SetFrom(rPos)
+		  Var rightWallBody As Physics.Body = World.CreateBody(wallBodyDef)
+		  
+		  // Set their shape.
+		  Var wallShape As New Physics.PolygonShape
+		  wallShape.SetAsBoxXY(WALL_WIDTH / 2, (Scene.Height / Scene.Viewport.Scale) / 2)
+		  
+		  // Create the fixture from the shape and a modest amount of friction.
+		  Var wallFixtureDef As New Physics.FixtureDef(wallShape)
+		  wallFixtureDef.Friction = 0.3
+		  leftWallBody.CreateFixture(wallFixtureDef)
+		  rightWallBody.CreateFixture(wallFixtureDef)
 		End Sub
 	#tag EndMethod
 
@@ -208,13 +248,21 @@ End
 		  World.DebugDraw.DrawStringXY(20, 20, _
 		  "Step Time: " + World.Profile.Step_.ToString, Color.Black)
 		  
-		  World.DebugDraw.DrawStringXY(20, 40, _
+		  World.DebugDraw.DrawStringXY(20, 35, _
 		  "Draw Time: " + _
 		  drawTimer.ElapsedMilliseconds.ToString(Locale.Current, "#.#") + " ms", _
 		  Color.Black)
 		  
-		  World.DebugDraw.DrawStringXY(20, 60, _
+		  World.DebugDraw.DrawStringXY(20, 50, _
 		  "Bodies: " + World.Bodies.Count.ToString, Color.Black)
+		  
+		  Var frameTime As Double = World.Profile.Step_.LongAvg + drawTimer.ElapsedMilliseconds
+		  Var fps As Integer = 1000 / frameTime
+		  World.DebugDraw.DrawStringXY(20, 65, _
+		  "Frame Time: " + _
+		  frameTime.ToString(Locale.Current, "#.#") + " ms " + _
+		  fps.ToString + " fps", _
+		  Color.Black)
 		  
 		  // Tell the debug canvas to paint.
 		  Scene.Refresh

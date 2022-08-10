@@ -215,9 +215,9 @@ Protected Class World
 		  DebugDraw.BeginDrawing
 		  
 		  Var flags As Integer = DebugDraw.DrawFlags
-		  Var wireframe As Boolean = (flags And Physics.DebugDrawWireFrameDrawingBit) <> 0
+		  Var wireframe As Boolean = (flags And Physics.DebugDrawingFlags.WireFrameDrawingBit) <> 0
 		  
-		  If (flags And Physics.DebugDrawShapeBit) <> 0 Then
+		  If (flags And Physics.DebugDrawingFlags.ShapeBit) <> 0 Then
 		    For Each body As Physics.Body In Bodies
 		      Xf.Set(body.Transform)
 		      For Each fixture As Physics.Fixture In body.Fixtures
@@ -246,13 +246,13 @@ Protected Class World
 		    particleSystem.Render(DebugDraw)
 		  End If
 		  
-		  If (flags And Physics.DebugDrawJointBit) <> 0 Then
+		  If (flags And Physics.DebugDrawingFlags.JointBit) <> 0 Then
 		    For Each j As Physics.Joint In Joints
 		      j.Render(DebugDraw)
 		    Next j
 		  End If
 		  
-		  If (flags And Physics.DebugDrawPairBit) <> 0 Then
+		  If (flags And Physics.DebugDrawingFlags.PairBit) <> 0 Then
 		    Colour = &c4CE5E5
 		    For Each c As Physics.Contact In ContactManager.Contacts
 		      Var fixtureA As Physics.Fixture = c.FixtureA
@@ -263,7 +263,7 @@ Protected Class World
 		    Next c
 		  End If
 		  
-		  If (flags And Physics.DebugDrawAABBBit) <> 0 Then
+		  If (flags And Physics.DebugDrawingFlags.AABBBit) <> 0 Then
 		    Colour = &cE54CE5
 		    
 		    For Each b As Physics.Body In Bodies
@@ -287,7 +287,7 @@ Protected Class World
 		    Next b
 		  End If
 		  
-		  If (flags And Physics.DebugDrawCenterOfMassBit) <> 0 Then
+		  If (flags And Physics.DebugDrawingFlags.CenterOfMassBit) <> 0 Then
 		    Var xfColor As Color = &cFF0000
 		    For Each b As Physics.Body In Bodies
 		      Xf.Set(b.Transform)
@@ -296,7 +296,7 @@ Protected Class World
 		    Next b
 		  End If
 		  
-		  If (flags And Physics.DebugDrawDynamicTreeBit) <> 0 Then
+		  If (flags And Physics.DebugDrawingFlags.DynamicTreeBit) <> 0 Then
 		    ContactManager.Broadphase.DrawTree(DebugDraw)
 		  End If
 		  

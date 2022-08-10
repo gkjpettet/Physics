@@ -59,11 +59,11 @@ Implements Physics.DebugDraw
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
-		Sub ClearFlag(flag As Integer)
+	#tag Method, Flags = &h21
+		Private Sub ClearFlag(flag As Integer)
 		  // Part of the Physics.DebugDraw interface.
 		  
-		  mDrawFlags = mDrawFlags And OnesComplement(flag)
+		  mDrawFlags = mDrawFlags And Bitwise.OnesComplement(flag)
 		  
 		End Sub
 	#tag EndMethod
@@ -355,15 +355,15 @@ Implements Physics.DebugDraw
 	#tag ComputedProperty, Flags = &h0, Description = 57686574686572206F72206E6F7420746F206472617720746865206178697320616C69676E656420626F756E64696E6720626F7865732061726F756E6420626F646965732E
 		#tag Getter
 			Get
-			  Return (mDrawFlags And DrawAABBBit) <> 0
+			  Return (mDrawFlags And DebugDrawingFlags.AABBBit) <> 0
 			End Get
 		#tag EndGetter
 		#tag Setter
 			Set
 			  If value Then
-			    AppendFlags(DrawAABBBit)
+			    AppendFlags(DebugDrawingFlags.AABBBit)
 			  Else
-			    ClearFlag(DrawAABBBit)
+			    ClearFlag(DebugDrawingFlags.AABBBit)
 			  End If
 			End Set
 		#tag EndSetter
@@ -373,15 +373,15 @@ Implements Physics.DebugDraw
 	#tag ComputedProperty, Flags = &h0, Description = 49662054727565207468656E207468652063656E747265206F66206D6173732077696C6C20626520647261776E20666F7220626F646965732E
 		#tag Getter
 			Get
-			  Return (mDrawFlags And DrawCenterOfMassBit) <> 0
+			  Return (mDrawFlags And DebugDrawingFlags.CenterOfMassBit) <> 0
 			End Get
 		#tag EndGetter
 		#tag Setter
 			Set
 			  If value Then
-			    AppendFlags(DrawCenterOfMassBit)
+			    AppendFlags(DebugDrawingFlags.CenterOfMassBit)
 			  Else
-			    ClearFlag(DrawCenterOfMassBit)
+			    ClearFlag(DebugDrawingFlags.CenterOfMassBit)
 			  End If
 			End Set
 		#tag EndSetter
@@ -391,15 +391,15 @@ Implements Physics.DebugDraw
 	#tag ComputedProperty, Flags = &h0, Description = 49662054727565207468656E207468652064796E616D696320747265652077696C6C20626520647261776E2E
 		#tag Getter
 			Get
-			  Return (mDrawFlags And DrawDynamicTreeBit) <> 0
+			  Return (mDrawFlags And DebugDrawingFlags.DynamicTreeBit) <> 0
 			End Get
 		#tag EndGetter
 		#tag Setter
 			Set
 			  If value Then
-			    AppendFlags(DrawDynamicTreeBit)
+			    AppendFlags(DebugDrawingFlags.DynamicTreeBit)
 			  Else
-			    ClearFlag(DrawDynamicTreeBit)
+			    ClearFlag(DebugDrawingFlags.DynamicTreeBit)
 			  End If
 			End Set
 		#tag EndSetter
@@ -409,15 +409,15 @@ Implements Physics.DebugDraw
 	#tag ComputedProperty, Flags = &h0, Description = 49662054727565207468656E206A6F696E74732077696C6C20626520647261776E2E
 		#tag Getter
 			Get
-			  Return (mDrawFlags And DrawJointBit) <> 0
+			  Return (mDrawFlags And DebugDrawingFlags.JointBit) <> 0
 			End Get
 		#tag EndGetter
 		#tag Setter
 			Set
 			  If value Then
-			    AppendFlags(DrawJointBit)
+			    AppendFlags(DebugDrawingFlags.JointBit)
 			  Else
-			    ClearFlag(DrawJointBit)
+			    ClearFlag(DebugDrawingFlags.JointBit)
 			  End If
 			End Set
 		#tag EndSetter
@@ -427,15 +427,15 @@ Implements Physics.DebugDraw
 	#tag ComputedProperty, Flags = &h0, Description = 49662054727565207468656E2070616972732077696C6C20626520647261776E2E
 		#tag Getter
 			Get
-			  Return (mDrawFlags And DrawPairBit) <> 0
+			  Return (mDrawFlags And DebugDrawingFlags.PairBit) <> 0
 			End Get
 		#tag EndGetter
 		#tag Setter
 			Set
 			  If value Then
-			    AppendFlags(DrawPairBit)
+			    AppendFlags(DebugDrawingFlags.PairBit)
 			  Else
-			    ClearFlag(DrawPairBit)
+			    ClearFlag(DebugDrawingFlags.PairBit)
 			  End If
 			End Set
 		#tag EndSetter
@@ -445,15 +445,15 @@ Implements Physics.DebugDraw
 	#tag ComputedProperty, Flags = &h0, Description = 49662054727565207468656E207368617065732077696C6C20626520647261776E2E
 		#tag Getter
 			Get
-			  Return (mDrawFlags And DrawShapeBit) <> 0
+			  Return (mDrawFlags And DebugDrawingFlags.ShapeBit) <> 0
 			End Get
 		#tag EndGetter
 		#tag Setter
 			Set
 			  If value Then
-			    AppendFlags(DrawShapeBit)
+			    AppendFlags(DebugDrawingFlags.ShapeBit)
 			  Else
-			    ClearFlag(DrawShapeBit)
+			    ClearFlag(DebugDrawingFlags.ShapeBit)
 			  End If
 			End Set
 		#tag EndSetter
@@ -463,15 +463,15 @@ Implements Physics.DebugDraw
 	#tag ComputedProperty, Flags = &h0, Description = 49662054727565207468656E20776972656672616D657320726174686572207468616E20736F6C6964207368617065732077696C6C20626520647261776E2E
 		#tag Getter
 			Get
-			  Return (mDrawFlags And DrawWireFrameDrawingBit) <> 0
+			  Return (mDrawFlags And DebugDrawingFlags.WireFrameDrawingBit) <> 0
 			End Get
 		#tag EndGetter
 		#tag Setter
 			Set
 			  If value Then
-			    AppendFlags(DrawWireFrameDrawingBit)
+			    AppendFlags(DebugDrawingFlags.WireFrameDrawingBit)
 			  Else
-			    ClearFlag(DrawWireFrameDrawingBit)
+			    ClearFlag(DebugDrawingFlags.WireFrameDrawingBit)
 			  End If
 			End Set
 		#tag EndSetter
@@ -483,7 +483,7 @@ Implements Physics.DebugDraw
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private mDrawFlags As Integer = Physics.DebugDrawShapeBit
+		Private mDrawFlags As Integer = Physics.DebugDrawingFlags.ShapeBit
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
@@ -493,28 +493,6 @@ Implements Physics.DebugDraw
 	#tag Property, Flags = &h0, Description = 546865206261636B67726F756E6420636F6C6F7572206F6620746865207363656E652E
 		SceneBackgroundColor As Color = &cffffff
 	#tag EndProperty
-
-
-	#tag Constant, Name = DrawAABBBit, Type = Double, Dynamic = False, Default = \"8", Scope = Protected, Description = 44726177206178697320616C69676E656420626F756E64696E6720626F7865732E20466F722064656275672064726177696E672E
-	#tag EndConstant
-
-	#tag Constant, Name = DrawCenterOfMassBit, Type = Double, Dynamic = False, Default = \"32", Scope = Protected, Description = 44726177207468652063656E747265206F66206D617373206F6620626F646965732E20466F722064656275672064726177696E672E
-	#tag EndConstant
-
-	#tag Constant, Name = DrawDynamicTreeBit, Type = Double, Dynamic = False, Default = \"64", Scope = Protected, Description = 447261772064796E616D696320747265652E20466F722064656275672064726177696E672E
-	#tag EndConstant
-
-	#tag Constant, Name = DrawJointBit, Type = Double, Dynamic = False, Default = \"4", Scope = Protected, Description = 44726177206A6F696E7420636F6E6E656374696F6E732E20466F722064656275672064726177696E672E
-	#tag EndConstant
-
-	#tag Constant, Name = DrawPairBit, Type = Double, Dynamic = False, Default = \"16", Scope = Protected, Description = 44726177207061697273206F6620636F6E6E6563746564206F626A656374732E20466F722064656275672064726177696E672E
-	#tag EndConstant
-
-	#tag Constant, Name = DrawShapeBit, Type = Double, Dynamic = False, Default = \"2", Scope = Protected, Description = 44726177207368617065732E20466F722064656275672064726177696E672E
-	#tag EndConstant
-
-	#tag Constant, Name = DrawWireFrameDrawingBit, Type = Double, Dynamic = False, Default = \"128", Scope = Protected, Description = 44726177206F6E6C792074686520776972656672616D6520666F722064726177696E6720706572666F726D616E63652E20466F722064656275672064726177696E672E
-	#tag EndConstant
 
 
 	#tag ViewBehavior

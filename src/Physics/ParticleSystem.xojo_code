@@ -497,7 +497,7 @@ Protected Class ParticleSystem
 	#tag Method, Flags = &h0
 		Sub Render(debugDraw As Physics.DebugDraw)
 		  Var wireframe As Boolean = _
-		  (debugDraw.DrawFlags And Physics.DebugDrawWireFrameDrawingBit) <> 0
+		  (debugDraw.DrawFlags And Physics.DebugDrawingFlags.WireFrameDrawingBit) <> 0
 		  
 		  If Particles.count > 1 Then
 		    If wireframe Then
