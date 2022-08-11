@@ -83,32 +83,27 @@ End
 		  // Create the ground and two walls.
 		  CreateGroundAndWalls
 		  
-		  // Figure out the limits of where we will randomise bodies to in world space.
-		  Var xMin As Double = Scene.ScreenXYToWorld(0, 0).X
-		  Var xMax As Double = Scene.ScreenXYToWorld(Scene.Width, 0).X
-		  Var yMin As Double = Scene.ScreenXYToWorld(0, 0).Y
-		  Var yMax As Double = Scene.ScreenXYToWorld(0, Scene.Height).Y - 5 // Allow for ground height.
+		  // Figure out the limits of where to randomise the bodies in world space.
+		  Var minX As Double = Scene.ScreenXYToWorld(0, 0).X
+		  Var maxX As Double = Scene.ScreenXYToWorld(Scene.Width, 0).X
+		  Var minY As Double = Scene.ScreenXYToWorld(0, 0).Y
+		  Var maxY As Double = Scene.ScreenXYToWorld(0, Scene.Height).Y - 5 // Allow for ground height.
 		  
-		  // Create some circles in random locations.
+		  // Create some circles in random locations and apply a random impulse to each one.
 		  For i As Integer = 0 To 19
-		    Var pos As New VMaths.Vector2(System.Random.InRange(xMin, xMax), _
-		    System.Random.InRange(yMin, yMax))
-		    CreateCircle(pos, System.Random.InRange(5, 30)/10)
-		    
-		    // Add a random impulse.
-		    World.Bodies(World.Bodies.LastIndex).ApplyLinearImpulse( _
-		    New VMaths.Vector2(System.Random.InRange(1, 10), System.Random.InRange(1, 10)))
+		    Var pos As VMaths.Vector2 = RandomVector2(minX, maxX, minY, maxY)
+		    Var radius As Double = System.Random.InRange(5, 30)/10
+		    CreateCircle(pos, radius)
+		    World.Bodies(World.Bodies.LastIndex).ApplyLinearImpulse(RandomVector2(1, 10, 1, 10))
 		  Next i
 		  
-		  // Create some boxes in random locations.
+		  // Create some boxes in random locations and apply a random impulse to each one.
 		  For i As Integer = 0 To 19
-		    Var pos As New VMaths.Vector2(System.Random.InRange(xMin, xMax), _
-		    System.Random.InRange(yMin, yMax))
-		    CreateBox(pos, System.Random.InRange(5, 60)/10, System.Random.InRange(5, 60)/10)
-		    
-		    // Add a random impulse.
-		    World.Bodies(World.Bodies.LastIndex).ApplyLinearImpulse( _
-		    New VMaths.Vector2(System.Random.InRange(1, 10), System.Random.InRange(1, 10)))
+		    Var pos As VMaths.Vector2 = RandomVector2(minX, maxX, minY, maxY)
+		    Var w As Double = System.Random.InRange(5, 60)/10
+		    Var h As Double = System.Random.InRange(5, 60)/10
+		    CreateBox(pos, w, h)
+		    World.Bodies(World.Bodies.LastIndex).ApplyLinearImpulse(RandomVector2(1, 10, 1, 10))
 		  Next i
 		  
 		  // Start updating.
@@ -218,6 +213,16 @@ End
 		  leftWallBody.CreateFixture(wallFixtureDef)
 		  rightWallBody.CreateFixture(wallFixtureDef)
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21, Description = 52657475726E732061206E657720566563746F72322077686F736520605860206973205B6D696E582C206D6178585D20616E642077686F736520605960206973205B6D696E592C206D6178595D2E
+		Private Function RandomVector2(minX As Integer, maxX As Integer, minY As Integer, maxY As Integer) As VMaths.Vector2
+		  /// Returns a new Vector2 whose `X` is [minX, maxX] and whose `Y` is [minY, maxY].
+		  
+		  Return New VMaths.Vector2( _
+		  System.Random.InRange(minX, maxX), System.Random.InRange(minY, maxY))
+		  
+		End Function
 	#tag EndMethod
 
 

@@ -145,6 +145,7 @@ Interface=DebugDraw;Physics/DebugDraw.xojo_code;&h0000000027E1CFFF;&h00000000584
 Class=DebugCanvas;Physics/DebugCanvas.xojo_code;&h0000000038031FFF;&h0000000058463FFF;false
 Class=Timer;Physics/Timer.xojo_code;&h0000000060BE97FF;&h0000000058463FFF;false
 Class=DebugDrawingFlags;Physics/DebugDrawingFlags.xojo_code;&h0000000063D72FFF;&h0000000058463FFF;false
+Class=RevoluteJointDef;Physics/RevoluteJointDef.xojo_code;&h000000001A18BFFF;&h0000000058463FFF;false
 DefaultWindow=Window1
 AppMenuBar=MainMenuBar
 MajorVersion=1

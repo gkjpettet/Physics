@@ -93,6 +93,23 @@ Protected Class Vector2
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 52657475726E7320616E206172726179206F66206E657720566563746F7232206F626A65637473206F662074686520726571756573746564206C656E6774682E
+		Shared Function ArrayOf(length As Integer) As VMaths.Vector2()
+		  /// Returns an array of new Vector2 objects of the requested length.
+		  
+		  Var vectors() As VMaths.Vector2
+		  
+		  Var i As Integer
+		  length = length - 1
+		  For i = 0 To length
+		    vectors.AddRow(VMaths.Vector2.Zero)
+		  Next i
+		  
+		  Return vectors
+		  
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 4365696C20636F6D706F6E656E747320696E207468697320766563746F722E
 		Sub Ceil()
 		  /// Ceil components in this vector.

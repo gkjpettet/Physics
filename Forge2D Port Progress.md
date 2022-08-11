@@ -74,7 +74,7 @@
 	[x] polygon_contact
 	[x] position
 	[x] velocity
-[] joints
+[-] joints
 	[] constant_volume_joint
 	[] constant_volume_joint_def
 	[] distance_joint
@@ -96,7 +96,7 @@
 	[] pulley_joint
 	[] pulley_joint_def
 	[] revolute_joint
-	[] revolute_joint_def
+	[x] revolute_joint_def
 	[] rope_joint
 	[] rope_joint_def
 	[] weld_joint
