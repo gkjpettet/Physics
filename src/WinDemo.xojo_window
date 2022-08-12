@@ -30,6 +30,13 @@ Begin DesktopWindow WinDemo
       AllowFocusRing  =   True
       AllowTabs       =   False
       Backdrop        =   0
+      DrawAABB        =   False
+      DrawCenterOfMass=   False
+      DrawDynamicTree =   False
+      DrawJoints      =   False
+      DrawPairs       =   False
+      DrawShapes      =   False
+      DrawWireframes  =   False
       Enabled         =   True
       Height          =   720
       Index           =   -2147483648
@@ -302,6 +309,7 @@ End
 		  
 		  // Draw the centre of mass for debugging.
 		  Scene.DrawCenterOfMass = True
+		  Scene.DrawShapes = True
 		  Scene.DrawWireframes = True
 		  
 		  // Create a world with normal gravity.
