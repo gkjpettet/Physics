@@ -233,7 +233,7 @@ Protected Class Collision
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 436F6D707574652074686520636F6C6C6973696F6E206D616E69666F6C64206265747765656E206120706F6C79676F6E20616E64206120636972636C652E
-		Sub CollidePolygonAndCircle(manifold AS Physics.Manifold, polygon AS Physics.PolygonShape, xfA AS Physics.Transform, circle AS Physics.CircleShape, xfB AS Physics.Transform)
+		Sub CollidePolygonAndCircle(manifold As Physics.Manifold, polygon As Physics.PolygonShape, xfA As Physics.Transform, circle As Physics.CircleShape, xfB As Physics.Transform)
 		  /// Compute the collision manifold between a polygon and a circle.
 		  
 		  manifold.PointCount = 0

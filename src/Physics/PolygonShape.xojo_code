@@ -482,7 +482,8 @@ Inherits Physics.Shape
 		    If Not hull.Contains(pointOnHull) Then
 		      hull.Add(pointOnHull)
 		    End If
-		  Loop Until pointOnHull <> hull(0)
+		    
+		  Loop Until pointOnHull = hull(0)
 		  
 		  // Copy vertices.
 		  vertices.ResizeTo(-1)
