@@ -2,6 +2,10 @@
 Protected Class EdgePolygonCollider
 	#tag Method, Flags = &h0
 		Sub Collide(manifold As Physics.Manifold, edgeA As Physics.EdgeShape, xfA As Physics.Transform, polygonB2 As Physics.PolygonShape, xfB As Physics.Transform)
+		  #Pragma DisableBoundsChecking
+		  #Pragma NilObjectChecking False
+		  #Pragma StackOverflowChecking False
+		  
 		  Xf.Set(Physics.Transform.MulTrans(xfA, xfB))
 		  CentroidB.SetFrom(Physics.Transform.MulVec2(xf, polygonB2.Centroid))
 		  
@@ -384,6 +388,10 @@ Protected Class EdgePolygonCollider
 
 	#tag Method, Flags = &h0
 		Sub ComputeEdgeSeparation(axis As Physics.EPAxis)
+		  #Pragma DisableBoundsChecking
+		  #Pragma NilObjectChecking False
+		  #Pragma StackOverflowChecking False
+		  
 		  axis.Type = Physics.EPAxisType.EdgeA
 		  axis.Index = If(front, 0, 1)
 		  axis.Separation = Maths.DoubleMaxFinite
@@ -406,6 +414,10 @@ Protected Class EdgePolygonCollider
 
 	#tag Method, Flags = &h0
 		Sub ComputePolygonSeparation(axis As Physics.EPAxis)
+		  #Pragma DisableBoundsChecking
+		  #Pragma NilObjectChecking False
+		  #Pragma StackOverflowChecking False
+		  
 		  axis.Type = Physics.EPAxisType.Unknown
 		  axis.Index = -1
 		  axis.Separation = -Maths.DoubleMaxFinite
@@ -664,6 +676,38 @@ Protected Class EdgePolygonCollider
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Front"
+			Visible=false
+			Group="Behavior"
+			InitialValue="False"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Radius"
+			Visible=false
+			Group="Behavior"
+			InitialValue="0"
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Type1"
+			Visible=false
+			Group="Behavior"
+			InitialValue="Physics.VertexType.Isolated"
+			Type="Physics.VertexType"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Type2"
+			Visible=false
+			Group="Behavior"
+			InitialValue="Physics.VertexType.Isolated"
+			Type="Physics.VertexType"
 			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior

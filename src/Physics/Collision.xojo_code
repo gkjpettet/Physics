@@ -52,6 +52,10 @@ Protected Class Collision
 		Sub CollideCircles(manifold As Physics.Manifold, circle1 As Physics.CircleShape, xfA As Physics.Transform, circle2 As Physics.CircleShape, xfB As Physics.Transform)
 		  /// Compute the collision manifold between two circles.
 		  
+		  #Pragma DisableBoundsChecking
+		  #Pragma NilObjectChecking False
+		  #Pragma StackOverflowChecking False
+		  
 		  manifold.PointCount = 0
 		  
 		  Var circle1p As VMaths.Vector2 = circle1.Position
@@ -84,6 +88,10 @@ Protected Class Collision
 		Sub CollideEdgeAndCircle(manifold As Physics.Manifold, edgeA As Physics.EdgeShape, xfA As Physics.Transform, circleB As Physics.CircleShape, xfB As Physics.Transform)
 		  /// Compute contact points for edge versus circle.
 		  /// This accounts for edge connectivity.
+		  
+		  #Pragma DisableBoundsChecking
+		  #Pragma NilObjectChecking False
+		  #Pragma StackOverflowChecking False
 		  
 		  manifold.PointCount = 0
 		  
@@ -236,6 +244,10 @@ Protected Class Collision
 		Sub CollidePolygonAndCircle(manifold As Physics.Manifold, polygon As Physics.PolygonShape, xfA As Physics.Transform, circle As Physics.CircleShape, xfB As Physics.Transform)
 		  /// Compute the collision manifold between a polygon and a circle.
 		  
+		  #Pragma DisableBoundsChecking
+		  #Pragma NilObjectChecking False
+		  #Pragma StackOverflowChecking False
+		  
 		  manifold.PointCount = 0
 		  
 		  Var circlep As VMaths.Vector2 = circle.Position
@@ -375,6 +387,10 @@ Protected Class Collision
 		  // - Clip
 		  
 		  // The normal points from 1 to 2.
+		  
+		  #Pragma DisableBoundsChecking
+		  #Pragma NilObjectChecking False
+		  #Pragma StackOverflowChecking False
 		  
 		  manifold.PointCount = 0
 		  Var totalRadius As Double = polyA.Radius + polyB.Radius
@@ -586,6 +602,10 @@ Protected Class Collision
 
 	#tag Method, Flags = &h0
 		Sub FindIncidentEdge(c() As Physics.ClipVertex, poly1 As Physics.PolygonShape, xf1 As Physics.Transform, edge1 As Integer, poly2 As Physics.PolygonShape, xf2 As Physics.Transform)
+		  #Pragma DisableBoundsChecking
+		  #Pragma NilObjectChecking False
+		  #Pragma StackOverflowChecking False
+		  
 		  Var count1 As Integer = poly1.Vertices.Count
 		  Var normals1() As VMaths.Vector2 = poly1.Normals
 		  
@@ -651,6 +671,10 @@ Protected Class Collision
 		Sub FindMaxSeparation(results As Physics.mEdgeResults, poly1 As Physics.PolygonShape, xf1 As Physics.Transform, poly2 As Physics.PolygonShape, xf2 As Physics.Transform)
 		  /// Find the max separation between poly1 and poly2 using edge normals from `poly1`.
 		  
+		  #Pragma DisableBoundsChecking
+		  #Pragma NilObjectChecking False
+		  #Pragma StackOverflowChecking False
+		  
 		  Var count1 As Double = poly1.Vertices.Count
 		  Var count2 As Double = poly2.Vertices.Count
 		  Var n1s() As VMaths.Vector2 = poly1.Normals
@@ -694,6 +718,10 @@ Protected Class Collision
 	#tag Method, Flags = &h0, Description = 44657465726D696E652069662074776F2067656E6572696320736861706573206F7665726C61702E
 		Function TestOverlap(shapeA As Physics.Shape, indexA As Integer, shapeB As Physics.Shape, indexB As Integer, xfA As Physics.Transform, xfB As Physics.Transform) As Boolean
 		  /// Determine if two generic shapes overlap.
+		  
+		  #Pragma DisableBoundsChecking
+		  #Pragma NilObjectChecking False
+		  #Pragma StackOverflowChecking False
 		  
 		  mInput.ProxyA.Set(shapeA, indexA)
 		  mInput.ProxyB.Set(shapeB, indexB)

@@ -208,6 +208,10 @@ Protected Class World
 		Sub DrawDebugData()
 		  /// Call this to draw shapes and other debug draw data.
 		  
+		  #Pragma DisableBoundsChecking
+		  #Pragma NilObjectChecking False
+		  #Pragma StackOverflowChecking False
+		  
 		  If debugDraw = Nil Then
 		    Return
 		  End If
@@ -499,6 +503,10 @@ Protected Class World
 
 	#tag Method, Flags = &h0
 		Sub Solve(step_ As Physics.TimeStep)
+		  #Pragma DisableBoundsChecking
+		  #Pragma NilObjectChecking False
+		  #Pragma StackOverflowChecking False
+		  
 		  mProfile.SolveInit.StartAccum
 		  mProfile.SolveVelocity.StartAccum
 		  mProfile.SolvePosition.StartAccum
@@ -664,6 +672,10 @@ Protected Class World
 
 	#tag Method, Flags = &h0
 		Sub SolveTOI(step_ As Physics.TimeStep)
+		  #Pragma DisableBoundsChecking
+		  #Pragma NilObjectChecking False
+		  #Pragma StackOverflowChecking False
+		  
 		  mToiIsland.Init(ContactManager.ContactListener)
 		  Var island As Physics.Island = mToiIsland
 		  
@@ -945,6 +957,10 @@ Protected Class World
 		  ///
 		  /// `dt` should be the amount of time (in seconds) that has passed since the
 		  /// last step.
+		  
+		  #Pragma DisableBoundsChecking
+		  #Pragma NilObjectChecking False
+		  #Pragma StackOverflowChecking False
 		  
 		  mStepTimer.Reset
 		  mTempTimer.Reset
