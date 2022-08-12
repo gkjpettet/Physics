@@ -267,6 +267,21 @@ End
 		  CreateCircle(New VMaths.Vector2(-6, 26), 2)
 		  CreateCircle(New VMaths.Vector2(-8, 34), 3)
 		  CreateCircle(New VMaths.Vector2(-60, 32), 2.6)
+		  
+		  // Add 10 little boxes.
+		  For i As Integer = 0 To 9
+		    CreateBox(New VMaths.Vector2(-60 + (i * 2.3), 38), 2, 2)
+		  Next i
+		  
+		  // Add a pentagon with some spin.
+		  Var pentagonVertices() As VMaths.Vector2 = Array( _
+		  New VMaths.Vector2(0, 0), _
+		  New VMaths.Vector2(7, 1), _
+		  New VMaths.Vector2(7, 3), _
+		  New VMaths.Vector2(5, 7), _
+		  New VMaths.Vector2(0, 5))
+		  CreatePolygon(New VMaths.Vector2(45, 28), pentagonVertices)
+		  World.Bodies(World.Bodies.LastIndex).AngularVelocity = 0.55
 		End Sub
 	#tag EndMethod
 
