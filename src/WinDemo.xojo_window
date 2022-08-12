@@ -10,7 +10,7 @@ Begin DesktopWindow WinDemo
    HasFullScreenButton=   False
    HasMaximizeButton=   True
    HasMinimizeButton=   True
-   Height          =   800
+   Height          =   720
    ImplicitInstance=   True
    MacProcID       =   0
    MaximumHeight   =   32000
@@ -31,7 +31,7 @@ Begin DesktopWindow WinDemo
       AllowTabs       =   False
       Backdrop        =   0
       Enabled         =   True
-      Height          =   800
+      Height          =   720
       Index           =   -2147483648
       Left            =   0
       LockBottom      =   True
@@ -73,7 +73,7 @@ End
 
 
 	#tag Method, Flags = &h21, Description = 4372656174657320616E642061646473206120626F7820706F6C79676F6E20746F2074686520776F726C642061742060706F736974696F6E602E
-		Private Sub CreateBox(position As VMaths.Vector2, width As Double, height As Double, isStatic As Boolean = False)
+		Private Sub CreateBox(position As VMaths.Vector2, width As Double, height As Double, isStatic As Boolean = False, restitution As Double = 0.3)
 		  /// Creates and adds a box polygon to the world at `position`.
 		  
 		  // Create a body.
@@ -90,14 +90,14 @@ End
 		  Var fixtureDef As New Physics.FixtureDef(box)
 		  fixtureDef.Density = 1
 		  fixtureDef.Friction = 0.5
-		  fixtureDef.Restitution = 0.3
+		  fixtureDef.Restitution = restitution
 		  body.CreateFixture(fixtureDef)
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h21, Description = 4372656174657320616E642061646473206120636972636C6520626F647920746F2074686520776F726C642061742060706F736974696F6E602E
-		Private Sub CreateCircle(position As VMaths.Vector2, radius As Double, isStatic As Boolean = False, restitution As Double = 0.4)
+		Private Sub CreateCircle(position As VMaths.Vector2, radius As Double, isStatic As Boolean = False, restitution As Double = 0.3)
 		  /// Creates and adds a circle body to the world at `position`.
 		  
 		  // Create a body.
@@ -177,7 +177,7 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21, Description = 4372656174657320616E642061646473206120706F6C79676F6E20636F6D707269736564206F662060706F696E74736020746F2074686520776F726C642061742060706F736974696F6E602E
-		Private Sub CreatePolygon(position As VMaths.Vector2, vertices() As VMaths.Vector2, isStatic As Boolean = False)
+		Private Sub CreatePolygon(position As VMaths.Vector2, vertices() As VMaths.Vector2, isStatic As Boolean = False, restitution As Double = 0.3)
 		  /// Creates and adds a polygon comprised of `vertices` to the world at `position`.
 		  /// `vertices` will be copied.
 		  
@@ -190,15 +190,12 @@ End
 		  // Create the polygon shape.
 		  Var poly As New Physics.PolygonShape
 		  poly.Set(vertices)
-		  ' For Each v As VMaths.Vector2 In vertices
-		  ' poly.Vertices.Add(v.Clone)
-		  ' Next v
 		  
 		  // Create and add a fixture with custom properties for the box.
 		  Var fixtureDef As New Physics.FixtureDef(poly)
 		  fixtureDef.Density = 1
 		  fixtureDef.Friction = 0.5
-		  fixtureDef.Restitution = 0.3
+		  fixtureDef.Restitution = restitution
 		  body.CreateFixture(fixtureDef)
 		  
 		End Sub
@@ -282,6 +279,7 @@ End
 		  New VMaths.Vector2(0, 5))
 		  CreatePolygon(New VMaths.Vector2(45, 28), pentagonVertices)
 		  World.Bodies(World.Bodies.LastIndex).AngularVelocity = 0.55
+		  
 		End Sub
 	#tag EndMethod
 
