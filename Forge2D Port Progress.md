@@ -77,7 +77,7 @@
 [-] joints
 	[] constant_volume_joint
 	[x] constant_volume_joint_def
-	[] distance_joint
+	[x] distance_joint
 	[x] distance_joint_def
 	[] friction_joint
 	[] friction_joint_def
