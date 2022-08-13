@@ -277,7 +277,7 @@ Protected Class Vector2
 
 	#tag Method, Flags = &h0, Description = 52657475726E732061206E657720566563746F723220696E697469616C6973656420776974682076616C75657320696E20606460207374617274696E6720617420606F6666736574602E
 		Shared Function FromArray(d() As Double, offset As Integer = 0) As VMaths.Vector2
-		  /// Returns a new Vector2 initialised with values in `d` starting at `offset`.
+		  /// Returns a new `Vector2` initialised with values in `d` starting at `offset`.
 		  
 		  Return New VMaths.Vector2(d(offset), d(offset + 1))
 		  

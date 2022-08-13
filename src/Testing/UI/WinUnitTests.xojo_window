@@ -769,6 +769,7 @@ Begin DesktopWindow WinUnitTests
    Begin DesktopTestController Controller
       AllTestCount    =   0
       Duration        =   0.0
+      Enabled         =   True
       FailedCount     =   0
       GroupCount      =   0
       Index           =   -2147483648
@@ -800,7 +801,7 @@ Begin DesktopWindow WinUnitTests
       Scope           =   0
       TabIndex        =   6
       TabPanelIndex   =   0
-      TabStop         =   True
+      TabStop         =   "True"
       Tooltip         =   ""
       Top             =   7
       Transparent     =   False

@@ -99,6 +99,21 @@ Protected Class Vector3
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 4D756C7469706C6573207468697320766563746F722062792060617267602E
+		Sub ApplyMatrix3(arg As VMaths.Matrix3)
+		  /// Multiples this vector by `arg`.
+		  
+		  Var v0 As Double = X
+		  Var v1 As Double = Y
+		  Var v2 As Double = Z
+		  
+		  X = arg.Storage(0) * v0 + arg.Storage(3) * v1 + arg.Storage(6) * v2
+		  Y = arg.Storage(1) * v0 + arg.Storage(4) * v1 + arg.Storage(7) * v2
+		  Z = arg.Storage(2) * v0 + arg.Storage(5) * v1 + arg.Storage(8) * v2
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 52657475726E7320616E206172726179206F66206E65772060566563746F723360206F626A65637473206F662074686520726571756573746564206C656E6774682E
 		Shared Function ArrayOf(length As Integer) As VMaths.Vector3()
 		  /// Returns an array of new `Vector3` objects of the requested length.
@@ -312,6 +327,15 @@ Protected Class Vector3
 		  Z = Floor(Z)
 		  
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 52657475726E732061206E65772060566563746F72336020696E697469616C6973656420776974682076616C75657320696E20606460207374617274696E6720617420606F6666736574602E
+		Shared Function FromArray(d() As Double, offset As Integer = 0) As VMaths.Vector3
+		  /// Returns a new `Vector3` initialised with values in `d` starting at `offset`.
+		  
+		  Return New VMaths.Vector3(d(offset), d(offset + 1), d(offset + 2))
+		  
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 536574207468652076616C756573206F662060726573756C746020746F20746865206D6178696D756D206F662060616020616E642060626020666F722065616368206C696E652E

@@ -523,10 +523,10 @@ Private Class mSimplex
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="Vertices(2)"
+			Name="Count"
 			Visible=false
 			Group="Behavior"
-			InitialValue=""
+			InitialValue="0"
 			Type="Integer"
 			EditorType=""
 		#tag EndViewProperty

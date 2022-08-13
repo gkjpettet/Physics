@@ -146,6 +146,13 @@ Protected Module Physics
 		EdgeB
 	#tag EndEnum
 
+	#tag Enum, Name = LimitState, Type = Integer, Flags = &h1
+		Inactive
+		  AtLower
+		  AtUpper
+		Equal
+	#tag EndEnum
+
 	#tag Enum, Name = ManifoldType, Type = Integer, Flags = &h1
 		Circles
 		  FaceA
