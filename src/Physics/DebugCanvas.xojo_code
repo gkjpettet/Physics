@@ -92,9 +92,6 @@ Implements Physics.DebugDraw
 		    
 		  #ElseIf TargetLinux
 		    mBuffer.Graphics.FontName = "DejaVu Sans Mono"
-		    
-		  #ElseIf TargetIOS
-		    mBuffer.Graphics.FontName = "Menlo"
 		  #EndIf
 		  
 		End Sub

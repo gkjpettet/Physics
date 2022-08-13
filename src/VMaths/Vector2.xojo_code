@@ -525,6 +525,16 @@ Protected Class Vector2
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 52657475726E732061206E657720566563746F72322077686F736520605860206973205B6D696E582C206D6178585D20616E642077686F736520605960206973205B6D696E592C206D6178595D2E
+		Shared Function RandomInRange(minX As Integer, maxX As Integer, minY As Integer, maxY As Integer) As VMaths.Vector2
+		  /// Returns a new `Vector2` whose `X` is [minX, maxX] and whose `Y` is [minY, maxY].
+		  
+		  Return New VMaths.Vector2( _
+		  System.Random.InRange(minX, maxX), System.Random.InRange(minY, maxY))
+		  
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 5265666C65637473207468697320766563746F722E
 		Sub Reflect(normal As VMaths.Vector2)
 		  /// Reflects this vector.
