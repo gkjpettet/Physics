@@ -89,9 +89,9 @@ Protected Class World
 		End Function
 	#tag EndMethod
 
-	#tag Method, Flags = &h0, Description = 416464732061206A6F696E7420746F20636F6E73747261696E20626F6469657320746F6765746865722E
+	#tag Method, Flags = &h0, Description = 4372656174657320616E6420616464732061206A6F696E7420746F20636F6E73747261696E20626F6469657320746F6765746865722E
 		Sub CreateJoint(joint As Physics.Joint)
-		  /// Adds a joint to constrain bodies together.
+		  /// Creates and adds a joint to constrain bodies together.
 		  ///
 		  /// This may cause the connected bodies to cease colliding.
 		  ///

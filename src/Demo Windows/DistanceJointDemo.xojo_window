@@ -1,5 +1,5 @@
 #tag DesktopWindow
-Begin DesktopWindow WinImpulseEngineReplicaDemo
+Begin DesktopWindow DistanceJointDemo
    Backdrop        =   0
    BackgroundColor =   &cFFFFFF
    Composite       =   False
@@ -20,7 +20,7 @@ Begin DesktopWindow WinImpulseEngineReplicaDemo
    MinimumHeight   =   64
    MinimumWidth    =   64
    Resizeable      =   True
-   Title           =   "ImpulseEngine Replica Demo"
+   Title           =   "Distance Joint Demo"
    Type            =   0
    Visible         =   True
    Width           =   1280
@@ -220,19 +220,40 @@ Begin DesktopWindow WinImpulseEngineReplicaDemo
       VisualState     =   1
       Width           =   104
    End
+   Begin DesktopCheckBox CheckBoxJoints
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Caption         =   "Joints"
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   746
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
+      Scope           =   0
+      TabIndex        =   6
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   660
+      Transparent     =   False
+      Underline       =   False
+      Value           =   False
+      Visible         =   True
+      VisualState     =   1
+      Width           =   76
+   End
 End
 #tag EndDesktopWindow
 
 #tag WindowCode
-	#tag Event
-		Sub Resized()
-		  If Scene.Viewport <> Nil Then
-		    Scene.Viewport.Extents = New VMaths.Vector2(Scene.Width / 2, Scene.Height / 2)
-		  End If
-		End Sub
-	#tag EndEvent
-
-
 	#tag Method, Flags = &h1, Description = 4372656174657320616E642061646473206120626F7820706F6C79676F6E20746F2074686520776F726C642061742060706F736974696F6E602E2052657475726E732074686520626F64792E
 		Protected Function CreateBox(position As VMaths.Vector2, width As Double, height As Double, isStatic As Boolean = False, restitution As Double = 0.3, friction As Double = 0.5, density As Double = 1) As Physics.Body
 		  /// Creates and adds a box polygon to the world at `position`. Returns the body.
@@ -282,40 +303,6 @@ End
 		  body.CreateFixture(fixtureDef)
 		  
 		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Sub CreateCircleShuffler(centre As VMaths.Vector2)
-		  Var bodyDef As New Physics.BodyDef
-		  bodyDef.Type = Physics.BodyType.Dynamic
-		  bodyDef.Position = centre
-		  
-		  Var body As Physics.Body = World.CreateBody(bodyDef)
-		  
-		  Const numPieces As Integer = 5
-		  Const radius As Double = 6.5
-		  
-		  For i As Integer = 0 To numPieces - 1
-		    Var xPos As Double = radius * Cos(2 * Maths.PI * (i / numPieces))
-		    Var yPos As Double = radius * Sin(2 * Maths.PI * (i / numPieces))
-		    
-		    Var shape As New Physics.CircleShape
-		    shape.Radius = 2
-		    shape.Position.SetValues(xPos, yPos)
-		    
-		    Var fixtureDef As New Physics.FixtureDef(shape, Nil, 0.1, 0.9, 50.0)
-		    body.CreateFixture(fixtureDef)
-		  Next i
-		  
-		  Var revoluteJointDef As New Physics.RevoluteJointDef
-		  revoluteJointDef.Initialize(body, Ground, body.Position)
-		  revoluteJointDef.MotorSpeed = Maths.PI
-		  revoluteJointDef.MaxMotorTorque = 1000000.0
-		  revoluteJointDef.EnableMotor = True
-		  
-		  World.CreateJoint(New Physics.RevoluteJoint(revoluteJointDef))
-		  
-		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h1, Description = 437265617465732067726F756E6420616E642077616C6C20626F6469657320616E642061646473207468656D20746F2074686520776F726C642E
@@ -409,45 +396,15 @@ End
 		Protected Sub CreateSimulation()
 		  InitialiseWorldAndScene
 		  
-		  CreateGroundAndWalls
+		  #Pragma Warning "TODO: Finish"
 		  
-		  // Static central circle.
-		  Call CreateCircle(VMaths.Vector2.Zero, 5, True)
+		  Var staticBox As Physics.Body = CreateBox(New VMaths.Vector2(0, 10), 7, 7, True)
+		  Var swingingBox As Physics.Body = CreateBox(New VMaths.Vector2(-15, -5), 7, 7)
 		  
-		  // Triangle.
-		  Var triangleVertices() As VMaths.Vector2 = Array( _
-		  New VMaths.Vector2(0, 0), _
-		  New VMaths.Vector2(27, 0), _
-		  New VMaths.Vector2(27, 12))
-		  Call CreatePolygon( _
-		  New VMaths.Vector2(Ground.Position.X - 22, Ground.Position.Y + 1), _
-		  triangleVertices, True)
+		  Var jointDef As New Physics.DistanceJointDef
+		  jointDef.Initialize(staticBox, swingingBox, New VMaths.Vector2(-3.5, 6.5), New VMaths.Vector2(-11.5, -1.5))
+		  World.CreateJoint(New Physics.DistanceJoint(jointdef))
 		  
-		  // Bouncy circle.
-		  Call CreateCircle(New VMaths.Vector2(-1, 35), 1.7, False, 0.8)
-		  
-		  // Add some other circles.
-		  Call CreateCircle(New VMaths.Vector2(1, 25), 2)
-		  Call CreateCircle(New VMaths.Vector2(35, 20), 3.5)
-		  Call CreateCircle(New VMaths.Vector2(50, 20), 2)
-		  Call CreateCircle(New VMaths.Vector2(-6, 26), 2)
-		  Call CreateCircle(New VMaths.Vector2(-8, 34), 3)
-		  Call CreateCircle(New VMaths.Vector2(-60, 32), 2.6)
-		  
-		  // Add 10 little boxes.
-		  For i As Integer = 0 To 9
-		    Call CreateBox(New VMaths.Vector2(-60 + (i * 2.3), 38), 2, 2)
-		  Next i
-		  
-		  // Add a pentagon with some spin.
-		  Var pentagonVertices() As VMaths.Vector2 = Array( _
-		  New VMaths.Vector2(0, 0), _
-		  New VMaths.Vector2(7, 1), _
-		  New VMaths.Vector2(7, 3), _
-		  New VMaths.Vector2(5, 7), _
-		  New VMaths.Vector2(0, 5))
-		  Call CreatePolygon(New VMaths.Vector2(45, 28), pentagonVertices)
-		  World.Bodies(World.Bodies.LastIndex).AngularVelocity = 0.55
 		End Sub
 	#tag EndMethod
 
@@ -461,10 +418,16 @@ End
 		  Scene.DrawShapes = True
 		  Scene.DrawCenterOfMass = CheckBoxCentreOfMass.Value
 		  Scene.DrawWireframes = CheckBoxWireframes.Value
+		  Scene.DrawJoints = CheckBoxJoints.Value
 		  
 		  // Create a world with normal gravity.
 		  Var gravity As New VMaths.Vector2(0, -10)
 		  World = New Physics.World(gravity)
+		  
+		  // Reset any bodies from previous runs.
+		  Ground = Nil
+		  LeftWall = Nil
+		  RightWall = Nil
 		  
 		  // Assign the debug drawing canvas to the world.
 		  World.DebugDraw = Scene
@@ -528,7 +491,6 @@ End
 		  WorldUpdateTimer.Enabled = False
 		  
 		  InitialiseWorldAndScene
-		  World.DrawDebugData
 		  Scene.Refresh
 		  
 		  ButtonStart.Caption = "Start"
@@ -589,6 +551,13 @@ End
 	#tag Event
 		Sub ValueChanged()
 		  Scene.DrawWireframes = Me.Value
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events CheckBoxJoints
+	#tag Event
+		Sub ValueChanged()
+		  Scene.DrawJoints = Me.Value
 		End Sub
 	#tag EndEvent
 #tag EndEvents

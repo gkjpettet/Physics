@@ -187,7 +187,7 @@ Begin DesktopWindow WinRevoluteJointDemo
       Underline       =   False
       Value           =   False
       Visible         =   True
-      VisualState     =   1
+      VisualState     =   0
       Width           =   126
    End
    Begin DesktopCheckBox CheckBoxWireframes
@@ -219,6 +219,36 @@ Begin DesktopWindow WinRevoluteJointDemo
       Visible         =   True
       VisualState     =   1
       Width           =   104
+   End
+   Begin DesktopCheckBox CheckBoxJoints
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Caption         =   "Joints"
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   746
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
+      Scope           =   0
+      TabIndex        =   6
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   660
+      Transparent     =   False
+      Underline       =   False
+      Value           =   False
+      Visible         =   True
+      VisualState     =   1
+      Width           =   76
    End
 End
 #tag EndDesktopWindow
@@ -375,6 +405,7 @@ End
 		  Scene.DrawShapes = True
 		  Scene.DrawCenterOfMass = CheckBoxCentreOfMass.Value
 		  Scene.DrawWireframes = CheckBoxWireframes.Value
+		  Scene.DrawJoints = CheckBoxJoints.Value
 		  
 		  // Create a world with normal gravity.
 		  Var gravity As New VMaths.Vector2(0, -10)
@@ -503,6 +534,13 @@ End
 	#tag Event
 		Sub ValueChanged()
 		  Scene.DrawWireframes = Me.Value
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events CheckBoxJoints
+	#tag Event
+		Sub ValueChanged()
+		  Scene.DrawJoints = Me.Value
 		End Sub
 	#tag EndEvent
 #tag EndEvents

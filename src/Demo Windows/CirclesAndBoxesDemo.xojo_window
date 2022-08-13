@@ -187,7 +187,7 @@ Begin DesktopWindow CirclesAndBoxesDemo
       Underline       =   False
       Value           =   False
       Visible         =   True
-      VisualState     =   1
+      VisualState     =   0
       Width           =   126
    End
    Begin DesktopCheckBox CheckBoxWireframes

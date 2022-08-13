@@ -1,14 +1,16 @@
 #tag Class
 Protected Class DistanceJointDef
 Inherits Physics.JointDef
-	#tag Method, Flags = &h0
+	#tag Method, Flags = &h0, Description = 496E697469616C6973652074686520626F646965732C20616E63686F72732C20616E64206C656E677468207573696E672074686520776F726C6420616E63686F72732E
 		Sub Initialize(body1 As Physics.Body, body2 As Physics.Body, anchor1 As VMaths.Vector2, anchor2 As VMaths.Vector2)
+		  /// Initialise the bodies, anchors, and length using the world anchors.
+		  
 		  BodyA = body1
 		  BodyB = body2
 		  LocalAnchorA.SetFrom(BodyA.LocalPoint(anchor1))
 		  LocalAnchorB.SetFrom(BodyB.LocalPoint(anchor2))
 		  Var d As VMaths.Vector2 = anchor2 - anchor1
-		  length = d.Length
+		  Length = d.Length
 		  
 		End Sub
 	#tag EndMethod
