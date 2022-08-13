@@ -72,8 +72,9 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  DemoCirclesAndBoxes
+		  'DemoCirclesAndBoxes
 		  'DemoImpulseEngineReplica
+		  DemoRevoluteJoints
 		  
 		End Sub
 	#tag EndEvent
@@ -123,6 +124,40 @@ End
 		  fixtureDef.Friction = 0.5
 		  fixtureDef.Restitution = restitution
 		  body.CreateFixture(fixtureDef)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub CreateCircleShuffler(centre As VMaths.Vector2)
+		  Var bodyDef As New Physics.BodyDef
+		  bodyDef.Type = Physics.BodyType.Dynamic
+		  bodyDef.Position = centre
+		  
+		  Var body As Physics.Body = World.CreateBody(bodyDef)
+		  
+		  Const numPieces As Integer = 5
+		  Const radius As Double = 6.5
+		  
+		  For i As Integer = 0 To numPieces - 1
+		    Var xPos As Double = radius * Cos(2 * Maths.PI * (i / numPieces))
+		    Var yPos As Double = radius * Sin(2 * Maths.PI * (i / numPieces))
+		    
+		    Var shape As New Physics.CircleShape
+		    shape.Radius = 2
+		    shape.Position.SetValues(xPos, yPos)
+		    
+		    Var fixtureDef As New Physics.FixtureDef(shape, Nil, 0.1, 0.9, 50.0)
+		    body.CreateFixture(fixtureDef)
+		  Next i
+		  
+		  Var revoluteJointDef As New Physics.RevoluteJointDef
+		  revoluteJointDef.Initialize(body, GroundBody, body.Position)
+		  revoluteJointDef.MotorSpeed = Maths.PI
+		  revoluteJointDef.MaxMotorTorque = 1000000.0
+		  revoluteJointDef.EnableMotor = True
+		  
+		  World.CreateJoint(New Physics.RevoluteJoint(revoluteJointDef))
+		  
 		End Sub
 	#tag EndMethod
 
@@ -290,6 +325,22 @@ End
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h21
+		Private Sub DemoRevoluteJoints()
+		  SetupWorldAndScene
+		  
+		  CreateGroundAndWalls
+		  
+		  CreateCircleShuffler(New VMaths.Vector2(0, -15))
+		  
+		  Const numBalls As Integer = 30
+		  For i As Integer = 1 To numBalls
+		    CreateCircle(RandomVector2(-7, 7, 20, 30), 1)
+		  Next i
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h21, Description = 52657475726E732061206E657720566563746F72322077686F736520605860206973205B6D696E582C206D6178585D20616E642077686F736520605960206973205B6D696E592C206D6178595D2E
 		Private Function RandomVector2(minX As Integer, maxX As Integer, minY As Integer, maxY As Integer) As VMaths.Vector2
 		  /// Returns a new Vector2 whose `X` is [minX, maxX] and whose `Y` is [minY, maxY].
@@ -310,7 +361,7 @@ End
 		  // Draw the centre of mass for debugging.
 		  Scene.DrawCenterOfMass = True
 		  Scene.DrawShapes = True
-		  Scene.DrawWireframes = True
+		  'Scene.DrawWireframes = True
 		  
 		  // Create a world with normal gravity.
 		  Var gravity As New VMaths.Vector2(0, -10)
