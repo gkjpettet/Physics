@@ -49,7 +49,7 @@ Inherits Physics.JointDef
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		Joints() As Physics.DistanceJOint
+		Joints() As Physics.DistanceJoint
 	#tag EndProperty
 
 

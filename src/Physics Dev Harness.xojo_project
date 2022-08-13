@@ -154,6 +154,7 @@ DesktopWindow=CirclesAndBoxesDemo;Demo Windows/CirclesAndBoxesDemo.xojo_window;&
 DesktopWindow=WinRevoluteJointDemo;Demo Windows/WinRevoluteJointDemo.xojo_window;&h000000007C73BFFF;&h0000000055998FFF;false
 DesktopWindow=WinImpulseEngineReplicaDemo;Demo Windows/WinImpulseEngineReplicaDemo.xojo_window;&h0000000003D98FFF;&h0000000055998FFF;false
 Class=ConstantVolumeJointDef;Physics/ConstantVolumeJointDef.xojo_code;&h000000000B2917FF;&h0000000058463FFF;false
+Class=DistanceJointDef;Physics/DistanceJointDef.xojo_code;&h0000000047E5FFFF;&h0000000058463FFF;false
 DefaultWindow=WinRevoluteJointDemo
 AppMenuBar=MainMenuBar
 MajorVersion=1
