@@ -13,7 +13,7 @@
 		  bodyB = def.BodyB
 		  mCollideConnected = def.CollideConnected
 		  IslandFlag = False
-		  
+		  RenderColor = Color.RGB(122, 204, 204)
 		End Sub
 	#tag EndMethod
 
@@ -178,6 +178,10 @@
 
 	#tag Property, Flags = &h21
 		Private mCollideConnected As Boolean = False
+	#tag EndProperty
+
+	#tag Property, Flags = &h0, Description = 54686520636F6C6F7572207573656420746F2072656E6465722E
+		RenderColor As Color
 	#tag EndProperty
 
 

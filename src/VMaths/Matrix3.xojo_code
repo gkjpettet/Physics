@@ -1130,7 +1130,7 @@ Protected Class Matrix3
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 536F6C7665206041202A2078203D2062602E
-		Shared Sub Solve2(A As VMaths.Matrix2, x As VMaths.Vector2, b As VMaths.Vector2)
+		Shared Sub Solve2(A As VMaths.Matrix3, x As VMaths.Vector2, b As VMaths.Vector2)
 		  /// Solve `A * x = b`.
 		  
 		  Var a11 As Double = A.Entry(0, 0)

@@ -95,7 +95,7 @@
 	[] prismatic_joint_def
 	[] pulley_joint
 	[] pulley_joint_def
-	[] revolute_joint
+	[x] revolute_joint
 	[x] revolute_joint_def
 	[] rope_joint
 	[] rope_joint_def
