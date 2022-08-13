@@ -76,7 +76,7 @@
 	[x] velocity
 [-] joints
 	[] constant_volume_joint
-	[] constant_volume_joint_def
+	[x] constant_volume_joint_def
 	[] distance_joint
 	[] distance_joint_def
 	[] friction_joint

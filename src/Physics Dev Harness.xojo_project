@@ -153,6 +153,7 @@ DesktopWindow=AbstractDemoWindow;Demo Windows/AbstractDemoWindow.xojo_window;&h0
 DesktopWindow=CirclesAndBoxesDemo;Demo Windows/CirclesAndBoxesDemo.xojo_window;&h0000000004BAFFFF;&h0000000055998FFF;false
 DesktopWindow=WinRevoluteJointDemo;Demo Windows/WinRevoluteJointDemo.xojo_window;&h000000007C73BFFF;&h0000000055998FFF;false
 DesktopWindow=WinImpulseEngineReplicaDemo;Demo Windows/WinImpulseEngineReplicaDemo.xojo_window;&h0000000003D98FFF;&h0000000055998FFF;false
+Class=ConstantVolumeJointDef;Physics/ConstantVolumeJointDef.xojo_code;&h000000000B2917FF;&h0000000058463FFF;false
 DefaultWindow=WinRevoluteJointDemo
 AppMenuBar=MainMenuBar
 MajorVersion=1
