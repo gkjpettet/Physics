@@ -31,7 +31,7 @@ Begin DesktopWindow WinDemo
       AllowTabs       =   False
       Backdrop        =   0
       Enabled         =   True
-      Height          =   635
+      Height          =   648
       Index           =   -2147483648
       Left            =   0
       LockBottom      =   True
@@ -112,38 +112,6 @@ Begin DesktopWindow WinDemo
       Visible         =   True
       Width           =   80
    End
-   Begin DesktopLabel LabelTiming
-      AllowAutoDeactivate=   True
-      Bold            =   False
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   11.0
-      FontUnit        =   0
-      Height          =   38
-      Index           =   -2147483648
-      Italic          =   False
-      Left            =   10
-      LockBottom      =   True
-      LockedInPosition=   False
-      LockLeft        =   True
-      LockRight       =   True
-      LockTop         =   False
-      Multiline       =   True
-      Scope           =   0
-      Selectable      =   False
-      TabIndex        =   3
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Text            =   ""
-      TextAlignment   =   0
-      TextColor       =   &c000000
-      Tooltip         =   ""
-      Top             =   647
-      Transparent     =   False
-      Underline       =   False
-      Visible         =   True
-      Width           =   370
-   End
    Begin Timer WorldUpdateTimer
       Enabled         =   True
       Index           =   -2147483648
@@ -152,36 +120,6 @@ Begin DesktopWindow WinDemo
       RunMode         =   0
       Scope           =   0
       TabPanelIndex   =   0
-   End
-   Begin DesktopCheckBox CheckBoxCentreOfMass
-      AllowAutoDeactivate=   True
-      Bold            =   False
-      Caption         =   "Centre of Mass"
-      Enabled         =   True
-      FontName        =   "System"
-      FontSize        =   0.0
-      FontUnit        =   0
-      Height          =   20
-      Index           =   -2147483648
-      Italic          =   False
-      Left            =   950
-      LockBottom      =   True
-      LockedInPosition=   False
-      LockLeft        =   False
-      LockRight       =   True
-      LockTop         =   False
-      Scope           =   0
-      TabIndex        =   4
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   660
-      Transparent     =   False
-      Underline       =   False
-      Value           =   False
-      Visible         =   True
-      VisualState     =   0
-      Width           =   126
    End
    Begin DesktopCheckBox CheckBoxWireframes
       AllowAutoDeactivate=   True
@@ -194,7 +132,7 @@ Begin DesktopWindow WinDemo
       Height          =   20
       Index           =   -2147483648
       Italic          =   False
-      Left            =   834
+      Left            =   972
       LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   False
@@ -224,7 +162,7 @@ Begin DesktopWindow WinDemo
       Height          =   20
       Index           =   -2147483648
       Italic          =   False
-      Left            =   746
+      Left            =   884
       LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   False
@@ -254,7 +192,7 @@ Begin DesktopWindow WinDemo
       Height          =   20
       Index           =   -2147483648
       Italic          =   False
-      Left            =   658
+      Left            =   796
       LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   False
@@ -284,7 +222,7 @@ Begin DesktopWindow WinDemo
       Index           =   -2147483648
       InitialValue    =   ""
       Italic          =   False
-      Left            =   392
+      Left            =   20
       LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   False
@@ -300,7 +238,68 @@ Begin DesktopWindow WinDemo
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   254
+      Width           =   224
+   End
+   Begin DesktopLabel Label1
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   546
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
+      Multiline       =   False
+      Scope           =   0
+      Selectable      =   False
+      TabIndex        =   10
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Text            =   "Gravity"
+      TextAlignment   =   3
+      TextColor       =   &c000000
+      Tooltip         =   ""
+      Top             =   660
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   63
+   End
+   Begin DesktopSlider SliderGravity
+      AllowAutoDeactivate=   True
+      AllowLiveScrolling=   True
+      Enabled         =   True
+      Height          =   30
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Left            =   621
+      LineStep        =   1
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
+      MaximumValue    =   15
+      MinimumValue    =   0
+      PageStep        =   1
+      Scope           =   0
+      TabIndex        =   11
+      TabPanelIndex   =   0
+      TabStop         =   True
+      TickMarkStyle   =   0
+      Tooltip         =   ""
+      Top             =   656
+      Transparent     =   False
+      Value           =   10
+      Visible         =   True
+      Width           =   163
    End
 End
 #tag EndDesktopWindow
@@ -347,6 +346,8 @@ End
 		  
 		  InitialiseWorldAndScene
 		  
+		  ResetGravity
+		  
 		  // Create the ground and two walls.
 		  Call Demo.CreateGroundAndOptionalWalls(world, Scene.Width, Scene.Height)
 		  
@@ -380,6 +381,10 @@ End
 		Sub DemoClickToAddRandomBodies()
 		  #Pragma Warning "TODO"
 		  
+		  InitialiseWorldAndScene
+		  
+		  ResetGravity
+		  
 		  
 		End Sub
 	#tag EndMethod
@@ -391,6 +396,8 @@ End
 		  /// We'll make two "blobs" composed of multiple circle bodies.
 		  
 		  InitialiseWorldAndScene
+		  
+		  ResetGravity
 		  
 		  // We need a ground and some walls.
 		  Call Demo.CreateGroundAndOptionalWalls(World, Scene.Width, Scene.Height)
@@ -420,6 +427,8 @@ End
 		  
 		  InitialiseWorldAndScene
 		  
+		  ResetGravity
+		  
 		  Const BOX_SIZE = 7.0
 		  
 		  // Create three swinging box pairs.
@@ -445,6 +454,8 @@ End
 		  
 		  InitialiseWorldAndScene
 		  
+		  ResetGravity
+		  
 		  Demo.CreateCircleShuffler(New VMaths.Vector2(0, -15), World, Scene.Width, Scene.Height)
 		  
 		  Const numBalls As Integer = 30
@@ -465,6 +476,8 @@ End
 		  
 		  InitialiseWorldAndScene
 		  
+		  ResetGravity
+		  
 		  Var ground As Physics.Body = Demo.CreateGroundAndOptionalWalls(World, Scene.Width, Scene.Height)
 		  
 		  // Static central circle.
@@ -476,7 +489,7 @@ End
 		  New VMaths.Vector2(27, 0), _
 		  New VMaths.Vector2(27, 12))
 		  Call Demo.CreatePolygon(World, _
-		  New VMaths.Vector2(ground.Position.X - 22, ground.Position.Y + 1), _
+		  New VMaths.Vector2(ground.Position.X - 22, ground.Position.Y + 0.5), _
 		  triangleVertices, True)
 		  
 		  // Bouncy circle.
@@ -508,24 +521,32 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function GravitySliderValueToVector(sliderValue As Integer) As VMaths.Vector2
+		  Var mapping(15) As Integer = Array(10, 8, 6, 4, 2, 0, -2, -4, -6, -8, -10, -12, -14, -16, -18, -20)
+		  
+		  Return New VMaths.Vector2(0, mapping(sliderValue))
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub InitialiseWorldAndScene()
 		  // Setup the viewport for the canvas.
 		  Var extents As New VMaths.Vector2(Scene.Width / 2, Scene.Height / 2)
 		  Scene.Viewport = New Physics.ViewportTransform(extents, extents, VIEWPORT_SCALE)
 		  
 		  Scene.ShouldDrawShapes = True
-		  Scene.ShouldDrawCenterOfMass = CheckBoxCentreOfMass.Value
 		  Scene.ShouldDrawWireframes = CheckBoxWireframes.Value
 		  Scene.ShouldDrawJoints = CheckBoxJoints.Value
 		  
 		  // Create a world with normal gravity.
 		  Var gravity As New VMaths.Vector2(0, -10)
-		  World = New Physics.World(gravity)
+		  World = New Physics.World(GravitySliderValueToVector(SliderGravity.Value))
 		  
 		  // Assign the debug drawing canvas to the world.
 		  World.DebugDraw = Scene
 		  
 		  Scene.ResetTiming
+		  
 		End Sub
 	#tag EndMethod
 
@@ -534,6 +555,18 @@ End
 		  // Pause a running simulation.
 		  WorldUpdateTimer.Enabled = False
 		  ButtonStart.Caption = "Resume"
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub ResetGravity()
+		  /// Resets the world's gravity vector to (0, -10).
+		  
+		  SliderGravity.Value = 10
+		  
+		  If World <> Nil Then
+		    World.SetGravity(GravitySliderValueToVector(10))
+		  End If
 		End Sub
 	#tag EndMethod
 
@@ -606,22 +639,6 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events LabelTiming
-	#tag Event
-		Sub Opening()
-		  // Use a monospace font.
-		  #If TargetMacOS
-		    Me.FontName = "Menlo"
-		    
-		  #ElseIf TargetWindows
-		    Me.FontName = "Consolas"
-		    
-		  #ElseIf TargetLinux
-		    Me.FontName = "DejaVu Sans Mono"
-		  #EndIf
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag Events WorldUpdateTimer
 	#tag Event
 		Sub Action()
@@ -637,20 +654,14 @@ End
 		  drawTimer.Stop
 		  
 		  // Update the timing stats.
-		  LabelTiming.Text = _
+		  Var stats As String = _
 		  "Step Time: " + World.Profile.Step_.ToString + EndOfLine + _
 		  "Draw Time: " + Scene.Timing.ToString
+		  Scene.DrawStringXY(20, 20, stats, Color.Black)
 		  
 		  // Tell the scene to paint.
 		  Scene.Refresh
 		  
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events CheckBoxCentreOfMass
-	#tag Event
-		Sub ValueChanged()
-		  Scene.ShouldDrawCenterOfMass = Me.Value
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -708,6 +719,18 @@ End
 		  
 		  // Run the simulation so long as this is the first time the popup has changed (i.e. during initialisation).
 		  If mAllowRunning Then StartSimulation
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events SliderGravity
+	#tag Event
+		Sub ValueChanged()
+		  /// The slider goes from 0 to 15. 
+		  /// We clamp the gravity Y component between 10 and -20 (-10 is normal).
+		  
+		  If World <> Nil Then
+		    World.SetGravity(GravitySliderValueToVector(Me.Value))
+		  End If
 		End Sub
 	#tag EndEvent
 #tag EndEvents
