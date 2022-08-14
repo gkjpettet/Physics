@@ -108,6 +108,12 @@ Protected Interface DebugDraw
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 54616B6573207468652073637265656E20582C205920636F6F7264696E6174657320616E642072657475726E732074686520776F726C6420636F6F7264696E617465732E
+		Function ScreenXYToWorld(screenX As Double, screenY As Double) As VMaths.Vector2
+		  
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Function Viewport() As Physics.ViewportTransform
 		  
@@ -142,5 +148,47 @@ Protected Interface DebugDraw
 	#tag EndNote
 
 
+	#tag ViewBehavior
+		#tag ViewProperty
+			Name="Name"
+			Visible=true
+			Group="ID"
+			InitialValue=""
+			Type="String"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Index"
+			Visible=true
+			Group="ID"
+			InitialValue="-2147483648"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Super"
+			Visible=true
+			Group="ID"
+			InitialValue=""
+			Type="String"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Left"
+			Visible=true
+			Group="Position"
+			InitialValue="0"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Top"
+			Visible=true
+			Group="Position"
+			InitialValue="0"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+	#tag EndViewBehavior
 End Interface
 #tag EndInterface

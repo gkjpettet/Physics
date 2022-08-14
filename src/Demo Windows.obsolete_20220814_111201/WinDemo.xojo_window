@@ -1,5 +1,5 @@
 #tag DesktopWindow
-Begin DesktopWindow WinRevoluteJointDemo
+Begin DesktopWindow WinDemo
    Backdrop        =   0
    BackgroundColor =   &cFFFFFF
    Composite       =   False
@@ -20,7 +20,7 @@ Begin DesktopWindow WinRevoluteJointDemo
    MinimumHeight   =   64
    MinimumWidth    =   64
    Resizeable      =   True
-   Title           =   "Revolute Joint Demo"
+   Title           =   "Xojo Physics Demo"
    Type            =   0
    Visible         =   True
    Width           =   1280
@@ -133,7 +133,7 @@ Begin DesktopWindow WinRevoluteJointDemo
       LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
-      LockRight       =   False
+      LockRight       =   True
       LockTop         =   False
       Multiline       =   True
       Scope           =   0
@@ -250,153 +250,228 @@ Begin DesktopWindow WinRevoluteJointDemo
       VisualState     =   1
       Width           =   76
    End
+   Begin DesktopCheckBox CheckBoxAABBs
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Caption         =   "AABBs"
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   -2147483648
+      Italic          =   False
+      Left            =   658
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
+      Scope           =   0
+      TabIndex        =   7
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   660
+      Transparent     =   False
+      Underline       =   False
+      Value           =   False
+      Visible         =   True
+      VisualState     =   0
+      Width           =   76
+   End
+   Begin DesktopPopupMenu PopupDemos
+      AllowAutoDeactivate=   True
+      Bold            =   False
+      Enabled         =   True
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      Height          =   20
+      Index           =   -2147483648
+      InitialValue    =   ""
+      Italic          =   False
+      Left            =   392
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockLeft        =   False
+      LockRight       =   True
+      LockTop         =   False
+      Scope           =   0
+      SelectedRowIndex=   0
+      TabIndex        =   8
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   660
+      Transparent     =   False
+      Underline       =   False
+      Visible         =   True
+      Width           =   254
+   End
 End
 #tag EndDesktopWindow
 
 #tag WindowCode
 	#tag Event
-		Sub Resized()
-		  If Scene.Viewport <> Nil Then
-		    Scene.Viewport.Extents = New VMaths.Vector2(Scene.Width / 2, Scene.Height / 2)
-		  End If
+		Sub Opening()
+		  mAllowRunning = True
+		  
 		End Sub
 	#tag EndEvent
 
 
-	#tag Method, Flags = &h1, Description = 4372656174657320616E642061646473206120636972636C6520626F647920746F2074686520776F726C642061742060706F736974696F6E60207265747575726E696E672074686520626F64792E
-		Protected Function CreateCircle(position As VMaths.Vector2, radius As Double, isStatic As Boolean = False, restitution As Double = 0.3, friction As Double = 0.5, density As Double = 1) As Physics.Body
-		  /// Creates and adds a circle body to the world at `position` retuurning the body.
-		  
-		  // Create a body.
-		  Var type As Physics.BodyType = If(isStatic, Physics.BodyType.Static_, Physics.BodyType.Dynamic)
-		  Var bodyDef As New Physics.BodyDef(type)
-		  bodyDef.Position.SetValues(position.X, position.Y)
-		  Var body As Physics.Body = World.CreateBody(bodyDef)
-		  
-		  // Create a circle shape.
-		  Var circle As New Physics.CircleShape
-		  circle.Radius = radius
-		  
-		  // Create and add a fixture with custom properties for the circle.
-		  Var fixtureDef As New Physics.FixtureDef(circle)
-		  fixtureDef.Restitution = restitution
-		  fixtureDef.Friction = friction
-		  fixtureDef.Density = density
-		  
-		  body.CreateFixture(fixtureDef)
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Sub CreateCircleShuffler(centre As VMaths.Vector2)
-		  Var bodyDef As New Physics.BodyDef
-		  bodyDef.Type = Physics.BodyType.Dynamic
-		  bodyDef.Position = centre
-		  
-		  Var body As Physics.Body = World.CreateBody(bodyDef)
-		  
-		  Const numPieces As Integer = 5
-		  Const radius As Double = 6.5
-		  
-		  For i As Integer = 0 To numPieces - 1
-		    Var xPos As Double = radius * Cos(2 * Maths.PI * (i / numPieces))
-		    Var yPos As Double = radius * Sin(2 * Maths.PI * (i / numPieces))
-		    
-		    Var shape As New Physics.CircleShape
-		    shape.Radius = 2
-		    shape.Position.SetValues(xPos, yPos)
-		    
-		    Var fixtureDef As New Physics.FixtureDef(shape, Nil, 0.1, 0.9, 50.0)
-		    body.CreateFixture(fixtureDef)
-		  Next i
-		  
-		  Var revoluteJointDef As New Physics.RevoluteJointDef
-		  revoluteJointDef.Initialize(body, Ground, body.Position)
-		  revoluteJointDef.MotorSpeed = Maths.PI
-		  revoluteJointDef.MaxMotorTorque = 1000000.0
-		  revoluteJointDef.EnableMotor = True
-		  
-		  World.CreateJoint(New Physics.RevoluteJoint(revoluteJointDef))
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h1, Description = 437265617465732067726F756E6420616E642077616C6C20626F6469657320616E642061646473207468656D20746F2074686520776F726C642E
-		Protected Sub CreateGroundAndWalls()
-		  /// Creates ground and wall bodies and adds them to the world.
-		  
-		  Const GROUND_HEIGHT = 1
-		  Const WALL_WIDTH = 1
-		  
-		  // =======================
-		  // GROUND
-		  // =======================
-		  // Compute the position of the ground (accounting for pixels -> world space coordinates).
-		  Var pos As VMaths.Vector2 = _
-		  Scene.ScreenXYToWorld(Scene.Width/2, Scene.Height - (GROUND_HEIGHT/2 * Scene.Viewport.Scale))
-		  
-		  // Create the ground body.
-		  Var groundBodyDef As New Physics.BodyDef
-		  groundBodyDef.Position.SetFrom(pos)
-		  Ground = World.CreateBody(groundBodyDef)
-		  
-		  // Make the ground a rectangle.
-		  Var groundShape As New Physics.PolygonShape
-		  groundShape.SetAsBoxXY((Scene.Width / Scene.Viewport.Scale) / 2, GROUND_HEIGHT / 2)
-		  
-		  // Create the fixture from the shape and a modest amount of friction.
-		  Var groundFixtureDef As New Physics.FixtureDef(groundShape)
-		  groundFixtureDef.Friction = 0.5
-		  Ground.CreateFixture(groundFixtureDef)
-		  
-		  // =======================
-		  // WALLS
-		  // =======================
-		  // Compute the position of the walls. (accounting for pixels -> world space coordinates).
-		  Var lPos As VMaths.Vector2 = _
-		  Scene.ScreenXYToWorld(0 + (WALL_WIDTH * Scene.Viewport.Scale)/2, Scene.Height / 2)
-		  Var rPos As VMaths.Vector2 = _
-		  Scene.ScreenXYToWorld(Scene.Width - (WALL_WIDTH * Scene.Viewport.Scale)/2, Scene.Height / 2)
-		  
-		  // Create the wall bodyies.
-		  Var wallBodyDef As New Physics.BodyDef
-		  wallBodyDef.Position.SetFrom(lPos)
-		  LeftWall = World.CreateBody(wallBodyDef)
-		  
-		  wallBodyDef.Position.SetFrom(rPos)
-		  RightWall = World.CreateBody(wallBodyDef)
-		  
-		  // Set their shape.
-		  Var wallShape As New Physics.PolygonShape
-		  wallShape.SetAsBoxXY(WALL_WIDTH / 2, (Scene.Height / Scene.Viewport.Scale) / 2)
-		  
-		  // Create the fixture from the shape and a modest amount of friction.
-		  Var wallFixtureDef As New Physics.FixtureDef(wallShape)
-		  wallFixtureDef.Friction = 0.3
-		  LeftWall.CreateFixture(wallFixtureDef)
-		  RightWall.CreateFixture(wallFixtureDef)
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h1
-		Protected Sub CreateSimulation()
+	#tag Method, Flags = &h0
+		Sub CreateSimulation()
 		  InitialiseWorldAndScene
 		  
-		  CreateGroundAndWalls
+		  Select Case PopupDemos.RowTagAt(PopupDemos.SelectedRowIndex)
+		  Case Demo.Types.DistanceJoints
+		    DemoDistanceJoints
+		    
+		  Case Demo.Types.RevoluteJoint
+		    DemoRevoluteJoint
+		    
+		  Case Demo.Types.CirclesAndBoxes
+		    DemoCirclesAndBoxes
+		    
+		  Case Demo.Types.VariousShapes
+		    DemoVariousShapes
+		    
+		  Else
+		    Raise New UnsupportedOperationException("Unknown demo type.")
+		  End Select
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 436F6E666967757265207468652073696D756C6174696F6E20776974682072616E646F6D206D6F76696E6720626F78657320616E6420636972636C65732E
+		Sub DemoCirclesAndBoxes()
+		  /// Configure the simulation with random moving boxes and circles.
 		  
-		  CreateCircleShuffler(New VMaths.Vector2(0, -15))
+		  // Create the ground and two walls.
+		  Call Demo.CreateGroundAndOptionalWalls(world, Scene.Width, Scene.Height)
+		  
+		  // Figure out the limits of where to randomise the bodies in world space.
+		  Var minX As Double = Scene.ScreenXYToWorld(0, 0).X
+		  Var maxX As Double = Scene.ScreenXYToWorld(Scene.Width, 0).X
+		  Var minY As Double = Scene.ScreenXYToWorld(0, 0).Y
+		  Var maxY As Double = Scene.ScreenXYToWorld(0, Scene.Height).Y - 5 // Allow for ground height.
+		  
+		  // Create some circles in random locations and apply a random impulse to each one.
+		  For i As Integer = 0 To 19
+		    Var pos As VMaths.Vector2 = VMaths.Vector2.RandomInRange(minX, maxX, minY, maxY)
+		    Var radius As Double = System.Random.InRange(5, 30)/10
+		    Call Demo.CreateCircle(World, pos, radius)
+		    World.Bodies(World.Bodies.LastIndex).ApplyLinearImpulse(VMaths.Vector2.RandomInRange(1, 10, 1, 10))
+		  Next i
+		  
+		  // Create some boxes in random locations and apply a random impulse to each one.
+		  For i As Integer = 0 To 19
+		    Var pos As VMaths.Vector2 = VMaths.Vector2.RandomInRange(minX, maxX, minY, maxY)
+		    Var w As Double = System.Random.InRange(5, 60)/10
+		    Var h As Double = System.Random.InRange(5, 60)/10
+		    Call Demo.CreateBox(World, pos, w, h)
+		    World.Bodies(World.Bodies.LastIndex).ApplyLinearImpulse(VMaths.Vector2.RandomInRange(1, 10, 1, 10))
+		  Next i
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 436F6E666967757265207468652073696D756C6174696F6E20666F72207468652064697374616E6365206A6F696E742064656D6F2E
+		Sub DemoDistanceJoints()
+		  /// Configure the simulation for the distance joint demo.
+		  
+		  InitialiseWorldAndScene
+		  
+		  Const BOX_SIZE = 7.0
+		  
+		  // Create three swinging box pairs.
+		  // Left.
+		  Var leftStaticX As Double = -3 * BOX_SIZE
+		  Demo.CreateSwingingBoxPair(World, leftStaticX, 0, BOX_SIZE, leftStaticX - 14, -5, BOX_SIZE)
+		  
+		  // Centre.
+		  Demo.CreateSwingingBoxPair(World, 0, 0, BOX_SIZE, -10, -5, BOX_SIZE)
+		  
+		  // Right.
+		  Var rightStaticX As Double = 3 * BOX_SIZE
+		  Demo.CreateSwingingBoxPair(World, rightStaticX, 0, BOX_SIZE, rightStaticX + 8, -5, BOX_SIZE)
+		  
+		  // Ensure the joints are drawn by default.
+		  CheckBoxJoints.Value = True
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 436F6E666967757265207468652073696D756C6174696F6E20666F7220746865207265766F6C757465206A6F696E742064656D6F2E
+		Sub DemoRevoluteJoint()
+		  /// Configure the simulation for the revolute joint demo.
+		  
+		  InitialiseWorldAndScene
+		  
+		  Demo.CreateCircleShuffler(New VMaths.Vector2(0, -15), World, Scene.Width, Scene.Height)
 		  
 		  Const numBalls As Integer = 30
 		  For i As Integer = 1 To numBalls
-		    Call CreateCircle(VMaths.Vector2.RandomInRange(-7, 7, 20, 30), 1)
+		    Call Demo.CreateCircle(world, VMaths.Vector2.RandomInRange(-7, 7, 20, 30), 1)
 		  Next i
 		  
+		  // Don't draw the joints by default.
+		  CheckBoxJoints.Value = False
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h1
-		Protected Sub InitialiseWorldAndScene()
+	#tag Method, Flags = &h0, Description = 436F6E666967757265207468652073696D756C6174696F6E207769746820766172696F757320626F64696573206F6620646966666572656E742073686170657320616E642073697A65732E
+		Sub DemoVariousShapes()
+		  /// Configure the simulation with various bodies of different shapes and sizes.
+		  ///
+		  /// Mimics my old ImpulseEngine demo.
+		  
+		  InitialiseWorldAndScene
+		  
+		  Var ground As Physics.Body = Demo.CreateGroundAndOptionalWalls(World, Scene.Width, Scene.Height)
+		  
+		  // Static central circle.
+		  Call Demo.CreateCircle(World, VMaths.Vector2.Zero, 5, True)
+		  
+		  // Triangle.
+		  Var triangleVertices() As VMaths.Vector2 = Array( _
+		  New VMaths.Vector2(0, 0), _
+		  New VMaths.Vector2(27, 0), _
+		  New VMaths.Vector2(27, 12))
+		  Call Demo.CreatePolygon(World, _
+		  New VMaths.Vector2(ground.Position.X - 22, ground.Position.Y + 1), _
+		  triangleVertices, True)
+		  
+		  // Bouncy circle.
+		  Call Demo.CreateCircle(World, New VMaths.Vector2(-1, 35), 1.7, False, 0.8)
+		  
+		  // Add some other circles.
+		  Call Demo.CreateCircle(World, New VMaths.Vector2(1, 25), 2)
+		  Call Demo.CreateCircle(World, New VMaths.Vector2(35, 20), 3.5)
+		  Call Demo.CreateCircle(World, New VMaths.Vector2(50, 20), 2)
+		  Call Demo.CreateCircle(World, New VMaths.Vector2(-6, 26), 2)
+		  Call Demo.CreateCircle(World, New VMaths.Vector2(-8, 34), 3)
+		  Call Demo.CreateCircle(World, New VMaths.Vector2(-60, 32), 2.6)
+		  
+		  // Add 10 little boxes.
+		  For i As Integer = 0 To 9
+		    Call Demo.CreateBox(World, New VMaths.Vector2(-60 + (i * 2.3), 38), 2, 2)
+		  Next i
+		  
+		  // Add a pentagon with some spin.
+		  Var pentagonVertices() As VMaths.Vector2 = Array( _
+		  New VMaths.Vector2(0, 0), _
+		  New VMaths.Vector2(7, 1), _
+		  New VMaths.Vector2(7, 3), _
+		  New VMaths.Vector2(5, 7), _
+		  New VMaths.Vector2(0, 5))
+		  Call Demo.CreatePolygon(World, New VMaths.Vector2(45, 28), pentagonVertices)
+		  World.Bodies(World.Bodies.LastIndex).AngularVelocity = 0.55
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub InitialiseWorldAndScene()
 		  // Setup the viewport for the canvas.
 		  Var extents As New VMaths.Vector2(Scene.Width / 2, Scene.Height / 2)
 		  Scene.Viewport = New Physics.ViewportTransform(extents, extents, VIEWPORT_SCALE)
@@ -416,17 +491,42 @@ End
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Sub PauseSimulation()
+		  // Pause a running simulation.
+		  WorldUpdateTimer.Enabled = False
+		  ButtonStart.Caption = "Resume"
+		End Sub
+	#tag EndMethod
 
-	#tag Property, Flags = &h0, Description = 41207265666572656E636520746F207468652067726F756E6420626F64792028666F7220636F6E76656E69656E6365292E
-		Ground As Physics.Body
-	#tag EndProperty
+	#tag Method, Flags = &h0
+		Sub ResetSimulation()
+		  WorldUpdateTimer.Enabled = False
+		  
+		  InitialiseWorldAndScene
+		  World.DrawDebugData
+		  Scene.Refresh
+		  
+		  ButtonStart.Caption = "Start"
+		  
+		End Sub
+	#tag EndMethod
 
-	#tag Property, Flags = &h0, Description = 41207265666572656E636520746F20746865206C6566742077616C6C20626F64792028666F7220636F6E76656E69656E6365292E
-		LeftWall As Physics.Body
-	#tag EndProperty
+	#tag Method, Flags = &h0, Description = 5374617274207468652073696D756C6174696F6E2E
+		Sub StartSimulation()
+		  /// Start the simulation.
+		  
+		  CreateSimulation
+		  WorldUpdateTimer.Enabled = True
+		  WorldUpdateTimer.RunMode = Timer.RunModes.Multiple
+		  ButtonStart.Caption = "Pause"
+		  
+		End Sub
+	#tag EndMethod
 
-	#tag Property, Flags = &h0, Description = 41207265666572656E636520746F207468652072696768742077616C6C20626F64792028666F7220636F6E76656E69656E6365292E
-		RightWall As Physics.Body
+
+	#tag Property, Flags = &h21, Description = 547275652069662066697273742074696D65207365747570206F66207468652077696E646F772068617320636F6D706C657465642E
+		Private mAllowRunning As Boolean = False
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -445,11 +545,7 @@ End
 		Sub Pressed()
 		  Select Case Me.Caption
 		  Case "Start"
-		    // Start the simulation.
-		    CreateSimulation
-		    WorldUpdateTimer.Enabled = True
-		    WorldUpdateTimer.RunMode = Timer.RunModes.Multiple
-		    Me.Caption = "Pause"
+		    StartSimulation
 		    
 		  Case "Resume"
 		    // Resume a paused simulation.
@@ -458,9 +554,7 @@ End
 		    Me.Caption = "Pause"
 		    
 		  Case "Pause"
-		    // Pause a running simulation.
-		    WorldUpdateTimer.Enabled = False
-		    Me.Caption = "Resume"
+		    PauseSimulation
 		    
 		  End Select
 		  
@@ -470,14 +564,7 @@ End
 #tag Events ButtonReset
 	#tag Event
 		Sub Pressed()
-		  WorldUpdateTimer.Enabled = False
-		  
-		  InitialiseWorldAndScene
-		  World.DrawDebugData
-		  Scene.Refresh
-		  
-		  ButtonStart.Caption = "Start"
-		  
+		  ResetSimulation
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -541,6 +628,41 @@ End
 	#tag Event
 		Sub ValueChanged()
 		  Scene.DrawJoints = Me.Value
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events CheckBoxAABBs
+	#tag Event
+		Sub ValueChanged()
+		  Scene.DrawAABB = Me.Value
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events PopupDemos
+	#tag Event
+		Sub Opening()
+		  Me.AddRow(Demo.Types.CirclesAndBoxes.ToString)
+		  Me.RowTagAt(Me.LastAddedRowIndex) = Demo.Types.CirclesAndBoxes
+		  
+		  Me.AddRow(Demo.Types.DistanceJoints.ToString)
+		  Me.RowTagAt(Me.LastAddedRowIndex) = Demo.Types.DistanceJoints
+		  
+		  Me.AddRow(Demo.Types.RevoluteJoint.ToString)
+		  Me.RowTagAt(Me.LastAddedRowIndex) = Demo.Types.RevoluteJoint
+		  
+		  Me.AddRow(Demo.Types.VariousShapes.ToString)
+		  Me.RowTagAt(Me.LastAddedRowIndex) = Demo.Types.VariousShapes
+		  
+		  Me.SelectRowWithTag(Demo.Types.RevoluteJoint)
+		  
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub SelectionChanged(item As DesktopMenuItem)
+		  ResetSimulation
+		  
+		  // Run the simulation so long as this is the first time the popup has changed (i.e. during initialisation).
+		  If mAllowRunning Then StartSimulation
 		End Sub
 	#tag EndEvent
 #tag EndEvents
