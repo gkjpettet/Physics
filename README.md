@@ -52,7 +52,9 @@ I've recently been dabbling in Flutter and Dart and came across the [Flame] game
 
 I made a short YouTube video walking through the demo app that might be of interest to you.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/EeBKyH_cYuE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=EeBKyH_cYuE
+" target="_blank"><img src="http://img.youtube.com/vi/EeBKyH_cYuE/0.jpg" 
+alt="YouTube Video of Xojo Physics"/></a>
 
 [Box2D]: https://box2d.org
 [Forge2D]: https://github.com/flame-engine/forge2d]
