@@ -409,8 +409,6 @@ End
 		Sub DemoClickToAddRandomBodiesClickHandler(worldPos As VMaths.Vector2, optionClick As Boolean)
 		  /// Called whenever the scene is clicked and the Demo.Types.ClickToAddRandomBodies demo is running.
 		  
-		  #Pragma Warning "TODO"
-		  
 		  Var type As Integer = System.Random.InRange(0, 3)
 		  Select Case type
 		  Case 0
@@ -597,8 +595,7 @@ End
 		  Scene.ShouldDrawWireframes = CheckBoxWireframes.Value
 		  Scene.ShouldDrawJoints = CheckBoxJoints.Value
 		  
-		  // Create a world with normal gravity.
-		  Var gravity As New VMaths.Vector2(0, -10)
+		  // Create a world with gravity specified by the gravity slider.
 		  World = New Physics.World(GravitySliderValueToVector(SliderGravity.Value))
 		  
 		  // Assign the debug drawing canvas to the world.
