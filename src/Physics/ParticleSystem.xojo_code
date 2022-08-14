@@ -496,11 +496,8 @@ Protected Class ParticleSystem
 
 	#tag Method, Flags = &h0
 		Sub Render(debugDraw As Physics.DebugDraw)
-		  Var wireframe As Boolean = _
-		  (debugDraw.DrawFlags And Physics.DebugDrawingFlags.WireFrameDrawingBit) <> 0
-		  
 		  If Particles.count > 1 Then
-		    If wireframe Then
+		    If debugDraw.ShouldDrawWireframes Then
 		      debugDraw.DrawParticlesWireframe(Particles.ToArray, ParticleRadius)
 		    Else
 		      debugDraw.DrawParticles(Particles.ToArray, ParticleRadius)
@@ -1770,6 +1767,30 @@ Protected Class ParticleSystem
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="ParticleDensity"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="ParticleInverseMass"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="ParticleMass"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="ParticleStride"
 			Visible=false
 			Group="Behavior"
 			InitialValue=""

@@ -18,15 +18,6 @@ Implements Physics.DebugDraw
 	#tag EndEvent
 
 
-	#tag Method, Flags = &h0
-		Sub AppendFlags(flags As Integer)
-		  // Part of the Physics.DebugDraw interface.
-		  
-		  mDrawFlags = mDrawFlags Or flags
-		  
-		End Sub
-	#tag EndMethod
-
 	#tag Method, Flags = &h0, Description = 54686520776F726C642069732061626F757420746F20626567696E2064726177696E6720666F72207468697320737465702E
 		Sub BeginDrawing()
 		  /// The world is about to begin drawing for this step.
@@ -55,24 +46,6 @@ Implements Physics.DebugDraw
 		    CreateNewBuffer
 		    Return
 		  End If
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Sub ClearFlag(flag As Integer)
-		  // Part of the Physics.DebugDraw interface.
-		  
-		  mDrawFlags = mDrawFlags And Bitwise.OnesComplement(flag)
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub ClearFlags(flags As Integer)
-		  // Part of the Physics.DebugDraw interface.
-		  
-		  mDrawFlags = mDrawFlags And Bitwise.OnesComplement(flags)
 		  
 		End Sub
 	#tag EndMethod
@@ -122,12 +95,6 @@ Implements Physics.DebugDraw
 		  
 		  DrawCircle(center, radius, colour)
 		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function DrawFlags() As Integer
-		  Return mDrawFlags
-		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
@@ -313,6 +280,94 @@ Implements Physics.DebugDraw
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function ShouldDrawAABB() As Boolean
+		  Return mShouldDrawAABB
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub ShouldDrawAABB(Assigns value As Boolean)
+		  mShouldDrawAABB = value
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function ShouldDrawCenterOfMass() As Boolean
+		  Return mShouldDrawCenterOfMass
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub ShouldDrawCenterOfMass(Assigns value As Boolean)
+		  mShouldDrawCenterOfMass = value
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function ShouldDrawDynamicTree() As Boolean
+		  Return mShouldDrawDynamicTree
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub ShouldDrawDynamicTree(Assigns value As Boolean)
+		  mShouldDrawDynamicTree = value
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function ShouldDrawJoints() As Boolean
+		  Return mShouldDrawJoints
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub ShouldDrawJoints(Assigns value As Boolean)
+		  mShouldDrawJoints = value
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function ShouldDrawPairs() As Boolean
+		  Return mShouldDrawPairs
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub ShouldDrawPairs(Assigns value As Boolean)
+		  mShouldDrawPairs = value
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function ShouldDrawShapes() As Boolean
+		  Return mShouldDrawShapes
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub ShouldDrawShapes(Assigns value As Boolean)
+		  mShouldDrawShapes = value
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function ShouldDrawWireframes() As Boolean
+		  Return mShouldDrawWireframes
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub ShouldDrawWireframes(Assigns value As Boolean)
+		  mShouldDrawWireframes = value
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function Viewport() As Physics.ViewportTransform
 		  Return mViewport
 		  
@@ -349,138 +404,36 @@ Implements Physics.DebugDraw
 	#tag EndMethod
 
 
-	#tag ComputedProperty, Flags = &h0, Description = 57686574686572206F72206E6F7420746F206472617720746865206178697320616C69676E656420626F756E64696E6720626F7865732061726F756E6420626F646965732E
-		#tag Getter
-			Get
-			  Return (mDrawFlags And DebugDrawingFlags.AABBBit) <> 0
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  If value Then
-			    AppendFlags(DebugDrawingFlags.AABBBit)
-			  Else
-			    ClearFlag(DebugDrawingFlags.AABBBit)
-			  End If
-			End Set
-		#tag EndSetter
-		DrawAABB As Boolean
-	#tag EndComputedProperty
-
-	#tag ComputedProperty, Flags = &h0, Description = 49662054727565207468656E207468652063656E747265206F66206D6173732077696C6C20626520647261776E20666F7220626F646965732E
-		#tag Getter
-			Get
-			  Return (mDrawFlags And DebugDrawingFlags.CenterOfMassBit) <> 0
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  If value Then
-			    AppendFlags(DebugDrawingFlags.CenterOfMassBit)
-			  Else
-			    ClearFlag(DebugDrawingFlags.CenterOfMassBit)
-			  End If
-			End Set
-		#tag EndSetter
-		DrawCenterOfMass As Boolean
-	#tag EndComputedProperty
-
-	#tag ComputedProperty, Flags = &h0, Description = 49662054727565207468656E207468652064796E616D696320747265652077696C6C20626520647261776E2E
-		#tag Getter
-			Get
-			  Return (mDrawFlags And DebugDrawingFlags.DynamicTreeBit) <> 0
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  If value Then
-			    AppendFlags(DebugDrawingFlags.DynamicTreeBit)
-			  Else
-			    ClearFlag(DebugDrawingFlags.DynamicTreeBit)
-			  End If
-			End Set
-		#tag EndSetter
-		DrawDynamicTree As Boolean
-	#tag EndComputedProperty
-
-	#tag ComputedProperty, Flags = &h0, Description = 49662054727565207468656E206A6F696E74732077696C6C20626520647261776E2E
-		#tag Getter
-			Get
-			  Return (mDrawFlags And DebugDrawingFlags.JointBit) <> 0
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  If value Then
-			    AppendFlags(DebugDrawingFlags.JointBit)
-			  Else
-			    ClearFlag(DebugDrawingFlags.JointBit)
-			  End If
-			End Set
-		#tag EndSetter
-		DrawJoints As Boolean
-	#tag EndComputedProperty
-
-	#tag ComputedProperty, Flags = &h0, Description = 49662054727565207468656E2070616972732077696C6C20626520647261776E2E
-		#tag Getter
-			Get
-			  Return (mDrawFlags And DebugDrawingFlags.PairBit) <> 0
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  If value Then
-			    AppendFlags(DebugDrawingFlags.PairBit)
-			  Else
-			    ClearFlag(DebugDrawingFlags.PairBit)
-			  End If
-			End Set
-		#tag EndSetter
-		DrawPairs As Boolean
-	#tag EndComputedProperty
-
-	#tag ComputedProperty, Flags = &h0, Description = 49662054727565207468656E207368617065732077696C6C20626520647261776E2E
-		#tag Getter
-			Get
-			  Return (mDrawFlags And DebugDrawingFlags.ShapeBit) <> 0
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  If value Then
-			    AppendFlags(DebugDrawingFlags.ShapeBit)
-			  Else
-			    ClearFlag(DebugDrawingFlags.ShapeBit)
-			  End If
-			End Set
-		#tag EndSetter
-		DrawShapes As Boolean
-	#tag EndComputedProperty
-
-	#tag ComputedProperty, Flags = &h0, Description = 49662054727565207468656E20776972656672616D657320726174686572207468616E20736F6C6964207368617065732077696C6C20626520647261776E2E
-		#tag Getter
-			Get
-			  Return (mDrawFlags And DebugDrawingFlags.WireFrameDrawingBit) <> 0
-			End Get
-		#tag EndGetter
-		#tag Setter
-			Set
-			  If value Then
-			    AppendFlags(DebugDrawingFlags.WireFrameDrawingBit)
-			  Else
-			    ClearFlag(DebugDrawingFlags.WireFrameDrawingBit)
-			  End If
-			End Set
-		#tag EndSetter
-		DrawWireframes As Boolean
-	#tag EndComputedProperty
-
 	#tag Property, Flags = &h21
 		Private mBuffer As Picture
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private mDrawFlags As Integer = Physics.DebugDrawingFlags.ShapeBit
+		Private mShouldDrawAABB As Boolean = False
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mShouldDrawCenterOfMass As Boolean = False
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mShouldDrawDynamicTree As Boolean = False
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mShouldDrawJoints As Boolean = False
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mShouldDrawPairs As Boolean = False
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mShouldDrawShapes As Boolean = True
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mShouldDrawWireframes As Boolean = True
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
@@ -683,62 +636,6 @@ Implements Physics.DebugDraw
 			Group="Behavior"
 			InitialValue="&cffffff"
 			Type="Color"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="DrawCenterOfMass"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Boolean"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="DrawAABB"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Boolean"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="DrawDynamicTree"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Boolean"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="DrawJoints"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Boolean"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="DrawPairs"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Boolean"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="DrawShapes"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Boolean"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="DrawWireframes"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Boolean"
 			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior

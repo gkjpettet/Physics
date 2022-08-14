@@ -476,11 +476,10 @@ End
 		  Var extents As New VMaths.Vector2(Scene.Width / 2, Scene.Height / 2)
 		  Scene.Viewport = New Physics.ViewportTransform(extents, extents, VIEWPORT_SCALE)
 		  
-		  // Draw the centre of mass for debugging.
-		  Scene.DrawShapes = True
-		  Scene.DrawCenterOfMass = CheckBoxCentreOfMass.Value
-		  Scene.DrawWireframes = CheckBoxWireframes.Value
-		  Scene.DrawJoints = CheckBoxJoints.Value
+		  Scene.ShouldDrawShapes = True
+		  Scene.ShouldDrawCenterOfMass = CheckBoxCentreOfMass.Value
+		  Scene.ShouldDrawWireframes = CheckBoxWireframes.Value
+		  Scene.ShouldDrawJoints = CheckBoxJoints.Value
 		  
 		  // Create a world with normal gravity.
 		  Var gravity As New VMaths.Vector2(0, -10)
@@ -613,28 +612,28 @@ End
 #tag Events CheckBoxCentreOfMass
 	#tag Event
 		Sub ValueChanged()
-		  Scene.DrawCenterOfMass = Me.Value
+		  Scene.ShouldDrawCenterOfMass = Me.Value
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events CheckBoxWireframes
 	#tag Event
 		Sub ValueChanged()
-		  Scene.DrawWireframes = Me.Value
+		  Scene.ShouldDrawWireframes = Me.Value
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events CheckBoxJoints
 	#tag Event
 		Sub ValueChanged()
-		  Scene.DrawJoints = Me.Value
+		  Scene.ShouldDrawJoints = Me.Value
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events CheckBoxAABBs
 	#tag Event
 		Sub ValueChanged()
-		  Scene.DrawAABB = Me.Value
+		  Scene.ShouldDrawAABB = Me.Value
 		End Sub
 	#tag EndEvent
 #tag EndEvents

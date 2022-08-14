@@ -1,19 +1,7 @@
 #tag Interface
 Protected Interface DebugDraw
-	#tag Method, Flags = &h0
-		Sub AppendFlags(flags As Integer)
-		  
-		End Sub
-	#tag EndMethod
-
 	#tag Method, Flags = &h0, Description = 54686520776F726C642069732061626F757420746F20626567696E2064726177696E6720666F72207468697320737465702E
 		Sub BeginDrawing()
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub ClearFlags(flags As Integer)
 		  
 		End Sub
 	#tag EndMethod
@@ -28,12 +16,6 @@ Protected Interface DebugDraw
 		Sub DrawCircleAxis(center As VMaths.Vector2, radius As Double, axis As VMaths.Vector2, colour As Color)
 		  
 		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function DrawFlags() As Integer
-		  
-		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 447261772061207061727469636C652061727261792E
@@ -112,6 +94,90 @@ Protected Interface DebugDraw
 		Function ScreenXYToWorld(screenX As Double, screenY As Double) As VMaths.Vector2
 		  
 		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 49662054727565207468656E20617869732D616C69676E656420626F756E64696E6720626F7865732077696C6C20626520647261776E2E
+		Function ShouldDrawAABB() As Boolean
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 49662054727565207468656E20617869732D616C69676E656420626F756E64696E6720626F7865732077696C6C20626520647261776E2E
+		Sub ShouldDrawAABB(Assigns value As Boolean)
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 49662054727565207468656E207468652063656E747265206F66206D6173732077696C6C20626520647261776E2E
+		Function ShouldDrawCenterOfMass() As Boolean
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 49662054727565207468656E207468652063656E747265206F66206D6173732077696C6C20626520647261776E2E
+		Sub ShouldDrawCenterOfMass(Assigns value As Boolean)
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 49662054727565207468656E207468652064796E616D696320747265652077696C6C20626520647261776E2E
+		Function ShouldDrawDynamicTree() As Boolean
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 49662054727565207468656E207468652064796E616D696320747265652077696C6C20626520647261776E2E
+		Sub ShouldDrawDynamicTree(Assigns value As Boolean)
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 49662054727565207468656E206A6F696E74732077696C6C20626520647261776E2E
+		Function ShouldDrawJoints() As Boolean
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 49662054727565207468656E206A6F696E74732077696C6C20626520647261776E2E
+		Sub ShouldDrawJoints(Assigns value As Boolean)
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 49662054727565207468656E2070616972732077696C6C20626520647261776E2E
+		Function ShouldDrawPairs() As Boolean
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 49662054727565207468656E2070616972732077696C6C20626520647261776E2E
+		Sub ShouldDrawPairs(Assigns value As Boolean)
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 49662054727565207468656E207368617065732077696C6C20626520647261776E2E
+		Function ShouldDrawShapes() As Boolean
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 49662054727565207468656E207368617065732077696C6C20626520647261776E2E
+		Sub ShouldDrawShapes(Assigns value As Boolean)
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 49662054727565207468656E20776972656672616D65732077696C6C20626520647261776E2E
+		Function ShouldDrawWireframes() As Boolean
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 49662054727565207468656E20776972656672616D65732077696C6C20626520647261776E2E
+		Sub ShouldDrawWireframes(Assigns value As Boolean)
+		  
+		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
