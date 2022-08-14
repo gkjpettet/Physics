@@ -75,7 +75,7 @@
 	[x] position
 	[x] velocity
 [-] joints
-	[] constant_volume_joint
+	[x] constant_volume_joint
 	[x] constant_volume_joint_def
 	[x] distance_joint
 	[x] distance_joint_def
