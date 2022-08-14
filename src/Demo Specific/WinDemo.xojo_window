@@ -323,17 +323,18 @@ End
 
 	#tag Method, Flags = &h0
 		Sub CreateSimulation()
-		  InitialiseWorldAndScene
-		  
 		  Select Case PopupDemos.RowTagAt(PopupDemos.SelectedRowIndex)
+		  case Demo.Types.ConstantVolumeJoint
+		    DemoConstantVolumeJoint
+		    
+		  Case Demo.Types.CirclesAndBoxes
+		    DemoCirclesAndBoxes
+		    
 		  Case Demo.Types.DistanceJoints
 		    DemoDistanceJoints
 		    
 		  Case Demo.Types.RevoluteJoint
 		    DemoRevoluteJoint
-		    
-		  Case Demo.Types.CirclesAndBoxes
-		    DemoCirclesAndBoxes
 		    
 		  Case Demo.Types.VariousShapes
 		    DemoVariousShapes
@@ -347,6 +348,8 @@ End
 	#tag Method, Flags = &h0, Description = 436F6E666967757265207468652073696D756C6174696F6E20776974682072616E646F6D206D6F76696E6720626F78657320616E6420636972636C65732E
 		Sub DemoCirclesAndBoxes()
 		  /// Configure the simulation with random moving boxes and circles.
+		  
+		  InitialiseWorldAndScene
 		  
 		  // Create the ground and two walls.
 		  Call Demo.CreateGroundAndOptionalWalls(world, Scene.Width, Scene.Height)
@@ -374,6 +377,36 @@ End
 		    World.Bodies(World.Bodies.LastIndex).ApplyLinearImpulse(VMaths.Vector2.RandomInRange(1, 10, 1, 10))
 		  Next i
 		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub DemoConstantVolumeJoint()
+		  /// Configure the simulation to demo constant volume joints.
+		  ///
+		  /// We'll make two "blobs" composed of multiple circle bodies.
+		  
+		  InitialiseWorldAndScene
+		  
+		  // We need a ground and some walls.
+		  Call Demo.CreateGroundAndOptionalWalls(World, Scene.Width, Scene.Height)
+		  
+		  // ==============================
+		  // BLOB 1
+		  // ==============================
+		  Var blob1Center As New VMaths.Vector2(5, 10)
+		  Var blob1Radius As New VMaths.Vector2(6, 6)
+		  Demo.CreateBlob(World, 20, blob1Radius, blob1Center)
+		  
+		  // ==============================
+		  // BLOB 2
+		  // ==============================
+		  Var blob2Center As New VMaths.Vector2(-15, 20)
+		  Var blob2Radius As New VMaths.Vector2(3, 3)
+		  Demo.CreateBlob(World, 20, blob2Radius, blob2Center)
+		  
+		  // Don't draw the joint by default.
+		  CheckBoxJoints.Value = False
 		End Sub
 	#tag EndMethod
 
@@ -642,6 +675,9 @@ End
 		Sub Opening()
 		  Me.AddRow(Demo.Types.CirclesAndBoxes.ToString)
 		  Me.RowTagAt(Me.LastAddedRowIndex) = Demo.Types.CirclesAndBoxes
+		  
+		  Me.AddRow(Demo.Types.ConstantVolumeJoint.ToString)
+		  Me.RowTagAt(Me.LastAddedRowIndex) = Demo.Types.ConstantVolumeJoint
 		  
 		  Me.AddRow(Demo.Types.DistanceJoints.ToString)
 		  Me.RowTagAt(Me.LastAddedRowIndex) = Demo.Types.DistanceJoints

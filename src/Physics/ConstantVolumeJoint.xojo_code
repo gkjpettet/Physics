@@ -232,6 +232,14 @@ Inherits Physics.Joint
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub Render(debugDraw As Physics.DebugDraw)
+		  #Pragma Unused debugDraw
+		  
+		  // Nothing to draw.
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function SolvePositionConstraints(step_ As Physics.SolverData) As Boolean
 		  Return ConstrainEdges(step_.Positions)
 		End Function

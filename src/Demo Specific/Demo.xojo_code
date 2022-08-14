@@ -1,5 +1,47 @@
 #tag Module
 Protected Module Demo
+	#tag Method, Flags = &h1, Description = 4372656174657320616E64206164647320612022626C6F622220746F2060776F726C64602E
+		Protected Sub CreateBlob(world As Physics.World, circleCount As Integer, blobRadius As VMaths.Vector2, blobCenter As VMaths.Vector2)
+		  /// Creates and adds a "blob" to `world`.
+		  ///
+		  /// A blob is a collection of circle bodies that maintain a constant volume.
+		  
+		  Const bodyRadius = 0.5
+		  
+		  // Create a joint definition for the blob.
+		  Var jointDef As New Physics.ConstantVolumeJointDef
+		  jointDef.FrequencyHz = 20
+		  jointDef.DampingRatio = 1
+		  jointDef.CollideConnected = False
+		  
+		  For i As Integer = 0 To circleCount - 1
+		    Var angle As Double = (i / circleCount) * Maths.PI * 2
+		    Var x As Double = blobCenter.X + blobRadius.X * Sin(angle)
+		    Var y As Double = blobCenter.Y + blobRadius.Y * Cos(angle)
+		    
+		    Var bodyDef As New Physics.BodyDef(Physics.BodyType.Dynamic)
+		    bodyDef.FixedRotation = True
+		    bodyDef.Position = New VMaths.Vector2(x, y)
+		    
+		    Var body As Physics.Body = world.CreateBody(bodyDef)
+		    
+		    Var shape As New Physics.CircleShape
+		    shape.Radius = bodyRadius
+		    
+		    Var fixtureDef As New Physics.FixtureDef(shape)
+		    fixtureDef.Density = 1
+		    fixtureDef.Friction = 0.2
+		    
+		    body.CreateFixture(fixtureDef)
+		    jointDef.AddBody(body)
+		    
+		  Next i
+		  
+		  world.CreateJoint(New Physics.ConstantVolumeJoint(world, jointDef))
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h1, Description = 4372656174657320616E642061646473206120626F7820706F6C79676F6E20746F2074686520776F726C642061742060706F736974696F6E602E2052657475726E732074686520626F64792E
 		Protected Function CreateBox(world As Physics.World, position As VMaths.Vector2, width As Double, height As Double, isStatic As Boolean = False, restitution As Double = 0.3, friction As Double = 0.5, density As Double = 1) As Physics.Body
 		  /// Creates and adds a box polygon to the world at `position`. Returns the body.
@@ -209,6 +251,9 @@ Protected Module Demo
 		  Case Demo.Types.CirclesAndBoxes
 		    Return "Circles and Boxes"
 		    
+		  Case Demo.Types.ConstantVolumeJoint
+		    Return "Constant Volume Joint"
+		    
 		  Case Demo.Types.DistanceJoints
 		    Return "Distance Joints"
 		    
@@ -230,7 +275,8 @@ Protected Module Demo
 		DistanceJoints
 		  RevoluteJoint
 		  VariousShapes
-		CirclesAndBoxes
+		  CirclesAndBoxes
+		ConstantVolumeJoint
 	#tag EndEnum
 
 
