@@ -48,6 +48,12 @@ I've been trying (on and off) since about 2019 to write a physics engine for Xoj
 
 I've recently been dabbling in Flutter and Dart and came across the [Flame] game engine which uses a Dart-port of Box2D called [Forge2D]. Dart is similar enough in its object model to allow me to port it to Xojo.
 
+## Video
+
+I made a short YouTube video walking through the demo app that might be of interest to you.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/EeBKyH_cYuE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 [Box2D]: https://box2d.org
 [Forge2D]: https://github.com/flame-engine/forge2d]
 [Chipmunk]: https://chipmunk-physics.net
