@@ -3,6 +3,13 @@ Protected Class DebugCanvas
 Inherits DesktopCanvas
 Implements Physics.DebugDraw
 	#tag Event
+		Sub Opening()
+		  Timing = New Physics.ProfileEntry
+		  mDrawTimer = New Physics.Timer(True)
+		End Sub
+	#tag EndEvent
+
+	#tag Event
 		Sub Paint(g As Graphics, areas() As Rect)
 		  #Pragma Unused areas
 		  
@@ -23,6 +30,8 @@ Implements Physics.DebugDraw
 		  /// The world is about to begin drawing for this step.
 		  ///
 		  /// Part of the Physics.DebugDraw interface.
+		  
+		  mDrawTimer.Reset
 		  
 		  CheckBuffer
 		  
@@ -226,7 +235,7 @@ Implements Physics.DebugDraw
 		  ///
 		  /// Part of the Physics.DebugDraw interface.
 		  
-		  
+		  Timing.Record(mDrawTimer.ElapsedMilliseconds)
 		End Sub
 	#tag EndMethod
 
@@ -255,6 +264,15 @@ Implements Physics.DebugDraw
 		  Return path
 		  
 		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 5265736574207468652063616E7661732720647261772074696D65732E
+		Sub ResetTiming()
+		  /// Reset the canvas' draw times.
+		  
+		  Timing = New Physics.ProfileEntry
+		  
+		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 54616B6573207468652073637265656E20636F6F7264696E6174657320616E642072657475726E732074686520776F726C6420636F6F7264696E617465732E
@@ -409,6 +427,10 @@ Implements Physics.DebugDraw
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
+		Private mDrawTimer As Physics.Timer
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
 		Private mShouldDrawAABB As Boolean = False
 	#tag EndProperty
 
@@ -442,6 +464,10 @@ Implements Physics.DebugDraw
 
 	#tag Property, Flags = &h0, Description = 546865206261636B67726F756E6420636F6C6F7572206F6620746865207363656E652E
 		SceneBackgroundColor As Color = &cffffff
+	#tag EndProperty
+
+	#tag Property, Flags = &h0, Description = 5573656420746F207265636F72642074686520617665726167652C206D696E20616E64206D61782074696D6520656C6170736564207768656E2064726177696E672E
+		Timing As Physics.ProfileEntry
 	#tag EndProperty
 
 

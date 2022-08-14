@@ -30,15 +30,8 @@ Begin DesktopWindow WinDemo
       AllowFocusRing  =   True
       AllowTabs       =   False
       Backdrop        =   0
-      DrawAABB        =   False
-      DrawCenterOfMass=   False
-      DrawDynamicTree =   False
-      DrawJoints      =   False
-      DrawPairs       =   False
-      DrawShapes      =   False
-      DrawWireframes  =   False
       Enabled         =   True
-      Height          =   648
+      Height          =   635
       Index           =   -2147483648
       Left            =   0
       LockBottom      =   True
@@ -126,7 +119,7 @@ Begin DesktopWindow WinDemo
       FontName        =   "System"
       FontSize        =   11.0
       FontUnit        =   0
-      Height          =   40
+      Height          =   38
       Index           =   -2147483648
       Italic          =   False
       Left            =   10
@@ -145,7 +138,7 @@ Begin DesktopWindow WinDemo
       TextAlignment   =   0
       TextColor       =   &c000000
       Tooltip         =   ""
-      Top             =   655
+      Top             =   647
       Transparent     =   False
       Underline       =   False
       Visible         =   True
@@ -520,6 +513,8 @@ End
 		  
 		  // Assign the debug drawing canvas to the world.
 		  World.DebugDraw = Scene
+		  
+		  Scene.ResetTiming
 		End Sub
 	#tag EndMethod
 
@@ -633,8 +628,7 @@ End
 		  // Update the timing stats.
 		  LabelTiming.Text = _
 		  "Step Time: " + World.Profile.Step_.ToString + EndOfLine + _
-		  "Draw Time: " + drawTimer.ElapsedMilliseconds.ToString(Locale.Current, "#.#") + " ms" + EndOfLine + _
-		  "      FPS: ?"
+		  "Draw Time: " + Scene.Timing.ToString
 		  
 		  // Tell the scene to paint.
 		  Scene.Refresh
