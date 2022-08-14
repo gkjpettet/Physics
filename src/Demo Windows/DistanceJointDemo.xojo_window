@@ -396,13 +396,37 @@ End
 		Protected Sub CreateSimulation()
 		  InitialiseWorldAndScene
 		  
-		  #Pragma Warning "TODO: Finish"
+		  Const BOX_SIZE = 7.0
 		  
-		  Var staticBox As Physics.Body = CreateBox(New VMaths.Vector2(0, 10), 7, 7, True)
-		  Var swingingBox As Physics.Body = CreateBox(New VMaths.Vector2(-15, -5), 7, 7)
+		  // Create three swinging box pairs.
+		  // Left.
+		  Var leftStaticX As Double = -3 * BOX_SIZE
+		  CreateSwingingBoxPair(leftStaticX, 0, BOX_SIZE, leftStaticX - 14, -5, BOX_SIZE)
+		  
+		  // Centre.
+		  CreateSwingingBoxPair(0, 0, BOX_SIZE, -10, -5, BOX_SIZE)
+		  
+		  // Right.
+		  Var rightStaticX As Double = 3 * BOX_SIZE
+		  CreateSwingingBoxPair(rightStaticX, 0, BOX_SIZE, rightStaticX + 8, -5, BOX_SIZE)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub CreateSwingingBoxPair(staticBoxX As Double, staticBoxY As Double, staticBoxSize As Double, swingingBoxX As Double, swingingBoxY As Double, swingingBoxSize As Double)
+		  /// Creates and adds two box bodies (one static) linked via a distance joint.
+		  
+		  Var staticBox As Physics.Body = CreateBox(New VMaths.Vector2(staticBoxX, staticBoxY), _
+		  staticBoxSize, staticBoxSize, True)
+		  
+		  Var swingingBox As Physics.Body = CreateBox(New VMaths.Vector2(swingingBoxX, swingingBoxY), _
+		  swingingBoxSize, swingingBoxSize)
 		  
 		  Var jointDef As New Physics.DistanceJointDef
-		  jointDef.Initialize(staticBox, swingingBox, New VMaths.Vector2(-3.5, 6.5), New VMaths.Vector2(-11.5, -1.5))
+		  Var staticBoxAnchor As New VMaths.Vector2(staticBoxX - (staticBoxSize/2), staticBoxY - (staticBoxSize/2))
+		  Var swingingBoxAnchor As New VMaths.Vector2(swingingBoxX - (swingingBoxSize/2), swingingBoxY - (swingingBoxSize/2))
+		  jointDef.Initialize(staticBox, swingingBox, staticBoxAnchor, swingingBoxAnchor)
+		  
 		  World.CreateJoint(New Physics.DistanceJoint(jointdef))
 		  
 		End Sub
