@@ -746,6 +746,10 @@ Implements Physics.BroadphaseStrategy
 		Sub Query(callback As Physics.TreeCallback, aabb As Physics.AABB)
 		  // Part of the Physics.BroadphaseStrategy interface.
 		  
+		  #Pragma DisableBoundsChecking
+		  #Pragma NilObjectChecking False
+		  #Pragma StackOverflowChecking False
+		  
 		  #If DebugBuild
 		    Assert(aabb.IsValid)
 		  #EndIf

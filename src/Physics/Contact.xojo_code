@@ -224,6 +224,10 @@
 
 	#tag Method, Flags = &h0
 		Sub Update(listener As Physics.ContactListener)
+		  #Pragma DisableBoundsChecking
+		  #Pragma NilObjectChecking False
+		  #Pragma StackOverflowChecking False
+		  
 		  mOldManifold.Set(Manifold)
 		  
 		  // Re-enable this contact.

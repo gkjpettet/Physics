@@ -163,6 +163,10 @@ Protected Class Fixture
 
 	#tag Method, Flags = &h0
 		Sub Render(debugDraw As Physics.DebugDraw, xf As Physics.Transform, colour As Color, wireframe As Boolean)
+		  #Pragma DisableBoundsChecking
+		  #Pragma NilObjectChecking False
+		  #Pragma StackOverflowChecking False
+		  
 		  Select Case Self.Type
 		  Case Physics.ShapeType.Circle
 		    Var circle As Physics.CircleShape = Physics.CircleShape(shape)

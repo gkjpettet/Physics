@@ -520,6 +520,10 @@ Protected Class Collision
 		  /// transition from `manifold1` to `manifold2`. So `state1` is either persist or
 		  /// remove while `state2` is either add or persist.
 		  
+		  #Pragma DisableBoundsChecking
+		  #Pragma NilObjectChecking False
+		  #Pragma StackOverflowChecking False
+		  
 		  Var iLimit As Integer = Physics.Settings.MaxManifoldPoints - 1
 		  For i As Integer = 0 To iLimit
 		    state1(i) = Physics.PointState.NullState

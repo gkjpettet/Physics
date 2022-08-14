@@ -101,6 +101,10 @@ Protected Class Island
 		Sub Solve(profile As Physics.Profile, step_ As Physics.TimeStep, gravity As VMaths.Vector2, allowSleep As Boolean)
 		  #Pragma Unused profile
 		  
+		  #Pragma DisableBoundsChecking
+		  #Pragma NilObjectChecking False
+		  #Pragma StackOverflowChecking False
+		  
 		  Var dt As Double = step_.Dt
 		  
 		  // Integrate velocities and apply damping. Initialise the body state.
@@ -280,6 +284,10 @@ Protected Class Island
 
 	#tag Method, Flags = &h0
 		Sub SolveTOI(subStep As Physics.TimeStep, toiIndexA As Integer, toiIndexB As Integer)
+		  #Pragma DisableBoundsChecking
+		  #Pragma NilObjectChecking False
+		  #Pragma StackOverflowChecking False
+		  
 		  #If DebugBuild
 		    Assert(toiIndexA < Bodies.Count)
 		    Assert(toiIndexB < Bodies.Count)
