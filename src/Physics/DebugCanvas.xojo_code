@@ -3,6 +3,21 @@ Protected Class DebugCanvas
 Inherits DesktopCanvas
 Implements Physics.DebugDraw
 	#tag Event
+		Function MouseDown(x As Integer, y As Integer) As Boolean
+		  // Permit the MouseUp event to fire.
+		  Return True
+		End Function
+	#tag EndEvent
+
+	#tag Event
+		Sub MouseUp(x As Integer, y As Integer)
+		  // Raise our custom clicked event, passing in the world position.
+		  
+		  Clicked(ScreenXYToWorld(x, y), Keyboard.AsyncOptionKey)
+		End Sub
+	#tag EndEvent
+
+	#tag Event
 		Sub Opening()
 		  Timing = New Physics.ProfileEntry
 		  mDrawTimer = New Physics.Timer(True)
@@ -423,6 +438,10 @@ Implements Physics.DebugDraw
 		End Function
 	#tag EndMethod
 
+
+	#tag Hook, Flags = &h0, Description = 54686520757365722068617320636C69636B6564207468652063616E7661732E20496620606F7074696F6E436C69636B602069732054727565207468656E2074686520606F7074696F6E6020636C69636B207761732068656C6420646F776E207768656E20746865206D6F7573652077617320636C69636B65642E
+		Event Clicked(worldPos As VMaths.Vector2, optionClick As Boolean)
+	#tag EndHook
 
 	#tag Hook, Flags = &h0
 		Event Opening()

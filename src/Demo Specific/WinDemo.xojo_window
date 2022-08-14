@@ -313,6 +313,19 @@ End
 	#tag EndEvent
 
 
+	#tag Method, Flags = &h0, Description = 41646A757374732074686520706572696F64206F6620746865207570646174652074696D657220646570656E64696E67206F6E207468652063756D756C6174697665207374657020616E6420647261772074696D652E
+		Sub AdjustFPS()
+		  /// Adjusts the period of the update timer depending on the cumulative step and draw time.
+		  ///
+		  /// We will clamp to a max of ~60 frames per second (16 ms per frame).
+		  
+		  Var totalTime As Double = World.Profile.Step_.LongAvg + Scene.Timing.LongAvg
+		  
+		  WorldUpdateTimer.Period = Maths.Clamp(totalTime, 16, 1000)
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Sub CreateSimulation()
 		  Select Case PopupDemos.RowTagAt(PopupDemos.SelectedRowIndex)
@@ -377,14 +390,60 @@ End
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
+	#tag Method, Flags = &h0, Description = 436F6E666967757265207468652073696D756C6174696F6E20726561647920746F20636F6E766572742063616E76617320636C69636B7320746F2072616E646F6D20626F646965732E
 		Sub DemoClickToAddRandomBodies()
-		  #Pragma Warning "TODO"
+		  /// Configure the simulation ready to convert canvas clicks to random bodies.
+		  ///
+		  /// Clicking the canvas will place a circle, box, polygon or blob at the mouse click location.
+		  /// If the option key is held down at the time of the click, the body will be static (except blobs).
 		  
 		  InitialiseWorldAndScene
 		  
 		  ResetGravity
 		  
+		  Call Demo.CreateGroundAndOptionalWalls(World, Scene.Width, Scene.Height)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub DemoClickToAddRandomBodiesClickHandler(worldPos As VMaths.Vector2, optionClick As Boolean)
+		  /// Called whenever the scene is clicked and the Demo.Types.ClickToAddRandomBodies demo is running.
+		  
+		  #Pragma Warning "TODO"
+		  
+		  Var type As Integer = System.Random.InRange(0, 3)
+		  Select Case type
+		  Case 0
+		    // Circle.
+		    Var radius As Double = System.Random.InRange(5, 60)/10
+		    Call Demo.CreateCircle(World, worldPos, radius, optionClick)
+		  Case 1
+		    // Box.
+		    Var boxW As Double = System.Random.InRange(10, 60)/10
+		    Var boxH As Double = System.Random.InRange(10, 60)/10
+		    Call Demo.CreateBox(World, worldPos, boxW, boxH, optionClick)
+		  Case 2
+		    // Polygon.
+		    Var pointCount As Integer = System.Random.InRange(3, Physics.Settings.MaxPolygonVertices)
+		    Var points() As VMaths.Vector2
+		    points.ResizeTo(pointCount - 1)
+		    For i As Integer = 0 To points.LastIndex
+		      points(i) = New VMaths.Vector2(System.Random.InRange(3, 9), System.Random.InRange(3, 9))
+		    Next i
+		    #Pragma BreakOnExceptions False
+		    Try
+		      Call Demo.CreatePolygon(World, worldPos, points, optionClick)
+		    Catch e As UnsupportedOperationException
+		      // We must have randomised non-sensical vertices. Just return a box.
+		      Call Demo.CreateBox(World, worldPos, System.Random.InRange(10, 60)/10, System.Random.InRange(10, 60)/10, optionClick)
+		    End Try
+		    #Pragma BreakOnExceptions True
+		  Case 3
+		    // Blob
+		    Var circleCount As Integer = System.Random.InRange(10, 20)
+		    Var blobRadius As VMaths.Vector2 = VMaths.Vector2.RandomInRange(4, 8, 4, 8)
+		    Call Demo.CreateBlob(World, circleCount, blobRadius, worldPos)
+		  End Select
 		  
 		End Sub
 	#tag EndMethod
@@ -416,8 +475,8 @@ End
 		  Var blob2Radius As New VMaths.Vector2(3, 3)
 		  Demo.CreateBlob(World, 20, blob2Radius, blob2Center)
 		  
-		  // Don't draw the joint by default.
-		  CheckBoxJoints.Value = False
+		  // Draw the joints by default.
+		  CheckBoxJoints.Value = True
 		End Sub
 	#tag EndMethod
 
@@ -547,6 +606,8 @@ End
 		  
 		  Scene.ResetTiming
 		  
+		  // Aim for 30 FPS.
+		  WorldUpdateTimer.Period = 33
 		End Sub
 	#tag EndMethod
 
@@ -611,6 +672,18 @@ End
 
 #tag EndWindowCode
 
+#tag Events Scene
+	#tag Event , Description = 54686520757365722068617320636C69636B6564207468652063616E7661732E20496620606F7074696F6E436C69636B602069732054727565207468656E2074686520606F7074696F6E6020636C69636B207761732068656C6420646F776E207768656E20746865206D6F7573652077617320636C69636B65642E
+		Sub Clicked(worldPos As VMaths.Vector2, optionClick As Boolean)
+		  If World = Nil Or Not WorldUpdateTimer.Enabled Then Return
+		  
+		  Select Case PopupDemos.RowTagAt(PopupDemos.SelectedRowIndex)
+		  Case Demo.Types.ClickToAddRandomBodies
+		    DemoClickToAddRandomBodiesClickHandler(worldPos, optionClick)
+		  End Select
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag Events ButtonStart
 	#tag Event
 		Sub Pressed()
@@ -642,26 +715,27 @@ End
 #tag Events WorldUpdateTimer
 	#tag Event
 		Sub Action()
-		  // fps = 1/dt
 		  Var dt As Double = Me.Period / 1000
+		  Var fps As Integer = 1000 / Me.Period
 		  
 		  // Step the physics simulation.
 		  World.StepDt(dt)
 		  
-		  // Draw the world to its internal buffer and time how long it takes.
-		  Var drawTimer As New Physics.Timer
+		  // Draw the world.
 		  World.DrawDebugData
-		  drawTimer.Stop
 		  
 		  // Update the timing stats.
 		  Var stats As String = _
 		  "Step Time: " + World.Profile.Step_.ToString + EndOfLine + _
-		  "Draw Time: " + Scene.Timing.ToString
+		  "Draw Time: " + Scene.Timing.ToString + EndOfLine + _
+		  "   Bodies: " + World.Bodies.Count.ToString + EndOfLine + _
+		  "      FPS: " + fps.ToString
 		  Scene.DrawStringXY(20, 20, stats, Color.Black)
 		  
 		  // Tell the scene to paint.
 		  Scene.Refresh
 		  
+		  AdjustFPS
 		End Sub
 	#tag EndEvent
 #tag EndEvents
