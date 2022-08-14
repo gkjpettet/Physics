@@ -317,11 +317,14 @@ End
 	#tag Method, Flags = &h0
 		Sub CreateSimulation()
 		  Select Case PopupDemos.RowTagAt(PopupDemos.SelectedRowIndex)
-		  case Demo.Types.ConstantVolumeJoint
-		    DemoConstantVolumeJoint
-		    
 		  Case Demo.Types.CirclesAndBoxes
 		    DemoCirclesAndBoxes
+		    
+		  Case Demo.Types.ClickToAddRandomBodies
+		    DemoClickToAddRandomBodies
+		    
+		  Case Demo.Types.ConstantVolumeJoint
+		    DemoConstantVolumeJoint
 		    
 		  Case Demo.Types.DistanceJoints
 		    DemoDistanceJoints
@@ -369,6 +372,14 @@ End
 		    Call Demo.CreateBox(World, pos, w, h)
 		    World.Bodies(World.Bodies.LastIndex).ApplyLinearImpulse(VMaths.Vector2.RandomInRange(1, 10, 1, 10))
 		  Next i
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub DemoClickToAddRandomBodies()
+		  #Pragma Warning "TODO"
+		  
 		  
 		End Sub
 	#tag EndMethod
@@ -669,6 +680,9 @@ End
 		Sub Opening()
 		  Me.AddRow(Demo.Types.CirclesAndBoxes.ToString)
 		  Me.RowTagAt(Me.LastAddedRowIndex) = Demo.Types.CirclesAndBoxes
+		  
+		  Me.AddRow(Demo.Types.ClickToAddRandomBodies.ToString)
+		  Me.RowTagAt(Me.LastAddedRowIndex) = Demo.Types.ClickToAddRandomBodies
 		  
 		  Me.AddRow(Demo.Types.ConstantVolumeJoint.ToString)
 		  Me.RowTagAt(Me.LastAddedRowIndex) = Demo.Types.ConstantVolumeJoint

@@ -251,6 +251,9 @@ Protected Module Demo
 		  Case Demo.Types.CirclesAndBoxes
 		    Return "Circles and Boxes"
 		    
+		  Case Demo.Types.ClickToAddRandomBodies
+		    Return "Click to add Random Bodies"
+		    
 		  Case Demo.Types.ConstantVolumeJoint
 		    Return "Constant Volume Joint"
 		    
@@ -276,7 +279,8 @@ Protected Module Demo
 		  RevoluteJoint
 		  VariousShapes
 		  CirclesAndBoxes
-		ConstantVolumeJoint
+		  ConstantVolumeJoint
+		ClickToAddRandomBodies
 	#tag EndEnum
 
 

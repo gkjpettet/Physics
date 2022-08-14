@@ -6,6 +6,8 @@ Implements Physics.DebugDraw
 		Sub Opening()
 		  Timing = New Physics.ProfileEntry
 		  mDrawTimer = New Physics.Timer(True)
+		  
+		  RaiseEvent Opening
 		End Sub
 	#tag EndEvent
 
@@ -420,6 +422,11 @@ Implements Physics.DebugDraw
 		  
 		End Function
 	#tag EndMethod
+
+
+	#tag Hook, Flags = &h0
+		Event Opening()
+	#tag EndHook
 
 
 	#tag Property, Flags = &h21
