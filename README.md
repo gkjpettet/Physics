@@ -44,7 +44,7 @@ I'm about 95% of the way through porting Forge2D. The engine is fully operationa
 
 ## Development background
 
-I've been trying (on and off) since about 2019 to write a physics engine for Xojo. After multiple failed attempts at porting various physics engines written in C++ (such as the original [Box2D], [Bullet] and [Chipmunk]) and Javascript ()[Matter.js][Matterjs]) I decided to write my own. After a lot of reading I released a simple engine called [ImpulseEngine]. Whilst I was pretty proud of this it was lacking in a number of areas. Firstly it was slow as it lacked a decent broadphase. Secondly I never managed to figure out how to implement joints which were very important to me.
+I've been trying (on and off) since about 2019 to write a physics engine for Xojo. After multiple failed attempts at porting various physics engines written in C++ (such as the original [Box2D], [Bullet] and [Chipmunk]) and Javascript ([Matter.js][Matterjs]) I decided to write my own. After a lot of reading I released a simple engine called [ImpulseEngine]. Whilst I was pretty proud of this it was lacking in a number of areas. Firstly it was slow as it lacked a decent broadphase. Secondly I never managed to figure out how to implement joints which were very important to me.
 
 I've recently been dabbling in Flutter and Dart and came across the [Flame] game engine which uses a Dart-port of Box2D called [Forge2D]. Dart is similar enough in its object model to allow me to port it to Xojo.
 
@@ -57,7 +57,7 @@ I made a short YouTube video walking through the demo app that might be of inter
 alt="YouTube Video of Xojo Physics"/></a>
 
 [Box2D]: https://box2d.org
-[Forge2D]: https://github.com/flame-engine/forge2d]
+[Forge2D]: https://github.com/flame-engine/forge2d
 [Chipmunk]: https://chipmunk-physics.net
 [Bullet]: https://github.com/bulletphysics/bullet3
 [Matterjs]: https://brm.io/matter-js/
