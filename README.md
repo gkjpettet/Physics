@@ -57,7 +57,7 @@ I made a short YouTube video walking through the demo app that might be of inter
 alt="YouTube Video of Xojo Physics"/></a>
 
 [Box2D]: https://box2d.org
-[Forge2D]: https://github.com/flame-engine/forge2d]
+[Forge2D]: https://github.com/flame-engine/forge2d
 [Chipmunk]: https://chipmunk-physics.net
 [Bullet]: https://github.com/bulletphysics/bullet3
 [Matterjs]: https://brm.io/matter-js/
