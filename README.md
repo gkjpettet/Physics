@@ -26,6 +26,7 @@ The engine is entirely contained within the `Physics` module to make it easy to 
 
 Included is the `Physics.DebugCanvas` class which is a subclass of `DesktopCanvas`. This is a drop-in control that will render the physics simulation. The `DebugCanvas` is not intended to be used for a game (it could be better optimised) but it's quite performant nonetheless.
 
+The main project is saved in Xojo's "Project" format since this plays nicely with version control. I have also saved the project as a binary file so free and lite license users of Xojo can experiment with the module too.
 ## Requirements
 
 The engine was developed on a 16" MacBook Pro with an M1 Pro using Xojo 2022 Release 2. The code is entirely API 2.0. I've not tested it on earlier Xojo releases.
