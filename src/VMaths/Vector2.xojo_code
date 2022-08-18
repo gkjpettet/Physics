@@ -660,6 +660,18 @@ Protected Class Vector2
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 53657473207468697320766563746F72277320636F6D706F6E656E747320627920636F7079696E67207468656D2066726F6D20606F74686572602E2052657475726E7320697473656C662E
+		Function SetFrom(other As VMaths.Vector2) As VMaths.Vector2
+		  /// Sets this vector's components by copying them from `other`. Returns itself.
+		  
+		  X = other.X
+		  Y = other.Y
+		  
+		  Return Self
+		  
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Sub SetValues(x As Double, y As Double)
 		  /// Set the values of this vector.

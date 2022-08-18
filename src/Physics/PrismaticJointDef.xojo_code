@@ -47,7 +47,7 @@ Inherits Physics.JointDef
 	#tag EndProperty
 
 	#tag Property, Flags = &h0, Description = 456E61626C652F64697361626C6520746865206A6F696E74206D6F746F722E
-		EnableMotor As Double = False
+		EnableMotor As Boolean = False
 	#tag EndProperty
 
 	#tag Property, Flags = &h0, Description = 546865206C6F63616C207472616E736C6174696F6E206178697320696E2060426F647941602E
