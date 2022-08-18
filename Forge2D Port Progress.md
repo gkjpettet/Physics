@@ -91,7 +91,7 @@
 	[] motor_joint_def
 	[] mouse_joint
 	[] mouse_joint_def
-	[] prismtatic_joint
+	[x] prismtatic_joint
 	[x] prismatic_joint_def
 	[] pulley_joint
 	[] pulley_joint_def
