@@ -92,13 +92,13 @@
 	[] mouse_joint
 	[] mouse_joint_def
 	[] prismtatic_joint
-	[] prismatic_joint_def
+	[x] prismatic_joint_def
 	[] pulley_joint
 	[] pulley_joint_def
 	[x] revolute_joint
 	[x] revolute_joint_def
-	[] rope_joint
-	[x] rope_joint_def
+	[] rope_joint  <--- not working when previously ported.
+	[] rope_joint_def
 	[] weld_joint
 	[] weld_joint_def
 	[] wheel_joint

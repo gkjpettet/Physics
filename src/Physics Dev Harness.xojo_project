@@ -139,6 +139,7 @@ Class=DistanceJointDef;Physics/DistanceJointDef.xojo_code;&h0000000047E5FFFF;&h0
 Class=DistanceJoint;Physics/DistanceJoint.xojo_code;&h000000003AA677FF;&h0000000058463FFF;false
 Module=Demo;Demo Specific/Demo.xojo_code;&h000000000574A7FF;&h0000000055998FFF;false
 Class=ConstantVolumeJoint;Physics/ConstantVolumeJoint.xojo_code;&h000000006AF61FFF;&h0000000058463FFF;false
+Class=PrismaticJointDef;Physics/PrismaticJointDef.xojo_code;&h000000004568C7FF;&h0000000058463FFF;false
 DefaultWindow=WinDemo
 AppMenuBar=MainMenuBar
 MajorVersion=1
