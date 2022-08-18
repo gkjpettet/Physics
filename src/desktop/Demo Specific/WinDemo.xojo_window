@@ -522,8 +522,8 @@ End
 		  
 		  ResetGravity
 		  
-		  // Create the ground.
-		  Var ground As Physics.Body = Demo.CreateGroundAndOptionalWalls(World, Scene.Width, Scene.Height, False)
+		  // Create the ground and walls.
+		  Var ground As Physics.Body = Demo.CreateGroundAndOptionalWalls(World, Scene.Width, Scene.Height)
 		  
 		  // Box for the prismatic joint.
 		  Const PLATFORM_W = 25

@@ -254,7 +254,7 @@ Protected Module Demo
 		    Return "Circles and Boxes"
 		    
 		  Case Demo.Types.ClickToAddRandomBodies
-		    Return "Click to add Random Bodies"
+		    Return "Click To Add"
 		    
 		  Case Demo.Types.ConstantVolumeJoint
 		    Return "Constant Volume Joint"

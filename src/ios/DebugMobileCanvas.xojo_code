@@ -27,6 +27,12 @@ Implements Physics.DebugDraw
 		End Sub
 	#tag EndEvent
 
+	#tag Event
+		Sub PointerDown(position As Point, pointerInfo() As PointerEvent)
+		  Tapped(ScreenXYToWorld(position.X, position.Y))
+		End Sub
+	#tag EndEvent
+
 
 	#tag Method, Flags = &h0
 		Sub BeginDrawing()
@@ -108,8 +114,10 @@ Implements Physics.DebugDraw
 	#tag Method, Flags = &h0
 		Sub DrawParticles(particles() As Physics.Particle, radius As Double)
 		  // Part of the Physics.DebugDraw interface.
-		  #Pragma Warning  "Don't forget to implement this method!"
 		  
+		  For Each p As Physics.Particle In particles
+		    DrawSolidCircle(p.Position, radius, p.Colour)
+		  Next p
 		  
 		End Sub
 	#tag EndMethod
@@ -117,35 +125,53 @@ Implements Physics.DebugDraw
 	#tag Method, Flags = &h0
 		Sub DrawParticlesWireframe(particles() As Physics.Particle, radius As Double)
 		  // Part of the Physics.DebugDraw interface.
-		  #Pragma Warning  "Don't forget to implement this method!"
 		  
+		  #Pragma Unused particles
+		  #Pragma Unused radius
 		  
+		  Raise New UnsupportedOperationException("Not implemented.")
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub DrawPoint(argPoint As VMaths.Vector2, argRadiusOnScreen As Double, argColor As Color)
+		Sub DrawPoint(point As VMaths.Vector2, radiusOnScreen As Double, colour As Color)
 		  // Part of the Physics.DebugDraw interface.
-		  #Pragma Warning  "Don't forget to implement this method!"
 		  
+		  Var screenCenter As VMaths.Vector2 = WorldToScreen(point)
+		  Var circumference As Double = radiusOnScreen * 2
 		  
+		  mBuffer.Graphics.DrawingColor = colour
+		  
+		  mBuffer.Graphics.FillOval(screenCenter.X - radiusOnScreen, _
+		  screenCenter.Y - radiusOnScreen, _
+		  circumference, circumference)
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub DrawPolygon(vertices() As VMaths.Vector2, colour As Color)
-		  // Part of the Physics.DebugDraw interface.
-		  #Pragma Warning  "Don't forget to implement this method!"
+		  /// Draw the wireframe of a closed polygon provided in counter-clockwise order.
+		  ///
+		  /// Part of the Physics.DebugDraw interface.
 		  
+		  mBuffer.Graphics.DrawingColor = colour
+		  mBuffer.Graphics.DrawPath(PolygonPath(vertices))
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub DrawSegment(p1 As VMaths.Vector2, p2 As VMaths.Vector2, colour As Color)
-		  // Part of the Physics.DebugDraw interface.
-		  #Pragma Warning  "Don't forget to implement this method!"
+		  /// Draw a line segment. 
+		  ///
+		  /// Part of the Physics.DebugDraw interface.
 		  
+		  mBuffer.Graphics.DrawingColor = colour
+		  
+		  Var screenP1 As VMaths.Vector2 = WorldToScreen(p1)
+		  Var screenP2 As VMaths.Vector2 = WorldToScreen(p2)
+		  
+		  mBuffer.Graphics.DrawLine(screenP1.X, screenP1.Y, screenP2.X, screenP2.Y)
 		  
 		End Sub
 	#tag EndMethod
@@ -169,9 +195,12 @@ Implements Physics.DebugDraw
 
 	#tag Method, Flags = &h0
 		Sub DrawSolidPolygon(vertices() As VMaths.Vector2, colour As Color)
-		  // Part of the Physics.DebugDraw interface.
-		  #Pragma Warning  "Don't forget to implement this method!"
+		  /// Draw a filled closed polygon provided in counter-clockwise order.
+		  ///
+		  /// Part of the Physics.DebugDraw interface.
 		  
+		  mBuffer.Graphics.DrawingColor = colour
+		  mBuffer.Graphics.FillPath(PolygonPath(vertices))
 		  
 		End Sub
 	#tag EndMethod
@@ -236,6 +265,33 @@ Implements Physics.DebugDraw
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h21, Description = 52657475726E73206120636C6F73656420706F6C79676F6E2070726F766964656420696E20636F756E7465722D636C6F636B77697365206F726465722E
+		Private Function PolygonPath(vertices() As VMaths.Vector2) As GraphicsPath
+		  /// Returns a closed polygon provided in counter-clockwise order.
+		  ///
+		  /// Part of the Physics.DebugDraw interface.
+		  
+		  Var screenVertices() As VMaths.Vector2
+		  For Each vertex As VMaths.Vector2 In vertices
+		    screenVertices.Add(WorldToScreen(vertex))
+		  Next vertex
+		  
+		  Var path As New GraphicsPath
+		  path.MoveToPoint(screenVertices(0).X, screenVertices(0).Y)
+		  
+		  // Draw lines to all of the remaining points.
+		  For Each vertex As VMaths.Vector2 In screenVertices
+		    path.AddLineToPoint(vertex.X, vertex.Y)
+		  Next vertex
+		  
+		  // Draw a line back to the starting point.
+		  path.AddLineToPoint(screenVertices(0).X, screenVertices(0).Y)
+		  
+		  Return path
+		  
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 5265736574207468652063616E7661732720647261772074696D65732E
 		Sub ResetTiming()
 		  /// Reset the canvas' draw times.
@@ -247,9 +303,11 @@ Implements Physics.DebugDraw
 
 	#tag Method, Flags = &h0
 		Function ScreenToWorld(argScreen As VMaths.Vector2) As VMaths.Vector2
-		  // Part of the Physics.DebugDraw interface.
-		  #Pragma Warning  "Don't forget to implement this method!"
+		  /// Takes the screen coordinates and returns the world coordinates.
+		  ///
+		  /// Part of the Physics.DebugDraw interface.
 		  
+		  Return Viewport.ScreenToWorld(argScreen)
 		  
 		End Function
 	#tag EndMethod
@@ -386,6 +444,10 @@ Implements Physics.DebugDraw
 
 	#tag Hook, Flags = &h0
 		Event Opening()
+	#tag EndHook
+
+	#tag Hook, Flags = &h0, Description = 54686520757365722068617320746170706564207468652063616E7661732E
+		Event Tapped(worldPos As VMaths.Vector2)
 	#tag EndHook
 
 
