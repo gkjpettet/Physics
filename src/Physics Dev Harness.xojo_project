@@ -140,6 +140,7 @@ Class=DistanceJoint;Physics/DistanceJoint.xojo_code;&h000000003AA677FF;&h0000000
 Module=Demo;Demo Specific/Demo.xojo_code;&h000000000574A7FF;&h0000000055998FFF;false
 Class=ConstantVolumeJoint;Physics/ConstantVolumeJoint.xojo_code;&h000000006AF61FFF;&h0000000058463FFF;false
 Class=RopeJointDef;Physics/RopeJointDef.xojo_code;&h0000000033D347FF;&h0000000058463FFF;false
+Class=RopeJoint;Physics/RopeJoint.xojo_code;&h000000002E646FFF;&h0000000058463FFF;false
 DefaultWindow=WinDemo
 AppMenuBar=MainMenuBar
 MajorVersion=1

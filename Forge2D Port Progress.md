@@ -98,7 +98,7 @@
 	[x] revolute_joint
 	[x] revolute_joint_def
 	[] rope_joint
-	[] rope_joint_def
+	[x] rope_joint_def
 	[] weld_joint
 	[] weld_joint_def
 	[] wheel_joint
