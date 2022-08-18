@@ -328,6 +328,9 @@ End
 
 	#tag Method, Flags = &h0
 		Sub CreateSimulation()
+		  // Clear out any existing custom update action.
+		  MyUpdateAction = Nil
+		  
 		  Select Case PopupDemos.RowTagAt(PopupDemos.SelectedRowIndex)
 		  Case Demo.Types.CirclesAndBoxes
 		    DemoCirclesAndBoxes
@@ -340,6 +343,9 @@ End
 		    
 		  Case Demo.Types.DistanceJoints
 		    DemoDistanceJoints
+		    
+		  Case Demo.Types.PrismaticJoint
+		    DemoPrismaticJoint
 		    
 		  Case Demo.Types.RevoluteJoint
 		    DemoRevoluteJoint
@@ -505,6 +511,67 @@ End
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 436F6E666967757265207468652073696D756C6174696F6E20666F722074686520707269736D61746963206A6F696E742064656D6F2E
+		Sub DemoPrismaticJoint()
+		  /// Configure the simulation for the prismatic joint demo.
+		  
+		  InitialiseWorldAndScene
+		  
+		  ResetGravity
+		  
+		  // Create the ground.
+		  Var ground As Physics.Body = Demo.CreateGroundAndOptionalWalls(World, Scene.Width, Scene.Height, False)
+		  
+		  // Box for the prismatic joint.
+		  Const PLATFORM_W = 25
+		  Const PLATFORM_H = 2.5
+		  Var platform As Physics.Body = Demo.CreateBox(World, New VMaths.Vector2(0, -12), PLATFORM_W, PLATFORM_H)
+		  
+		  // Assign some user data - we will use this to find the joint in our update action after every world step.
+		  platform.UserData = "prismaticPlatform"
+		  
+		  // Create the prismatic joint.
+		  Var jointDef As New Physics.PrismaticJointDef
+		  jointDef.LowerTranslation = -25
+		  jointDef.UpperTranslation = 20
+		  jointDef.EnableLimit = True
+		  jointDef.MaxMotorForce = 300
+		  jointDef.MotorSpeed = 5.0
+		  jointDef.EnableMotor = True
+		  jointDef.Initialize(ground, platform, platform.Position, New VMaths.Vector2(1, 0))
+		  World.CreateJoint(New Physics.PrismaticJoint(jointDef))
+		  
+		  // Set a custom method to be called upon each world update. 
+		  // This method will reverse the direction of the platform when it slows to a stop.
+		  MyUpdateAction = AddressOf DemoPrismaticJointUpdateDelegate
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 54686973206D6574686F6420636865636B7320746F207365652069662074686520706C6174666F726D206372656174656420696E20746865206044656D6F507269736D617469634A6F696E7460206D6574686F64206861732073746F70706564206D6F76696E672E20496620736F2C2069742072657665727365732069747320646972656374696F6E2E
+		Sub DemoPrismaticJointUpdateDelegate()
+		  /// This method checks to see if the platform created in the `DemoPrismaticJoint` method has stopped
+		  /// moving. If so, it reverses its direction.
+		  
+		  // Find the platform's joint.
+		  Var platformJoint As Physics.PrismaticJoint
+		  For Each j As Physics.Joint In World.Joints
+		    If j.BodyB.UserData = "prismaticPlatform" Then // Set in `DemoPrismaticJoint`.
+		      platformJoint = Physics.PrismaticJoint(j)
+		      Exit
+		    End If
+		  Next j
+		  
+		  If platformJoint <> Nil And platformJoint.MotorLimitStateDidChange Then
+		    Select Case platformJoint.LimitState
+		    Case Physics.LimitState.AtUpper, Physics.LimitState.AtLower
+		      platformJoint.MotorSpeed = -platformJoint.MotorSpeed
+		    End Select
+		  End If
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 436F6E666967757265207468652073696D756C6174696F6E20666F7220746865207265766F6C757465206A6F696E742064656D6F2E
 		Sub DemoRevoluteJoint()
 		  /// Configure the simulation for the revolute joint demo.
@@ -653,9 +720,17 @@ End
 		End Sub
 	#tag EndMethod
 
+	#tag DelegateDeclaration, Flags = &h0
+		Delegate Sub UpdateAction()
+	#tag EndDelegateDeclaration
+
 
 	#tag Property, Flags = &h21, Description = 547275652069662066697273742074696D65207365747570206F66207468652077696E646F772068617320636F6D706C657465642E
 		Private mAllowRunning As Boolean = False
+	#tag EndProperty
+
+	#tag Property, Flags = &h0, Description = 4F7074696F6E616C206D6574686F6420746861742077696C2062652063616C6C65642075706F6E206561636820776F726C64207570646174652E
+		MyUpdateAction As UpdateAction
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -733,6 +808,11 @@ End
 		  Scene.Refresh
 		  
 		  AdjustFPS
+		  
+		  // If a demo has set a custom action to occur within each update, call it.
+		  If MyUpdateAction <> Nil Then
+		    MyUpdateAction.Invoke
+		  End If
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -771,6 +851,9 @@ End
 		  
 		  Me.AddRow(Demo.Types.DistanceJoints.ToString)
 		  Me.RowTagAt(Me.LastAddedRowIndex) = Demo.Types.DistanceJoints
+		  
+		  Me.AddRow(Demo.Types.PrismaticJoint.ToString)
+		  Me.RowTagAt(Me.LastAddedRowIndex) = Demo.Types.PrismaticJoint
 		  
 		  Me.AddRow(Demo.Types.RevoluteJoint.ToString)
 		  Me.RowTagAt(Me.LastAddedRowIndex) = Demo.Types.RevoluteJoint

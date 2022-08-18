@@ -125,11 +125,59 @@ Inherits Physics.JointDef
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="LocalAxisA"
+			Name="ReferenceAngle"
 			Visible=false
 			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
+			InitialValue="0.0"
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="EnableLimit"
+			Visible=false
+			Group="Behavior"
+			InitialValue="False"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="LowerTranslation"
+			Visible=false
+			Group="Behavior"
+			InitialValue="0.0"
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="UpperTranslation"
+			Visible=false
+			Group="Behavior"
+			InitialValue="0.0"
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="EnableMotor"
+			Visible=false
+			Group="Behavior"
+			InitialValue="False"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="MaxMotorForce"
+			Visible=false
+			Group="Behavior"
+			InitialValue="0.0"
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="MotorSpeed"
+			Visible=false
+			Group="Behavior"
+			InitialValue="0.0"
+			Type="Double"
 			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior

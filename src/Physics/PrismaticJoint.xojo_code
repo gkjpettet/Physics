@@ -258,25 +258,46 @@ Inherits Physics.Joint
 		  End If
 		  
 		  // Compute motor and limit terms.
+		  mMotorLimitStateDidChange = False
 		  If mEnableLimit Then
 		    Var jointTranslation As Double = mAxis.Dot(d)
 		    If Abs(mUpperTranslation - mLowerTranslation) < 2.0 * Physics.Settings.LinearSlop Then
 		      mLimitState = Physics.LimitState.Equal
 		    ElseIf jointTranslation <= mLowerTranslation Then
 		      If mLimitState <> Physics.LimitState.AtLower Then
+		        // Flag that the motor state has changed and store the previous state.
+		        If mLimitState <> Physics.LimitState.AtLower Then
+		          mMotorLimitStateDidChange = True
+		          mPreviousMotorLimitState = mLimitState
+		        End If
 		        mLimitState = Physics.LimitState.AtLower
 		        mImpulse.Z = 0.0
 		      End If
 		    ElseIf jointTranslation >= mUpperTranslation Then
 		      If mLimitState <> Physics.LimitState.AtUpper Then
+		        // Flag that the motor state has changed and store the previous state.
+		        If mLimitState <> Physics.LimitState.AtUpper Then
+		          mMotorLimitStateDidChange = True
+		          mPreviousMotorLimitState = mLimitState
+		        End If
 		        mLimitState = Physics.LimitState.AtUpper
 		        mImpulse.Z = 0.0
 		      End If
 		    Else
+		      // Flag that the motor state has changed and store the previous state.
+		      If mLimitState <> Physics.LimitState.Inactive Then
+		        mMotorLimitStateDidChange = True
+		        mPreviousMotorLimitState = mLimitState
+		      End If
 		      mLimitState = Physics.LimitState.Inactive
 		      mImpulse.Z = 0.0
 		    End If
 		  Else
+		    // Flag that the motor state has changed and store the previous state.
+		    If mLimitState <> Physics.LimitState.Inactive Then
+		      mMotorLimitStateDidChange = True
+		      mPreviousMotorLimitState = mLimitState
+		    End If
 		    mLimitState = Physics.LimitState.Inactive
 		    mImpulse.Z = 0.0
 		  End If
@@ -673,6 +694,16 @@ Inherits Physics.Joint
 	#tag EndMethod
 
 
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  Return mLimitState
+			  
+			End Get
+		#tag EndGetter
+		LimitState As Physics.LimitState
+	#tag EndComputedProperty
+
 	#tag Property, Flags = &h0
 		LocalXAxisA As VMaths.Vector2
 	#tag EndProperty
@@ -788,6 +819,10 @@ Inherits Physics.Joint
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
+		Private mPreviousMotorLimitState As Physics.LimitState = Physics.LimitState.Inactive
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
 		Private mReferenceAngle As Double
 	#tag EndProperty
 
@@ -803,6 +838,16 @@ Inherits Physics.Joint
 		Private mUpperTranslation As Double = 0.0
 	#tag EndProperty
 
+	#tag ComputedProperty, Flags = &h0, Description = 546865206D6F746F72206C696D697420737461746520647572696E67207468652070726576696F757320776F726C6420737465702E
+		#tag Getter
+			Get
+			  Return mPreviousMotorLimitState
+			  
+			End Get
+		#tag EndGetter
+		PreviousMotorLimitState As Physics.LimitState
+	#tag EndComputedProperty
+
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
@@ -815,6 +860,14 @@ Inherits Physics.Joint
 
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="MotorLimitStateDidChange"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
@@ -888,12 +941,34 @@ Inherits Physics.Joint
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="LocalXAxisA"
+			Name="ReferenceAngle"
 			Visible=false
 			Group="Behavior"
 			InitialValue=""
-			Type="Integer"
+			Type="Double"
 			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="MotorSpeed"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="LimitState"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Physics.LimitState"
+			EditorType="Enum"
+			#tag EnumValues
+				"0 - Inactive"
+				"1 - AtLower"
+				"2 - AtUpper"
+				"3 - Equal"
+			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

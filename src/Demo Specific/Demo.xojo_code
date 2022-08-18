@@ -262,6 +262,9 @@ Protected Module Demo
 		  Case Demo.Types.DistanceJoints
 		    Return "Distance Joints"
 		    
+		  Case Demo.Types.PrismaticJoint
+		    Return "Prismatic Joint"
+		    
 		  Case Demo.Types.RevoluteJoint
 		    Return "Revolute Joint"
 		    
@@ -282,7 +285,8 @@ Protected Module Demo
 		  VariousShapes
 		  CirclesAndBoxes
 		  ConstantVolumeJoint
-		ClickToAddRandomBodies
+		  ClickToAddRandomBodies
+		PrismaticJoint
 	#tag EndEnum
 
 

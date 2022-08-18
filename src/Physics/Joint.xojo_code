@@ -180,6 +180,19 @@
 		Private mCollideConnected As Boolean = False
 	#tag EndProperty
 
+	#tag Property, Flags = &h1
+		Protected mMotorLimitStateDidChange As Boolean = False
+	#tag EndProperty
+
+	#tag ComputedProperty, Flags = &h0, Description = 547275652069662074686973206A6F696E742773206D6F746F72206C696D6974207374617465206368616E67656420647572696E6720746865206C61737420737465702E
+		#tag Getter
+			Get
+			  Return mMotorLimitStateDidChange
+			End Get
+		#tag EndGetter
+		MotorLimitStateDidChange As Boolean
+	#tag EndComputedProperty
+
 	#tag Property, Flags = &h0, Description = 54686520636F6C6F7572207573656420746F2072656E6465722E
 		RenderColor As Color
 	#tag EndProperty
@@ -244,6 +257,22 @@
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="IsActive"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="RenderColor"
+			Visible=false
+			Group="Behavior"
+			InitialValue="&c000000"
+			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="MotorLimitStateDidChange"
 			Visible=false
 			Group="Behavior"
 			InitialValue=""
