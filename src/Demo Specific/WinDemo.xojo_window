@@ -514,6 +514,9 @@ End
 	#tag Method, Flags = &h0, Description = 436F6E666967757265207468652073696D756C6174696F6E20666F722074686520707269736D61746963206A6F696E742064656D6F2E
 		Sub DemoPrismaticJoint()
 		  /// Configure the simulation for the prismatic joint demo.
+		  ///
+		  /// We will create a rectangle platform that moves backwards and forwards from left to right.
+		  /// Clickling anywhere in the canvas will create random bodies at that location.
 		  
 		  InitialiseWorldAndScene
 		  
@@ -752,6 +755,10 @@ End
 		  Select Case PopupDemos.RowTagAt(PopupDemos.SelectedRowIndex)
 		  Case Demo.Types.ClickToAddRandomBodies
 		    DemoClickToAddRandomBodiesClickHandler(worldPos, optionClick)
+		    
+		  Case Demo.Types.PrismaticJoint
+		    DemoClickToAddRandomBodiesClickHandler(worldPos, optionClick)
+		    
 		  End Select
 		End Sub
 	#tag EndEvent
