@@ -24,14 +24,14 @@ Begin DesktopWindow WinDemo
    Type            =   0
    Visible         =   True
    Width           =   1280
-   Begin Physics.DebugCanvas Scene
+   Begin DebugCanvas Scene
       AllowAutoDeactivate=   True
       AllowFocus      =   False
       AllowFocusRing  =   True
       AllowTabs       =   False
       Backdrop        =   0
       Enabled         =   True
-      Height          =   648
+      Height          =   644
       Index           =   -2147483648
       Left            =   0
       LockBottom      =   True
@@ -40,7 +40,7 @@ Begin DesktopWindow WinDemo
       LockRight       =   True
       LockTop         =   True
       SceneBackgroundColor=   &cFFFFFF00
-      Scope           =   1
+      Scope           =   0
       TabIndex        =   0
       TabPanelIndex   =   0
       TabStop         =   True
@@ -548,6 +548,8 @@ End
 		  // This method will reverse the direction of the platform when it slows to a stop.
 		  MyUpdateAction = AddressOf DemoPrismaticJointUpdateDelegate
 		  
+		  // Don't draw the joints by default.
+		  CheckBoxJoints.Value = False
 		End Sub
 	#tag EndMethod
 
