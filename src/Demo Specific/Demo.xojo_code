@@ -70,7 +70,7 @@ Protected Module Demo
 
 	#tag Method, Flags = &h1, Description = 4372656174657320616E642061646473206120636972636C6520626F647920746F2074686520776F726C642061742060706F736974696F6E60207265747575726E696E672074686520626F64792E
 		Protected Function CreateCircle(world As Physics.World, position As VMaths.Vector2, radius As Double, isStatic As Boolean = False, restitution As Double = 0.3, friction As Double = 0.5, density As Double = 1) As Physics.Body
-		  /// Creates and adds a circle body to the world at `position` retuurning the body.
+		  /// Creates and adds a circle body to the world at `position` returning the body.
 		  
 		  // Create a body.
 		  Var type As Physics.BodyType = If(isStatic, Physics.BodyType.Static_, Physics.BodyType.Dynamic)
@@ -89,6 +89,8 @@ Protected Module Demo
 		  fixtureDef.Density = density
 		  
 		  body.CreateFixture(fixtureDef)
+		  
+		  Return body
 		  
 		End Function
 	#tag EndMethod
