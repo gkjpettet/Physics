@@ -25,6 +25,7 @@ Begin MobileScreen ScreenDemo
       Height          =   682
       Left            =   225
       LockedInPosition=   False
+      SceneBackgroundColor=   &cFFFFFF00
       Scope           =   0
       TintColor       =   &c000000
       Top             =   28
@@ -86,6 +87,7 @@ Begin MobileScreen ScreenDemo
       AutoLayout      =   TableDemos, 4, ButtonReset, 3, False, +1.00, 4, 1, -*kStdControlGapV, , True
       ControlCount    =   0
       EditingEnabled  =   False
+      EditingEnabled  =   False
       Enabled         =   True
       EstimatedRowHeight=   -1
       Format          =   0
@@ -100,20 +102,12 @@ Begin MobileScreen ScreenDemo
       Width           =   225
    End
    Begin Timer WorldUpdateTimer
-      Height          =   32
-      Height          =   32
-      Left            =   140
-      Left            =   140
       LockedInPosition=   False
       PanelIndex      =   -1
       Parent          =   ""
       Period          =   33
       RunMode         =   0
       Scope           =   2
-      Top             =   140
-      Top             =   140
-      Width           =   32
-      Width           =   32
    End
    Begin MobileSwitch SwitchWireframes
       AccessibilityHint=   ""

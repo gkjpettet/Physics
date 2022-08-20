@@ -490,6 +490,10 @@ Protected Class World
 		  
 		  mGravity.SetFrom(gravity)
 		  
+		  // Wake all sleeping bodies.
+		  For Each b As Physics.Body In Bodies
+		    b.SetAwake(True)
+		  Next b
 		End Sub
 	#tag EndMethod
 
