@@ -141,10 +141,9 @@ Implements Physics.DebugDraw
 		Sub DrawParticlesWireframe(particles() As Physics.Particle, radius As Double)
 		  // Part of the Physics.DebugDraw interface.
 		  
-		  #Pragma Unused particles
-		  #Pragma Unused radius
-		  
-		  Raise New UnsupportedOperationException("Not implemented.")
+		  For Each p As Physics.Particle In particles
+		    DrawCircle(p.Position, radius, p.Colour)
+		  Next p
 		End Sub
 	#tag EndMethod
 

@@ -344,6 +344,9 @@ End
 		  Case Demo.Types.DistanceJoints
 		    DemoDistanceJoints
 		    
+		  Case Demo.Types.Particles
+		    DemoParticles
+		    
 		  Case Demo.Types.PrismaticJoint
 		    DemoPrismaticJoint
 		    
@@ -392,6 +395,31 @@ End
 		    Call Demo.CreateBox(World, pos, w, h)
 		    World.Bodies(World.Bodies.LastIndex).ApplyLinearImpulse(VMaths.Vector2.RandomInRange(1, 10, 1, 10))
 		  Next i
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 447261777320612063697263756C61722067726F7570206F66207061727469636C65732061742060776F726C64506F73602E
+		Sub DemoClickToAddParticlesClickHandler(worldPos As VMaths.Vector2, optionClick As Boolean)
+		  /// Draws a circular group of particles at `worldPos`.
+		  
+		  #Pragma Unused optionClick
+		  
+		  // Ensure the world has a particle system.
+		  If World.ParticleSystem = Nil Then
+		    World.ParticleSystem = New Physics.ParticleSystem(World)
+		  End If
+		  
+		  // Set the size of the particles.
+		  World.ParticleSystem.ParticleDiameter = 0.5
+		  
+		  // Create a circular particle group centred at `worldPos`.
+		  Var groupDef As New Physics.ParticleGroupDef
+		  groupDef.Colour = RandomColor
+		  groupDef.Shape = New Physics.CircleShape(2.5)
+		  groupDef.Position = worldPos
+		  
+		  Call World.ParticleSystem.CreateParticleGroup(groupDef)
 		  
 		End Sub
 	#tag EndMethod
@@ -508,6 +536,24 @@ End
 		  
 		  // Ensure the joints are drawn by default.
 		  CheckBoxJoints.Value = True
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 436F6E666967757265207468652073696D756C6174696F6E20666F7220746865207061727469636C65732064656D6F2E
+		Sub DemoParticles()
+		  /// Configure the simulation for the particles demo.
+		  ///
+		  /// Clicking anywhere in the scene will create a randomly coloured circular particle group.
+		  
+		  InitialiseWorldAndScene
+		  
+		  ResetGravity
+		  
+		  // Create a ground.
+		  Call Demo.CreateGroundAndOptionalWalls(World, Scene.Width, Scene.Height, False)
+		  
+		  // Default to drawing solid bodies and objects.
+		  CheckBoxWireframes.Value = False
 		End Sub
 	#tag EndMethod
 
@@ -688,6 +734,15 @@ End
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 52657475726E7320612072616E646F6D20636F6C6F75722E
+		Function RandomColor() As Color
+		  /// Returns a random colour.
+		  
+		  Return Color.RGB(System.Random.InRange(0, 255), System.Random.InRange(0, 255), System.Random.InRange(0, 255))
+		  
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Sub ResetGravity()
 		  /// Resets the world's gravity vector to (0, -10).
@@ -761,6 +816,9 @@ End
 		  Case Demo.Types.PrismaticJoint
 		    DemoClickToAddRandomBodiesClickHandler(worldPos, optionClick)
 		    
+		  Case Demo.Types.Particles
+		    DemoClickToAddParticlesClickHandler(worldPos, optionClick)
+		    
 		  End Select
 		End Sub
 	#tag EndEvent
@@ -810,6 +868,7 @@ End
 		  "Step Time: " + World.Profile.Step_.ToString + EndOfLine + _
 		  "Draw Time: " + Scene.Timing.ToString + EndOfLine + _
 		  "   Bodies: " + World.Bodies.Count.ToString + EndOfLine + _
+		  If(World.ParticleSystem <> Nil, "Particles: " + World.ParticleSystem.ParticleCount.ToString, "") + EndOfLine + _
 		  "      FPS: " + fps.ToString
 		  Scene.DrawStringXY(20, 20, stats, Color.Black)
 		  
@@ -860,6 +919,9 @@ End
 		  
 		  Me.AddRow(Demo.Types.DistanceJoints.ToString)
 		  Me.RowTagAt(Me.LastAddedRowIndex) = Demo.Types.DistanceJoints
+		  
+		  Me.AddRow(Demo.Types.Particles.ToString)
+		  Me.RowTagAt(Me.LastAddedRowIndex) = Demo.Types.Particles
 		  
 		  Me.AddRow(Demo.Types.PrismaticJoint.ToString)
 		  Me.RowTagAt(Me.LastAddedRowIndex) = Demo.Types.PrismaticJoint

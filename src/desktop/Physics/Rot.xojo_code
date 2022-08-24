@@ -38,13 +38,6 @@ Protected Class Rot
 
 	#tag Method, Flags = &h0
 		Function GetXAxis(xAxis As VMaths.Vector2) As VMaths.Vector2
-		  #Pragma Unused xAxis
-		  
-		  // Changed from original code due to bug in Forge2D:
-		  // https://github.com/flame-engine/forge2d/issues/60#issuecomment-1186529420
-		  
-		  'Return New VMaths.Vector2(Self.Cos, Self.Sin)
-		  
 		  If xAxis = Nil Then
 		    Return New VMaths.Vector2(Self.Cos, Self.Sin)
 		  Else
@@ -57,13 +50,6 @@ Protected Class Rot
 
 	#tag Method, Flags = &h0
 		Function GetYAxis(yAxis As VMaths.Vector2) As VMaths.Vector2
-		  #Pragma Unused yAxis
-		  
-		  // Changed from original code due to bug in Forge2D:
-		  // https://github.com/flame-engine/forge2d/issues/60#issuecomment-1186529420
-		  
-		  'Return New VMaths.Vector2(-Self.Sin, Self.Cos)
-		  
 		  If yAxis = Nil Then
 		    Return New VMaths.Vector2(-Self.Sin, Self.Cos)
 		  Else
@@ -200,7 +186,15 @@ Protected Class Rot
 			Visible=false
 			Group="Behavior"
 			InitialValue=""
-			Type="Integer"
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Cos"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Double"
 			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior

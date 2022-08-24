@@ -589,7 +589,7 @@ Inherits Physics.Shape
 		  Var pLocalX As Double = xfq.Cos * tempX + xfq.Sin * tempY
 		  Var pLocalY As Double = -xfq.Sin * tempX + xfq.Cos * tempY
 		  
-		  Var iLimit As Integer = Vertices.Count
+		  Var iLimit As Integer = Vertices.Count - 1
 		  For i As Integer = 0 To iLimit
 		    Var vertex As VMaths.Vector2= Vertices(i)
 		    Var normal As VMaths.Vector2 = Normals(i)

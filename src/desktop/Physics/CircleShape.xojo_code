@@ -68,12 +68,26 @@ Inherits Physics.Shape
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
+	#tag Method, Flags = &h0, Description = 437265617465206120636972636C652073686170652077697468206120726164697573206F662060306020616E64206120706F736974696F6E206F66206028302C203029602E
 		Sub Constructor()
+		  /// Create a circle shape with a radius of `0` and a position of `(0, 0)`.
+		  
 		  Super.Constructor(Physics.ShapeType.Circle)
 		  
 		  Position = VMaths.Vector2.Zero
 		  Radius = 0.0
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 437265617465206120636972636C652073686170652077697468206120646566696E656420607261646975736020616E64206F7074696F6E616C2060706F736974696F6E602E
+		Sub Constructor(radius As Double, position As VMaths.Vector2 = Nil)
+		  /// Create a circle shape with a defined `radius` and optional `position`.
+		  
+		  Super.Constructor(Physics.ShapeType.Circle)
+		  
+		  Self.Position = If(position = Nil, VMaths.Vector2.Zero, position)
+		  Self.Radius = radius
+		  
 		End Sub
 	#tag EndMethod
 
