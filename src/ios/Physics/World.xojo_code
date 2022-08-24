@@ -246,7 +246,8 @@ Protected Class World
 		        End If
 		      Next fixture
 		    Next body
-		    particleSystem.Render(DebugDraw)
+		    
+		    ParticleSystem.Render(DebugDraw)
 		  End If
 		  
 		  If DebugDraw.ShouldDrawJoints Then

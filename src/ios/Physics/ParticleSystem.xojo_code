@@ -127,6 +127,7 @@ Protected Class ParticleSystem
 		  Self.PowderStrength = powderStrength
 		  Self.EjectionStrength = ejectionStrength
 		  Self.ColorMixingStrength = colorMixingStrength
+		  Self.GroupBuffer = New Physics.ParticleGroupSet
 		  
 		  mTemp = New Physics.AABB
 		  mTemp2 = New Physics.AABB
@@ -187,16 +188,16 @@ Protected Class ParticleSystem
 		    Next childIndex
 		    Var upperBoundY As Double = aabb.UpperBound.Y
 		    Var upperBoundX As Double = aabb.UpperBound.X
-		    Var yLimit As Integer = upperBoundY - 1
-		    For y As Integer = Floor(aabb.LowerBound.Y / stride) * stride To yLimit Step stride
-		      Var xLimit As Integer = upperBoundX - 1
-		      For x As Integer = Floor(aabb.lowerBound.x / stride) * stride To xLimit Step stride
-		        mTempVec.SetValues(x, y)
+		    For y As Double = Floor(aabb.LowerBound.Y / stride) * stride To upperBoundY Step stride
+		      For x As Double = Floor(aabb.lowerBound.x / stride) * stride To upperBoundX Step stride
+		        'mTempVec.SetValues(x, y)
 		        Var p As VMaths.Vector2 = mTempVec
+		        p.X = x
+		        p.Y = y
 		        If shape.TestPoint(identity, p) Then
 		          p.SetFrom(Physics.Transform.MulVec2(transform, p))
 		          Var particle As Physics.Particle = seedParticle.Clone
-		          p.Subtract(groupDef.Position)
+		          particle.Lifespan = groupDef.Lifespan
 		          particle.Position.SetFrom(p)
 		          p.ScaleOrthogonalInto(groupDef.AngularVelocity, particle.Velocity)
 		          particle.Velocity.Add(groupDef.LinearVelocity)
@@ -515,6 +516,8 @@ Protected Class ParticleSystem
 		  
 		  AllParticleFlags = 0
 		  For Each particle As Physics.Particle In mParticles
+		    // Tell this particle we are beginning the `Solve` step. This will determine if the particle has expired.
+		    particle.PreSolve(step_.Dt)
 		    AllParticleFlags = AllParticleFlags Or particle.Flags
 		  Next particle
 		  

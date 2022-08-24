@@ -29,6 +29,8 @@ Implements Physics.DebugDraw
 
 	#tag Event
 		Sub PointerDown(position As Point, pointerInfo() As PointerEvent)
+		  #Pragma Unused pointerInfo
+		  
 		  Tapped(ScreenXYToWorld(position.X, position.Y))
 		End Sub
 	#tag EndEvent
@@ -70,7 +72,7 @@ Implements Physics.DebugDraw
 
 	#tag Method, Flags = &h21, Description = 437265617465732061206E6577206261636B69676E20627566666572206F662074686520636F727265637420776964746820616E64206865696768742E
 		Private Sub CreateNewBuffer()
-		  /// Creates a new backign buffer of the correct width and height.
+		  /// Creates a new backing buffer of the correct width and height.
 		  
 		  mBuffer = New Picture(Self.Width * ScaleFactor, Self.Height * ScaleFactor)
 		  mBuffer.HorizontalResolution = 72 * ScaleFactor
@@ -126,10 +128,9 @@ Implements Physics.DebugDraw
 		Sub DrawParticlesWireframe(particles() As Physics.Particle, radius As Double)
 		  // Part of the Physics.DebugDraw interface.
 		  
-		  #Pragma Unused particles
-		  #Pragma Unused radius
-		  
-		  Raise New UnsupportedOperationException("Not implemented.")
+		  For Each p As Physics.Particle In particles
+		    DrawCircle(p.Position, radius, p.Colour)
+		  Next p
 		End Sub
 	#tag EndMethod
 
