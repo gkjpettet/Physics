@@ -42,6 +42,10 @@ Protected Class ParticleGroupDef
 		GroupFlags As Integer = 0
 	#tag EndProperty
 
+	#tag Property, Flags = &h0, Description = 546865206C6966657370616E206F66207061727469636C65732077697468696E207468652067726F757020696E207365636F6E64732E
+		Lifespan As Double = 0.5
+	#tag EndProperty
+
 	#tag Property, Flags = &h0, Description = 546865206C696E6561722076656C6F63697479206F66207468652067726F75702773206F726967696E20696E20776F726C6420636F6F7264696E617465732E
 		LinearVelocity As VMaths.Vector2
 	#tag EndProperty
@@ -108,8 +112,56 @@ Protected Class ParticleGroupDef
 			Name="Flags"
 			Visible=false
 			Group="Behavior"
-			InitialValue=""
+			InitialValue="0"
 			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Angle"
+			Visible=false
+			Group="Behavior"
+			InitialValue="0"
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="AngularVelocity"
+			Visible=false
+			Group="Behavior"
+			InitialValue="0"
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Colour"
+			Visible=false
+			Group="Behavior"
+			InitialValue="Color.Black"
+			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="DestroyAutomatically"
+			Visible=false
+			Group="Behavior"
+			InitialValue="True"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="GroupFlags"
+			Visible=false
+			Group="Behavior"
+			InitialValue="0"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Strength"
+			Visible=false
+			Group="Behavior"
+			InitialValue="1"
+			Type="Double"
 			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior

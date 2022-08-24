@@ -418,6 +418,7 @@ End
 		  groupDef.Colour = RandomColor
 		  groupDef.Shape = New Physics.CircleShape(2.5)
 		  groupDef.Position = worldPos
+		  groupDef.Lifespan = 2
 		  
 		  Call World.ParticleSystem.CreateParticleGroup(groupDef)
 		  

@@ -197,6 +197,7 @@ Protected Class ParticleSystem
 		        If shape.TestPoint(identity, p) Then
 		          p.SetFrom(Physics.Transform.MulVec2(transform, p))
 		          Var particle As Physics.Particle = seedParticle.Clone
+		          particle.Lifespan = groupDef.Lifespan
 		          particle.Position.SetFrom(p)
 		          p.ScaleOrthogonalInto(groupDef.AngularVelocity, particle.Velocity)
 		          particle.Velocity.Add(groupDef.LinearVelocity)
@@ -515,6 +516,8 @@ Protected Class ParticleSystem
 		  
 		  AllParticleFlags = 0
 		  For Each particle As Physics.Particle In mParticles
+		    // Tell this particle we are beginning the `Solve` step. This will determine if the particle has expired.
+		    particle.PreSolve(step_.Dt)
 		    AllParticleFlags = AllParticleFlags Or particle.Flags
 		  Next particle
 		  
