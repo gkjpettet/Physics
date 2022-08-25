@@ -632,6 +632,7 @@ End
 		  /// Configure the simulation for the raycasting demo.
 		  ///
 		  /// We will construct a scene with a fenced area and some shapes floating in zero gravity.
+		  /// We will then add a rotating ray in the centre of the scene.
 		  
 		  InitialiseWorldAndScene
 		  
@@ -752,9 +753,9 @@ End
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0, Description = 436F6D707574657320616E6420647261772061207265666C65637461626C6520726179636173742072617920696E206120726563757273697665206D616E6E65722E
+	#tag Method, Flags = &h0, Description = 436F6D707574657320616E6420647261772061207265666C65637461626C652072617920696E206120726563757273697665206D616E6E65722E
 		Sub DrawReflectedRay(p1 As VMaths.Vector2, p2 As VMaths.Vector2, g As Graphics)
-		  /// Computes and draw a reflectable raycast ray in a recursive manner.
+		  /// Computes and draw a reflectable ray in a recursive manner.
 		  ///
 		  /// Credit: https://www.iforce2d.net/b2dtut/raycasting
 		  
@@ -769,8 +770,8 @@ End
 		  input.MaxFraction = 1
 		  
 		  // Check every fixture of every body to find the closest.
-		  #Pragma Warning "TODO: This is inefficient. Use a callbacks for better efficiency"
-		  ' https://www.iforce2d.net/b2dtut/world-querying
+		  // TODO: This is inefficient. Use a callbacks for better efficiency:
+		  // https://www.iforce2d.net/b2dtut/world-querying
 		  
 		  Var closestFraction As Double = 1 // Start with end of line as p2.
 		  Var intersectionNormal As New VMaths.Vector2 (0, 0)
@@ -811,10 +812,10 @@ End
 		  // We still some ray left to reflect.
 		  Var remainingRay As VMaths.Vector2 = p2 - intersectionPoint
 		  Var projectedOntoNormal As VMaths.Vector2 =  intersectionNormal * remainingRay.Dot(intersectionNormal)
-		  Var nextp2 As VMaths.Vector2 = p2 - projectedOntoNormal * 2
+		  Var nextP2 As VMaths.Vector2 = p2 - projectedOntoNormal * 2
 		  
 		  // Recurse.
-		  DrawReflectedRay(intersectionPoint, nextp2, g)
+		  DrawReflectedRay(intersectionPoint, nextP2, g)
 		  
 		End Sub
 	#tag EndMethod
@@ -860,6 +861,7 @@ End
 		  Var p2 As VMaths.Vector2 = _
 		  p1 + (New VMaths.Vector2(Sin(mCurrentRayAngle), Cos(mCurrentRayAngle)) * rayLength)
 		  
+		  // Recursively draw the ray and its reflections.
 		  DrawReflectedRay(p1, p2, g)
 		  
 		  
