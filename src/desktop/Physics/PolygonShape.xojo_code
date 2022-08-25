@@ -297,7 +297,7 @@ Inherits Physics.Shape
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function Raycast(output As Physics.RaycastOutput, input As Physics.RaycastInput, xf As Physics.Transform, childIndex As Integer) As Boolean
+		Function Raycast(output As Physics.RaycastOutput, input As Physics.RaycastInput, xf As Physics.Transform, childIndex As Integer = 0) As Boolean
 		  #Pragma Unused childIndex
 		  
 		  Var xfqc As Double = xf.Q.Cos

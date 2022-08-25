@@ -779,7 +779,7 @@ End
 		  For Each b As Physics.Body In World.Bodies
 		    For Each f As Physics.Fixture In b.Fixtures
 		      Var output As New Physics.RaycastOutput
-		      If Not f.RayCast(output, input, 0) Then
+		      If Not f.RayCast(output, input) Then
 		        Continue
 		      End If
 		      

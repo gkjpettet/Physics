@@ -136,7 +136,7 @@ Inherits Physics.Shape
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function Raycast(output As Physics.RaycastOutput, input As Physics.RaycastInput, transform As Physics.Transform, childIndex As Integer) As Boolean
+		Function Raycast(output As Physics.RaycastOutput, input As Physics.RaycastInput, transform As Physics.Transform, childIndex As Integer = 0) As Boolean
 		  // Collision Detection in Interactive 3D Environments by Gino van den Bergen
 		  // From Section 3.1.2
 		  // x = s + a * r
