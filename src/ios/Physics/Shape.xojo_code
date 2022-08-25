@@ -77,7 +77,7 @@
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 4361737420612072617920616761696E73742061206368696C642073686170652E2052657475726E73205472756520696620746865206368696C64207368617065206973206869742E
-		Attributes( ShouldOverride )  Function Raycast(output As Physics.RaycastOutput, input As Physics.RaycastInput, transform As Physics.Transform, childIndex As Integer) As Boolean
+		Attributes( ShouldOverride )  Function Raycast(output As Physics.RaycastOutput, input As Physics.RaycastInput, transform As Physics.Transform, childIndex As Integer = 0) As Boolean
 		  /// Cast a ray against a child shape. Returns True if the child shape is hit.
 		  ///
 		  /// `output` is the ray-cast results.

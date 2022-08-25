@@ -290,6 +290,9 @@ End
 		  Case Demo.Types.PrismaticJoint.ToString
 		    DemoPrismaticJoint
 		    
+		  Case Demo.Types.Raycasting.ToString
+		    DemoRaycasting
+		    
 		  Case Demo.Types.RevoluteJoint.ToString
 		    DemoRevoluteJoint
 		    
@@ -564,6 +567,61 @@ End
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Sub DemoRaycasting()
+		  /// Configure the simulation for the raycasting demo.
+		  ///
+		  /// We will construct a scene with a fenced area and some shapes floating in zero gravity.
+		  /// We will then add a rotating ray in the centre of the scene.
+		  
+		  InitialiseWorldAndScene
+		  
+		  // Set gravity to (0, 0).
+		  SliderGravity.Value = 5
+		  World.SetGravity(VMaths.Vector2.Zero)
+		  
+		  Demo.CreateEnclosingBox(World, Scene.Width, Scene.Height)
+		  
+		  // Figure out the limits of where to randomise the bodies in world space.
+		  Var minX As Double = Scene.ScreenXYToWorld(0, 0).X
+		  Var maxX As Double = Scene.ScreenXYToWorld(Scene.Width, 0).X
+		  Var minY As Double = Scene.ScreenXYToWorld(0, 0).Y
+		  Var maxY As Double = Scene.ScreenXYToWorld(0, Scene.Height).Y - 5 // Allow for ground height.
+		  
+		  // Create some boxes and circles with some velocity and rotation.
+		  For i As Integer = 1 To 10
+		    Var box As Physics.Body = _
+		    Demo.CreateBox(World, VMaths.Vector2.RandomInRange(minX, maxX, minY, maxY), 3, 3, False, 0.5, 1.0)
+		    Var circle As Physics.Body = _
+		    Demo.CreateCircle(World, VMaths.Vector2.RandomInRange(minX, maxX, minY, maxY), 3, False, 0.5, 1.0)
+		    
+		    // Apply some spin.
+		    box.ApplyAngularImpulse(Maths.DegreesToRadians(System.Random.InRange(0, 360)))
+		    circle.ApplyAngularImpulse(Maths.DegreesToRadians(System.Random.InRange(0, 360)))
+		    
+		    // Apply random linear motion.
+		    box.ApplyLinearImpulse(VMaths.Vector2.RandomInRange(-100, 100, -100, 100))
+		    circle.ApplyLinearImpulse(VMaths.Vector2.RandomInRange(-100, 100, -100, 100))
+		  Next i
+		  
+		  // Reset the raycasting angle.
+		  mCurrentRayAngle = 0
+		  
+		  // Set the method to be called each step.
+		  MyUpdateAction = AddressOf DemoRaycastingUpdateDelegate
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub DemoRaycastingUpdateDelegate()
+		  /// Increases the current ray angle.
+		  
+		  // One revolution every 20 seconds.
+		  mCurrentRayAngle = mCurrentRayAngle + 360 / 15.0 / 60.0 * Maths.DEGREES_TO_RADIANS_RATIO
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 436F6E666967757265207468652073696D756C6174696F6E20666F7220746865207265766F6C757465206A6F696E742064656D6F2E
 		Sub DemoRevoluteJoint()
 		  /// Configure the simulation for the revolute joint demo.
@@ -637,6 +695,73 @@ End
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 436F6D707574657320616E6420647261772061207265666C65637461626C652072617920696E206120726563757273697665206D616E6E65722E
+		Sub DrawReflectedRay(p1 As VMaths.Vector2, p2 As VMaths.Vector2, g As Graphics)
+		  /// Computes and draw a reflectable ray in a recursive manner.
+		  ///
+		  /// Credit: https://www.iforce2d.net/b2dtut/raycasting
+		  
+		  // Draw the centre of the ray as a circle point.
+		  g.DrawingColor = Color.Purple
+		  g.FillOval((Scene.Width / 2) - 4, (Scene.Height / 2) - 4, 8, 8)
+		  
+		  // Set up the raycasting input.
+		  Var input As New Physics.RaycastInput
+		  input.P1 = p1
+		  input.P2 = p2
+		  input.MaxFraction = 1
+		  
+		  // Check every fixture of every body to find the closest.
+		  // TODO: This is inefficient. Use a callbacks for better efficiency:
+		  // https://www.iforce2d.net/b2dtut/world-querying
+		  
+		  Var closestFraction As Double = 1 // Start with end of line as p2.
+		  Var intersectionNormal As New VMaths.Vector2 (0, 0)
+		  
+		  For Each b As Physics.Body In World.Bodies
+		    For Each f As Physics.Fixture In b.Fixtures
+		      Var output As New Physics.RaycastOutput
+		      If Not f.RayCast(output, input) Then
+		        Continue
+		      End If
+		      
+		      If output.Fraction < closestFraction Then
+		        closestFraction = output.Fraction
+		        intersectionNormal = output.Normal
+		      End If
+		    Next f
+		  Next b
+		  
+		  Var intersectionPoint As VMaths.Vector2 = p1 + (p2 - p1) * closestFraction
+		  
+		  // Get screen coordinates from world coordinates.
+		  Var p1Screen As VMaths.Vector2 = Scene.Viewport.WorldToScreen(p1)
+		  Var intersectScreen As VMaths.Vector2 = Scene.Viewport.WorldToScreen(intersectionPoint)
+		  
+		  // Draw this part of the ray.
+		  g.DrawLine(p1Screen.X, p1Screen.Y, intersectScreen.X, intersectScreen.Y)
+		  
+		  If closestFraction = 1 Then
+		    // The ray hit nothing so we can finish here.
+		    Return
+		  End If
+		  
+		  If closestFraction = 0 Then
+		    // The ray has run out of steam.
+		    Return
+		  End If
+		  
+		  // We still some ray left to reflect.
+		  Var remainingRay As VMaths.Vector2 = p2 - intersectionPoint
+		  Var projectedOntoNormal As VMaths.Vector2 =  intersectionNormal * remainingRay.Dot(intersectionNormal)
+		  Var nextP2 As VMaths.Vector2 = p2 - projectedOntoNormal * 2
+		  
+		  // Recurse.
+		  DrawReflectedRay(intersectionPoint, nextP2, g)
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Function GravitySliderValueToVector(sliderValue As Integer) As VMaths.Vector2
 		  Var mapping(15) As Integer = Array(10, 8, 6, 4, 2, 0, -2, -4, -6, -8, -10, -12, -14, -16, -18, -20)
@@ -665,6 +790,23 @@ End
 		  
 		  // Aim for 30 FPS.
 		  WorldUpdateTimer.Period = 33
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 5061696E7473206120726F746174696E672C207265666C65637461626C652C20726179207769746820697473206F726967696E20696E207468652063656E747265206F6620746865207363656E652E
+		Sub PaintRaycastDemo(g As Graphics)
+		  /// Paints a rotating, reflectable, ray with its origin in the centre of the scene.
+		  
+		  // Create the ray being cast.
+		  Var rayLength As Double = 32 // Long enough to hit the walls.
+		  Var p1 As New VMaths.Vector2(0, 0) // The centre of the scene.
+		  Var p2 As VMaths.Vector2 = _
+		  p1 + (New VMaths.Vector2(Sin(mCurrentRayAngle), Cos(mCurrentRayAngle)) * rayLength)
+		  
+		  // Recursively draw the ray and its reflections.
+		  DrawReflectedRay(p1, p2, g)
+		  
+		  
 		End Sub
 	#tag EndMethod
 
@@ -735,6 +877,10 @@ End
 		Private mAllowRunning As Boolean = False
 	#tag EndProperty
 
+	#tag Property, Flags = &h21, Description = 55736564206279207468652072617963617374696E672064656D6F2E20497427732074686520616E676C65206F66207468652072617920726F746174696E672061626F7574207468652063656E7472652E
+		Private mCurrentRayAngle As Double = 0
+	#tag EndProperty
+
 	#tag Property, Flags = &h0, Description = 4F7074696F6E616C206D6574686F6420746861742077696C2062652063616C6C65642075706F6E206561636820776F726C64207570646174652E
 		MyUpdateAction As UpdateAction
 	#tag EndProperty
@@ -770,6 +916,15 @@ End
 		    DemoClickToAddParticlesClickHandler(worldPos)
 		    
 		  End Select
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Paint(g As Graphics)
+		  Select Case DemoToRun
+		  Case Demo.Types.Raycasting.ToString
+		    PaintRaycastDemo(g)
+		  End Select
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -810,6 +965,7 @@ End
 		  Me.AddRow(Demo.Types.DistanceJoints.ToString)
 		  Me.AddRow(Demo.Types.Particles.ToString)
 		  Me.AddRow(Demo.Types.PrismaticJoint.ToString)
+		  Me.AddRow(Demo.Types.Raycasting.ToString)
 		  Me.AddRow(Demo.Types.RevoluteJoint.ToString)
 		  Me.AddRow(Demo.Types.VariousShapes.ToString)
 		  

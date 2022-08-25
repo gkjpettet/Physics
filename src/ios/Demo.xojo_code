@@ -131,6 +131,41 @@ Protected Module Demo
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h1, Description = 437265617465732067726F756E642C206365696C696E6720616E642077616C6C20626F6469657320616E642061646473207468656D20746F2074686520776F726C642E
+		Protected Sub CreateEnclosingBox(world As Physics.World, sceneWidth As Double, sceneHeight As Double)
+		  /// Creates ground, ceiling and wall bodies and adds them to the world.
+		  
+		  Const GROUND_HEIGHT = 1
+		  Const WALL_WIDTH = 1
+		  
+		  Var scene As Physics.DebugDraw = world.DebugDraw
+		  
+		  Call CreateGroundAndOptionalWalls(world, sceneWidth, sceneHeight)
+		  
+		  // =======================
+		  // CEILING
+		  // =======================
+		  // Compute the position of the ceiling (accounting for pixels -> world space coordinates).
+		  Var pos As VMaths.Vector2 = _
+		  scene.ScreenXYToWorld(sceneWidth/2, (GROUND_HEIGHT/2 * scene.Viewport.Scale))
+		  
+		  // Create the ceiling body.
+		  Var ceilingBodyDef As New Physics.BodyDef
+		  ceilingBodyDef.Position.SetFrom(pos)
+		  Var ceiling As Physics.Body = world.CreateBody(ceilingBodyDef)
+		  
+		  // Make the ceiling a rectangle.
+		  Var ceilingShape As New Physics.PolygonShape
+		  ceilingShape.SetAsBoxXY((sceneWidth / scene.Viewport.Scale) / 2, GROUND_HEIGHT / 2)
+		  
+		  // Create the fixture from the shape and a modest amount of friction.
+		  Var ceilingFixtureDef As New Physics.FixtureDef(ceilingShape)
+		  ceilingFixtureDef.Friction = 0.5
+		  ceiling.CreateFixture(ceilingFixtureDef)
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h1, Description = 437265617465732067726F756E6420616E642077616C6C20626F6469657320616E642061646473207468656D20746F2074686520776F726C642E2052657475726E73207468652067726F756E6420626F64792E
 		Protected Function CreateGroundAndOptionalWalls(world As Physics.World, sceneWidth As Double, sceneHeight As Double, createWalls As Boolean = True) As Physics.Body
 		  /// Creates ground and wall bodies and adds them to the world. Returns the ground body.
@@ -268,6 +303,9 @@ Protected Module Demo
 		  Case Demo.Types.PrismaticJoint
 		    Return "Prismatic Joint"
 		    
+		  Case Demo.Types.Raycasting
+		    Return "Raycasting"
+		    
 		  Case Demo.Types.RevoluteJoint
 		    Return "Revolute Joint"
 		    
@@ -290,7 +328,8 @@ Protected Module Demo
 		  ConstantVolumeJoint
 		  ClickToAddRandomBodies
 		  PrismaticJoint
-		Particles
+		  Particles
+		Raycasting
 	#tag EndEnum
 
 

@@ -24,6 +24,8 @@ Implements Physics.DebugDraw
 		  
 		  g.DrawPicture(mBuffer, 0, 0)
 		  
+		  RaiseEvent Paint(g)
+		  
 		End Sub
 	#tag EndEvent
 
@@ -445,6 +447,10 @@ Implements Physics.DebugDraw
 
 	#tag Hook, Flags = &h0
 		Event Opening()
+	#tag EndHook
+
+	#tag Hook, Flags = &h0
+		Event Paint(g As Graphics)
 	#tag EndHook
 
 	#tag Hook, Flags = &h0, Description = 54686520757365722068617320746170706564207468652063616E7661732E

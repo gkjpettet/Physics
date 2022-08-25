@@ -11,6 +11,39 @@ Protected Interface RaycastCallback
 		Callback class for ray casts.
 		See `World.`Raycast`.
 		
+		ReportFixture()
+		---------------
+		Called every time a fixture is found that is hit by a ray.
+		
+		If a ray is long enough there could be many fixtures that it intersects with, and this callback could be 
+		called many times during one RayCast. Very importantly, this raycast does not detect fixtures in order of 
+		nearest to furthest, it just gives them to you in any order. 
+		
+		The engine lets you decide how you want to deal with each fixture as it is encountered. This is where the 
+		return value of the callback comes in. You will return a floating point value, which you can think of as 
+		adjusting the length of the ray while the raycast is in progress:
+		
+		Return `-1` to completely ignore the current intersection
+		Return a value from `0 - 1` to adjust the length of the ray, for example:
+		  returning `0` says there is now no ray at all
+		  returning `1` says that the ray length does not change
+		  returning the `fraction` value makes the ray just long enough to hit the intersected fixture
+		
+		Here the fraction value refers to the 'fraction' parameter that is passed to the callback. 
+		
+		Remember the common cases:
+		To find only the closest intersection:
+		 - return the fraction value from the callback
+		 - use the most recent intersection as the result
+		
+		To find all intersections along the ray:
+		 - return 1 from the callback
+		 - store the intersections in an array
+		
+		To simply find if the ray hits anything:
+		 - if you get a callback, something was hit (but it may not be the closest)
+		 - return 0 from the callback for efficiency
+		
 	#tag EndNote
 
 

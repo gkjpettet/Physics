@@ -121,7 +121,7 @@ Inherits Shape
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 4361737420612072617920616761696E73742061206368696C642073686170652E2052657475726E73205472756520696620746865206368696C64207368617065206973206869742E
-		Function Raycast(output As Physics.RaycastOutput, input As Physics.RaycastInput, xf As Physics.Transform, childIndex As Integer) As Boolean
+		Function Raycast(output As Physics.RaycastOutput, input As Physics.RaycastInput, xf As Physics.Transform, childIndex As Integer = 0) As Boolean
 		  #Pragma Unused childIndex
 		  
 		  Var v1 As VMaths.Vector2 = Vertex1

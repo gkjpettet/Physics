@@ -74,7 +74,7 @@ Protected Module Maths
 	#tag EndMethod
 
 
-	#tag Constant, Name = DEGREES_TO_RADIANS_RATIO, Type = Double, Dynamic = False, Default = \"0.017453292", Scope = Private, Description = 313830202F20CF802E205573656420666F7220636F6E76657274696E67206465677265657320746F2072616469616E732E
+	#tag Constant, Name = DEGREES_TO_RADIANS_RATIO, Type = Double, Dynamic = False, Default = \"0.017453292", Scope = Protected, Description = 313830202F20CF802E205573656420666F7220636F6E76657274696E67206465677265657320746F2072616469616E732E
 	#tag EndConstant
 
 	#tag Constant, Name = DoubleMaxFinite, Type = Double, Dynamic = False, Default = \"1.7976931348623157e+308", Scope = Protected
@@ -86,7 +86,7 @@ Protected Module Maths
 	#tag Constant, Name = PI, Type = Double, Dynamic = False, Default = \"3.14159265359", Scope = Protected, Description = 5468652076616C7565206F6620506920746F20313120646563696D616C20706C616365732E
 	#tag EndConstant
 
-	#tag Constant, Name = RADIANS_TO_DEGREES_RATIO, Type = Double, Dynamic = False, Default = \"57.29577951", Scope = Private, Description = 313830202F20CF802E205573656420666F7220636F6E76657274696E67206465677265657320746F2072616469616E732E
+	#tag Constant, Name = RADIANS_TO_DEGREES_RATIO, Type = Double, Dynamic = False, Default = \"57.29577951", Scope = Protected, Description = 313830202F20CF802E205573656420666F7220636F6E76657274696E67206465677265657320746F2072616469616E732E
 	#tag EndConstant
 
 	#tag Constant, Name = TWO_PI, Type = Double, Dynamic = False, Default = \"6.28318530718", Scope = Protected, Description = 416E20617070726F78696D6174696F6E206F66205069202A20322E

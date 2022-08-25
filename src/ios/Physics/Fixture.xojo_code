@@ -128,7 +128,7 @@ Protected Class Fixture
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 4361737420612072617920616761696E737420746869732073686170652E
-		Function Raycast(output As Physics.RaycastOutput, input As Physics.RaycastInput, childIndex As Integer) As Boolean
+		Function Raycast(output As Physics.RaycastOutput, input As Physics.RaycastInput, childIndex As Integer = 0) As Boolean
 		  /// Cast a ray against this shape.
 		  
 		  Return Self.Shape.Raycast(output, input, Self.Body.Transform, childIndex)
