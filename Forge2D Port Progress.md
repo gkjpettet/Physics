@@ -99,8 +99,8 @@
 	[x] revolute_joint_def
 	[] rope_joint  <--- not working when previously ported.
 	[] rope_joint_def
-	[] weld_joint
-	[] weld_joint_def
+	[x] weld_joint
+	[x] weld_joint_def
 	[] wheel_joint
 	[] wheel_joint_def
 [x] body
