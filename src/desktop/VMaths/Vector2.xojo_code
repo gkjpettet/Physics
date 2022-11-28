@@ -102,7 +102,7 @@ Protected Class Vector2
 		  Var i As Integer
 		  length = length - 1
 		  For i = 0 To length
-		    vectors.AddRow(VMaths.Vector2.Zero)
+		    vectors.Add(VMaths.Vector2.Zero)
 		  Next i
 		  
 		  Return vectors
