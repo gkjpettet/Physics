@@ -282,6 +282,24 @@ Protected Module Demo
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h1, Description = 4372656174657320616E6420616464732074776F20626F6469657320286120626F7820616E64206120636972636C6529206C696E6B65642076696120612077656C64206A6F696E742E
+		Protected Sub CreateWeldedBodies(world As Physics.World, boxX As Double, boxY As Double, boxSize As Double, circleX As Double, circleY As Double, circleRadius As Double)
+		  /// Creates and adds two bodies (a box and a circle) linked via a weld joint.
+		  
+		  Var box As Physics.Body = _
+		  CreateBox(World, New VMaths.Vector2(boxX, boxY), boxSize, boxSize)
+		  
+		  Var circle As Physics.Body = CreateCircle(World, New VMaths.Vector2(circleX, circleY), circleRadius)
+		  
+		  Var jointDef As New Physics.WeldJointDef
+		  var anchor As New VMaths.Vector2(boxX - (boxSize/2), boxY - (boxSize/2))
+		  jointDef.Initialize(box, circle, anchor)
+		  
+		  world.CreateJoint(New Physics.WeldJoint(jointdef))
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Function ToString(Extends type As Demo.Types) As String
 		  Select Case type
@@ -312,6 +330,9 @@ Protected Module Demo
 		  Case Demo.Types.VariousShapes
 		    Return "Various Shapes"
 		    
+		  Case Demo.Types.WeldJoint
+		    Return "Weld Joint"
+		    
 		  Else
 		    Raise New UnsupportedOperationException("Unknown demo type.")
 		  End Select
@@ -329,7 +350,8 @@ Protected Module Demo
 		  ClickToAddRandomBodies
 		  PrismaticJoint
 		  Particles
-		Raycasting
+		  Raycasting
+		WeldJoint
 	#tag EndEnum
 
 

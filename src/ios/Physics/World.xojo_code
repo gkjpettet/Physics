@@ -159,7 +159,7 @@ Protected Class World
 		    f.DestroyProxies(ContactManager.Broadphase)
 		  Next f
 		  
-		  Bodies.Remove(body)
+		  Bodies.RemoveBody(body)
 		  
 		End Sub
 	#tag EndMethod
@@ -175,7 +175,7 @@ Protected Class World
 		  #EndIf
 		  
 		  Var collideConnected As Boolean = joint.CollideConnected
-		  joints.Remove(joint)
+		  joints.RemoveJoint(joint)
 		  
 		  // Disconnect from island graph.
 		  Var bodyA As Physics.Body = joint.BodyA
@@ -185,8 +185,8 @@ Protected Class World
 		  bodyA.SetAwake(True)
 		  bodyB.SetAwake(True)
 		  
-		  bodyA.Joints.Remove(joint)
-		  bodyB.Joints.Remove(joint)
+		  bodyA.Joints.RemoveJoint(joint)
+		  bodyB.Joints.RemoveJoint(joint)
 		  
 		  Joint.Destroy(joint)
 		  

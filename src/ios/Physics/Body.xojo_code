@@ -329,7 +329,7 @@ Protected Class Body
 		  #If DebugBuild
 		    Assert(Fixtures.Count > 0, "The body has no fixtures.")
 		  #EndIf
-		  Var removed As Boolean = Fixtures.Remove(fixture)
+		  Var removed As Boolean = Fixtures.RemoveFixture(fixture)
 		  
 		  // You tried to remove a shape that is not attached to this body.
 		  #If DebugBuild

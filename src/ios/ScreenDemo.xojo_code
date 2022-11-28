@@ -299,6 +299,9 @@ End
 		  Case Demo.Types.VariousShapes.ToString
 		    DemoVariousShapes
 		    
+		  Case Demo.Types.WeldJoint.ToString
+		    DemoWeldJoint
+		    
 		  Else
 		    Raise New UnsupportedOperationException("Unknown demo type.")
 		  End Select
@@ -695,6 +698,21 @@ End
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 436F6E666967757265207468652073696D756C6174696F6E20666F72207468652077656C64206A6F696E742064656D6F2E
+		Sub DemoWeldJoint()
+		  /// Configure the simulation for the weld joint demo.
+		  
+		  InitialiseWorldAndScene
+		  
+		  ResetGravity
+		  
+		  // Create the ground and two walls.
+		  Call Demo.CreateGroundAndOptionalWalls(world, Scene.Width, Scene.Height)
+		  
+		  Demo.CreateWeldedBodies(World, 0, 0, 7, 5, 5, 5)
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 436F6D707574657320616E6420647261772061207265666C65637461626C652072617920696E206120726563757273697665206D616E6E65722E
 		Sub DrawReflectedRay(p1 As VMaths.Vector2, p2 As VMaths.Vector2, g As Graphics)
 		  /// Computes and draw a reflectable ray in a recursive manner.
@@ -968,6 +986,7 @@ End
 		  Me.AddRow(Demo.Types.Raycasting.ToString)
 		  Me.AddRow(Demo.Types.RevoluteJoint.ToString)
 		  Me.AddRow(Demo.Types.VariousShapes.ToString)
+		  Me.AddRow(Demo.Types.WeldJoint.ToString)
 		  
 		  Me.SelectRow(0, 0)
 		  

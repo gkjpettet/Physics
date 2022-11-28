@@ -145,9 +145,9 @@ Implements Physics.PairCallback
 		    ContactListener.EndContact(c)
 		  End If
 		  
-		  Contacts.Remove(c)
-		  c.BodyA.Contacts.Remove(c)
-		  c.bodyB.contacts.Remove(c)
+		  Contacts.RemoveContact(c)
+		  c.BodyA.Contacts.RemoveContact(c)
+		  c.bodyB.contacts.RemoveContact(c)
 		  
 		  If c.Manifold.PointCount > 0 And Not fixtureA.IsSensor And Not fixtureB.IsSensor Then
 		    fixtureA.Body.SetAwake(True)

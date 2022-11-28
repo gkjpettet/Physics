@@ -1,5 +1,5 @@
 Type=iOS
-RBProjectVersion=2022.02
+RBProjectVersion=2022.032
 MinIDEVersion=20140300
 OrigIDEVersion=20220200
 Class=App;App.xojo_code;&h000000001778BFFF;&h0000000000000000;false
@@ -143,6 +143,8 @@ Class=DistanceJoint;Physics/DistanceJoint.xojo_code;&h000000003AA677FF;&h0000000
 Class=ConstantVolumeJoint;Physics/ConstantVolumeJoint.xojo_code;&h000000006AF61FFF;&h0000000058463FFF;false
 Class=PrismaticJointDef;Physics/PrismaticJointDef.xojo_code;&h000000004568C7FF;&h0000000058463FFF;false
 Class=PrismaticJoint;Physics/PrismaticJoint.xojo_code;&h00000000089957FF;&h0000000058463FFF;false
+Class=WeldJointDef;Physics/WeldJointDef.xojo_code;&h0000000003AAE7FF;&h0000000058463FFF;false
+Class=WeldJoint;Physics/WeldJoint.xojo_code;&h000000005BD727FF;&h0000000058463FFF;false
 DefaultLayout=iPhoneLayout
 DefaultTabletLayout=iPadLayout
 MajorVersion=1
